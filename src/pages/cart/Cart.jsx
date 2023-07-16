@@ -11,6 +11,7 @@ export default function Cart() {
 
 
   const articleList = useSelector(state => state.cart.articleList);
+  console.log(articleList)
   const numberArticle = useSelector(state => state.cart.numberArticle);
   const totalPriceProducts = useSelector(state => state.cart.totalPriceProducts);
   const totalPrice = useSelector(state => state.cart.totalPrice);

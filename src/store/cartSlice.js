@@ -25,7 +25,7 @@ const cartSlice = createSlice({
     console.log("statenumberArticle",state.numberArticle)
     console.log("statearticlelist",state.articleList)
     console.dir(state.articleList);
-    console.log(JSON.stringify(state.articleList));
+    console.log("statearticleListjson",JSON.stringify(state.articleList));
 
     // Vérifier si action.payload est défini
     console.log(action.payload)
