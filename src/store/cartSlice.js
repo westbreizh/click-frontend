@@ -37,6 +37,7 @@ const cartSlice = createSlice({
     }
   
     // Si le panier est vide, ajouter simplement newProduct au panier
+    console.log("juste avant le bug", state.articleList)
     if (state.articleList.length === 0) {
       console.log("newProduct2",newProduct)
       state.articleList.push(newProduct);
