@@ -24,6 +24,9 @@ const cartSlice = createSlice({
     console.log("state",state)
     console.log("statenumberArticle",state.numberArticle)
     console.log("statearticlelist",state.articleList)
+    console.dir(state.articleList);
+    console.log(JSON.stringify(state.articleList));
+
     // Vérifier si action.payload est défini
     console.log(action.payload)
     if (!action.payload) {
@@ -41,7 +44,7 @@ const cartSlice = createSlice({
   
     // Si le panier est vide, ajouter simplement newProduct au panier
     console.log("juste avant le bug", state.articleList)
-    if (state.articleList.length === 0) {
+    if (state.articleList.length === 0 ||state.articleList.length === undefined) {
       console.log("newProduct2",newProduct)
       state.articleList.push(newProduct);
     } else {
