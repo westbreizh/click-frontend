@@ -20,21 +20,41 @@ const cartSlice = createSlice({
   reducers: {
 
      // Action pour ajouter des articles aux panier
-    addArticle: (state, action) => {
-      const newProduct = action.payload;
+  addArticle: (state, action) => {
+    // Vérifier si action.payload est défini
+    console.log(action.payload)
+    if (!action.payload) {
+      // Si action.payload est indéfini ou falsy, ne rien faire
+      return;
+    }
+  
+    const newProduct = action.payload;
+    if (!newProduct.id) {
+      // Vérifier si newProduct.id est défini
+      // Si newProduct.id est indéfini ou falsy, ne rien faire
+      return;
+    }
+  
+    // Si le panier est vide, ajouter simplement newProduct au panier
+    if (state.articleList.length === 0) {
+      state.articleList.push(newProduct);
+    } else {
+      // Rechercher un produit existant avec le même ID que newProduct.id
       const existingProduct = state.articleList.find(
         (product) => product.id === newProduct.id
       );
-
-      
-    // Si le produit existe déjà dans le panier, augmenter la quantité
-    if (existingProduct) {
-      existingProduct.quantity += newProduct.quantity;
-    } else {
-      // Sinon, ajouter le produit à la liste du panier
-      state.articleList.push(newProduct);
+  
+      // Si le produit existe déjà dans le panier, augmenter la quantité
+      if (existingProduct) {
+        existingProduct.quantity += newProduct.quantity;
+      } else {
+        // Sinon, ajouter le produit à la liste du panier
+        state.articleList.push(newProduct);
+      }
     }
   },
+  
+
 
     // Action pour ajouter une pose cordage (avec ou sans fourniture du cordage)
     addInstallationString: (state, action) => {
