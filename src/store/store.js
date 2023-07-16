@@ -5,6 +5,7 @@ import userReducer from "./userSlice";
 import productReducer from "./productSlice";
 import cartReducer from "./cartSlice";
 
+
 // Combiner les différents reducers en un seul rootReducer
 const rootReducer = combineReducers({
   user: userReducer,
