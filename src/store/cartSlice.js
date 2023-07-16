@@ -21,6 +21,9 @@ const cartSlice = createSlice({
 
      // Action pour ajouter des articles aux panier
   addArticle: (state, action) => {
+    console.log("state",state)
+    console.log("statenumberArticle",state.numberArticle)
+    console.log("statearticlelist",state.articleList)
     // Vérifier si action.payload est défini
     console.log(action.payload)
     if (!action.payload) {
