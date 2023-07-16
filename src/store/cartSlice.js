@@ -29,6 +29,7 @@ const cartSlice = createSlice({
     }
   
     const newProduct = action.payload;
+    console.log("newProduct",newProduct)
     if (!newProduct.id) {
       // Vérifier si newProduct.id est défini
       // Si newProduct.id est indéfini ou falsy, ne rien faire
@@ -37,6 +38,7 @@ const cartSlice = createSlice({
   
     // Si le panier est vide, ajouter simplement newProduct au panier
     if (state.articleList.length === 0) {
+      console.log("newProduct2",newProduct)
       state.articleList.push(newProduct);
     } else {
       // Rechercher un produit existant avec le même ID que newProduct.id
