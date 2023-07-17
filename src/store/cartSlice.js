@@ -1,5 +1,6 @@
+import { listItemIconClasses } from "@mui/material";
 import { createSlice } from "@reduxjs/toolkit";
-
+localStorage.clear()
 
 // Créez une slice pour le panier
 const cartSlice = createSlice({
@@ -21,6 +22,7 @@ const cartSlice = createSlice({
 
      // Action pour ajouter des articles aux panier
   addArticle: (state, action) => {
+    localStorage.clear()
     console.log("state",state)
     console.log("statejson",JSON.stringify(state));
     console.log("statearticlelist",state.articleList)
