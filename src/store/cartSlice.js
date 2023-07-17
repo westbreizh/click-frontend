@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    articleList: [], // comprend les balles et accessoires
+    articleList: [1], // comprend les balles et accessoires
     numberArticle: 0, // comprend tous les éléments articleList et installationWithStringList
     totalPriceProducts: 0,
     priceDelivery: 0,
