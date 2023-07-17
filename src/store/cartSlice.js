@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    articleList: [1], // comprend les balles et accessoires
+    articleList: [], // comprend les balles et accessoires
     numberArticle: 0, // comprend tous les éléments articleList et installationWithStringList
     totalPriceProducts: 0,
     priceDelivery: 0,
@@ -22,9 +22,8 @@ const cartSlice = createSlice({
      // Action pour ajouter des articles aux panier
   addArticle: (state, action) => {
     console.log("state",state)
-    console.log("statenumberArticle",state.numberArticle)
+    console.log("statejson",JSON.stringify(state));
     console.log("statearticlelist",state.articleList)
-    console.dir(state.articleList);
     console.log("statearticleListjson",JSON.stringify(state.articleList));
 
     // Vérifier si action.payload est défini
@@ -35,7 +34,6 @@ const cartSlice = createSlice({
     }
   
     const newProduct = action.payload;
-    console.log("newProduct",newProduct)
     if (!newProduct.id) {
       // Vérifier si newProduct.id est défini
       // Si newProduct.id est indéfini ou falsy, ne rien faire
@@ -43,7 +41,6 @@ const cartSlice = createSlice({
     }
   
     // Si le panier est vide, ajouter simplement newProduct au panier
-    console.log("juste avant le bug", state.articleList)
     if (state.articleList.length === 0 ||state.articleList.length === undefined) {
       console.log("newProduct2",newProduct)
       state.articleList.push(newProduct);
