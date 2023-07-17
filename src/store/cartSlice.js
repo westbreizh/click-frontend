@@ -6,6 +6,7 @@ localStorage.clear()
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
+    test: [],
     articleList: [], // comprend les balles et accessoires
     numberArticle: 0, // comprend tous les éléments articleList et installationWithStringList
     totalPriceProducts: 0,
@@ -25,7 +26,7 @@ const cartSlice = createSlice({
     localStorage.clear()
     console.log("state",state)
     console.log("statejson",JSON.stringify(state));
-    console.log("statearticlelist",state.articleList)
+    console.log("statearticlelist",state.articletList)
     console.log("statearticleListjson",JSON.stringify(state.articleList));
 
     // Vérifier si action.payload est défini
