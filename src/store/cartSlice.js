@@ -6,7 +6,6 @@ localStorage.clear()
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    test: [],
     articleList: [], // comprend les balles et accessoires
     numberArticle: 0, // comprend tous les éléments articleList et installationWithStringList
     totalPriceProducts: 0,
@@ -23,14 +22,8 @@ const cartSlice = createSlice({
 
      // Action pour ajouter des articles aux panier
   addArticle: (state, action) => {
-    localStorage.clear()
-    console.log("state",state)
     console.log("statejson",JSON.stringify(state));
-    console.log("statearticlelist",state.articletList)
-    console.log("statearticleListjson",JSON.stringify(state.articleList));
-
     // Vérifier si action.payload est défini
-    console.log(action.payload)
     if (!action.payload) {
       // Si action.payload est indéfini ou falsy, ne rien faire
       return;
@@ -45,7 +38,6 @@ const cartSlice = createSlice({
   
     // Si le panier est vide, ajouter simplement newProduct au panier
     if (state.articleList.length === 0 ||state.articleList.length === undefined) {
-      console.log("newProduct2",newProduct)
       state.articleList.push(newProduct);
     } else {
       // Rechercher un produit existant avec le même ID que newProduct.id
