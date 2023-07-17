@@ -1,6 +1,6 @@
 import { listItemIconClasses } from "@mui/material";
 import { createSlice } from "@reduxjs/toolkit";
-localStorage.clear()
+
 
 // Créez une slice pour le panier
 const cartSlice = createSlice({
