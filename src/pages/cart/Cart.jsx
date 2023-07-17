@@ -18,16 +18,21 @@ export default function Cart() {
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
 
   const dispatch = useDispatch();
-  dispatch(updateStringingPrice(10));
   function handleClickDelete (index) { 
   dispatch (deleteArticle(index))
   }
 
  //localStorage.clear();
 
-  useEffect(() => {
-    dispatch(calculNumberArticle(), dispatch(calculTotalPriceProducts()));
-  }, [articleList]);
+ useEffect(() => {
+  dispatch(calculNumberArticle());
+  dispatch(calculTotalPriceProducts());
+}, [articleList]);
+
+useEffect(() => {
+  dispatch(updateStringingPrice(10));
+}, []);
+
 
   console.log("article dans panier")
   console.log(articleList)
