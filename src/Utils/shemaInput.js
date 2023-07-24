@@ -74,7 +74,7 @@ const shemaInputSignupHub = yup.object().shape({
       .string()
       .max(30, "Votre prénom ne peut contenir 30 caratères au maximum"),
 
-      referent_lastname: yup
+  referent_lastname: yup
   .string()
   .max(30, "Votre nom ne peut contenir 30 caratères au maximum"),
 
@@ -99,25 +99,22 @@ const shemaInputSignupHub = yup.object().shape({
     .required('veuillez resaisir le mot de passe')
     .oneOf([yup.ref('password')], 'Les mots de passes doivent être identiques'),
 
+  road: yup
+  .string()
+  .max(30, "le champs ne peut contenir que 30 caratères"),
+  city: yup
+  .string()
+  .required("Veuillez saisir votre ville")
+  .max(30, "le champs ne peut contenir que 30 caratères"),
 
-    road: yup
-    .string()
-    .max(30, "le champs ne peut contenir que 30 caratères"),
-    city: yup
-    .string()
-    .required("Veuillez saisir votre ville")
-    .max(30, "le champs ne peut contenir que 30 caratères"),
-  
-    postalCode: yup
-    .string()
-    .max(30, "le champs ne peut contenir que 30 caratères"),
-  
-    telephone: yup
-    .string()
-    .matches(/^\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}$/, "Le numéro de téléphone doit contenir 10 chiffres avec un espace éventuel entre les chiffres")
-  
+  postalCode: yup
+  .string()
+  .max(30, "le champs ne peut contenir que 30 caratères"),
 
-
+  telephone: yup
+  .string()
+  .matches(/^\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}$/, "Le numéro de téléphone doit contenir 10 chiffres avec un espace éventuel entre les chiffres")
+  
   });
   
 export {shemaInputSignupHub}
