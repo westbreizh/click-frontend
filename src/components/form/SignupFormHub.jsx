@@ -133,7 +133,7 @@ export default function SignupFormHub(props) {
 
 
       <label htmlFor="forename"  className="input__label" > Prénom référent  </label>
-      <input  type ="text" {...register("referent_forename")} className="input__text" id="forename" name="forename" />
+      <input  type ="text" {...register("referent_forename")} className="input__text" />
       <p className="input__error">{errors.forename?.message}</p>
 
 
