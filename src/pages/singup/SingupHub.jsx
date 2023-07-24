@@ -3,7 +3,7 @@
 
 import { useState } from 'react'
 import ModalValidationSignup from "../../components/modal/modalValidation/ModalValidationSignup"
-import SignupForm from "../../components/form/SignupForm"
+import SignupFormHub from '../../components/form/SignupFormHub';
 
 
 export default function SignupHub() {
