@@ -1,6 +1,6 @@
 import { useForm} from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
-import { shemaInputSignup } from "../../Utils/shemaInput"
+import { shemaInputSignupHub } from "../../Utils/shemaInputHub"
 import { Link } from "react-router-dom" 
 import { useState } from 'react'
 import { useStore } from "react-redux"
@@ -49,7 +49,7 @@ export default function SignupFormHub(props) {
 
   const { register , formState, handleSubmit,   formState: { errors }  } =
    useForm({
-    resolver: yupResolver(shemaInputSignup),
+    resolver: yupResolver(shemaInputSignupHub),
     mode: 'onTouched',
     shouldFocusError: true,
     });
