@@ -22,12 +22,18 @@ import Order from '../pages/order/order'
 import SuccesPaiement from '../pages/afterPaiement/SuccesPaiement'
 import EchecPaiement from '../pages/afterPaiement/EchecPaiement'
 import ResetPassword from '../pages/resetPassword/ResetPassword'
+import SignupHub from '../pages/singup/SingupHub'
+
 
 
 export default function Router() {
 
 
+
+
   return (
+
+    
 
     <BrowserRouter scrollBehavior="smooth">
       
@@ -55,6 +61,7 @@ export default function Router() {
           <Route path='/historique_commandes/:orderId' element={<OrderDetailHistory />} />
           <Route path="/passwordReset/:token/:id" element={<ResetPassword />} />
           <Route path='/*' element={<ErrorPage />} />
+          <Route path='/inscription/hub'  element = {< SignupHub/>} />
       
       </Routes>
 
