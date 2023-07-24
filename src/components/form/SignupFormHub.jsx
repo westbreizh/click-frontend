@@ -6,7 +6,6 @@ import { useState } from 'react'
 import { useStore } from "react-redux"
 import {connectedToggle, setUserInfo, setToken} from '../../store/userSlice'
 import { Input, InputAdornment, IconButton, styled } from '@mui/material';
-
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -44,8 +43,6 @@ export default function SignupFormHub(props) {
       },
     }, 
   }));
-
-
 
 
   const showModal = props.showModal
@@ -93,7 +90,8 @@ export default function SignupFormHub(props) {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/signup`, {
         mode: "cors",
         method: "POST",
-        body: JSON.stringify({civilite: data.civilite, lastname: data.lastname, forename: data.forename, email: data.email, password: data.password}),
+        body: JSON.stringify({enterprise_name: data.enterprise_name, referent_lastname: data.referent_lastname, referent_forename: data.referent_forename, email: data.email, password: data.password,
+              telephone: data.telephone.replace(/(\d{2})(?=\d)/g, '$1 '), road: data.road, city: data.city, postalCode : data.postalCode.replace(/^(\d{2})(\d{3})$/, '$1 $2') }),
         headers: {"Content-Type": "application/json"}})
 
         if (!response.ok) {
@@ -108,8 +106,6 @@ export default function SignupFormHub(props) {
         store.dispatch(setUserInfo(result.userInfo));
         store.dispatch(setToken(result.token));
         showModal();
-
-
         console.log(result.userInfo)
         console.log(result.message)
       }
@@ -127,28 +123,18 @@ export default function SignupFormHub(props) {
 
     <form onSubmit={handleSubmit(onSubmit)} className="form__wrapper">
     
-      <label className="select__label" >Civilité<sup>*</sup> </label>
-      <div className='select__wrapper'>
-          <KeyboardArrowDownIcon className='select__arrow' />
-          <select 
-          className="select__bar" 
-          {...register("civilite")}>
-              <option value=""></option>
-              <option value="Madame">Madame</option>
-              <option value="Monsieur">Monsieur</option>
-              <option value="Padawan">Padawan</option>
-              <option value="Padawanette">Padawanette</option>
-          </select>
-      </div>
-      <p className="input__error">{errors.civilite?.message}</p>
 
-      <label className="input__label" > Nom <sup>*</sup> </label>
-      <input  type ="text" {...register("lastname")} className="input__text"  />
+      <label className="input__label" > Nom société <sup>*</sup> </label>
+      <input  type ="text" {...register("enterprise_name")} className="input__text"  />
+      <p className="input__error">{errors.enterprise_name?.message}</p>
+
+      <label className="input__label" > Nom référent </label>
+      <input  type ="text" {...register("referent_lastname")} className="input__text"  />
       <p className="input__error">{errors.lastname?.message}</p>
 
 
-      <label htmlFor="forename"  className="input__label" > Prénom <sup>*</sup> </label>
-      <input  type ="text" {...register("forename")} className="input__text" id="forename" name="forename" />
+      <label htmlFor="forename"  className="input__label" > Prénom référent  </label>
+      <input  type ="text" {...register("referent_forename")} className="input__text" id="forename" name="forename" />
       <p className="input__error">{errors.forename?.message}</p>
 
 
@@ -197,15 +183,15 @@ export default function SignupFormHub(props) {
       <input type="tel"  {...register('telephone')} className="input__text"  />
       <p className="input__error">{errors.telephone?.message}</p>  
 
-      <label className="input__label"> Adresse (nom et numéro de la voirie) </label>
+      <label className="input__label"> Adresse (nom et numéro de la voirie) <sup>*</sup> </label>
       <input type="text" {...register("road")} className="input__text" />
       <p className="input__error">{errors.road?.message}</p>
 
-      <label className="input__label"> Ville  </label>
+      <label className="input__label"> Ville <sup>*</sup> </label>
       <input type="text" {...register("city")} className="input__text" />
       <p className="input__error">{errors.city?.message}</p>
 
-      <label className="input__label"> Code postal  </label>
+      <label className="input__label"> Code postal <sup>*</sup> </label>
       <input type="text" {...register("postalCode")} className="input__text" />
       <p className="input__error">{errors.postalCode?.message}</p>
 
