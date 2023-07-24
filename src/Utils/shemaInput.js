@@ -71,13 +71,13 @@ const shemaInputSignupHub = yup.object().shape({
   .required("Veuillez renseigner le nom de l'entreprise, merci!"),
 
   referent_forename: yup
-    .string()
-    .required("Veuillez renseigner le nom du référent, merci!")
-    .max(30, "Votre prénom ne peut contenir 30 caratères au maximum"),
+      .string()
+      //.required("Veuillez renseigner le nom du référent, merci!")
+      .max(30, "Votre prénom ne peut contenir 30 caratères au maximum"),
 
   referent_lastname: yup
     .string()
-    .required("Veuillez renseigner le prénom du référent, merci!")
+    //.required("Veuillez renseigner le prénom du référent, merci!")
     .max(30, "Votre nom ne peut contenir 30 caratères au maximum"),
 
   email: yup
