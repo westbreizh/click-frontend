@@ -90,14 +90,14 @@ export default function SignupFormHub(props) {
         mode: "cors",
         method: "POST",
         body: JSON.stringify({enterprise_name: data.enterprise_name, referent_lastname: data.referent_lastname, referent_forename: data.referent_forename, email: data.email, password: data.password,
-              telephone: data.telephone.replace(/(\d{2})(?=\d)/g, '$1 '), road: data.road, city: data.city, postalCode : data.postalCode.replace(/^(\d{2})(\d{3})$/, '$1 $2') }),
+              telephone: data.telephone.replace(/(\d{2})(?=\d)/g, '$1 '), road: data.road, city: data.city, postal_code : data.postalCode.replace(/^(\d{2})(\d{3})$/, '$1 $2') }),
         headers: {"Content-Type": "application/json"}})
 
         if (!response.ok) {
           const result = await response.json();
           changeMessageFromBackEnd(result.message);
           showPErrorFromBackend();
-          throw new Error(` ${result.message}`);
+          throw new Error(` ${result.message}`);  
         }else {
         localStorage.clear();
         store.dispatch(connectedToggle());
