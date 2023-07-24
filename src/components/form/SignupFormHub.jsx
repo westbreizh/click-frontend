@@ -86,7 +86,7 @@ export default function SignupFormHub(props) {
   //fonction asynchrone vers le backend enregistrant l'utilisateur
   const onSubmit = async function (data) {
     try{
-      const response = await fetch(`https://click-backend.herokuapp.com/api/user/signup`, {
+      const response = await fetch(`https://click-backend.herokuapp.com/api/user/signupHub`, {
         mode: "cors",
         method: "POST",
         body: JSON.stringify({enterprise_name: data.enterprise_name, referent_lastname: data.referent_lastname, referent_forename: data.referent_forename, email: data.email, password: data.password,
