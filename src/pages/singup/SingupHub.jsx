@@ -37,7 +37,7 @@ export default function SignupHub() {
             </div>
 
             <div className="form-signup__field-wrapper">
-                <SignupForm  showModal={showModal}/>
+                <SignupFormHub  showModal={showModal}/>
             </div>
 
         </section>
