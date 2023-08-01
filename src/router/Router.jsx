@@ -28,8 +28,6 @@ import { useSelector } from "react-redux"
 
 export default function Router() {
 
-  const userRole = useSelector((state) => state.user.userRole);
-  console.log("userRole" + userRole)
 
   return (
 
