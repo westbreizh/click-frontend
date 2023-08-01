@@ -8,10 +8,10 @@ import LoginIcon from "../icons/desktop/LoginIcon"
 import AccountIcon from "../icons/desktop/AccountIcon"
 
 
-export default function NavbarDesktop() {
+export default function NavbarDesktopHub() {
 
   const isConnected = useSelector((state) => state.user.isConnected)
-  const numberArticle = useSelector((state) => state.cart.numberArticle)
+
 
 
   return (
@@ -21,40 +21,23 @@ export default function NavbarDesktop() {
       <ul className="navBar__ul">
 
         <li className='navBar__li'>
-          <NavLink  to='/' className={(nav) => (nav.isActive ? "navBar__active" : "navBar__inactive")} end>
+          <NavLink  to='/hub_raquettes-depot-ou-retrait' className={(nav) => (nav.isActive ? "navBar__active" : "navBar__inactive")} end>
             <HomeIcon className="navBar__icon"/>
-            Accueil
+            Dépot/retrait
           </NavLink>
         </li> 
 
+
         <li className='navBar__li'>
-          <NavLink  to="/cordez" className={(nav) => (nav.isActive ? "navBar__active" : "navBar__inactive")} end>
+          <NavLink  to="/hub_historique" className={(nav) => (nav.isActive ? "navBar__active" : "navBar__inactive")} end>
             <SportsTennisIcon className="navBar__icon"/>
-            Cordez
+            Historique
           </NavLink>
         </li>
 
-        <li className='navBar__li'>
-          < ShopIcon />
-        </li>
-
-        <li className='navBar__li'  >
-          {isConnected? 
-            <AccountIcon  /> 
-            :
-            < LoginIcon/>}
-        </li>
-
-        <li className='navBar__li navBar__li-shop'>
-          <NavLink  to="/panier" className={(nav) => (nav.isActive ? "navBar__active" : "navBar__inactive")} end>
-            <ShoppingBasketIcon className="navBar__icon"/>
-            panier
-            {numberArticle > 0 && 
-            <div className="number-article-desktop navBar__li-shop">{numberArticle}</div>}           
-          </NavLink> 
-        </li>
 
       </ul>
+
     </nav>
   )
 }

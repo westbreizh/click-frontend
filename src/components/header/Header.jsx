@@ -4,13 +4,19 @@ import NavbarDesktopStringer from "../navbar/NavbarDesktopStringer"
 import logo from "../../assets/LOGO.jpg"
 import NavbarHamburger from "../navbar/NavbarHamburger"
 import { useSelector } from "react-redux"
-
+import { useEffect } from "react";
 
 
 export default function Header() {
 
   const userRole = useSelector((state) => state.user.userRole)
   console.log( "userRole"+ userRole)
+
+  useEffect(() => {
+    // Cette fonction s'exécutera à chaque changement de `userRole`.
+    console.log("userRole a changé :", userRole);
+    // Des effets secondaires ou des actions supplémentaires en fonction du changement de `userRole` peuvent être effectués ici.
+  }, [userRole]);
 
   return (
 
