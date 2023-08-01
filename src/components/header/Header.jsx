@@ -9,8 +9,10 @@ import { useEffect } from "react";
 
 export default function Header() {
 
+  const user = useSelector((state) => state.user)
   const userRole = useSelector((state) => state.user.userRole)
   console.log( "userRole"+ userRole)
+  console.log( "user"+ user)
 
   useEffect(() => {
     // Cette fonction s'exécutera à chaque changement de `userRole`.
