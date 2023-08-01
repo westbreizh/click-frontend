@@ -20,12 +20,6 @@ export default function Home() {
 
 			<section className="functionning" >
 
-				<div className="functionning__button-animate" >
-					<div className="functionning__bubble"> 	1 </div>
-					<SportsTennisIcon className="functionning-icon-tennis"/>
-					<h3 className="functionning__h3">Déposez votre raquette où vous le souhaitez  </h3>
-				</div>
-
 				<Link to="/cordez" className='functionning__link'>
 				<div className="functionning__button-animate" >
 						<div className="functionning__bubble"> 	2 </div>
@@ -33,6 +27,14 @@ export default function Home() {
 						<h3 className="functionning__h3">Commander votre cordage en ligne</h3>
 					</div>
 				</Link>
+
+
+				<div className="functionning__button-animate" >
+					<div className="functionning__bubble"> 	1 </div>
+					<SportsTennisIcon className="functionning-icon-tennis"/>
+					<h3 className="functionning__h3">Déposez votre raquette où vous le souhaitez  </h3>
+				</div>
+
 
 				<div className="functionning__button-animate" >
 					<div className="functionning__bubble"> 	3 </div>

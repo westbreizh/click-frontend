@@ -23,17 +23,15 @@ import SuccesPaiement from '../pages/afterPaiement/SuccesPaiement'
 import EchecPaiement from '../pages/afterPaiement/EchecPaiement'
 import ResetPassword from '../pages/resetPassword/ResetPassword'
 import SignupHub from '../pages/singup/SingupHub'
-
+import { useSelector } from "react-redux"
 
 
 export default function Router() {
 
-
-
+  const userRole = useSelector((state) => state.user.userRole);
+  console.log("userRole" + userRole)
 
   return (
-
-    
 
     <BrowserRouter scrollBehavior="smooth">
       
