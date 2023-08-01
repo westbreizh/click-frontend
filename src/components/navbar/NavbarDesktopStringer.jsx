@@ -6,6 +6,7 @@ import ShopIcon from "../icons/desktop/ShopIcon";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import LoginIcon from "../icons/desktop/LoginIcon"
 import AccountIcon from "../icons/desktop/AccountIcon"
+import LogoutIcon from "../icons/desktop/LogoutIcon";
 
 
 export default function NavbarDesktopStringer() {
@@ -49,6 +50,7 @@ export default function NavbarDesktopStringer() {
           </NavLink>
         </li>
 
+        <LogoutIcon />
 
       </ul>
 

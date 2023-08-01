@@ -32,7 +32,7 @@ export default function Header() {
         {/* Conditional rendering based on userRole */}
         {userRole === '' && <NavbarDesktop />}
         {userRole === undefined && <NavbarDesktop />}
-        {userRole === 'client' && <NavbarDesktop />}
+        {userRole === 'player' && <NavbarDesktop />}
         {userRole === 'stringer' && <NavbarDesktopStringer />}
         {userRole === 'hub' && <NavbarDesktopHub />}
 
