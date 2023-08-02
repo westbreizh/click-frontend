@@ -5,7 +5,7 @@ import { useState } from 'react'
 import ModalValidationSignup from "../../components/modal/modalValidation/ModalValidationSignup"
 import SignupFormStringer from '../../components/form/SignupFormStringer';
 
-export default function SignupStringer() {
+export default function SingnupStringer() {
 
   const [isModalValidationMessageOpen, setModalValidationMessageOpen] = useState(false);
   const showModal = function(){

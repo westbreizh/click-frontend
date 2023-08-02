@@ -22,8 +22,9 @@ import Order from '../pages/order/order'
 import SuccesPaiement from '../pages/afterPaiement/SuccesPaiement'
 import EchecPaiement from '../pages/afterPaiement/EchecPaiement'
 import ResetPassword from '../pages/resetPassword/ResetPassword'
-import SignupHub from '../pages/singup/SingupHub'
-import { useSelector } from "react-redux"
+import SingnupHub from '../pages/singup/SingupHub'
+import SingnupStringer from '../pages/singup/SingupStringer'
+
 
 
 export default function Router() {
@@ -57,8 +58,8 @@ export default function Router() {
           <Route path='/historique_commandes/:orderId' element={<OrderDetailHistory />} />
           <Route path="/passwordReset/:token/:id" element={<ResetPassword />} />
           <Route path='/*' element={<ErrorPage />} />
-          <Route path='/inscription-hub'  element = {< SignupHub/>} />
-          <Route path='/inscription-cordeur'  element = {< SignupHub/>} />
+          <Route path='/inscription-hub'  element = {< SingnupHub/>} />
+          <Route path='/inscription-cordeur'  element = {< SingnupStringer/>} />
       </Routes>
 
       <Footer/>
