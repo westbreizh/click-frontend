@@ -41,6 +41,8 @@ export default function Router() {
 
           <Route path='/' element={<Home />} />     
           <Route path='/inscription'  element = {< Signup/>} />
+          <Route path='/inscription-hub'  element = {< SingnupHub/>} />
+          <Route path='/inscription-cordeur'  element = {< SingnupStringer/>} />
           <Route path='/cordez'  element = {<Stringing />} />
           <Route path='/cordages'  element = {<String />} />
           <Route path="/fiche_produit/cordage/:productId"  element = {<ProductStringPage />} />
@@ -58,8 +60,7 @@ export default function Router() {
           <Route path='/historique_commandes/:orderId' element={<OrderDetailHistory />} />
           <Route path="/passwordReset/:token/:id" element={<ResetPassword />} />
           <Route path='/*' element={<ErrorPage />} />
-          <Route path='/inscription-hub'  element = {< SingnupHub/>} />
-          <Route path='/inscription-cordeur'  element = {< SingnupStringer/>} />
+
       </Routes>
 
       <Footer/>
