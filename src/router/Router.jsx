@@ -57,8 +57,8 @@ export default function Router() {
           <Route path='/historique_commandes/:orderId' element={<OrderDetailHistory />} />
           <Route path="/passwordReset/:token/:id" element={<ResetPassword />} />
           <Route path='/*' element={<ErrorPage />} />
-          <Route path='/inscription/hub'  element = {< SignupHub/>} />
-      
+          <Route path='/inscription-hub'  element = {< SignupHub/>} />
+          <Route path='/inscription-cordeur'  element = {< SignupHub/>} />
       </Routes>
 
       <Footer/>
