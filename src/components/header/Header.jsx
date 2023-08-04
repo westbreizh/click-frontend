@@ -3,6 +3,8 @@ import NavbarDesktopHub from "../navbar/NavbarDesktopHub"
 import NavbarDesktopStringer from "../navbar/NavbarDesktopStringer"
 import logo from "../../assets/LOGO.jpg"
 import NavbarHamburger from "../navbar/NavbarHamburger"
+import NavbarHamburgerHub from "../navbar/NavbarHamburgerHub"
+import NavbarHamburgerStringer from "../navbar/NavbarHamburgerStringer"
 import { useSelector } from "react-redux"
 import { useEffect } from "react";
 
@@ -30,13 +32,14 @@ export default function Header() {
           <img src={logo} alt="logo de click & raquette" className="header__logo"/>
         
         {/* Conditional rendering based on userRole */}
-        {userRole === '' && <NavbarDesktop />}
-        {userRole === undefined && <NavbarDesktop />}
-        {userRole === 'player' && <NavbarDesktop />}
+        {(userRole === '' || userRole === undefined || userRole === 'player') && <NavbarDesktop />}
         {userRole === 'stringer' && <NavbarDesktopStringer />}
         {userRole === 'hub' && <NavbarDesktopHub />}
 
-          <NavbarHamburger />
+        {(userRole === '' || userRole === undefined || userRole === 'player') && <NavbarHamburger />}
+        {userRole === 'stringer' && <NavbarHamburgerStringer/>}
+        {userRole === 'hub' && <NavbarHamburgerHub  />}
+          
 
       </div>
       

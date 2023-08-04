@@ -534,6 +534,18 @@ body {
   border-radius: 50%;
 }
 
+.icons_wrapper {
+  height: 2.5rem;
+}
+
+.arrowOutward-to-rotate {
+  transform: rotate(180deg);
+}
+
+.li__logoutIcon {
+  margin-left: 3rem;
+}
+
 @media screen and (max-width: 768px) {
   .navBar__contenair {
     display: none;
@@ -554,9 +566,22 @@ body {
   border-radius: 1.5rem 1.5rem 0rem 0rem;
 }
 
+.signOut_wrapper {
+  display: flex;
+  flex-direction: row;
+  text-transform: uppercase;
+  margin-left: 2.5rem;
+  font-size: 1.7rem;
+}
+
 @media screen and (min-width: 768px) {
   .navHamburger__contenair {
     display: none;
+  }
+  .signOut_wrapper {
+    flex-direction: column;
+    margin-left: 2.5rem;
+    font-size: 1.5rem;
   }
 }
 .menuDropdownHamburger {

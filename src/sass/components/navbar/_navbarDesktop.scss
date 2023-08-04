@@ -61,9 +61,24 @@
     width: 1.5rem;
     border-radius: 50%;
     //border:0.1rem solid white;
-
-
 }
+
+
+.icons_wrapper{
+    height: 2.5rem;
+}
+
+.arrowOutward-to-rotate {
+    transform: rotate(180deg);
+}
+
+
+
+.li__logoutIcon{
+    margin-left: 3rem;
+}
+
+
 
 
 
