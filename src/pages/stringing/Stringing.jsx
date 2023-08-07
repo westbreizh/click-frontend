@@ -207,11 +207,11 @@ export default function Stringing() {
                 </div>
 
                 <div>
-                {hubChoice.value}
+                {hubChoice.enterprise_name}
                 </div>
 
                 <div>
-                {hubChoice.adress}
+                {hubChoice.road} - {hubChoice.city}
                 </div>
                   
               </>
@@ -243,11 +243,11 @@ export default function Stringing() {
                 </div>
 
                 <div>
-                {hubBackChoice.value}
+                {hubBackChoice.enterprise_name}
                 </div>
 
                 <div>
-                {hubBackChoice.adress}
+                {hubBackChoice.road} - {hubBackChoice.city}
                 </div>
                   
               </>

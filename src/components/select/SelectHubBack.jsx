@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { datasForSelectHub } from "../../Utils/localDataBase";
+import { useState, useEffect } from "react";
 import { resetHubBackChoice } from "../../store/cartSlice"; 
 import { useDispatch, useSelector } from 'react-redux'
 
 
 export default function SelectHubBack(props) {
 
+  const [datasForSelectHubBack , setDatasForSelectHubBack ] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const hubBackChoice = useSelector(state => state.cart.hubBackChoice);
   const dispatch = useDispatch();
@@ -17,6 +17,39 @@ export default function SelectHubBack(props) {
   };
   
  
+ //fonction asynchrone recuperant la liste des dépots de retrait
+ const fetchHubWithdrawaltList = async (data) => {
+  try {
+    const response = await fetch('https://click-backend.herokuapp.com/api/shop/listHubWithdrawal', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const result = await response.json();
+      // Gérer l'affichage ou la gestion des erreurs depuis le backend ici
+      console.error(result.message);
+      return []; // Ou vous pouvez renvoyer une valeur vide ou null en cas d'erreur
+    }
+
+    const result = await response.json();
+    setDatasForSelectHubBack(result.listHubWithdrawal)
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données:', error);
+    return []; // Renvoyer une valeur vide ou null en cas d'erreur
+  }
+};
+
+//on charge la liste des dépots à l'initialisation du composant...
+useEffect(() => {
+  fetchHubWithdrawaltList ()
+},[])
+
+
+
   return (
 
     <div 
@@ -39,13 +72,16 @@ export default function SelectHubBack(props) {
 
         <ul className='clubSelect__submenu-ul'>
 
-          {datasForSelectHub.map(( option) =>
+          {datasForSelectHubBack.map(( option) =>
 
-            <li key={option.value} 
-            className="clubSelect__submenu-li"  
-            onClick={() => handleChange(option)}>
-              {option.value} 
+            <li
+            key={option.id} // Assurez-vous que la propriété "id" est unique pour chaque élément
+            className="clubSelect__submenu-li"
+            onClick={() => handleChange(option)}
+            >
+            {option.enterprise_name} {/* Utilisez la propriété correcte ici */}
             </li>
+
 
           )}
 
