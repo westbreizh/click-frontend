@@ -20,7 +20,6 @@ export default function Order() {
   const userInfo = useSelector(state => state.user.userInfo);
 
   const token = useSelector((state) => state.user.token);
-  console.log("token : " + token)
   const PUBLIC_KEY = "pk_live_51NGdYqI8HrVwrRfPvO0VCSPgquB0SZOcQeifdVeXzlryvLj2gpTf6EufvCPRJ7SD1M9iCjTY7ZTwySpWtjYibzb100TJ7uXJag"
    const stripePromise =loadStripe (PUBLIC_KEY)
 
@@ -32,41 +31,66 @@ export default function Order() {
     setModalConnexionOpen(false);
   };
 
-  const [paiementEnLigneChecked, setPaiementEnLigneChecked] = useState(false);
-  const [paiementEnBoutiqueChecked, setPaiementEnBoutiqueChecked] = useState(false);
+  const [paiementInlineChecked, setPaiementInlineChecked] = useState(false);
+  const [paiementInShopChecked, setPaiementInShopChecked] = useState(false);
 
-  const handlePaiementEnLigneChange = () => {
-    setPaiementEnLigneChecked(!paiementEnLigneChecked);
-    setPaiementEnBoutiqueChecked(false); // Décoche l'autre case si elle est cochée
+  const handlePaiementInlineChange = () => {
+    setPaiementInlineChecked(!paiementInlineChecked);
+    setPaiementInShopChecked(false); // Décoche l'autre case si elle est cochée
   };
 
-  const handlePaiementEnBoutiqueChange = () => {
-    setPaiementEnBoutiqueChecked(!paiementEnBoutiqueChecked);
-    setPaiementEnLigneChecked(false); // Décoche l'autre case si elle est cochée
+  const handlePaiementInShopChange = () => {
+    setPaiementInShopChecked(!paiementInShopChecked);
+    setPaiementInlineChecked(false); // Décoche l'autre case si elle est cochée
   };
+
+
+
+ // gestion de l'affichage de l'erreur dans la balise p
+ const [showError, setShowError] = useState(false) ;
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
   
     // Créez un formulaire virtuel pour envoyer les données
     const form = document.createElement('form');
-    form.action = 'https://click-backend.herokuapp.com/api/stripe/create-checkout-session';
     form.method = 'POST';
+
+    if (!paiementInlineChecked && !paiementInShopChecked) {
+      setShowError(true);
+      return; // Arrêter la soumission du formulaire en cas d'erreur
+    }
   
-    // Ajoutez un champ de formulaire caché avec la valeur de la liste d'articles
-    const datasInput = document.createElement('input');
-    datasInput.type = 'hidden';
-    datasInput.name = 'datas';
-    datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token });
+    if (paiementInlineChecked) {
+      // Traitement pour paiement en ligne
+      form.action = 'https://click-backend.herokuapp.com/api/stripe/create-checkout-session';
   
-    console.log(datasInput)
-    // Ajoutez le champ de formulaire au formulaire virtuel
-    form.appendChild(datasInput);
+      // Ajoutez un champ de formulaire caché avec la valeur de la liste d'articles
+      const datasInput = document.createElement('input');
+      datasInput.type = 'hidden';
+      datasInput.name = 'datas';
+      datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token });
+  
+      // Ajoutez le champ de formulaire au formulaire virtuel
+      form.appendChild(datasInput);
+    } else if (paiementInShopChecked) {
+      // Traitement pour paiement en shop
+      form.action = 'https://click-backend.herokuapp.com/api/autre-endpoint-paiement-in-shop';
+  
+      const shopInput = document.createElement('input');
+      shopInput.type = 'hidden';
+      shopInput.name = 'montant';
+      shopInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token });
+      form.appendChild(shopInput);
+    }
   
     // Ajoutez le formulaire virtuel à la page et soumettez-le
     document.body.appendChild(form);
     form.submit();
   };
+  
   
   
 
@@ -265,10 +289,10 @@ export default function Order() {
                   <label className="order_checkbox_label">
                     <input
                       type="checkbox"
-                      name="paiementEnLigne"
+                      name="paiementInline"
                       className="order_checkbox_input"
-                      checked={paiementEnLigneChecked}
-                      onChange={handlePaiementEnLigneChange}                    />
+                      checked={paiementInlineChecked}
+                      onChange={handlePaiementInlineChange}                    />
                     Paiement en ligne
                   </label>
                   <img src={logoPaiment} alt="logo moyen de paiement" className="logo-paiement" />
@@ -280,10 +304,10 @@ export default function Order() {
                   <label className="order_checkbox_label">
                     <input
                       type="checkbox"
-                      name="paiementEnBoutique"
+                      name="paiementInShop"
                       className="order_checkbox_input"
-                      checked={paiementEnBoutiqueChecked}
-                      onChange={handlePaiementEnBoutiqueChange}                  />
+                      checked={paiementInShopChecked}
+                      onChange={handlePaiementInShopChange}                  />
                   Paiement en boutique
                   </label>
                   <div className='order_checkbox-text-under'> 
@@ -299,11 +323,16 @@ export default function Order() {
 
             <div className="order__contenair-info order__contenair-info-button" > 
 
+
+
+            {showError && <p className="input__error message__error">Veuillez saisir un mode de paiement, merci !</p>}
               <form onSubmit={handleSubmit}>
-                  <button className="btn btn-green btn-commander btn-cart" type="submit">
+                  <button 
+                  className="btn btn-green btn-commander btn-cart" 
+                  type="submit">
                     Commander
                   </button>
-                </form>
+              </form>
 
             </div>
 
