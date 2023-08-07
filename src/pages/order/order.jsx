@@ -32,7 +32,18 @@ export default function Order() {
     setModalConnexionOpen(false);
   };
 
+  const [paiementEnLigneChecked, setPaiementEnLigneChecked] = useState(false);
+  const [paiementEnBoutiqueChecked, setPaiementEnBoutiqueChecked] = useState(false);
 
+  const handlePaiementEnLigneChange = () => {
+    setPaiementEnLigneChecked(!paiementEnLigneChecked);
+    setPaiementEnBoutiqueChecked(false); // Décoche l'autre case si elle est cochée
+  };
+
+  const handlePaiementEnBoutiqueChange = () => {
+    setPaiementEnBoutiqueChecked(!paiementEnBoutiqueChecked);
+    setPaiementEnLigneChecked(false); // Décoche l'autre case si elle est cochée
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -219,14 +230,23 @@ export default function Order() {
               <h2 className="order__sub-title"> Lieu de dépot et retour </h2>
 
               <div className='order-hub__title'> Dépot :</div>
-              <div> {hubChoice.value}, </div>
-              <div> {hubChoice.adress} </div>
+              <div>
+                {hubChoice.enterprise_name}
+                </div>
+
+                <div>
+                {hubChoice.road} - {hubChoice.city}
+                </div>
 
 
-              <div className='order-hub__title'> Retour service :</div>
-              <div> {hubBackChoice.value},  </div>
-              <div> {hubBackChoice.adress} </div>
-              <div> Votre raquette sera disponible le lendemain à partir de midi si vous déposez votre raquette avant midi. </div>
+              <div className='order-hub__title'> Retour de service :</div>
+              <div>
+                {hubBackChoice.enterprise_name}
+                </div>
+
+                <div>
+                {hubBackChoice.road} - {hubBackChoice.city}
+                </div>
 
 
 
@@ -238,12 +258,44 @@ export default function Order() {
 
               <h2 className="order__sub-title"> Moyen de paiement </h2>
 
-              <img src={logoPaiment} alt="logo moyen de paiement" className="logo-paiement"/>
+              <div className="order_paiement-mode-wrapper">
 
-              <img src={logoPaypal} alt="logo moyen de paiement" className="logo-paiement"/>
+                <div className="order_paiement-mode-subWrapper">
 
+                  <label className="order_checkbox_label">
+                    <input
+                      type="checkbox"
+                      name="paiementEnLigne"
+                      className="order_checkbox_input"
+                      checked={paiementEnLigneChecked}
+                      onChange={handlePaiementEnLigneChange}                    />
+                    Paiement en ligne
+                  </label>
+                  <img src={logoPaiment} alt="logo moyen de paiement" className="logo-paiement" />
+                  <img src={logoPaypal} alt="logo moyen de paiement" className="logo-paiement" />
+                </div>
+
+                <div className="order_paiement-mode-subWrapper">
+
+                  <label className="order_checkbox_label">
+                    <input
+                      type="checkbox"
+                      name="paiementEnBoutique"
+                      className="order_checkbox_input"
+                      checked={paiementEnBoutiqueChecked}
+                      onChange={handlePaiementEnBoutiqueChange}                  />
+                  Paiement en boutique
+                  </label>
+                  <div className='order_checkbox-text-under'> 
+                    Le règlement se fera lors de <br/> votre passage en boutique
+                  </div>
+
+                </div>
+
+              </div>
 
             </div>
+
 
             <div className="order__contenair-info order__contenair-info-button" > 
 
