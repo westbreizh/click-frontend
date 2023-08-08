@@ -7,7 +7,7 @@ import ModalConnexionOrSingupFromOrder from '../../components/modal/modalLoginOr
 import CheckoutForm from '../../stripe/CheckoutForm';
 import logoPaiment from "../../assets/logo-Paiement-carte-bleu.webp"
 import logoPaypal from "../../assets/logo-paypal.jpeg"
-
+import { useNavigate } from 'react-router-dom';
 
 export default function Order() {
 
@@ -21,9 +21,10 @@ export default function Order() {
 
   const token = useSelector((state) => state.user.token);
   const PUBLIC_KEY = "pk_live_51NGdYqI8HrVwrRfPvO0VCSPgquB0SZOcQeifdVeXzlryvLj2gpTf6EufvCPRJ7SD1M9iCjTY7ZTwySpWtjYibzb100TJ7uXJag"
-   const stripePromise =loadStripe (PUBLIC_KEY)
+  const stripePromise =loadStripe (PUBLIC_KEY)
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //ne sert qu'à envoyer une prop qui avait été défini dans les composant enfant
   const [isModalConnexionOpen, setModalConnexionOpen] = useState(false);
@@ -51,7 +52,7 @@ export default function Order() {
 
 
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
   
     // Créez un formulaire virtuel pour envoyer les données
@@ -77,25 +78,36 @@ export default function Order() {
       form.appendChild(datasInput);
     } else if (paiementInShopChecked) {
       // Traitement pour paiement en shop
-      form.action = 'https://click-backend.herokuapp.com/api/autre-endpoint-paiement-in-shop';
+      form.action = 'https://click-backend.herokuapp.com/api/shop/paiement-in-shop';
   
-      const shopInput = document.createElement('input');
-      shopInput.type = 'hidden';
-      shopInput.name = 'montant';
-      shopInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token });
-      form.appendChild(shopInput);
+      const datasInput = document.createElement('input');
+      datasInput.type = 'hidden';
+      datasInput.name = 'datas';
+      datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token });
+      form.appendChild(datasInput);
     }
   
     // Ajoutez le formulaire virtuel à la page et soumettez-le
     document.body.appendChild(form);
     form.submit();
+    if (paiementInShopChecked) {
+      // Attendre la réponse du backend
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form)
+      });
+  
+      if (response.ok) {
+        // Redirection en cas de succès
+        navigate("/commande-passé")
+      } else {
+        // Gérer les erreurs ici
+        console.error('Erreur lors du traitement de la demande.');
+      }
+    }  
   };
   
   
-  
-
-
-
   return (
 
 
