@@ -24,7 +24,7 @@ import SingnupHub from '../pages/singup/SingupHub'
 import SingnupStringer from '../pages/singup/SingupStringer'
 import SuccesPaiement from '../pages/afterPaiement/SuccesPaiement'
 import EchecPaiement from '../pages/afterPaiement/EchecPaiement'
-import OrderPassed from '../pages/orderPassed/SuccesPaiement'
+import OrderPassed from '../pages/orderPassed/OrderPassed'
 
 export default function Router() {
 

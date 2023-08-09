@@ -25,7 +25,6 @@ export default function Order() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   //ne sert qu'à envoyer une prop qui avait été défini dans les composant enfant
   const [isModalConnexionOpen, setModalConnexionOpen] = useState(false);
   const closeModalConnexion = function(){
@@ -38,11 +37,13 @@ export default function Order() {
   const handlePaiementInlineChange = () => {
     setPaiementInlineChecked(!paiementInlineChecked);
     setPaiementInShopChecked(false); // Décoche l'autre case si elle est cochée
+    setShowError(false);
   };
 
   const handlePaiementInShopChange = () => {
     setPaiementInShopChecked(!paiementInShopChecked);
     setPaiementInlineChecked(false); // Décoche l'autre case si elle est cochée
+    setShowError(false);
   };
 
 
@@ -51,63 +52,62 @@ export default function Order() {
  const [showError, setShowError] = useState(false) ;
 
 
+ const handleSubmitInlignePaiement =  (event) => {
+  event.preventDefault();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-  
-    // Créez un formulaire virtuel pour envoyer les données
-    const form = document.createElement('form');
-    form.method = 'POST';
+  // Créez un formulaire virtuel pour envoyer les données
+  const form = document.createElement('form');
+  form.method = 'POST';
 
-    if (!paiementInlineChecked && !paiementInShopChecked) {
-      setShowError(true);
-      return; // Arrêter la soumission du formulaire en cas d'erreur
-    }
+  // Traitement pour paiement en ligne
+  form.action = 'https://click-backend.herokuapp.com/api/stripe/create-checkout-session';
+
+  // Ajoutez un champ de formulaire caché avec la valeur de la liste d'articles
+  const datasInput = document.createElement('input');
+  datasInput.type = 'hidden';
+  datasInput.name = 'datas';
+  datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token });
+
+  // Ajoutez le champ de formulaire au formulaire virtuel
+  form.appendChild(datasInput);
   
-    if (paiementInlineChecked) {
-      // Traitement pour paiement en ligne
-      form.action = 'https://click-backend.herokuapp.com/api/stripe/create-checkout-session';
-  
-      // Ajoutez un champ de formulaire caché avec la valeur de la liste d'articles
-      const datasInput = document.createElement('input');
-      datasInput.type = 'hidden';
-      datasInput.name = 'datas';
-      datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token });
-  
-      // Ajoutez le champ de formulaire au formulaire virtuel
-      form.appendChild(datasInput);
-    } else if (paiementInShopChecked) {
-      // Traitement pour paiement en shop
-      form.action = 'https://click-backend.herokuapp.com/api/shop/paiement-in-shop';
-  
-      const datasInput = document.createElement('input');
-      datasInput.type = 'hidden';
-      datasInput.name = 'datas';
-      datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token });
-      form.appendChild(datasInput);
-    }
-  
-    // Ajoutez le formulaire virtuel à la page et soumettez-le
-    document.body.appendChild(form);
-    form.submit();
-    if (paiementInShopChecked) {
-      // Attendre la réponse du backend
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form)
-      });
-  
-      if (response.ok) {
-        // Redirection en cas de succès
+  // Ajoutez le formulaire virtuel à la page et soumettez-le
+  document.body.appendChild(form);
+  form.submit();
+ }
+
+  const handleClickShopPaiement = async (event) => {
+    try{
+      
+      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/paiement-in-shop`, {
+        mode: "cors",
+        method: "POST",
+        body: JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+        }
+      })
+
+        if (!response.ok) {
+          const result = await response.json();
+          throw new Error(` ${result.message}`);
+        }else {
+        const result = await response.json();
         navigate("/commande-passé")
-      } else {
-        // Gérer les erreurs ici
-        console.error('Erreur lors du traitement de la demande.');
+        console.log(result)
       }
-    }  
-  };
+    }
+    catch(err){
+      const errorMessage = err.toString();
+      console.log(errorMessage);
+    }
+  }
   
-  
+  const  handleClickNoOptionPaiement =  (event) => {
+    setShowError(true);
+  }
+
   return (
 
 
@@ -337,14 +337,43 @@ export default function Order() {
 
 
 
-            {showError && <p className="input__error message__error">Veuillez saisir un mode de paiement, merci !</p>}
-              <form onSubmit={handleSubmit}>
+              {showError && <p className="input__error message__error">Veuillez saisir un mode de paiement, merci !</p>}
+
+              { paiementInlineChecked===true ?
+                <form onSubmit={handleSubmitInlignePaiement}>
                   <button 
-                  className="btn btn-green btn-commander btn-cart" 
-                  type="submit">
-                    Commander
+                    className="btn btn-green btn-commander btn-cart" 
+                    type="submit">
+                      Commander
+                    </button>
+                </form> : ""                
+
+              }
+
+
+              { paiementInShopChecked===true ?
+        
+                  <button 
+                    onClick={handleClickShopPaiement}
+                    className="btn btn-green btn-commander btn-cart" 
+                    type="submit">
+                      Commander
+                    </button>
+                :   ""              
+
+              }
+
+              { paiementInShopChecked===false && paiementInlineChecked===false ?
+        
+                  <button 
+                    onClick={handleClickNoOptionPaiement}
+                    className="btn btn-green btn-commander btn-cart" 
+                    type="submit">
+                      Commander
                   </button>
-              </form>
+                :   ""              
+
+              }
 
             </div>
 
