@@ -32,7 +32,6 @@ useEffect(() => {
   dispatch(updateStringingPrice(10));
 }, []);
 
-
   console.log("article dans panier",articleList )
   console.log("numberArticle", numberArticle )
 

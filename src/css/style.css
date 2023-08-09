@@ -3288,6 +3288,9 @@ input {
   margin-bottom: 2rem;
 }
 .order__contenair-info-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #ededed;
   border: 0.1rem solid #ededed;
   border-radius: 1rem;
@@ -3432,6 +3435,12 @@ input {
 
 .order_checkbox-text-under {
   font-weight: bold;
+}
+
+.message__errorOrderPaiement {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 /* -------------------  Responsive ----------------------*/

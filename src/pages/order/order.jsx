@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {  useSelector, useDispatch } from 'react-redux'
 import { NavLink } from "react-router-dom"
 import { loadStripe } from '@stripe/stripe-js'
-import { Elements } from '@stripe/react-stripe-js'
 import ModalConnexionOrSingupFromOrder from '../../components/modal/modalLoginOrSignup/ModalLoginOrSignupFromOrder';
-import CheckoutForm from '../../stripe/CheckoutForm';
 import logoPaiment from "../../assets/logo-Paiement-carte-bleu.webp"
 import logoPaypal from "../../assets/logo-paypal.jpeg"
 import { useNavigate } from 'react-router-dom';
@@ -340,7 +338,7 @@ export default function Order() {
 
 
 
-              {showError && <p className="input__error message__error">Veuillez saisir un mode de paiement, merci !</p>}
+              {showError && <p className="input__error message__errorOrderPaiement">Veuillez saisir un mode de paiement, merci !</p>}
 
               { paiementInlineChecked===true ?
                 <form onSubmit={handleSubmitInlignePaiement}>
