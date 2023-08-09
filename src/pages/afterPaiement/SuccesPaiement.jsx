@@ -1,9 +1,15 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import {  useSelector, useDispatch } from 'react-redux'
+import { resetCart } from "../../store/cartSlice";
+
+
 export default function SuccesPaiement() {
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    localStorage.clear();
+    dispatch(resetCart());
   }, []);
 
 

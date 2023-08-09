@@ -8,6 +8,7 @@ import CheckoutForm from '../../stripe/CheckoutForm';
 import logoPaiment from "../../assets/logo-Paiement-carte-bleu.webp"
 import logoPaypal from "../../assets/logo-paypal.jpeg"
 import { useNavigate } from 'react-router-dom';
+import { resetCart } from '../../store/cartSlice'
 
 export default function Order() {
 
@@ -94,8 +95,10 @@ export default function Order() {
           throw new Error(` ${result.message}`);
         }else {
         const result = await response.json();
+        dispatch(resetCart());
         navigate("/commande-passé")
         console.log(result)
+        
       }
     }
     catch(err){
