@@ -35,7 +35,7 @@ console.log("hubaackchoice",hubBackChoice)
     stringRopeChoice !== "" &&
     stringChoice.id !== "" 
     ;
-//localStorage.clear()
+localStorage.clear()
   // fonction qui ajoute, enrgistre la pose du cordage et ses options dans le panier du  store redux 
   const onSubmit= () => {
     if (stringChoice.id === "cordage fourni par le joueur") { 
