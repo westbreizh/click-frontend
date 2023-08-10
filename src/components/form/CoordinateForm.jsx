@@ -17,7 +17,7 @@ export default function CoordinateForm( props ) {
   const address = useSelector((state) => state.user.userAddress);
   const token = useSelector((state) => state.user.token);
 
-  console.log("adress",address)
+
  
   //gestion de l'ouverture du modal de validation et fermeture des 2 modales (modalValidation et modalChangeEmail...)
 
@@ -80,6 +80,7 @@ export default function CoordinateForm( props ) {
         }else {
         const result = await response.json();
         store.dispatch(setUserAddress(result.userAddress));
+        console.log(result.userInfo)
         store.dispatch(setUserInfo(result.userInfo));
         showModalValidation();
         console.log(result)
