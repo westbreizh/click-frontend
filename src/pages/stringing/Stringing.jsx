@@ -15,7 +15,7 @@ export default function Stringing() {
 
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
 
-  const hubChoice = useSelector(state => state.cart.hubChoice);
+  let hubChoice = useSelector(state => state.cart.hubChoice);
   const hubBackChoice = useSelector(state => state.cart.hubBackChoice);
   const stringRopeChoice = useSelector(state => state.cart.stringRopeChoice);
   const stringChoice = useSelector(state => state.cart.stringChoice[0]);
@@ -26,7 +26,7 @@ export default function Stringing() {
   const dispatch = useDispatch();
   dispatch(updateStringingPrice(10));
 
-console.log("hubaackchoice",hubBackChoice)
+console.log("hubackchoice",hubBackChoice)
 
   // gestion de l'état de validation du bouton pour ajouter le produit  
   const isValid =
@@ -35,7 +35,7 @@ console.log("hubaackchoice",hubBackChoice)
     stringRopeChoice !== "" &&
     stringChoice.id !== "" 
     ;
-localStorage.clear()
+
   // fonction qui ajoute, enrgistre la pose du cordage et ses options dans le panier du  store redux 
   const onSubmit= () => {
     if (stringChoice.id === "cordage fourni par le joueur") { 

@@ -110,6 +110,7 @@ export default function LoginForm( props ) {
         }else {
         const result = await response.json();
         store.dispatch(setUserInfo(result.userInfo));
+        console.log("userInfo", result.userInfo)
         store.dispatch(setUserAddress(result.userAddress));
         store.dispatch(connectedToggle());
         store.dispatch(setToken(result.token))

@@ -17,6 +17,7 @@ export default function CoordinateForm( props ) {
   const address = useSelector((state) => state.user.userAddress);
   const token = useSelector((state) => state.user.token);
 
+  console.log("adress",address)
  
   //gestion de l'ouverture du modal de validation et fermeture des 2 modales (modalValidation et modalChangeEmail...)
 
@@ -103,15 +104,30 @@ export default function CoordinateForm( props ) {
       <p className="input__error">{errors.telephone?.message}</p>  
 
       <label className="input__label"> Adresse (nom et numéro de la voirie) </label>
-      <input type="text" {...register("road")} className="input__text" defaultValue={address.road}  />
+      <input
+        type="text"
+        {...register("road")}
+        className="input__text"
+        defaultValue={address && address.road ? address.road : ""}
+      />
       <p className="input__error">{errors.road?.message}</p>
 
       <label className="input__label"> Ville  </label>
-      <input type="text" {...register("city")} className="input__text" defaultValue={address.city}  />
+      <input
+        type="text"
+        {...register("city")}
+        className="input__text"
+        defaultValue={address && address.city ? address.city : ""}
+      />
       <p className="input__error">{errors.city?.message}</p>
 
       <label className="input__label"> Code postal  </label>
-      <input type="text" {...register("postalCode")} className="input__text" defaultValue={address.postalCode} />
+      <input
+        type="text"
+        {...register("postalCode")}
+        className="input__text"
+        defaultValue={address && address.postalCode ? address.postalCode : ""}
+      />
       <p className="input__error">{errors.postalCode?.message}</p>
 
       {isPErrorFromBackEndOpen ?  
@@ -146,3 +162,6 @@ export default function CoordinateForm( props ) {
    </>
   )
 }
+
+
+
