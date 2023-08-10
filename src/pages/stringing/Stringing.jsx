@@ -26,6 +26,8 @@ export default function Stringing() {
   const dispatch = useDispatch();
   dispatch(updateStringingPrice(10));
 
+console.log("hubaackchoice",hubBackChoice)
+
   // gestion de l'état de validation du bouton pour ajouter le produit  
   const isValid =
     hubChoice !== "" &&
@@ -33,7 +35,7 @@ export default function Stringing() {
     stringRopeChoice !== "" &&
     stringChoice.id !== "" 
     ;
-    
+//localStorage.clear()
   // fonction qui ajoute, enrgistre la pose du cordage et ses options dans le panier du  store redux 
   const onSubmit= () => {
     if (stringChoice.id === "cordage fourni par le joueur") { 

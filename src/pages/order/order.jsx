@@ -245,8 +245,6 @@ export default function Order() {
                             <div>{parseFloat((product.price * product.quantity).toFixed(2))} €</div>
                           </div>
 
-                          
-
                         </div>
 
                       </div>
@@ -273,14 +271,18 @@ export default function Order() {
 
               <h2 className="order__sub-title"> Lieu de dépot et retour </h2>
 
-              <div className='order-hub__title'> Dépot :</div>
-              <div>
-                {hubChoice.enterprise_name}
-                </div>
+              {articleList.map((product, index) => (
+                product.categorie === "pose cordage seule" || product.categorie === "fourniture et pose cordage" ? (
+                  <div key={index}>
+                    <div className='order-hub__title'> Dépot :</div>
+                    <div>{hubChoice.enterprise_name}</div>
+                    <div>{hubChoice.road} - {hubChoice.city}</div>
+                  </div>
+                ) : (
+                  null
+                ))
+              )}
 
-                <div>
-                {hubChoice.road} - {hubChoice.city}
-                </div>
 
 
               <div className='order-hub__title'> Retour de service :</div>

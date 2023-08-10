@@ -78,8 +78,7 @@ export default function OrderHistory() {
             {orderLogList.length > 0 ? (
               <div className="order-log__list-contenair">
 
-                {orderLogList.map((order, index) => (
-
+                {orderLogList.slice().reverse().map((order, index) => (
                   <div 
                   key={`${index}`}
                   className="order-log__list-row"
