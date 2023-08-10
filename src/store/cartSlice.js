@@ -8,14 +8,14 @@ const cartSlice = createSlice({
   initialState: {
     articleList: [], // comprend les balles et accessoires
     numberArticle: 0, // comprend tous les éléments articleList et installationWithStringList
-    totalPriceProducts: 0,
+    totalPriceProducts: 0, // prix total produit sans le prix de la pose cordage
     priceDelivery: 0,
-    totalPrice: 0,
+    totalPrice: 0, //prix total
     hubChoice:"",
     hubBackChoice:"",
     stringChoice:[{id: "" }],
     stringRopeChoice:"",
-    stringingPrice: 10,
+    stringingPrice: 10, //prix de la pose 
   },
 
   reducers: {
@@ -95,11 +95,12 @@ const cartSlice = createSlice({
         (total, article) => total + article.price * article.quantity,
         0
       );
-      const roundedPrice = Math.round(totalPrice * 100) / 100;
-      const formattedPrice = Number.isInteger(roundedPrice) ? roundedPrice.toFixed(0) : roundedPrice.toFixed(2).replace('.', ',');
+      
+      const formattedPrice = totalPrice.toFixed(2).replace('.', ',');
       state.totalPriceProducts = formattedPrice;
       state.totalPrice = formattedPrice;
     },
+    
     
     // Action pour réinitialiser la valeur de hubChoice
     resetHubChoice: (state, action) => {

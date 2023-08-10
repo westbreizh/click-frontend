@@ -95,7 +95,7 @@ export default function OrderDetailHistory() {
                           const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
                           return dateFrancaise;
                         })()
-                      } à 
+                      } 
                   </div>
 
                   { oneOrder.depositDate !==null?

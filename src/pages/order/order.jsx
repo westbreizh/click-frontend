@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {  useSelector, useDispatch } from 'react-redux'
 import { NavLink } from "react-router-dom"
 import { loadStripe } from '@stripe/stripe-js'
@@ -7,16 +7,24 @@ import logoPaiment from "../../assets/logo-Paiement-carte-bleu.webp"
 import logoPaypal from "../../assets/logo-paypal.jpeg"
 import { useNavigate } from 'react-router-dom';
 import { resetCart } from '../../store/cartSlice'
+import { calculNumberArticle, calculTotalPriceProducts } from '../../store/cartSlice';
 
 export default function Order() {
 
   const isConnected = useSelector(state => state.user.isConnected);
   const hubChoice = useSelector(state => state.cart.hubChoice);
   const articleList = useSelector(state => state.cart.articleList);
-  const totalPrice = useSelector(state => state.cart.totalPrice);
+  const totalPriceProducts = useSelector(state => state.cart.totalPriceProducts);
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
   const hubBackChoice = useSelector(state => state.cart.hubBackChoice);
   const userInfo = useSelector(state => state.user.userInfo);
+
+  useEffect(() => {
+    dispatch(calculNumberArticle());
+    dispatch(calculTotalPriceProducts());
+  }, []);
+
+
 
   const token = useSelector((state) => state.user.token);
   const PUBLIC_KEY = "pk_live_51NGdYqI8HrVwrRfPvO0VCSPgquB0SZOcQeifdVeXzlryvLj2gpTf6EufvCPRJ7SD1M9iCjTY7ZTwySpWtjYibzb100TJ7uXJag"
@@ -65,7 +73,7 @@ export default function Order() {
   const datasInput = document.createElement('input');
   datasInput.type = 'hidden';
   datasInput.name = 'datas';
-  datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token });
+  datasInput.value = JSON.stringify({ userInfo, articleList, totalPriceProducts, hubChoice, hubBackChoice, token });
 
   // Ajoutez le champ de formulaire au formulaire virtuel
   form.appendChild(datasInput);
@@ -81,7 +89,7 @@ export default function Order() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/shop/paiement-in-shop`, {
         mode: "cors",
         method: "POST",
-        body: JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token }),
+        body: JSON.stringify({ userInfo, articleList, totalPriceProducts, hubChoice, hubBackChoice, token }),
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}` 
@@ -164,7 +172,7 @@ export default function Order() {
                               
                             </div>
 
-                            <div>{product.stringChoice.price} € </div>
+                            <div> {product.stringChoice.price} € </div>
 
                           </div>
 
@@ -252,12 +260,11 @@ export default function Order() {
               })}
           
 
-
               </div>
 
               <div className='cart-summary__total-line'>
                 <div> Total </div>
-                <div> {totalPrice} € </div>
+                <div> {totalPriceProducts} € </div>
               </div>
 
             </div>
@@ -284,8 +291,6 @@ export default function Order() {
                 <div>
                 {hubBackChoice.road} - {hubBackChoice.city}
                 </div>
-
-
 
 
             </div>

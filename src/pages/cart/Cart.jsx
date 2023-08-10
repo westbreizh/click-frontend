@@ -9,7 +9,6 @@ import { NavLink } from "react-router-dom"
 
 export default function Cart() {
 
-
   const articleList = useSelector(state => state.cart.articleList);
   const numberArticle = useSelector(state => state.cart.numberArticle);
   const totalPriceProducts = useSelector(state => state.cart.totalPriceProducts);

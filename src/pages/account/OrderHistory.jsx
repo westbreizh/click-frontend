@@ -33,6 +33,7 @@ export default function OrderHistory() {
       }else {
         const result = await response.json();
         const ordersInfo = result.data.ordersInfo
+        console.log(ordersInfo);
         setOrderLogList(ordersInfo)
         console.log(result.message);
       }
