@@ -16,15 +16,17 @@ export default function Order() {
   const articleList = useSelector(state => state.cart.articleList);
   const totalPriceProducts = useSelector(state => state.cart.totalPriceProducts);
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
+  const racquetPlayer = useSelector(state => state.cart.racquetPlayer);
   const hubBackChoice = useSelector(state => state.cart.hubBackChoice);
   const userInfo = useSelector(state => state.user.userInfo);
+
 
   useEffect(() => {
     dispatch(calculNumberArticle());
     dispatch(calculTotalPriceProducts());
   }, []);
 
-
+console.log("raquet player",racquetPlayer)
 
   const token = useSelector((state) => state.user.token);
   const PUBLIC_KEY = "pk_live_51NGdYqI8HrVwrRfPvO0VCSPgquB0SZOcQeifdVeXzlryvLj2gpTf6EufvCPRJ7SD1M9iCjTY7ZTwySpWtjYibzb100TJ7uXJag"
@@ -73,7 +75,7 @@ export default function Order() {
   const datasInput = document.createElement('input');
   datasInput.type = 'hidden';
   datasInput.name = 'datas';
-  datasInput.value = JSON.stringify({ userInfo, articleList, totalPriceProducts, hubChoice, hubBackChoice, token });
+  datasInput.value = JSON.stringify({ userInfo, articleList, totalPriceProducts, hubChoice, hubBackChoice, token, racquetPlayer });
 
   // Ajoutez le champ de formulaire au formulaire virtuel
   form.appendChild(datasInput);
@@ -89,7 +91,7 @@ export default function Order() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/shop/paiement-in-shop`, {
         mode: "cors",
         method: "POST",
-        body: JSON.stringify({ userInfo, articleList, totalPriceProducts, hubChoice, hubBackChoice, token }),
+        body: JSON.stringify({ userInfo, articleList, totalPriceProducts, hubChoice, hubBackChoice, token, racquetPlayer }),
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}` 

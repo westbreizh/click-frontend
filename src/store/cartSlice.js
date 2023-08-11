@@ -16,6 +16,7 @@ const cartSlice = createSlice({
     stringChoice:[{id: "" }],
     stringRopeChoice:"",
     stringingPrice: 10, //prix de la pose 
+    racquetPlayer: "",
   },
 
   reducers: {
@@ -69,7 +70,6 @@ const cartSlice = createSlice({
     },
 
 
-
     // Action pour changer la quantité d'un produit dans le panier
     changeQuantityArticle: (state, action) => {
       const { quantity, index } = action.payload;
@@ -81,6 +81,7 @@ const cartSlice = createSlice({
       }
     },
 
+
     // Action pour calculer le nombre de produits dans.articleList et l'enregistrer dans numberProduct
     calculNumberArticle: (state) => {
       state.numberArticle = state.articleList.reduce(
@@ -88,6 +89,7 @@ const cartSlice = createSlice({
         0
       ) ;
     },
+
 
     // Action pour calculer le prix du panier
     calculTotalPriceProducts: (state) => {
@@ -107,24 +109,33 @@ const cartSlice = createSlice({
       state.hubChoice = action.payload;
     },
 
+
     // Action pour réinitialiser la valeur de hubChoice
     resetHubBackChoice: (state, action) => {
       state.hubBackChoice = action.payload;
     },
+
 
     // Action pour réinitialiser la valeur de stringChoice
     resetStringChoice: (state, action) => {
       state.stringChoice = action.payload;
     },
 
+
     // Action pour réinitialiser la valeur de stringRopeChoice
     resetStringRopeChoice: (state, action) => {
       state.stringRopeChoice = action.payload;
     },
 
+
     // Action pour mettre à jour stringingPrice
     updateStringingPrice: (state, action) => {
       state.stringingPrice = action.payload;
+    },
+
+    // Action pour mettre à jour racquetplayer
+    updateRacquetPlayer: (state, action) => {
+      state.racquetPlayer = action.payload;
     },
 
     // Action pour réinitialiser complètement le panier
@@ -140,7 +151,6 @@ const cartSlice = createSlice({
 
 
 export const {
-
   addArticle,
   addInstallationString,
   changeQuantityArticle,
@@ -155,6 +165,7 @@ export const {
   resetStringRopeChoice,
   setStringingPrice,
   updateStringingPrice,
+  updateRacquetPlayer,
   resetCart,
 } = cartSlice.actions;
 

@@ -2556,6 +2556,16 @@ input {
   margin-left: 0rem;
   margin-right: 1.5rem;
 }
+.stringing-form__input-text, .stringing-form__input-text::placeholder {
+  border-radius: 1rem;
+  height: 3rem;
+  margin-top: 1rem;
+  text-transform: capitalize;
+  color: #1c166c !important;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-left: 1rem;
+}
 
 /* -------------------  Responsive ----------------------*/
 @media screen and (max-width: 768px) {

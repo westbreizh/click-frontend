@@ -5,8 +5,8 @@ const userSlice = createSlice({
   name: "user", // Nom de la tranche
   initialState: {
     isConnected: false, 
-    userInfo: "", 
-    userAddress: "", 
+    userInfo: "",
+    userAddress: "",
     token: "", 
   },
   
@@ -32,6 +32,12 @@ const userSlice = createSlice({
     changeEmail: (state, action) => {
       state.userInfo.email = action.payload;
     },
+
+    // Action pour mettre à jour uniquement racquet_player dans userInfo avec la valeur fournie
+    setRacquetPlayer: (state, action) => {
+      state.userInfo.racquet_player = action.payload;
+    },
+
   },
 });
 
@@ -42,6 +48,7 @@ export const {
   setToken,
   setUserAddress,
   changeEmail,
+  setRacquetPlayer,
 } = userSlice.actions;
 
 // Export du réducteur de la tranche

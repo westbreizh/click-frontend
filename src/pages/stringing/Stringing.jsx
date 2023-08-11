@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import {  useSelector, useDispatch } from 'react-redux'
-import { addInstallationString, calculNumberArticle, updateStringingPrice } from "../../store/cartSlice"
+import { addInstallationString, calculNumberArticle, updateStringingPrice, updateRacquetPlayer } from "../../store/cartSlice"
 import { NavLink } from 'react-router-dom';
 import SelectHub from '../../components/select/SelectHub';
 import SelectHubBack from '../../components/select/SelectHubBack';
@@ -13,27 +13,44 @@ import ModalValidationAddToCartInstallation from '../../components/modal/modalVa
 
 export default function Stringing() {
 
-  const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
+
 
   let hubChoice = useSelector(state => state.cart.hubChoice);
   const hubBackChoice = useSelector(state => state.cart.hubBackChoice);
   const stringRopeChoice = useSelector(state => state.cart.stringRopeChoice);
   const stringChoice = useSelector(state => state.cart.stringChoice[0]);
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
-  const cart= useSelector(state => state.cart);
+  const raquetPlayerStoreReduxCart = useSelector(state => state.cart.racquetPlayer);
+  console.log("raquet edux", raquetPlayerStoreReduxCart)
+  //const isConnected = useEffect(state => state.user.isConnected)
 
+  const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
+  const [racquetPlayer, setRacquetPlayer] = useState(raquetPlayerStoreReduxCart);
+
+
+  //const racquetPlayer = useSelector(state => state.user.userInfo.racquet_player);
+
+  console.log("racquetplayer", racquetPlayer)
 
   const dispatch = useDispatch();
   dispatch(updateStringingPrice(10));
 
-console.log("hubackchoice",hubBackChoice)
+  const handleRacquetPlayerChange = (event) => {
+    const value = event.target.value;
+    setRacquetPlayer(value)
+  };
+
+
+
 
   // gestion de l'état de validation du bouton pour ajouter le produit  
   const isValid =
     hubChoice !== "" &&
     hubBackChoice !== "" &&
     stringRopeChoice !== "" &&
-    stringChoice.id !== "" 
+    stringChoice.id !== "" &&
+    racquetPlayer !== "" && 
+    racquetPlayer !== null;
     ;
 
   // fonction qui ajoute, enrgistre la pose du cordage et ses options dans le panier du  store redux 
@@ -47,6 +64,7 @@ console.log("hubackchoice",hubBackChoice)
         stringChoice}
         console.log(article)
         dispatch(addInstallationString(article))
+        dispatch(updateRacquetPlayer(racquetPlayer))
         setSubmenuValidation(true)
         //registerPreferencePlayer(userEmail, hubChoice, stringRopeChoice, stringChoice )
     } else{ 
@@ -61,6 +79,7 @@ console.log("hubackchoice",hubBackChoice)
       dispatch(addInstallationString(article))
       setSubmenuValidation(true)
       dispatch(calculNumberArticle());
+      dispatch(updateRacquetPlayer(racquetPlayer))
       //registerPreferencePlayer(userEmail, hubChoice, stringRopeChoice, stringChoice )
     }
   };
@@ -257,6 +276,25 @@ console.log("hubackchoice",hubBackChoice)
             ) : null}
 
           </div>
+
+
+
+
+          <div className='string stringing-form__section-wrapper'>
+
+            <label className="stringing-form__label">Descriptif raquette</label>
+            <div> Veuillez saisir la marque et le modèle de votre raquette dans la zone de texte ci-dessous merci !</div>
+            <input
+              placeholder = {racquetPlayer}
+              type="text"
+              className="stringing-form__input-text"
+              onChange={handleRacquetPlayerChange}
+            />
+
+          </div>  
+
+
+
 
 
           <div className=" stringing-form__section-wrapper stringing-form__section-wrapper-button">
