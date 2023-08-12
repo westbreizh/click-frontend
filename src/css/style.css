@@ -2567,6 +2567,10 @@ input {
   padding-left: 1rem;
 }
 
+.stringing-form__input-text.focused::placeholder {
+  color: transparent;
+}
+
 /* -------------------  Responsive ----------------------*/
 @media screen and (max-width: 768px) {
   .stringing__main {

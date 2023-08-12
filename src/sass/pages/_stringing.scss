@@ -173,10 +173,14 @@
 }
 
 
+
   }
 
 
-
+  .stringing-form__input-text.focused::placeholder {
+    color: transparent;
+  }
+  
 
 
 

@@ -26,6 +26,8 @@ import SuccesPaiement from '../pages/afterPaiement/SuccesPaiement'
 import EchecPaiement from '../pages/afterPaiement/EchecPaiement'
 import OrderPassed from '../pages/orderPassed/OrderPassed'
 
+import RacquetToTake from '../pages/stringer/RacquetToTake'
+
 export default function Router() {
 
 
@@ -60,6 +62,10 @@ export default function Router() {
           <Route path='/paiement-refuse'  element = {< EchecPaiement/>} />
           <Route path='/commande-passé'  element = {< OrderPassed/>} />
           <Route path='/*' element={<ErrorPage />} />
+
+          <Route path='/cordeur_raquettes-à-retirer'  element = {< RacquetToTake/>} />
+          
+
 
       </Routes>
 
