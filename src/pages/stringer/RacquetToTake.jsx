@@ -11,7 +11,43 @@ export default function RacquetToTake() {
 
 
   const [orderLogList, setOrderLogList] = useState([]) ;
+  const [orderLogListByHub, setOrderLogListByHub] = useState([]) ;
+  const [selectedOrders, setSelectedOrders] = useState([]);
 
+  // gestion de l'état de validation du bouton pour ajouter le produit  
+  const isValid =
+  selectedOrders.length  !== 0;
+  ;
+
+  //fonction qui ajoute l'id de la commande à la liste
+  const handleCheckboxChange = (e, orderId) => {
+      const isChecked = e.target.checked;
+
+      if (isChecked) {
+          setSelectedOrders((prevSelectedOrders) => [...prevSelectedOrders, orderId]);
+      } else {
+          setSelectedOrders((prevSelectedOrders) =>
+              prevSelectedOrders.filter((id) => id !== orderId)
+          );
+      }
+  };
+
+  // Fonction pour regrouper les commandes par hub
+  const groupOrdersByHub = (orderList) => {
+    const ordersByHub = {};
+
+    for (const order of orderList) {
+      const hub = order.hub;
+
+      if (!ordersByHub[hub]) {
+        ordersByHub[hub] = [];
+      }
+
+      ordersByHub[hub].push(order);
+    }
+
+    return ordersByHub;
+  };
 
   //fonction asynchrone vers le backend pour recupérer 
   //l'historique des commandes effectué par le joueur 
@@ -31,7 +67,7 @@ export default function RacquetToTake() {
         throw new Error(` ${result.message}`);
       }else {
         const result = await response.json();
-        const ordersInfoByHub = result.ordersInfoByHub
+        const ordersInfoByHub = result.racquetsData
         console.log(ordersInfoByHub);
         setOrderLogList(ordersInfoByHub)
         console.log(result.message);
@@ -44,15 +80,24 @@ export default function RacquetToTake() {
     }
   }
 
-
-  console.log("orderLogList : ", orderLogList);
-  console.log("orderLogList premier élément : ", orderLogList[0]);
-  
-
+  //fonction asynchrone vers le backend pour valider 
+  //les raquettes récupérées 
+  const RacquetTaken = () => {
+    // Envoyer la liste selectedOrders au backend via une requête HTTP
+    console.log('Liste des commandes sélectionnées :', selectedOrders);
+};
   // charger la listes des commandes  au chargement de la page
   useEffect(() => {
     loadLogOrder ()
   },[])
+
+  // Après avoir chargé les données, regrouper les commandes par hub
+  useEffect(() => {
+    const groupedOrdersByHub = groupOrdersByHub(orderLogList);
+    setOrderLogListByHub(groupedOrdersByHub);
+  }, [orderLogList]);
+
+  console.log("cases cochés", selectedOrders)
 
   return (
 
@@ -60,75 +105,69 @@ export default function RacquetToTake() {
   <>
       <NavbarAccount />
 
-      <main className="order-log__main">
+      <main className="order-stringer__main">
 
-        <div className="order-log__bg"> </div>
+        <div className="order-stringer__bg"> </div>
 
-        <section className="order-log__contenair">
+        <section className="order-stringer__contenair">
 
 
-        <div className='oneOrder__contenair-cart'>
+        <div className='order-stringer__sub-contenair'>
 
-            <h1 className="order-log__h1">
+            <h1 className="order-stringer__h1">
               Raquette à récupérer 
             </h1>
 
 
-            {orderLogList.length > 0 ? (
-              <div className="order-log__list-contenair">
 
-                {orderLogList.slice().reverse().map((order, index) => (
-                  <div 
-                  key={`${index}`}
-                  className="order-log__list-row"
-                  >
-                    <div className="order-log__list-row-element">
-                      n° {order.id}
-                    </div>
+            {orderLogListByHub && Object.keys(orderLogListByHub).length > 0 ? (
+              <div >
 
-                    <div className="order-log__list-row-element">
-                    date :  {" "}
-                      {
-                        (() => {
-                          const orderDate = new Date(order.orderDate);
-                          const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
-                          const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
-                          return dateFrancaise;
-                        })()
-                      }
+                {Object.keys(orderLogListByHub).map((hubName, index) => (
 
-                    </div>
+                  <div key={index} className="order-stringer__list-contenair">
+                    <h3 className="order-stringer__h3">Lieu de retrait : {hubName}</h3>
 
-                    <div className="order-log__list-row-element">
-                      status : {order.statusOrder}
-                    </div>
 
-                    
+                        {orderLogListByHub[hubName].map((order, orderIndex) => (
+                            <div key={orderIndex} className="order-stringer__list-row">
+                                <input
+                                  type="checkbox"
+                                  className="order-stringer__checkbox"
+                                  onChange={(e) => handleCheckboxChange(e, order.id)}
+                                />
+                                <div className="order-stringer__list-row-element">N° : {order.id}</div>
+                                <div className="order-stringer__list-row-element">Raquette : {order.userInfo}</div>
+                                <NavLink
+                                    to={`/détails_commande/${order.id}`}
+                                    className="order-stringer__list-row-element"
+                                >
+                                    détails
+                                </NavLink>
+                            </div>
+                        ))}
 
-                    <NavLink 
-                    to={`/historique_commandes/${order.id}`}
-                    className="order-log__list-row-element"
-                    >
-                      détail 
-                    </NavLink>
+
 
                   </div>
-
                 ))}
-                
 
-
-
-
-
-
+              <button 
+                disabled={ !isValid} 
+                className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
+                onClick={RacquetTaken}>
+                Raquettes récupérées
+              </button>
+              
               </div>
 
-              ) : (
-                <div className="loadingspinnerString">
+              
+            ) : (
+              <div className="loadingspinnerString">
                 <TennisSpinner />
-                </div>
+              </div>
             )}
+
 
         </div>
 

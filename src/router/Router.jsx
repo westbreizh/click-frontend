@@ -25,7 +25,7 @@ import SingnupStringer from '../pages/singup/SingupStringer'
 import SuccesPaiement from '../pages/afterPaiement/SuccesPaiement'
 import EchecPaiement from '../pages/afterPaiement/EchecPaiement'
 import OrderPassed from '../pages/orderPassed/OrderPassed'
-
+import OrderDetailForStringer from '../pages/stringer/OrderDetailForStringer'
 import RacquetToTake from '../pages/stringer/RacquetToTake'
 
 export default function Router() {
@@ -64,7 +64,7 @@ export default function Router() {
           <Route path='/*' element={<ErrorPage />} />
 
           <Route path='/cordeur_raquettes-à-retirer'  element = {< RacquetToTake/>} />
-          
+          <Route path='/détails_commande/:orderId' element={<OrderDetailForStringer />} />
 
 
       </Routes>

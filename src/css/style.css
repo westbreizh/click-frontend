@@ -3753,5 +3753,121 @@ input {
     margin-bottom: 2.5rem;
   }
 }
+.order-stringer__bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  width: 100vw;
+  height: calc(100vh + 7rem);
+  margin-bottom: -10rem;
+  background: url("/src/assets/balleeffet.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.order-stringer__main {
+  max-width: 122rem;
+  margin: auto;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  width: 80%;
+}
+.order-stringer__contenair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  color: #151534;
+  font-size: 1.5rem;
+  padding: 2.5rem 0rem 3.5rem 0rem;
+  width: 100%;
+  border-radius: 1rem;
+  min-height: 45rem;
+}
+.order-stringer__sub-contenair {
+  border: 0.1rem solid #dadada;
+  border-radius: 1rem;
+  background-color: white;
+  width: 90%;
+  padding: 1rem;
+  height: min-content;
+  margin-bottom: 2.5rem;
+}
+.order-stringer__list-contenair {
+  width: 100%;
+}
+.order-stringer__h1 {
+  padding-bottom: 2rem;
+  text-align: center;
+  border-bottom: 0.1rem solid #dadada;
+  margin-bottom: 0rem;
+}
+.order-stringer__list-row {
+  width: 100%;
+  display: flex;
+  justify-content: flex;
+  align-items: baseline;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.1rem solid #dadada;
+}
+.order-stringer__list-row-element {
+  font-size: 1.7rem;
+  margin: 0rem 2rem 0rem 2rem;
+  min-width: 2.2rem;
+}
+.order-stringer__btn {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.order-stringer__checkbox {
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.3rem;
+  outline: none;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  margin-bottom: 0rem;
+}
+
+.order-stringer__checkbox:checked {
+  background-color: #007bff; /* Couleur lorsque la case est cochée */
+  border-color: #007bff; /* Couleur de la bordure lorsque la case est cochée */
+}
+
+/* Style du "checkmark" à l'intérieur de la case à cocher */
+.order-stringer__checkbox::after {
+  content: "✓"; /* Symbole "checkmark" Unicode */
+  position: absolute;
+  top: 0.1rem;
+  left: 0.3rem;
+  font-size: 1rem;
+  color: white;
+  display: none;
+}
+
+.order-stringer__checkbox:checked::after {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .order-stringer__main {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    width: 100%;
+  }
+  .order-stringer__contenair {
+    border-radius: 0rem;
+  }
+}
 
 /*# sourceMappingURL=style.css.map */
