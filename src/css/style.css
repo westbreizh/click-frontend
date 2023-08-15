@@ -3824,6 +3824,9 @@ input {
   margin-top: 3rem;
   margin-bottom: 2rem;
 }
+.order-stringer__important-info {
+  color: #007bff;
+}
 
 .order-stringer__checkbox {
   appearance: none;

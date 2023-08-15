@@ -27,6 +27,8 @@ import EchecPaiement from '../pages/afterPaiement/EchecPaiement'
 import OrderPassed from '../pages/orderPassed/OrderPassed'
 import OrderDetailForStringer from '../pages/stringer/OrderDetailForStringer'
 import RacquetToTake from '../pages/stringer/RacquetToTake'
+import CoordinatePlayer from '../pages/stringer/CoordinatePlayer'
+
 
 export default function Router() {
 
@@ -65,6 +67,7 @@ export default function Router() {
 
           <Route path='/cordeur_raquettes-à-retirer'  element = {< RacquetToTake/>} />
           <Route path='/détails_commande/:orderId' element={<OrderDetailForStringer />} />
+          <Route path='/fiche_joueur/:userId' element={<CoordinatePlayer />} />
 
 
       </Routes>

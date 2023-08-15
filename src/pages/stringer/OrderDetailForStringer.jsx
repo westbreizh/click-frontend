@@ -37,7 +37,6 @@ export default function OrderDetailForStringer() {
         const result = await response.json();
         const orderInfo = result.data.orderInfo
         setOneOrder(orderInfo[0])
-        console.log("resultat recup", oneOrder);
         console.log(result.message);
       }
     }
@@ -168,13 +167,15 @@ export default function OrderDetailForStringer() {
                               <div className='oneOrderCart__content-on-one-line'>
 
                                 <div className='oneOrderCart__cordage'>
-                                  <div> Cordage :                              <NavLink 
-                                key={index} 
-                                to={`/fiche_produit/cordage/${product.stringChoice.id}`}
-                                className="oneOrderCart__link-to-card-product"
-                              >
-                                { product.stringChoice.mark  + " " + product.stringChoice.model}
-                              </NavLink> </div>
+                                  <div> Cordage :   
+
+                                    <NavLink 
+                                      key={index} 
+                                      to={`/fiche_produit/cordage/${product.stringChoice.id}`}
+                                      className="oneOrderCart__link-to-card-product"
+                                    >
+                                    { product.stringChoice.mark  + " " + product.stringChoice.model}
+                                    </NavLink> </div>
                                   
                                 </div>
 
@@ -183,7 +184,7 @@ export default function OrderDetailForStringer() {
                               </div>
 
 
-                              <div> Tension de cordage : {product.stringRopeChoice} kg </div>
+                              <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
                           </div>
 
                         );
@@ -199,7 +200,7 @@ export default function OrderDetailForStringer() {
 
                               <div> Cordage : votre propre cordage </div>
                              
-                              <div> Tension de cordage : {product.stringRopeChoice} kg </div>
+                              <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
  
                             </div>
 
@@ -207,6 +208,8 @@ export default function OrderDetailForStringer() {
                             <div className='oneOrderCart__product-price'>
                                 <div>{parseFloat((product.price * product.quantity).toFixed(2))} €</div>
                             </div>
+
+
 
                           </div>
 
@@ -268,12 +271,27 @@ export default function OrderDetailForStringer() {
                 <div className='oneOrderCart__wrapper-status'>
 
                   <div className='oneOrderCart__first-line-status'>
-                    <div >  Joueur </div>
+                    <div>Joueur</div>
                   </div>
+                  {console.log("oneOrder", oneOrder.userInfo)}
 
-                  <div>nom prenom</div>
-                  <div>Raquette</div>
-                  <div>Fiche joueur</div>
+                  {(() => {
+                      const userInfo = JSON.parse(oneOrder.userInfo);
+                      return (
+                        <>
+                          <div> {userInfo.forename} {userInfo.lastname}</div>
+                          <div > Raquette : <span className="order-stringer__important-info"> {userInfo.racquet_player} </span> </div> 
+                          <div>                            
+                            <NavLink 
+                              to={`/fiche_joueur/${userInfo.id}`}
+                              className="oneOrderCart__link-to-card-product"
+                            >
+                              Fiche joueur
+                            </NavLink>
+                          </div>
+                        </>
+                      );
+                  })()}
 
                 </div>
 
@@ -281,9 +299,6 @@ export default function OrderDetailForStringer() {
                   <div> Total </div>
                   <div> {oneOrder.totalPrice} € </div>
                 </div>
-
-
-
 
               </div>
 

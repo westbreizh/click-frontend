@@ -50,7 +50,7 @@ export default function RacquetToTake() {
   };
 
   //fonction asynchrone vers le backend pour recupérer 
-  //l'historique des commandes effectué par le joueur 
+  //la liste des raquettes à recuperer 
   const loadLogOrder  = async function (data) {
     try{
       const response = await fetch(`https://click-backend.herokuapp.com/api/shop/racquetToTakeLog`, {
@@ -115,7 +115,7 @@ export default function RacquetToTake() {
         <div className='order-stringer__sub-contenair'>
 
             <h1 className="order-stringer__h1">
-              Raquette à récupérer 
+              Raquettes à récupérer 
             </h1>
 
 
