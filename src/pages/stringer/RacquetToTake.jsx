@@ -4,11 +4,12 @@ import { useSelector} from 'react-redux'
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom"
 import TennisSpinner from "../../components/loadingSpinner/TennisSpinner"
+import { useNavigate } from "react-router-dom";
+
 
 export default function RacquetToTake() {
 
   const token = useSelector((state) => state.user.token);
-
 
   const [orderLogList, setOrderLogList] = useState([]) ;
   const [orderLogListByHub, setOrderLogListByHub] = useState([]) ;
@@ -82,14 +83,43 @@ export default function RacquetToTake() {
 
   //fonction asynchrone vers le backend pour valider 
   //les raquettes récupérées 
-  const RacquetTaken = () => {
-    // Envoyer la liste selectedOrders au backend via une requête HTTP
-    console.log('Liste des commandes sélectionnées :', selectedOrders);
-};
-  // charger la listes des commandes  au chargement de la page
+  const racquetTaken  = async function (data) {
+    try{
+      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/racquetTaken`, {
+        mode: "cors",
+        method: "POST",
+        body: JSON.stringify({ selectedOrders}),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+        }
+    })
+
+      if (!response.ok) {
+        const result = await response.json();
+        throw new Error(` ${result.message}`);
+      }else {
+        const result = await response.json();
+        console.log(result.message);
+        window.location.reload();
+      }
+    }
+
+    catch(err){
+      const errorMessage = err.toString();
+      console.log(errorMessage);
+    }
+  }
+
+
+
+
+
+  // charger la listes des commandes  au chargement de la page et lorsque racquetTaken est appelé
   useEffect(() => {
-    loadLogOrder ()
-  },[])
+
+    loadLogOrder();
+  }, []);
 
   // Après avoir chargé les données, regrouper les commandes par hub
   useEffect(() => {
@@ -155,7 +185,7 @@ export default function RacquetToTake() {
               <button 
                 disabled={ !isValid} 
                 className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
-                onClick={RacquetTaken}>
+                onClick={racquetTaken}>
                 Raquettes récupérées
               </button>
               
@@ -164,7 +194,7 @@ export default function RacquetToTake() {
               
             ) : (
               <div className="loadingspinnerString">
-                <TennisSpinner />
+                Toutes les raquettes ont été récupérées
               </div>
             )}
 
