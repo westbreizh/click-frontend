@@ -103,7 +103,7 @@ export default function RacquetToTake() {
 
 
   <>
-      <NavbarAccount />
+
 
       <main className="order-stringer__main">
 

@@ -2,12 +2,11 @@ import { NavLink } from "react-router-dom"
 import { useState } from "react"
 import { Squash as Hamburger } from 'hamburger-react'
 import { useSelector } from "react-redux"
-import HomeIcon from '@mui/icons-material/Home'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import StorefrontIcon from '@mui/icons-material/Storefront';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import LogoutIconAdmin from "../icons/desktop/LogoutIconAdmin";
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 
 export default function NavbarHamburgerStringer() {
 
@@ -46,9 +45,9 @@ export default function NavbarHamburgerStringer() {
         <li className='menuHamburger__li' onClick={() =>toggleMenuHamburger() } >
           <NavLink  to="/cordeur_raquettes-à-déposer" className={(nav) => (nav.isActive ? "navLink__active" : "navLink__inactive")} end>
           <div className="icons_wrapper">
-              <ArrowOutwardIcon className="navBar__icon arrowOutward-to-rotate"/>
+              < ThumbUpAltIcon className="navBar__icon "/>
             </div>
-            A déposer 
+            Prête 
           </NavLink>
         </li>
 

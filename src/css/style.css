@@ -3787,6 +3787,7 @@ input {
   width: 100%;
   border-radius: 1rem;
   min-height: 45rem;
+  margin-top: 10rem;
 }
 .order-stringer__sub-contenair {
   border: 0.1rem solid #dadada;
@@ -3870,6 +3871,7 @@ input {
   }
   .order-stringer__contenair {
     border-radius: 0rem;
+    margin-top: 8rem;
   }
 }
 

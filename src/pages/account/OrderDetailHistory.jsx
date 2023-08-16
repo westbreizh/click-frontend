@@ -75,243 +75,207 @@ export default function OrderDetailHistory() {
 
           {oneOrder !== "" ? (
 
-              <div className='oneOrder__contenair-cart'>
+            <div className='oneOrder__contenair-cart'>
 
-                <h2 className="oneOrder__sub-title">  Commande n° {oneOrder.id} </h2>
+              <h2 className="oneOrder__sub-title">  Commande n° {oneOrder.id} </h2>
 
-                <div className='oneOrderCart__wrapper-status'>
+              <div className='oneOrderCart__wrapper-status'>
 
-                  <div className='oneOrderCart__first-line-status'>
-                    <div >  Statut </div>
-                    <div> {oneOrder.statusOrder} </div>
-                  </div>
-
-                  <div className='oneOrderCart__line-status'>
-                    Commandé le {" "}
-                      {
-                        (() => {
-                          const orderDate = new Date(oneOrder.orderDate);
-                          const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
-                          const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
-                          return dateFrancaise;
-                        })()
-                      } 
-                  </div>
-
-                  { oneOrder.depositDate !==null?
-                  <div className='oneOrderCart__line-status'>
-
-                    Déposé le {" "}
-                      {
-                        (() => {
-                          const orderDate = new Date(oneOrder.depositDate);
-                          const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
-                          const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
-                          return dateFrancaise;
-                        })()
-                      } à {" "}
-                      {
-                        (() => {
-                          const hub = JSON.parse(oneOrder.hub);
-                          console.log("type of hub", typeof hub);
-                          console.log( hub);
-                          return hub.value;
-                        })()
-                        
-                      }
-
-                  </div> : ""
-                  }
-
-                  { oneOrder.serviceBackDate !==null?
-                  <div className='oneOrderCart__line-status'>
-                    
-                    Prêt à être retiré le {" "}
-                      {
-                        (() => {
-                          const orderDate = new Date(oneOrder.serviceBackDate);
-                          const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
-                          const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
-                          return dateFrancaise;
-                        })()
-                      } à {" "}
-                      {
-                        (() => {
-                          const hub = JSON.parse(oneOrder.hub);
-                          console.log("type of hub", typeof hub);
-                          console.log( hub);
-                          return hub.value;
-                        })() 
-                      }
-
-                  </div>: ""
-                  }
-
-                  { oneOrder.withdrawDate !==null?
-                    <div className='oneOrderCart__line-status'>
-                    
-                     Retiré le {" "}
-                      {
-                        (() => {
-                          const orderDate = new Date(oneOrder.withdrawDate);
-                          const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
-                          const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
-                          return dateFrancaise;
-                        })()
-                      } à {" "}
-                      {
-                        (() => {
-                          const hub = JSON.parse(oneOrder.hub);
-                          console.log("type of hub", typeof hub);
-                          console.log( hub);
-                          return hub.value;
-                        })() 
-                      }
-
-                  </div>: ""
-                  }
-
-
-
-
+                <div className='oneOrderCart__first-line-status'>
+                  <div >  Statut </div>
+                  <div> {oneOrder.statusOrder} </div>
                 </div>
 
-                <div className='oneOrder__cart-detail-wrapper'>
+                <div className='oneOrderCart__line-status'>
+                  Commandé le {" "}
+                    {
+                      (() => {
+                        const orderDate = new Date(oneOrder.orderDate);
+                        const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+                        const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
+                        return dateFrancaise;
+                      })()
+                    } 
+                </div>
 
-                  {JSON.parse(oneOrder.articleList).map((product, index) => {
+                { oneOrder.statusOrder ==="initié"?
+                  <div className='oneOrderCart__line-status'>
+                    Raquette prête à être retirée à  {' '}
+                      {
+                        (() => {
+                          const hub = JSON.parse(oneOrder.hub);
+                          console.log( hub);
+                          return hub.enterprise_name;
+                        })() 
+                      }
+                  </div>: ""
+                }
 
-                    switch (product.categorie) {
+                { oneOrder.statusOrder ==="à corder"?
+                  <div className='oneOrderCart__line-status'>
+                    Raquette récuprérée et en cours de cordage
+                      {
+                        (() => {
+                          const hub = JSON.parse(oneOrder.hub);
+                          console.log( hub);
+                          return hub.enterprise_name;
+                        })() 
+                      }
+                  </div>: ""
+                }
 
-                      case "fourniture et pose cordage":
-                        return (
 
-                          <div className='oneOrderCart__product-wrapper-instal-with-string' key={index}>
+                { oneOrder.statusOrder ==="cordée"?
+                  <div className='oneOrderCart__line-status'>
+                    Raquette cordée, prête à jouer !
+                      {
+                        (() => {
+                          const hub = JSON.parse(oneOrder.hub);
+                          console.log( hub);
+                          return hub.enterprise_name;
+                        })() 
+                      }
+                  </div>: ""
+                }
 
-                            <div className='oneOrderCart__instal-with-string-top'>
 
-                              <div className='oneOrderCart__text-weight-uppercase'>  Fourniture et pose cordage </div>
 
-                              <div className='oneOrderCart__product-price'>
-                              <div>{(product.price * product.quantity).toFixed(2).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €</div>
-                              </div>
+              </div>
 
-                            </div>
+              <div className='oneOrder__cart-detail-wrapper'>
 
-                              <div className='oneOrderCart__content-on-one-line'>
-                                <div>Pose cordage </div> 
-                                <div> {stringingPrice}€ </div>
-                              </div>
+                {JSON.parse(oneOrder.articleList).map((product, index) => {
 
-                              <div className='oneOrderCart__content-on-one-line'>
+                  switch (product.categorie) {
 
-                                <div className='oneOrderCart__cordage'>
-                                  <div> Cordage : </div>
-                                  
-                                </div>
+                    case "fourniture et pose cordage":
+                      return (
 
-                                <div>{product.stringChoice.price} € </div>
+                        <div className='oneOrderCart__product-wrapper-instal-with-string' key={index}>
 
-                              </div>
+                          <div className='oneOrderCart__instal-with-string-top'>
 
-                              <NavLink 
-                                key={index} 
-                                to={`/fiche_produit/cordage/${product.stringChoice.id}`}
-                                className="oneOrderCart__link-to-card-product"
-                              >
-                                { product.stringChoice.mark  + " " + product.stringChoice.model}
-                              </NavLink>
-
-                          </div>
-
-                        );
-
-                      case "pose cordage seule":
-                        return (
-
-                          <div className='oneOrderCart__product-wrapper-installation' key={index}>
-
-                            <div className='oneOrderCart__product-info-wrapper-left'>
-
-                              <div className='oneOrderCart__text-weight-uppercase'>  Pose cordage </div>
-
-                              <div> Cordage : votre propre cordage </div>
-
-                            </div>
-
+                            <div className='oneOrderCart__text-weight-uppercase'>  Fourniture et pose cordage </div>
 
                             <div className='oneOrderCart__product-price'>
-                                <div>{parseFloat((product.price * product.quantity).toFixed(2))} €</div>
+                            <div>{(product.price * product.quantity).toFixed(2).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €</div>
                             </div>
 
                           </div>
 
-                        );
+                            <div className='oneOrderCart__content-on-one-line'>
+                              <div>Pose cordage </div> 
+                              <div> {stringingPrice}€ </div>
+                            </div>
 
-                      case "balle":
-                      case "accessoire":
-                        return (
+                            <div className='oneOrderCart__content-on-one-line'>
 
-                          <div className='oneOrderCart__product-wrapper' key={index}>
+                              <div className='oneOrderCart__cordage'>
+                                <div> Cordage : </div>
+                                
+                              </div>
+
+                              <div>{product.stringChoice.price} € </div>
+
+                            </div>
 
                             <NavLink 
                               key={index} 
-                              to={`/fiche_produit/${product.categorie}/${product.id}`}
+                              to={`/fiche_produit/cordage/${product.stringChoice.id}`}
                               className="oneOrderCart__link-to-card-product"
                             >
-                              <img
-                                crossOrigin="anonymous"
-                                src={product.image_url}
-                                alt={product.model}
-                                className="oneOrderCart__image"
-                              />
+                              { product.stringChoice.mark  + " " + product.stringChoice.model}
                             </NavLink>
 
-                            <div className='oneOrderCart__product-info-wrapper'>
+                        </div>
 
-                              <div className='oneOrderCart__product-info-wrapper-left'>
-                                <div>
-                                  <div className='oneOrderCart__text-weight-uppercase'>{product.categorie}</div>
-                                  <div >{product.mark}</div>
-                                  <div>{product.model}</div>   
-                                  <div> Quantité : {product.quantity}</div> 
-                                </div>
+                      );
 
-                              </div>
+                    case "pose cordage seule":
+                      return (
 
-                              <div className='oneOrderCart__product-price'>
-                                <div>{parseFloat((product.price * product.quantity).toFixed(2))} €</div>
-                              </div>
+                        <div className='oneOrderCart__product-wrapper-installation' key={index}>
 
-                              
-                            </div>
+                          <div className='oneOrderCart__product-info-wrapper-left'>
+
+                            <div className='oneOrderCart__text-weight-uppercase'>  Pose cordage </div>
+
+                            <div> Cordage : votre propre cordage </div>
 
                           </div>
 
-                        );
 
-                      default:
-                        return null;
-                    }
+                          <div className='oneOrderCart__product-price'>
+                              <div>{parseFloat((product.price * product.quantity).toFixed(2))} €</div>
+                          </div>
 
-                    
+                        </div>
 
-                  })}
+                      );
 
-                </div>
+                    case "balle":
+                    case "accessoire":
+                      return (
 
-                <div className='cart-summary__total-line'>
-                  <div> Total </div>
-                  <div> {oneOrder.totalPrice} € </div>
-                </div>
+                        <div className='oneOrderCart__product-wrapper' key={index}>
+
+                          <NavLink 
+                            key={index} 
+                            to={`/fiche_produit/${product.categorie}/${product.id}`}
+                            className="oneOrderCart__link-to-card-product"
+                          >
+                            <img
+                              crossOrigin="anonymous"
+                              src={product.image_url}
+                              alt={product.model}
+                              className="oneOrderCart__image"
+                            />
+                          </NavLink>
+
+                          <div className='oneOrderCart__product-info-wrapper'>
+
+                            <div className='oneOrderCart__product-info-wrapper-left'>
+                              <div>
+                                <div className='oneOrderCart__text-weight-uppercase'>{product.categorie}</div>
+                                <div >{product.mark}</div>
+                                <div>{product.model}</div>   
+                                <div> Quantité : {product.quantity}</div> 
+                              </div>
+
+                            </div>
+
+                            <div className='oneOrderCart__product-price'>
+                              <div>{parseFloat((product.price * product.quantity).toFixed(2))} €</div>
+                            </div>
+
+                            
+                          </div>
+
+                        </div>
+
+                      );
+
+                    default:
+                      return null;
+                  }
+
+                  
+
+                })}
 
               </div>
 
+              <div className='cart-summary__total-line'>
+                <div> Total </div>
+                <div> {oneOrder.totalPrice} € </div>
+              </div>
 
+            </div>
 
             ) : (
-              <div className="loadingspinnerString">
-              <TennisSpinner />
-              </div>
+            <div className="loadingspinnerString">
+            <TennisSpinner />
+            </div>
           )}
 
         
