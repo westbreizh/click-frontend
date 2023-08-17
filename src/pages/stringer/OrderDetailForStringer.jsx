@@ -1,4 +1,3 @@
-import NavbarAccount from "../../components/navbar/NavbarAccount"
 import { useState, useEffect } from "react"
 import { useSelector} from 'react-redux'
 import { useParams } from 'react-router-dom';
@@ -15,6 +14,14 @@ export default function OrderDetailForStringer() {
   const token = useSelector((state) => state.user.token);
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
   const [oneOrder, setOneOrder] = useState("") ;
+  const [selectedOrder, setSelectedOrder] = useState([]);
+
+
+  // gestion de l'état de validation du bouton pour ajouter le produit  
+  const isValid =
+  selectedOrder.length  !== 0;
+  ;
+
 
   //fonction asynchrone vers le backend pour recupérer 
   //l'historique de la  commandes effectué par le joueur 
@@ -48,11 +55,49 @@ export default function OrderDetailForStringer() {
     }
   }
 
+    //fonction asynchrone vers le backend pour valider 
+  //les raquettes récupérées 
+  const changeStatusOrder  = async function (data) {
+    try{
+      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/change-status-order`, {
+        mode: "cors",
+        method: "POST",
+        body: JSON.stringify({ orderId: selectedOrder, statusOrder: oneOrder.statusOrder}),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+        }
+    })
 
+      if (!response.ok) {
+        const result = await response.json();
+        throw new Error(` ${result.message}`);
+      }else {
+        const result = await response.json();
+        console.log(result.message);
+        //setShouldReload(true); // Mettre à jour l'état racquetsTaken
+      }
+    }
 
+    catch(err){
+      const errorMessage = err.toString();
+      console.log(errorMessage);
+    }
+  }
 
+  //fonction qui ajoute l'id de la commande à la liste
+  const handleCheckboxChange = (e, orderId) => {
+    const isChecked = e.target.checked;
 
-  
+    if (isChecked) {
+        setSelectedOrder((prevSelectedOrders) => [...prevSelectedOrders, orderId]);
+    } else {
+        setSelectedOrder((prevSelectedOrders) =>
+            prevSelectedOrders.filter((id) => id !== orderId)
+        );
+    }
+};
+
 
   // charger la listes des commandes  au chargement de la page
   useEffect(() => {
@@ -63,13 +108,13 @@ export default function OrderDetailForStringer() {
 
 
   <>
-      <NavbarAccount />
 
-      <main className="order-log__main">
 
-        <div className="order-log__bg"> </div>
+    <main className="order-stringer__main">
 
-        <section className="order-log__contenair">
+      <div className="order-stringer__bg"> </div>
+
+         <section className="order-stringer__contenair">
 
           {oneOrder !== "" ? (
 
@@ -108,25 +153,47 @@ export default function OrderDetailForStringer() {
                     </div>: ""
                   }
 
-                  { oneOrder.withdrawDate !==null?
+
+                  { oneOrder.statusOrder ==="prêt à corder"?
                     <div className='oneOrderCart__line-status'>
-                    
-                     Retiré le {" "}
+                      Raquette récupérée le  {' '}
                       {
                         (() => {
-                          const orderDate = new Date(oneOrder.withdrawDate);
+                          const orderDate = new Date(oneOrder.racquetTakenDate);
                           const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
                           const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
                           return dateFrancaise;
                         })()
-                      } à {" "}
+                      } 
+                    </div>: ""
+                  }
+
+
+                  { oneOrder.statusOrder ==="raquette cordée"?
+                    <div className='oneOrderCart__line-status'>
+                      Raquette cordée le  {' '}
                       {
                         (() => {
-                          const hub = JSON.parse(oneOrder.hub);
-                          return hub.value;
-                        })() 
-                      }
+                          const orderDate = new Date(oneOrder.racquetTakenDate);
+                          const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+                          const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
+                          return dateFrancaise;
+                        })()
+                      } 
+                    </div>: ""
+                  }
 
+                  { oneOrder.statusOrder ==="commande récupérée"?
+                    <div className='oneOrderCart__line-status'>
+                      Commande récupérée le  {' '}
+                      {
+                        (() => {
+                          const orderDate = new Date(oneOrder.racquetTakenDate);
+                          const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+                          const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
+                          return dateFrancaise;
+                        })()
+                      } 
                     </div>: ""
                   }
 
@@ -310,7 +377,64 @@ export default function OrderDetailForStringer() {
               </div>
           )}
 
-        
+            <div >
+
+              <div className="order-stringer-detail__checkbox-wrapper">
+                <input
+                  type="checkbox"
+                  className="order-stringer-detail__checkbox"
+                  onChange={(e) => handleCheckboxChange(e, oneOrder.id)}
+                />
+                { oneOrder.statusOrder ==="initié"?
+                  <div className="order-stringer-detail__checkbox-text"> 
+                    Valider la collecte de la raquette
+                  </div>
+                    : ""
+                }
+                { oneOrder.statusOrder ==="prêt à corder"?
+                  <div className="order-stringer-detail__checkbox-text"> 
+                    Valider le cordage de la raquette
+                  </div>
+                    : ""
+                }
+                { oneOrder.statusOrder ==="raquette cordée"?
+                  <div className="order-stringer-detail__checkbox-text"> 
+                    Valider la récupération de la commande
+                  </div>
+                    : ""
+                }
+              </div>
+
+              { oneOrder.statusOrder ==="initié"?
+                  <button 
+                  disabled={ !isValid} 
+                  className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
+                  onClick={() => changeStatusOrder()}> 
+                  Raquette collectée
+                  </button>
+                    : ""
+                }
+                { oneOrder.statusOrder ==="prêt à corder"?
+                  <button 
+                  disabled={ !isValid} 
+                  className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
+                  onClick={() => changeStatusOrder()}> 
+                  Raquette cordée
+                  </button>
+                    : ""
+                }
+                { oneOrder.statusOrder ==="raquette cordée"?
+                  <button 
+                  disabled={ !isValid} 
+                  className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
+                  onClick={() => changeStatusOrder()}> 
+                  Commande validée
+                  </button>
+                    : ""
+                }
+
+            </div>
+
         </section>
 
       </main>

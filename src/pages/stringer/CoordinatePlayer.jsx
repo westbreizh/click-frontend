@@ -64,14 +64,12 @@ export default function CoordinatePlayer() {
   return (
 
   <>
-      <NavbarAccount />
 
-      <main className="account__main">
+    <main className="order-stringer__main">
 
-      
-        <div className="account__bg"> </div>
+      <div className="order-stringer__bg"> </div>
 
-        <section className="account__contenair">
+        <section className="order-stringer__contenair">
 
           <div className="account__contenair">
             <div className="account__header">

@@ -43,7 +43,7 @@ export default function NavbarHamburgerStringer() {
         </li>
 
         <li className='menuHamburger__li' onClick={() =>toggleMenuHamburger() } >
-          <NavLink  to="/cordeur_raquettes-à-déposer" className={(nav) => (nav.isActive ? "navLink__active" : "navLink__inactive")} end>
+          <NavLink  to="/cordeur_raquettes-prête" className={(nav) => (nav.isActive ? "navLink__active" : "navLink__inactive")} end>
           <div className="icons_wrapper">
               < ThumbUpAltIcon className="navBar__icon "/>
             </div>

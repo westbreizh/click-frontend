@@ -37,7 +37,7 @@ export default function NavbarDesktopStringer() {
         </li>
 
         <li className='navBar__li'>
-          <NavLink  to="/cordeur_raquettes-à-déposer" className={(nav) => (nav.isActive ? "navBar__active" : "navBar__inactive")} end>
+          <NavLink  to="/cordeur_raquettes-prête" className={(nav) => (nav.isActive ? "navBar__active" : "navBar__inactive")} end>
           <div className="icons_wrapper">
               < ThumbUpAltIcon className="navBar__icon"/>
             </div>

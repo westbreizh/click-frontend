@@ -3822,7 +3822,7 @@ input {
   min-width: 2.2rem;
 }
 .order-stringer__btn {
-  margin-top: 3rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 .order-stringer__important-info {
@@ -3873,6 +3873,48 @@ input {
     border-radius: 0rem;
     margin-top: 8rem;
   }
+}
+.order-stringer-detail__checkbox-wrapper {
+  display: flex;
+  align-items: baseline;
+}
+.order-stringer-detail__checkbox-text {
+  font-size: 1.8rem;
+}
+
+.order-stringer-detail__checkbox {
+  appearance: none;
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.3rem;
+  outline: none;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  margin-bottom: 0rem;
+  margin-right: 1rem;
+}
+
+.order-stringer-detail__checkbox:checked {
+  background-color: #007bff; /* Couleur lorsque la case est cochée */
+  border-color: #007bff; /* Couleur de la bordure lorsque la case est cochée */
+}
+
+/* Style du "checkmark" à l'intérieur de la case à cocher */
+.order-stringer-detail__checkbox::after {
+  content: "✓"; /* Symbole "checkmark" Unicode */
+  position: absolute;
+  top: 0.1rem;
+  left: 0.3rem;
+  font-size: 1rem;
+  color: white;
+  display: none;
+}
+
+.order-stringer-detail__checkbox:checked::after {
+  display: block;
 }
 
 /*# sourceMappingURL=style.css.map */

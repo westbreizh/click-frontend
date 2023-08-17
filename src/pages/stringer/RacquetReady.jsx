@@ -5,12 +5,11 @@ import { NavLink } from "react-router-dom"
 import TennisSpinner from "../../components/loadingSpinner/TennisSpinner"
 
 
-export default function RacquetToTake() {
+export default function RacquetReady() {
 
   const token = useSelector((state) => state.user.token);
 
   const [orderLogList, setOrderLogList] = useState([]) ;
-  const [orderLogListByHub, setOrderLogListByHub] = useState([]) ;
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [shouldReload, setShouldReload] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
@@ -33,28 +32,13 @@ export default function RacquetToTake() {
       }
   };
 
-  // Fonction pour regrouper les commandes par hub
-  const groupOrdersByHub = (orderList) => {
-    const ordersByHub = {};
 
-    for (const order of orderList) {
-      const hub = order.hub;
-
-      if (!ordersByHub[hub]) {
-        ordersByHub[hub] = [];
-      }
-
-      ordersByHub[hub].push(order);
-    }
-
-    return ordersByHub;
-  };
 
   //fonction asynchrone vers le backend pour recupérer 
-  //la liste des raquettes à recuperer 
+  //la liste des raquettes à corder 
   const loadLogOrder  = async function (data) {
     try{
-      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/racquetToTakeLog`, {
+      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/racquetToStringLog`, {
         mode: "cors",
         method: "POST",
         headers: {
@@ -68,9 +52,9 @@ export default function RacquetToTake() {
         throw new Error(` ${result.message}`);
       }else {
         const result = await response.json();
-        const ordersInfoByHub = result.racquetsDataToTake
-        console.log(ordersInfoByHub);
-        setOrderLogList(ordersInfoByHub)
+        const ordersInfo = result.racquetsDataToString 
+        console.log(ordersInfo);
+        setOrderLogList(ordersInfo)
         console.log(result.message);
         setPageLoading(false)
       }
@@ -84,7 +68,7 @@ export default function RacquetToTake() {
 
   //fonction asynchrone vers le backend pour valider 
   //les raquettes récupérées 
-  const racquetTaken  = async function (data) {
+  const racquetStringed  = async function (data) {
     try{
       const response = await fetch(`https://click-backend.herokuapp.com/api/shop/racquetTaken`, {
         mode: "cors",
@@ -125,11 +109,7 @@ export default function RacquetToTake() {
     }
   }, [shouldReload]);
 
-  // Après avoir chargé les données, regrouper les commandes par hub
-  useEffect(() => {
-    const groupedOrdersByHub = groupOrdersByHub(orderLogList);
-    setOrderLogListByHub(groupedOrdersByHub);
-  }, [orderLogList]);
+
 
   console.log("cases cochés", selectedOrders)
 
@@ -149,7 +129,7 @@ export default function RacquetToTake() {
         <div className='order-stringer__sub-contenair'>
 
             <h1 className="order-stringer__h1">
-              Raquettes à récupérer 
+              Commandes prêtes
             </h1>
 
             { pageLoading ? (
@@ -158,17 +138,16 @@ export default function RacquetToTake() {
               </div>):""
             }
 
-            {orderLogListByHub && Object.keys(orderLogListByHub).length > 0 ? (
+            {orderLogList && Object.keys(orderLogList).length > 0 ? (
               <div >
 
-                {Object.keys(orderLogListByHub).map((hubName, index) => (
-
-                  <div key={index} className="order-stringer__list-contenair">
-                    <h3 className="order-stringer__h3">Lieu de retrait : {hubName}</h3>
 
 
-                        {orderLogListByHub[hubName].map((order, orderIndex) => (
-                            <div key={orderIndex} className="order-stringer__list-row">
+                  <div  className="order-stringer__list-contenair">
+
+                        {orderLogList.map((order, orderIndex) => (
+                            <div key={orderIndex} >
+                              <div className="order-stringer__list-row">
                                 <input
                                   type="checkbox"
                                   className="order-stringer__checkbox"
@@ -182,19 +161,25 @@ export default function RacquetToTake() {
                                 >
                                     détails
                                 </NavLink>
+                              </div>
+                              
                             </div>
+
+
+
+
                         ))}
 
 
 
                   </div>
-                ))}
+                
 
               <button 
                 disabled={ !isValid} 
                 className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
-                onClick={() => racquetTaken()}> 
-                Raquettes récupérées
+                onClick={() => racquetStringed()}> 
+                Raquettes cordées
               </button>
               
               </div>
@@ -203,12 +188,15 @@ export default function RacquetToTake() {
             ) : (
               
               <div className="loadingspinnerString">
-                Toutes les raquettes ont été récupérées
+                Toutes les raquettes ont été cordées
               </div>
             )}
 
 
         </div>
+
+
+
 
         </section>
 

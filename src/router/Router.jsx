@@ -27,6 +27,8 @@ import EchecPaiement from '../pages/afterPaiement/EchecPaiement'
 import OrderPassed from '../pages/orderPassed/OrderPassed'
 import OrderDetailForStringer from '../pages/stringer/OrderDetailForStringer'
 import RacquetToTake from '../pages/stringer/RacquetToTake'
+import RacquetToString from '../pages/stringer/RacquetToString'
+import RacquetReady from '../pages/stringer/RacquetReady'
 import CoordinatePlayer from '../pages/stringer/CoordinatePlayer'
 
 
@@ -66,6 +68,8 @@ export default function Router() {
           <Route path='/*' element={<ErrorPage />} />
 
           <Route path='/cordeur_raquettes-à-retirer'  element = {< RacquetToTake/>} />
+          <Route path='/cordeur_raquettes-à-corder'  element = {< RacquetToString/>} />
+          <Route path='/cordeur_raquettes-prête'  element = {< RacquetReady/>} />
           <Route path='/détails_commande/:orderId' element={<OrderDetailForStringer />} />
           <Route path='/fiche_joueur/:userId' element={<CoordinatePlayer />} />
 
