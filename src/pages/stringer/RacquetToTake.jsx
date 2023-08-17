@@ -68,7 +68,7 @@ export default function RacquetToTake() {
         throw new Error(` ${result.message}`);
       }else {
         const result = await response.json();
-        const ordersInfoByHub = result.racquetsData
+        const ordersInfoByHub = result.racquetsDataToTake
         console.log(ordersInfoByHub);
         setOrderLogList(ordersInfoByHub)
         console.log(result.message);
@@ -167,7 +167,7 @@ export default function RacquetToTake() {
                                   onChange={(e) => handleCheckboxChange(e, order.id)}
                                 />
                                 <div className="order-stringer__list-row-element">N° : {order.id}</div>
-                                <div className="order-stringer__list-row-element">Raquette : {order.userInfo}</div>
+                                <div className="order-stringer__list-row-element">Raquette : {order.racquetPlayer}</div>
                                 <NavLink
                                     to={`/détails_commande/${order.id}`}
                                     className="order-stringer__list-row-element"

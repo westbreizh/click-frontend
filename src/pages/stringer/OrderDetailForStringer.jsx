@@ -36,6 +36,7 @@ export default function OrderDetailForStringer() {
       }else {
         const result = await response.json();
         const orderInfo = result.data.orderInfo
+        console.log("oderInfo", orderInfo)
         setOneOrder(orderInfo[0])
         console.log(result.message);
       }
@@ -101,7 +102,6 @@ export default function OrderDetailForStringer() {
                         {
                           (() => {
                             const hub = JSON.parse(oneOrder.hub);
-                            console.log( hub);
                             return hub.enterprise_name;
                           })() 
                         }
@@ -123,8 +123,6 @@ export default function OrderDetailForStringer() {
                       {
                         (() => {
                           const hub = JSON.parse(oneOrder.hub);
-                          console.log("type of hub", typeof hub);
-                          console.log( hub);
                           return hub.value;
                         })() 
                       }
@@ -185,6 +183,8 @@ export default function OrderDetailForStringer() {
 
 
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
+                              <div > Raquette : <span className="order-stringer__important-info"> {product.racquetPlayer} </span> </div> 
+
                           </div>
 
                         );
@@ -193,7 +193,7 @@ export default function OrderDetailForStringer() {
                         return (
 
                           <div className='oneOrderCart__product-wrapper-installation' key={index}>
-                                {console.log("product", product)}
+
                             <div className='oneOrderCart__product-info-wrapper-left'>
 
                               <div className='oneOrderCart__text-weight-uppercase'>  Pose cordage </div>
@@ -202,6 +202,8 @@ export default function OrderDetailForStringer() {
                              
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
  
+                              <div > Raquette : <span className="order-stringer__important-info"> {product.racquetPlayer} </span> </div> 
+
                             </div>
 
                                 
@@ -273,14 +275,12 @@ export default function OrderDetailForStringer() {
                   <div className='oneOrderCart__first-line-status'>
                     <div>Joueur</div>
                   </div>
-                  {console.log("oneOrder", oneOrder.userInfo)}
 
                   {(() => {
                       const userInfo = JSON.parse(oneOrder.userInfo);
                       return (
                         <>
                           <div> {userInfo.forename} {userInfo.lastname}</div>
-                          <div > Raquette : <span className="order-stringer__important-info"> {userInfo.racquet_player} </span> </div> 
                           <div>                            
                             <NavLink 
                               to={`/fiche_joueur/${userInfo.id}`}

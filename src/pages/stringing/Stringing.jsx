@@ -35,6 +35,7 @@ export default function Stringing() {
   const dispatch = useDispatch();
   dispatch(updateStringingPrice(10));
 
+  //recupération de la saisie de la marque/type de la raquette
   const handleRacquetPlayerChange = (event) => {
     const value = event.target.value;
     setRacquetPlayer(value)
@@ -61,26 +62,27 @@ export default function Stringing() {
         quantity: 1,
         price: stringingPrice, 
         stringRopeChoice, 
-        stringChoice}
+        stringChoice,
+        racquetPlayer
+      }
         console.log(article)
         dispatch(addInstallationString(article))
         dispatch(updateRacquetPlayer(racquetPlayer))
         setSubmenuValidation(true)
-        //registerPreferencePlayer(userEmail, hubChoice, stringRopeChoice, stringChoice )
     } else{ 
       const article = {
         categorie:"fourniture et pose cordage", 
         price: (stringingPrice+ parseFloat(stringChoice.price)).toFixed(2),
         quantity: 1,
         stringRopeChoice, 
-        stringChoice
+        stringChoice,
+        racquetPlayer
       }
       console.log(article)
       dispatch(addInstallationString(article))
       setSubmenuValidation(true)
       dispatch(calculNumberArticle());
       dispatch(updateRacquetPlayer(racquetPlayer))
-      //registerPreferencePlayer(userEmail, hubChoice, stringRopeChoice, stringChoice )
     }
   };
        
@@ -288,6 +290,7 @@ export default function Stringing() {
               placeholder = {racquetPlayer}
               type="text"
               className="stringing-form__input-text"
+              onClick={() => setRacquetPlayer("")} 
               onChange={handleRacquetPlayerChange}
             />
 
