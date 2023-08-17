@@ -4,7 +4,6 @@ import { useSelector} from 'react-redux'
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom"
 import TennisSpinner from "../../components/loadingSpinner/TennisSpinner"
-import { useNavigate } from "react-router-dom";
 
 
 export default function RacquetToTake() {
@@ -14,7 +13,7 @@ export default function RacquetToTake() {
   const [orderLogList, setOrderLogList] = useState([]) ;
   const [orderLogListByHub, setOrderLogListByHub] = useState([]) ;
   const [selectedOrders, setSelectedOrders] = useState([]);
-
+  const [shouldReload, setShouldReload] = useState(false);
   // gestion de l'état de validation du bouton pour ajouter le produit  
   const isValid =
   selectedOrders.length  !== 0;
@@ -101,7 +100,7 @@ export default function RacquetToTake() {
       }else {
         const result = await response.json();
         console.log(result.message);
-        window.location.reload();
+        setShouldReload(true); // Mettre à jour l'état racquetsTaken
       }
     }
 
@@ -117,9 +116,11 @@ export default function RacquetToTake() {
 
   // charger la listes des commandes  au chargement de la page et lorsque racquetTaken est appelé
   useEffect(() => {
-
     loadLogOrder();
-  }, []);
+    if (shouldReload) {
+      setShouldReload(false);
+    }
+  }, [shouldReload]);
 
   // Après avoir chargé les données, regrouper les commandes par hub
   useEffect(() => {
@@ -167,7 +168,7 @@ export default function RacquetToTake() {
                                   onChange={(e) => handleCheckboxChange(e, order.id)}
                                 />
                                 <div className="order-stringer__list-row-element">N° : {order.id}</div>
-                                <div className="order-stringer__list-row-element">Raquette : {order.racquetPlayer}</div>
+                                <div className="order-stringer__list-row-element">Raquette : {order.racquetPlayerList.join(", ")}</div>
                                 <NavLink
                                     to={`/détails_commande/${order.id}`}
                                     className="order-stringer__list-row-element"
@@ -185,7 +186,7 @@ export default function RacquetToTake() {
               <button 
                 disabled={ !isValid} 
                 className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
-                onClick={racquetTaken}>
+                onClick={() => racquetTaken()}> 
                 Raquettes récupérées
               </button>
               
