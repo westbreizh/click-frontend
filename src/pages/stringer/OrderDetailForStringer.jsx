@@ -55,7 +55,7 @@ export default function OrderDetailForStringer() {
     }
   }
 
-    //fonction asynchrone vers le backend pour valider 
+  //fonction asynchrone vers le backend pour valider 
   //les raquettes récupérées 
   const changeStatusOrder  = async function (data) {
     try{
@@ -169,7 +169,7 @@ export default function OrderDetailForStringer() {
                   }
 
 
-                  { oneOrder.statusOrder ==="raquette cordée"?
+                  { oneOrder.statusOrder ==="prête"?
                     <div className='oneOrderCart__line-status'>
                       Raquette cordée le  {' '}
                       {
@@ -397,7 +397,7 @@ export default function OrderDetailForStringer() {
                   </div>
                     : ""
                 }
-                { oneOrder.statusOrder ==="raquette cordée"?
+                { oneOrder.statusOrder ==="prête"?
                   <div className="order-stringer-detail__checkbox-text"> 
                     Valider la récupération de la commande
                   </div>
@@ -423,7 +423,7 @@ export default function OrderDetailForStringer() {
                   </button>
                     : ""
                 }
-                { oneOrder.statusOrder ==="raquette cordée"?
+                { oneOrder.statusOrder ==="prête"?
                   <button 
                   disabled={ !isValid} 
                   className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
