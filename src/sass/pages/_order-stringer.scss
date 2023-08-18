@@ -72,6 +72,12 @@
         padding-bottom: 1rem;
         border-bottom: 0.1rem solid #dadada;
     }
+    &__list-row-infos{
+        width: 100%;
+        display: flex;
+    }
+
+
     &__list-row-element{
         font-size: 1.7rem;
         margin: 0rem 2rem 0rem 2rem;
@@ -137,9 +143,9 @@
         width: 100%;
         }
         &__contenair{
-
             border-radius: 0rem;
             margin-top: 8rem;
+            min-height: 50rem;
             }
 
     }

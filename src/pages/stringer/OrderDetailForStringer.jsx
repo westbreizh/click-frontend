@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react"
 import { useSelector} from 'react-redux'
 import { useParams } from 'react-router-dom';
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import TennisSpinner from "../../components/loadingSpinner/TennisSpinner"
-import BackNavArrow from '../../components/button/BackNavArrow';
-
+import BackNavArrowStringer from "../../components/button/BackNavArrowStringer";
 
 export default function OrderDetailForStringer() {
 
@@ -21,7 +20,7 @@ export default function OrderDetailForStringer() {
   const isValid =
   selectedOrder.length  !== 0;
   ;
-
+  const navigate = useNavigate();
 
   //fonction asynchrone vers le backend pour recupérer 
   //l'historique de la  commandes effectué par le joueur 
@@ -56,7 +55,7 @@ export default function OrderDetailForStringer() {
   }
 
   //fonction asynchrone vers le backend pour valider 
-  //les raquettes récupérées 
+  //le changement de status
   const changeStatusOrder  = async function (data) {
     try{
       const response = await fetch(`https://click-backend.herokuapp.com/api/shop/change-status-order`, {
@@ -75,7 +74,7 @@ export default function OrderDetailForStringer() {
       }else {
         const result = await response.json();
         console.log(result.message);
-        //setShouldReload(true); // Mettre à jour l'état racquetsTaken
+        navigate(-1);
       }
     }
 
@@ -104,8 +103,8 @@ export default function OrderDetailForStringer() {
     loadOneOrder ()
   },[])
 
-  return (
 
+  return (
 
   <>
 
@@ -118,9 +117,11 @@ export default function OrderDetailForStringer() {
 
           {oneOrder !== "" ? (
 
-              <div className='oneOrder__contenair-cart'>
+              <div className='oneOrder__contenair-cart oneOrder-stringer__contenair-cart'>
 
-                <h2 className="oneOrder__sub-title">  Commande n° {oneOrder.id} </h2>
+                <BackNavArrowStringer/>
+
+                <h2 className="oneOrder__sub-title oneOrder-stringer__sub-tittle">  Commande n° {oneOrder.id} </h2>
 
                 <div className='oneOrderCart__wrapper-status'>
 
@@ -196,8 +197,6 @@ export default function OrderDetailForStringer() {
                       } 
                     </div>: ""
                   }
-
-
 
 
                 </div>

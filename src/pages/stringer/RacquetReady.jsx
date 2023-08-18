@@ -67,42 +67,47 @@ export default function RacquetReady() {
           { pageLoading ? (
             <div className="loadingspinnerString">
             <TennisSpinner />
-            </div>):""
-          }
-
-          {orderListFiltered && Object.keys(orderListFiltered).length > 0 ? (
-            <div >
-              <div  className="order-stringer__list-contenair">
+            </div>):(
+            <>
+              {orderListFiltered && Object.keys(orderListFiltered).length > 0 ? (
+                <div >
+                  <div  className="order-stringer__list-contenair">
 
                     {orderListFiltered.map((order, orderIndex) => (
                         <div key={orderIndex} >
 
                           <div className="order-stringer__list-row">
-                            <div className="order-stringer__list-row-element">N° : {order.id}</div>
-                            <div className="order-stringer__list-row-element">Raquette : {order.racquetPlayerList.join(", ")}</div>
+                            <div className="order-stringer__list-row-infos"> 
+                              <div className="order-stringer__list-row-element">N° : {order.id}</div>
+                              <div className="order-stringer__list-row-element">Raquette : {order.racquetPlayerList.join(", ")}</div>
+                            </div>
+
                             <NavLink
                                 to={`/détails_commande/${order.id}`}
                                 className="order-stringer__list-row-element"
                             >
                                 détails
                             </NavLink>
+
                           </div>
                           
                         </div>
 
-
-
-
                     ))}
 
-              </div>          
-            </div>
+                  </div>          
+                </div>
 
-            ) : (
-            <div className="loadingspinnerString">
-              Toutes les commandes ont été validées
-            </div>)
-          }
+                ):
+                ( 
+                  <div className="loadingspinnerString">
+                    Toutes les commandes ont été validées
+                  </div>
+                )
+              }
+            </>
+          )}
+
 
         </div>
 

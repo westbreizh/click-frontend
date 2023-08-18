@@ -103,10 +103,6 @@ background-color: white;
 
 }
 
-
-
-
-
 .btn-close {
   font-size: 4rem;
   font-weight: 700;
@@ -135,6 +131,39 @@ background-color: white;
   &__wrapper {
     position: absolute;
     top: 0.8rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #2f3ba9;
+  }
+  
+  &__bubble {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: #ebe7e7; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 1rem;
+  }
+  
+  &__icon-back {
+    width: 4rem;
+    height: 4rem;
+    fill: #000000;
+    transform: scale(1.5);
+  }
+  
+}
+
+.btn-back-stringer{
+
+  &__wrapper {
+    position: absolute;
+    top: 0.4rem;
     left: 1rem;
     display: flex;
     align-items: center;

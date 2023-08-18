@@ -1524,6 +1524,33 @@ body {
   transform: scale(1.5);
 }
 
+.btn-back-stringer__wrapper {
+  position: absolute;
+  top: 0.4rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #2f3ba9;
+}
+.btn-back-stringer__bubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: #ebe7e7;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-right: 1rem;
+}
+.btn-back-stringer__icon-back {
+  width: 4rem;
+  height: 4rem;
+  fill: #000000;
+  transform: scale(1.5);
+}
+
 .btn-choice {
   margin-top: 2rem;
   margin-left: auto;
@@ -3816,6 +3843,10 @@ input {
   padding-bottom: 1rem;
   border-bottom: 0.1rem solid #dadada;
 }
+.order-stringer__list-row-infos {
+  width: 100%;
+  display: flex;
+}
 .order-stringer__list-row-element {
   font-size: 1.7rem;
   margin: 0rem 2rem 0rem 2rem;
@@ -3872,6 +3903,7 @@ input {
   .order-stringer__contenair {
     border-radius: 0rem;
     margin-top: 8rem;
+    min-height: 50rem;
   }
 }
 .order-stringer-detail__checkbox-wrapper {
@@ -3915,6 +3947,14 @@ input {
 
 .order-stringer-detail__checkbox:checked::after {
   display: block;
+}
+
+.oneOrder-stringer__contenair-cart {
+  position: relative;
+}
+
+.oneOrder-stringer__sub-tittle {
+  padding-bottom: 1.5rem;
 }
 
 /*# sourceMappingURL=style.css.map */
