@@ -157,7 +157,7 @@ export default function OrderDetailForStringer() {
 
                   { oneOrder.statusOrder ==="prêt à corder"?
                     <div className='oneOrderCart__line-status'>
-                      Raquette récupérée le  {' '}
+                      Raquette collectée le  {' '}
                       {
                         (() => {
                           const orderDate = new Date(oneOrder.racquetTakenDate);
@@ -171,6 +171,47 @@ export default function OrderDetailForStringer() {
 
 
                   { oneOrder.statusOrder ==="prête"?
+                    <>
+                      <div className='oneOrderCart__line-status'>
+                      Raquette collectée le  {' '}
+                      {
+                        (() => {
+                          const orderDate = new Date(oneOrder.racquetTakenDate);
+                          const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+                          const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
+                          return dateFrancaise;
+                        })()
+                      } 
+                      </div>
+
+                      <div className='oneOrderCart__line-status'>
+                        Raquette cordée le  {' '}
+                        {
+                          (() => {
+                            const orderDate = new Date(oneOrder.racquetTakenDate);
+                            const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+                            const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
+                            return dateFrancaise;
+                          })()
+                        } 
+                      </div>
+                    </> : ""
+                  }
+
+                  { oneOrder.statusOrder ==="commande validée"?
+                    <>
+                    <div className='oneOrderCart__line-status'>
+                    Raquette collectée le  {' '}
+                    {
+                      (() => {
+                        const orderDate = new Date(oneOrder.racquetTakenDate);
+                        const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+                        const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
+                        return dateFrancaise;
+                      })()
+                    } 
+                    </div>
+
                     <div className='oneOrderCart__line-status'>
                       Raquette cordée le  {' '}
                       {
@@ -181,21 +222,21 @@ export default function OrderDetailForStringer() {
                           return dateFrancaise;
                         })()
                       } 
-                    </div>: ""
-                  }
-
-                  { oneOrder.statusOrder ==="commande récupérée"?
                     <div className='oneOrderCart__line-status'>
-                      Commande récupérée le  {' '}
+                      Commande validée le  {' '}
                       {
                         (() => {
-                          const orderDate = new Date(oneOrder.racquetTakenDate);
+                          const orderDate = new Date(oneOrder.orderValidateDate);
                           const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
                           const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
                           return dateFrancaise;
                         })()
                       } 
-                    </div>: ""
+                    </div>
+
+                    </div>
+                  </> : ""
+
                   }
 
 
@@ -412,25 +453,25 @@ export default function OrderDetailForStringer() {
                   Raquette collectée
                   </button>
                     : ""
-                }
-                { oneOrder.statusOrder ==="prêt à corder"?
-                  <button 
-                  disabled={ !isValid} 
-                  className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
-                  onClick={() => changeStatusOrder()}> 
-                  Raquette cordée
-                  </button>
-                    : ""
-                }
-                { oneOrder.statusOrder ==="prête"?
-                  <button 
-                  disabled={ !isValid} 
-                  className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
-                  onClick={() => changeStatusOrder()}> 
-                  Commande validée
-                  </button>
-                    : ""
-                }
+              }
+              { oneOrder.statusOrder ==="prêt à corder"?
+                <button 
+                disabled={ !isValid} 
+                className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
+                onClick={() => changeStatusOrder()}> 
+                Raquette cordée
+                </button>
+                  : ""
+              }
+              { oneOrder.statusOrder ==="prête"?
+                <button 
+                disabled={ !isValid} 
+                className={`stringing-form__btn-order btn btn-blue order-stringer__btn ${isValid ? "" : "btn-blue-invalid"}`}
+                onClick={() => changeStatusOrder()}> 
+                Commande validée
+                </button>
+                  : ""
+              }
 
             </div>
 
