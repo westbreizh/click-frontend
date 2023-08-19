@@ -29,6 +29,7 @@ import OrderDetailForStringer from '../pages/stringer/OrderDetailForStringer'
 import RacquetToTake from '../pages/stringer/RacquetToTake'
 import RacquetToString from '../pages/stringer/RacquetToString'
 import RacquetReady from '../pages/stringer/RacquetReady'
+import HistoryOrderStringer from '../pages/stringer/historyOrderStringer'
 import CoordinatePlayer from '../pages/stringer/CoordinatePlayer'
 
 
@@ -70,6 +71,7 @@ export default function Router() {
           <Route path='/cordeur_raquettes-à-retirer'  element = {< RacquetToTake/>} />
           <Route path='/cordeur_raquettes-à-corder'  element = {< RacquetToString/>} />
           <Route path='/cordeur_raquettes-prête'  element = {< RacquetReady/>} />
+          <Route path='/cordeur_commandes-historique'  element = {< HistoryOrderStringer/>} />
           <Route path='/détails_commande/:orderId' element={<OrderDetailForStringer />} />
           <Route path='/fiche_joueur/:userId' element={<CoordinatePlayer />} />
 

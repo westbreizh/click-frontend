@@ -46,7 +46,7 @@ export default function NavbarDesktopStringer() {
         </li>
 
         <li className='navBar__li'>
-          <NavLink  to="/hub_historique" className={(nav) => (nav.isActive ? "navBar__active" : "navBar__inactive")} end>
+          <NavLink  to="/cordeur_commandes-historique" className={(nav) => (nav.isActive ? "navBar__active" : "navBar__inactive")} end>
             <FormatListBulletedIcon className="navBar__icon"/>
             Historique
           </NavLink>

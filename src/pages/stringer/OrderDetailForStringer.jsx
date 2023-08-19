@@ -222,6 +222,8 @@ export default function OrderDetailForStringer() {
                           return dateFrancaise;
                         })()
                       } 
+                    </div>
+
                     <div className='oneOrderCart__line-status'>
                       Commande validée le  {' '}
                       {
@@ -234,7 +236,6 @@ export default function OrderDetailForStringer() {
                       } 
                     </div>
 
-                    </div>
                   </> : ""
 
                   }

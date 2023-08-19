@@ -83,28 +83,30 @@ export default function OrderHistory() {
                   key={`${index}`}
                   className="order-log__list-row"
                   >
-                    <div className="order-log__list-row-element">
-                      n° {order.id}
+                    <div className="order-stringer__list-row-infos"> 
+
+                      <div className="order-log__list-row-element">
+                        n° {order.id}
+                      </div>
+
+                      <div className="order-log__list-row-element">
+                      date :  {" "}
+                        {
+                          (() => {
+                            const orderDate = new Date(order.orderDate);
+                            const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+                            const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
+                            return dateFrancaise;
+                          })()
+                        }
+
+                      </div>
+
+                      <div className="order-log__list-row-element">
+                        status : {order.statusOrder}
+                      </div>
+
                     </div>
-
-                    <div className="order-log__list-row-element">
-                    date :  {" "}
-                      {
-                        (() => {
-                          const orderDate = new Date(order.orderDate);
-                          const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
-                          const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
-                          return dateFrancaise;
-                        })()
-                      }
-
-                    </div>
-
-                    <div className="order-log__list-row-element">
-                      status : {order.statusOrder}
-                    </div>
-
-                    
 
                     <NavLink 
                     to={`/historique_commandes/${order.id}`}

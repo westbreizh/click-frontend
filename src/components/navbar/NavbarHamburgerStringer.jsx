@@ -53,7 +53,7 @@ export default function NavbarHamburgerStringer() {
 
 
         <li className='menuHamburger__li' onClick={() =>toggleMenuHamburger() } >
-          <NavLink  to="/hub_historique" className={(nav) => (nav.isActive ? "navLink__active" : "navLink__inactive")} end>
+          <NavLink  to="/cordeur_commandes-historique" className={(nav) => (nav.isActive ? "navLink__active" : "navLink__inactive")} end>
             <FormatListBulletedIcon className="navBar__icon"/>
             Historique
           </NavLink>
