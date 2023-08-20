@@ -420,31 +420,36 @@ export default function OrderDetailForStringer() {
 
             <div >
 
-              <div className="order-stringer-detail__checkbox-wrapper">
-                <input
-                  type="checkbox"
-                  className="order-stringer-detail__checkbox"
-                  onChange={(e) => handleCheckboxChange(e, oneOrder.id)}
-                />
-                { oneOrder.statusOrder ==="initié"?
-                  <div className="order-stringer-detail__checkbox-text"> 
-                    Valider la collecte de la raquette
-                  </div>
-                    : ""
-                }
-                { oneOrder.statusOrder ==="prêt à corder"?
-                  <div className="order-stringer-detail__checkbox-text"> 
-                    Valider le cordage de la raquette
-                  </div>
-                    : ""
-                }
-                { oneOrder.statusOrder ==="prête"?
-                  <div className="order-stringer-detail__checkbox-text"> 
-                    Valider la récupération de la commande
-                  </div>
-                    : ""
-                }
-              </div>
+              { oneOrder.statusOrder !=="commande validée"?
+
+                <div className="order-stringer-detail__checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    className="order-stringer-detail__checkbox"
+                    onChange={(e) => handleCheckboxChange(e, oneOrder.id)}
+                  />
+                  { oneOrder.statusOrder ==="initié"?
+                  
+                    <div className="order-stringer-detail__checkbox-text"> 
+                      Valider la collecte de la raquette
+                    </div>
+                      : ""
+                  }
+                  { oneOrder.statusOrder ==="prêt à corder"?
+                    <div className="order-stringer-detail__checkbox-text"> 
+                      Valider le cordage de la raquette
+                    </div>
+                      : ""
+                  }
+                  { oneOrder.statusOrder ==="prête"?
+                    <div className="order-stringer-detail__checkbox-text"> 
+                      Valider la récupération de la commande
+                    </div>
+                      : ""
+                  }
+                </div>
+                : ""
+              }
 
               { oneOrder.statusOrder ==="initié"?
                   <button 

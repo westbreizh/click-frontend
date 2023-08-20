@@ -378,31 +378,6 @@ export default function OrderDetailHistory() {
                 </div>
 
 
-                <div className='oneOrderCart__wrapper-status'>
-
-                  <div className='oneOrderCart__first-line-status'>
-                    <div>Joueur</div>
-                  </div>
-
-                  {(() => {
-                      const userInfo = JSON.parse(oneOrder.userInfo);
-                      return (
-                        <>
-                          <div> {userInfo.forename} {userInfo.lastname}</div>
-                          <div>                            
-                            <NavLink 
-                              to={`/fiche_joueur/${userInfo.id}`}
-                              className="oneOrderCart__link-to-card-product"
-                            >
-                              Fiche joueur
-                            </NavLink>
-                          </div>
-                        </>
-                      );
-                  })()}
-
-                </div>
-
                 <div className='cart-summary__total-line'>
                   <div> Total </div>
                   <div> {oneOrder.totalPrice} € </div>
