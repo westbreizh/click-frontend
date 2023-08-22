@@ -88,9 +88,14 @@
         width: 100%;
         }
         &__contenair{
-
             border-radius: 0rem;
-            }
+        }
+
+        &__list-row-element{
+        max-width: 7rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        }
 
     }
 

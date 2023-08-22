@@ -14,6 +14,8 @@ export default function Cart() {
   const totalPriceProducts = useSelector(state => state.cart.totalPriceProducts);
   const totalPrice = useSelector(state => state.cart.totalPrice);
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
+  const ownStringPlayerReduxCart = useSelector(state => state.cart.ownStringPlayer);
+
 
   const dispatch = useDispatch();
   function handleClickDelete (index) { 
@@ -95,6 +97,7 @@ useEffect(() => {
 
                               <div>{product.stringChoice.price} € </div>
 
+
                             </div>
                               
                              
@@ -134,6 +137,7 @@ useEffect(() => {
                             <div className='cart-content__text-weight-uppercase'>  Pose cordage </div>
 
                             <div> Cordage : votre propre cordage </div>
+                            <div>{ownStringPlayerReduxCart} </div>
 
                             <div> Tension cordage : {product.stringRopeChoice} kg </div>
 

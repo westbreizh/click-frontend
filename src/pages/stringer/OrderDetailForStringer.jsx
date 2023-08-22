@@ -307,6 +307,7 @@ export default function OrderDetailForStringer() {
                               <div className='oneOrderCart__text-weight-uppercase'>  Pose cordage </div>
 
                               <div> Cordage : votre propre cordage </div>
+                              <div> {product.ownStringPlayer} </div>
                              
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
  

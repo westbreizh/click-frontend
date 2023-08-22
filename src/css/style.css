@@ -2644,6 +2644,9 @@ input {
 .stringing-form__label {
   margin-bottom: 1.5rem;
 }
+.stringing-form__sub-label {
+  margin-bottom: 0.5rem;
+}
 
 .shop__main {
   max-width: 122rem;
@@ -3638,6 +3641,11 @@ input {
   }
   .order-log__contenair {
     border-radius: 0rem;
+  }
+  .order-log__list-row-element {
+    max-width: 7rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 }
 .oneOrder__contenair-cart {

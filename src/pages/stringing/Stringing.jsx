@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import {  useSelector, useDispatch } from 'react-redux'
-import { addInstallationString, calculNumberArticle, updateStringingPrice, updateRacquetPlayer } from "../../store/cartSlice"
+import { addInstallationString, calculNumberArticle, updateStringingPrice, updateRacquetPlayer, updateOwnStringPlayer } from "../../store/cartSlice"
 import { NavLink } from 'react-router-dom';
 import SelectHub from '../../components/select/SelectHub';
 import SelectHubBack from '../../components/select/SelectHubBack';
@@ -13,19 +13,20 @@ import ModalValidationAddToCartInstallation from '../../components/modal/modalVa
 
 export default function Stringing() {
 
-
-
+  
   let hubChoice = useSelector(state => state.cart.hubChoice);
   const hubBackChoice = useSelector(state => state.cart.hubBackChoice);
   const stringRopeChoice = useSelector(state => state.cart.stringRopeChoice);
   const stringChoice = useSelector(state => state.cart.stringChoice[0]);
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
   const raquetPlayerStoreReduxCart = useSelector(state => state.cart.racquetPlayer);
+  const ownStringPlayerReduxCart = useSelector(state => state.cart.ownStringPlayer);
   console.log("raquet edux", raquetPlayerStoreReduxCart)
   //const isConnected = useEffect(state => state.user.isConnected)
 
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
   const [racquetPlayer, setRacquetPlayer] = useState(raquetPlayerStoreReduxCart);
+  const [ownStringPlayer, setOwnStringPlayer] = useState(ownStringPlayerReduxCart);
 
 
   //const racquetPlayer = useSelector(state => state.user.userInfo.racquet_player);
@@ -39,6 +40,12 @@ export default function Stringing() {
   const handleRacquetPlayerChange = (event) => {
     const value = event.target.value;
     setRacquetPlayer(value)
+  };
+
+  //recupération de la saisie de la marque/type du cordage fournit par le joueur
+  const handleOwnStringPlayerChange = (event) => {
+    const value = event.target.value;
+    setOwnStringPlayer(value)
   };
 
 
@@ -63,11 +70,13 @@ export default function Stringing() {
         price: stringingPrice, 
         stringRopeChoice, 
         stringChoice,
-        racquetPlayer
+        racquetPlayer,
+        ownStringPlayer,
       }
         console.log(article)
         dispatch(addInstallationString(article))
         dispatch(updateRacquetPlayer(racquetPlayer))
+        dispatch(updateOwnStringPlayer(ownStringPlayer))
         setSubmenuValidation(true)
     } else{ 
       const article = {
@@ -76,7 +85,7 @@ export default function Stringing() {
         quantity: 1,
         stringRopeChoice, 
         stringChoice,
-        racquetPlayer
+        racquetPlayer,
       }
       console.log(article)
       dispatch(addInstallationString(article))
@@ -86,9 +95,6 @@ export default function Stringing() {
     }
   };
        
-
-
-
 
   return (
 
@@ -103,14 +109,6 @@ export default function Stringing() {
           <h1 className="stringing-header__title">
             Commandez votre cordage!
           </h1>
-
-          <div className="stringing-header__littleBitText">
-            Le forfait de la pose du cordage est de {stringingPrice} €.  Le tarif du cordage dépend du model choisi.
-          </div>
-
-          <div className="stringing-header__littleBitText">
-            Vous pouvez également déposez votre propre cordage avec votre raquette.
-          </div>
 
         </div>
 
@@ -161,6 +159,7 @@ export default function Stringing() {
 
             {stringChoice.id === "cordage fourni par le joueur"  ?  (
 
+              <div>
                 <div className='stringing-form__own-string-wrapper'> 
 
                   <div className="stringing-form__validation-bubble-checked     ">
@@ -173,6 +172,22 @@ export default function Stringing() {
                   
                 </div>
 
+                <div className='string stringing-form__section-wrapper'>
+
+                <label className="stringing-form__label stringing-form__sub-label">
+                  Descriptif cordage fournie
+                </label>
+                <div> Veuillez saisir la marque et le modèle de votre cordage dans la zone de texte ci-dessous merci !</div>
+                <input
+                  value={ownStringPlayer} 
+                  type="text"
+                  className="stringing-form__input-text"
+                  onClick={() => setOwnStringPlayer("")} 
+                  onChange={handleOwnStringPlayerChange}
+                />
+
+                </div>  
+              </div>
             ) : null}
 
           </div>
@@ -284,10 +299,12 @@ export default function Stringing() {
 
           <div className='string stringing-form__section-wrapper'>
 
-            <label className="stringing-form__label">Descriptif raquette</label>
+            <label className="stringing-form__label stringing-form__sub-label">
+              Descriptif raquette
+            </label>
             <div> Veuillez saisir la marque et le modèle de votre raquette dans la zone de texte ci-dessous merci !</div>
             <input
-              placeholder = {racquetPlayer}
+              value={racquetPlayer}
               type="text"
               className="stringing-form__input-text"
               onClick={() => setRacquetPlayer("")} 

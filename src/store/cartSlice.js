@@ -17,6 +17,7 @@ const cartSlice = createSlice({
     stringRopeChoice:"",
     stringingPrice: 10, //prix de la pose 
     racquetPlayer: "",
+    ownStringPlayer: "",
   },
 
   reducers: {
@@ -137,6 +138,10 @@ const cartSlice = createSlice({
     updateRacquetPlayer: (state, action) => {
       state.racquetPlayer = action.payload;
     },
+    // Action pour mettre à jour racquetplayer
+    updateOwnStringPlayer: (state, action) => {
+      state.ownStringPlayer = action.payload;
+    },
 
     // Action pour réinitialiser complètement le panier
     resetCart: (state) => {
@@ -166,6 +171,7 @@ export const {
   setStringingPrice,
   updateStringingPrice,
   updateRacquetPlayer,
+  updateOwnStringPlayer,
   resetCart,
 } = cartSlice.actions;
 

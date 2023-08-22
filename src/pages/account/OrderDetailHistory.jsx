@@ -11,7 +11,7 @@ export default function OrderDetailHistory() {
   const orderIdParam = useParams()
   const orderId = orderIdParam.orderId
   const token = useSelector((state) => state.user.token);
-  const stringingPrice = useSelector(state => state.cart.stringingPrice);
+
   const [oneOrder, setOneOrder] = useState("") ;
   const [selectedOrder, setSelectedOrder] = useState([]);
 
@@ -41,9 +41,10 @@ export default function OrderDetailHistory() {
         throw new Error(` ${result.message}`);
       }else {
         const result = await response.json();
-        const orderInfo = result.data.orderInfo
-        console.log("oderInfo", orderInfo)
-        setOneOrder(orderInfo[0])
+        const orderInfoFromBackend = result.data.orderInfo
+        setOneOrder(orderInfoFromBackend[0])
+        console.log("oderInfo", oneOrder)
+        console.log("oderInfo.articleList", oneOrder.articleList)
         console.log(result.message);
       }
     }
@@ -225,7 +226,7 @@ export default function OrderDetailHistory() {
                       </div>
 
                       <div className='oneOrderCart__line-status'>
-                        Commande validée le  {' '}
+                         Validée le  {' '}
                         {
                           (() => {
                             const orderDate = new Date(oneOrder.orderValidateDate);
@@ -267,7 +268,7 @@ export default function OrderDetailHistory() {
                               <div className='oneOrderCart__content-on-one-line'>
                                 <div>Pose cordage </div> 
 
-                                <div> {stringingPrice}€ </div>
+                                <div> {product.price}€ </div>
                               </div>
 
                               <div className='oneOrderCart__content-on-one-line'>
@@ -307,6 +308,8 @@ export default function OrderDetailHistory() {
                               <div className='oneOrderCart__text-weight-uppercase'>  Pose cordage </div>
 
                               <div> Cordage : votre propre cordage </div>
+
+                              <div> {product.ownStringPlayer} </div>
                              
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
  
