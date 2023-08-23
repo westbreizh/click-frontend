@@ -38,14 +38,14 @@ export default function AccountSubmenuMobile(props) {
             <ArrowForwardIosIcon className="submenuMobile__icon-forward"/>
           </li> 
 
-          {/* 
+          
           <li className='submenuMobile__li' onClick={()=> toggleMenuHamburgerAndSubmenu()}  >
             <Link  to="/préférences_joueur" className="submenuMobile__link">
             Préférences cordage
             </Link>
             <ArrowForwardIosIcon className="submenuMobile__icon-forward"/>
           </li> 
-          */}
+          
           <li className='submenuMobile__li'  onClick={()=> toggleMenuHamburgerAndSubmenu()}  >
             <Link  to="/historique_commandes" className="submenuMobile__link">
             Commandes

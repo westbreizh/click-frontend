@@ -16,7 +16,7 @@ export default function RacquetToSring() {
   //la liste des raquettes en fonction du status de la commande
   const loadListOrderFiltered  = async function (data) {
     try{
-      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/ordertSelectedByStatus`, {
+      const response = await fetch(`https://click-backend.herokuapp.com/api/stringer/ordertSelectedByStatus`, {
         mode: "cors",
         method: "POST",
         body: JSON.stringify({ statusOrder: "prêt à corder"}),

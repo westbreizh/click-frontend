@@ -79,12 +79,11 @@ export default function CoordinateForm( props ) {
           throw new Error(` ${result.message}`);
         }else {
         const result = await response.json();
-        store.dispatch(setUserAddress(result.userAddress));
-        console.log(result.userInfo)
-        store.dispatch(setUserInfo(result.userInfo));
+        const updatedPlayerData = result.updatedPlayerData
+        console.log("données user mis àjour", updatedPlayerData)
+        store.dispatch(setUserInfo(updatedPlayerData));
         showModalValidation();
-        console.log(result)
-        console.log(result.userInfo)
+
       }
     }
     catch(err){

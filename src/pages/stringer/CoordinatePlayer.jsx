@@ -26,7 +26,7 @@ export default function CoordinatePlayer() {
   //l'historique de la  commandes effectué par le joueur 
   const loadOnePlayer  = async function (data) {
     try{
-      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/onePlayer`, {
+      const response = await fetch(`https://click-backend.herokuapp.com/api/stringer/onePlayer`, {
         mode: "cors",
         method: "POST",
         body: JSON.stringify({ userId}),

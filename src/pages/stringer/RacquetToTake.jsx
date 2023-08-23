@@ -37,7 +37,7 @@ export default function RacquetToTake() {
   //la liste des raquettes à recuperer 
   const loadLogOrder  = async function (data) {
     try{
-      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/ordertSelectedByStatus`, {
+      const response = await fetch(`https://click-backend.herokuapp.com/api/stringer/ordertSelectedByStatus`, {
         mode: "cors",
         method: "POST",
         body: JSON.stringify({ statusOrder: "initié"}),

@@ -26,7 +26,7 @@ export default function OrderDetailHistory() {
   //l'historique de la  commandes effectué par le joueur 
   const loadOneOrder  = async function (data) {
     try{
-      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/oneOrder`, {
+      const response = await fetch(`https://click-backend.herokuapp.com/api/user/oneOrder`, {
         mode: "cors",
         method: "POST",
         body: JSON.stringify({ orderId}),

@@ -8,7 +8,7 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import ModalResetPassword from '../modal/modalReset/ModalResetPassword'
 import { shemaInputLogin } from '../../Utils/shemaInput'
-import {connectedToggle, setUserInfo, setUserAddress, setToken} from '../../store/userSlice'
+import {connectedToggle, setUserInfo, setToken} from '../../store/userSlice'
 
 
 export default function LoginForm( props ) {
@@ -111,7 +111,6 @@ export default function LoginForm( props ) {
         const result = await response.json();
         store.dispatch(setUserInfo(result.userInfo));
         console.log("userInfo", result.userInfo)
-        store.dispatch(setUserAddress(result.userAddress));
         store.dispatch(connectedToggle());
         store.dispatch(setToken(result.token))
         closeModalConnexion(); 

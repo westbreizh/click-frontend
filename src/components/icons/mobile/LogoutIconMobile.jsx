@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useStore } from "react-redux";
-import { setUserAddress, setUserInfo} from "../../../store/userSlice"
+import {  setUserInfo} from "../../../store/userSlice"
 import { connectedToggle } from "../../../store/userSlice"; 
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
@@ -14,7 +14,6 @@ export default function LogoutIconMobile(props) {
   function logoutAction() {
     toggleMenuHamburgerAndSubmenu();
     dispatch(connectedToggle());
-    store.dispatch(setUserAddress(""));
     store.dispatch(setUserInfo("")); 
     navigate("/");
   }

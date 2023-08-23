@@ -6,7 +6,6 @@ const userSlice = createSlice({
   initialState: {
     isConnected: false, 
     userInfo: "",
-    userAddress: "",
     token: "", 
   },
   
@@ -24,19 +23,12 @@ const userSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
     },
-    // Action pour mettre à jour userAddress avec la valeur fournie
-    setUserAddress: (state, action) => {
-      state.userAddress = action.payload;
-    },
-    // Action pour mettre à jour l'email dans userInfo avec la valeur fournie
-    changeEmail: (state, action) => {
-      state.userInfo.email = action.payload;
-    },
 
     // Action pour mettre à jour uniquement racquet_player dans userInfo avec la valeur fournie
     setRacquetPlayer: (state, action) => {
       state.userInfo.racquet_player = action.payload;
     },
+
 
   },
 });
@@ -46,8 +38,6 @@ export const {
   connectedToggle,
   setUserInfo,
   setToken,
-  setUserAddress,
-  changeEmail,
   setRacquetPlayer,
 } = userSlice.actions;
 

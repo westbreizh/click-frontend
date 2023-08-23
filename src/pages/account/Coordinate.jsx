@@ -2,33 +2,15 @@
 import { useState } from 'react'
 import { useSelector } from "react-redux"
 import NavbarAccount from "../../components/navbar/NavbarAccount"
-import ModalChangeEmail from "../../components/modal/modalReset/ModalChangeEmail"
-import ModalChangePassword from "../../components/modal/modalReset/ModalChangePassword"
 import ModalCreateOrUploadCoordinate from "../../components/modal/modalReset/ModalCreateOrUploadCoordinates"
 
 
 export default function Coordinate() {
 
   const userInfo =  useSelector((state) => state.user.userInfo);
-  const address =  useSelector((state) => state.user.userAddress);
-  console.log(address)
-  // gestion de l'ouverture du modale change e-mail
-  const [isModalChangeEmailOpen, setModalChangeEmailOpen] = useState(false) ;
-  const handleClickToOpenModalEmail = () => {
-    setModalChangeEmailOpen(true);
-  };
-  const hideModalEmail = function(){
-    setModalChangeEmailOpen(false);
-  };
 
-  // gestion de l'ouverture du modale change password
-  const [isModalChangePasswordOpen, setModalChangePasswordOpen] = useState(false) ;
-  const handleClickToOpenModalPassword = () => {
-    setModalChangePasswordOpen(true);
-  };
-  const hideModalPassword = function(){
-    setModalChangePasswordOpen(false);
-  };
+  console.log("userInfo", userInfo)
+
 
   // gestion de l'ouverture du modale de l'adresse
   const [isModalCreateOrUploadAdressOpen, setModalCreateOrUploadAdressOpen] = useState(false) ;
@@ -88,29 +70,7 @@ export default function Coordinate() {
                 <div className="info-login__data">{userInfo.email}</div>
               </div>
 
-              {/* 
-              <button  className={"info-login__button"} onClick={handleClickToOpenModalEmail}>
-                Modifier l'e-mail
-              </button>
-              */}
-              
-              {isModalChangeEmailOpen && <ModalChangeEmail onClose={hideModalEmail}/>}
-
-
-              {/* 
-              <div className="info-login__wrapper">
-                <div className="info-login__title">Mot de passe  </div>
-                <div className="info-login__data">XXXXXXXX</div>
-              </div>
-
-              <button  className={"info-login__button"} onClick={handleClickToOpenModalPassword}>
-                Modifier le mot de passe
-              </button>
-
-              {isModalChangePasswordOpen && <ModalChangePassword onClose={hideModalPassword}/>}
-
-              */}
-
+            
             </div>
 
 
@@ -129,31 +89,19 @@ export default function Coordinate() {
 
               <div className="info-perso__wrapper">
                 <div className="info-perso__title"> adresse : </div>
-                {address && address.road ? (
-                  <div className="info-login__data">{address.road}</div>
-                ) : (
-                  <div className="info-login__data"> </div>
-                )}
+                <div className="info-perso__value">{userInfo.road}</div>
               </div>
 
 
               <div className="info-perso__wrapper">
                 <div className="info-perso__title"> code postal : </div>
-                {address && address.postalCode ? (
-                  <div className="info-perso__value">{address.postalCode}</div>
-                ) : (
-                  <div className="info-perso__value"> </div>
-                )}
+                <div className="info-perso__value">{userInfo.postal_code}</div>
               </div>
 
 
               <div className="info-perso__wrapper">
                 <div className="info-perso__title"> ville :</div>
-                {address && address.city ? (
-                  <div className="info-perso__value">{address.city}</div>
-                ) : (
-                  <div className="info-perso__value"> </div>
-                )}
+                <div className="info-perso__value">{userInfo.city}</div>
               </div>
 
               <div className="info-perso__wrapper">

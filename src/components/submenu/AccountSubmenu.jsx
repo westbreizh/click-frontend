@@ -22,13 +22,13 @@ const toogleSubmenuOff = props.toogleSubmenuOff
                 Coordonnées
                 </NavLink>
             </li> 
-            {/* 
+
             <li className='submenu__li'  onClick={()=> toogleSubmenuOff()}  >
                 <NavLink  to="/préférences_joueur" className={(nav) => (nav.isActive ? "submenu__navLink__active" : "submenu__navLink__inactive")} end>
-                Préférences joueur
+                Préférences cordages
                 </NavLink>
             </li> 
-            */}
+
             <li className='submenu__li'  onClick={()=> toogleSubmenuOff()}  >
                 <NavLink  to="/historique_commandes" className={(nav) => (nav.isActive ? "submenu__navLink__active" : "submenu__navLink__inactive")} end>
                 Commandes
