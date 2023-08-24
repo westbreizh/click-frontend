@@ -6,7 +6,7 @@ const userSlice = createSlice({
   initialState: {
     isConnected: false, 
     userInfo: "",
-    token: "", 
+    token: "",
   },
   
   reducers: {
@@ -23,12 +23,7 @@ const userSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
     },
-
-    // Action pour mettre à jour uniquement racquet_player dans userInfo avec la valeur fournie
-    setRacquetPlayer: (state, action) => {
-      state.userInfo.racquet_player = action.payload;
-    },
-
+    
 
   },
 });
@@ -38,7 +33,6 @@ export const {
   connectedToggle,
   setUserInfo,
   setToken,
-  setRacquetPlayer,
 } = userSlice.actions;
 
 // Export du réducteur de la tranche

@@ -58,14 +58,6 @@ export default function PreferencePlayer() {
 
           <div className="account__contenair">
 
-            <div className="account__header">
-
-              <h1 className="account__header__h1">
-                Vos prérences 
-              </h1>
-
-            </div>
-
             <div className="submenu__wrapper">
 
               <h3 className="submenu__title">
@@ -73,15 +65,11 @@ export default function PreferencePlayer() {
               </h3>
 
 
-
-
-
               <div className='modal-atc__message-text'>
                 Lieu de dépot choisi :
                </div>
 
   
-
                <button  className={"info-login__button"} onClick={handleClickToOpenModalAdress}>
                 Renseignez ou modifier vos préférences
               </button>
@@ -89,11 +77,6 @@ export default function PreferencePlayer() {
               {isModalCreateOrUploadAdressOpen && <ModalCreateOrUploadCoordinate onClose={hideModalCreateOrUploadAdress}/>}
 
 
-
-
-
-
-      
           </div>
 
 
