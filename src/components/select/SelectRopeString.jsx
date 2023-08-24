@@ -3,19 +3,17 @@
 
 import { useState } from "react";
 import { datasForSelectRopeString } from "../../Utils/localDataBase";
-import { resetStringRopeChoice } from "../../store/cartSlice"; 
-import { useDispatch, useSelector } from 'react-redux'
-
 
 export default function SelectRopeString(props) {
 
   const [isOpen, setIsOpen] = useState(false);
-  const stringRopeChoice = useSelector(state => state.cart.stringRopeChoice);
-  const dispatch = useDispatch();
+  const setStringRopeChoice = props.setStringRopeChoice
+
 
   const handleChange = (value) => {
     const ropeStringSelected = value; 
-    dispatch(resetStringRopeChoice(ropeStringSelected))
+    console.log("ropeStringSelected", ropeStringSelected)
+    setStringRopeChoice(ropeStringSelected);
   };
   
  

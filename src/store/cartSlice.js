@@ -1,4 +1,3 @@
-import { listItemIconClasses } from "@mui/material";
 import { createSlice } from "@reduxjs/toolkit";
 
 
@@ -9,15 +8,9 @@ const cartSlice = createSlice({
     articleList: [], // comprend les balles et accessoires
     numberArticle: 0, // comprend tous les éléments articleList et installationWithStringList
     totalPriceProducts: 0, // prix total produit sans le prix de la pose cordage
-    priceDelivery: 0,
     totalPrice: 0, //prix total
-    hubChoice:"",
-    hubBackChoice:"",
     stringChoice:[{id: "" }],
-    stringRopeChoice:"",
     stringingPrice: 10, //prix de la pose 
-    racquetPlayer: "",
-    ownStringPlayer: "",
   },
 
   reducers: {
@@ -30,7 +23,7 @@ const cartSlice = createSlice({
         // Si action.payload est indéfini ou falsy, ne rien faire
         return;
       }
-    
+
       const newProduct = action.payload;
       if (!newProduct.id) {
         // Vérifier si newProduct.id est défini
@@ -104,44 +97,12 @@ const cartSlice = createSlice({
       state.totalPrice = formattedPrice;
     },
     
-    
-    // Action pour réinitialiser la valeur de hubChoice
-    resetHubChoice: (state, action) => {
-      state.hubChoice = action.payload;
-    },
-
-
-    // Action pour réinitialiser la valeur de hubChoice
-    resetHubBackChoice: (state, action) => {
-      state.hubBackChoice = action.payload;
-    },
-
-
     // Action pour réinitialiser la valeur de stringChoice
     resetStringChoice: (state, action) => {
       state.stringChoice = action.payload;
     },
 
 
-    // Action pour réinitialiser la valeur de stringRopeChoice
-    resetStringRopeChoice: (state, action) => {
-      state.stringRopeChoice = action.payload;
-    },
-
-
-    // Action pour mettre à jour stringingPrice
-    updateStringingPrice: (state, action) => {
-      state.stringingPrice = action.payload;
-    },
-
-    // Action pour mettre à jour racquetplayer
-    updateRacquetPlayer: (state, action) => {
-      state.racquetPlayer = action.payload;
-    },
-    // Action pour mettre à jour racquetplayer
-    updateOwnStringPlayer: (state, action) => {
-      state.ownStringPlayer = action.payload;
-    },
 
     // Action pour réinitialiser complètement le panier
     resetCart: (state) => {
@@ -164,14 +125,8 @@ export const {
   deleteArticle,
   deleteInstallationWithString,
   deleteInstallationAlone ,
-  resetHubChoice,
-  resetHubBackChoice,
   resetStringChoice,
-  resetStringRopeChoice,
-  setStringingPrice,
   updateStringingPrice,
-  updateRacquetPlayer,
-  updateOwnStringPlayer,
   resetCart,
 } = cartSlice.actions;
 

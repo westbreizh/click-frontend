@@ -1,22 +1,20 @@
 import { useState, useEffect } from "react";
 import { resetHubBackChoice } from "../../store/cartSlice"; 
-import { useDispatch, useSelector } from 'react-redux'
 
 
 export default function SelectHubBack(props) {
 
+  const setHubBackChoice = props.setHubBackChoice
   const [datasForSelectHubBack , setDatasForSelectHubBack ] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const hubBackChoice = useSelector(state => state.cart.hubBackChoice);
-  const dispatch = useDispatch();
+
 
   const handleChange = (value) => {
     const hubBackSelected = value; 
-    console.log(hubBackSelected)
-    dispatch(resetHubBackChoice(hubBackSelected))
+    console.log("hubBackSelected", hubBackSelected)
+    setHubBackChoice(hubBackSelected);
   };
   
- 
  //fonction asynchrone recuperant la liste des dépots de retrait
  const fetchHubWithdrawaltList = async (data) => {
   try {
@@ -49,7 +47,6 @@ useEffect(() => {
 },[])
 
 
-
   return (
 
     <div 
@@ -75,11 +72,11 @@ useEffect(() => {
           {datasForSelectHubBack.map(( option) =>
 
             <li
-            key={option.id} // Assurez-vous que la propriété "id" est unique pour chaque élément
+            key={option.id} 
             className="clubSelect__submenu-li"
             onClick={() => handleChange(option)}
             >
-            {option.enterprise_name} {/* Utilisez la propriété correcte ici */}
+            {option.enterprise_name} 
             </li>
 
 

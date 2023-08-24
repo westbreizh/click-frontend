@@ -1,22 +1,21 @@
 import { useState,useEffect } from "react";
 import { resetHubChoice } from "../../store/cartSlice"; 
-import { useDispatch, useSelector } from 'react-redux'
+
 
 
 export default function SelectHub(props) {
 
   const [datasForSelectHub , setDatasForSelectHub ] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const hubChoice = useSelector(state => state.cart.hubChoice);
-  const dispatch = useDispatch();
+
+  const setHubChoice = props.setHubChoice
 
   const handleChange = (value) => {
     const hubSelected = value; 
-    console.log(hubSelected)
-    dispatch(resetHubChoice(hubSelected))
+    console.log("hubselected", hubSelected)
+    setHubChoice(hubSelected)
   };
   
- 
 
   //fonction asynchrone recuperant la liste des dépots de collecte
   const fetchHubCollectList = async (data) => {

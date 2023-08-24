@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import {  useSelector, useDispatch } from 'react-redux'
-import { addInstallationString, calculNumberArticle, updateStringingPrice, updateRacquetPlayer, updateOwnStringPlayer } from "../../store/cartSlice"
+import { addInstallationString, calculNumberArticle, updateStringingPrice } from "../../store/cartSlice"
 import { NavLink } from 'react-router-dom';
 import SelectHub from '../../components/select/SelectHub';
 import SelectHubBack from '../../components/select/SelectHubBack';
@@ -13,53 +13,40 @@ import ModalValidationAddToCartInstallation from '../../components/modal/modalVa
 
 export default function Stringing() {
 
-  
-  let hubChoice = useSelector(state => state.cart.hubChoice);
-  const hubBackChoice = useSelector(state => state.cart.hubBackChoice);
-  const stringRopeChoice = useSelector(state => state.cart.stringRopeChoice);
-  const stringChoice = useSelector(state => state.cart.stringChoice[0]);
+  const userInfo =  useSelector((state) => state.user.userInfo);
+  const stringInfo =  useSelector((state) => state.cart.stringChoice);
+
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
-  const raquetPlayerStoreReduxCart = useSelector(state => state.cart.racquetPlayer);
-  const ownStringPlayerReduxCart = useSelector(state => state.cart.ownStringPlayer);
-  console.log("raquet edux", raquetPlayerStoreReduxCart)
-  //const isConnected = useEffect(state => state.user.isConnected)
 
+  const [stringChoice, setStringChoice] = useState(userInfo.stringInfo);
+  const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
+  const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
+  const [hubBackChoice, setHubBackChoice] = useState(userInfo.hubBackInfo);
+  const [ownStringPlayer, setOwnStringPlayer] = useState(userInfo.ownString_player);
+  const [racquetPlayer, setRacquetPlayer] = useState(userInfo.racquet_player);
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
-  const [racquetPlayer, setRacquetPlayer] = useState(raquetPlayerStoreReduxCart);
-  const [ownStringPlayer, setOwnStringPlayer] = useState(ownStringPlayerReduxCart);
 
+  
+  console.log("userInfo", userInfo)
+  console.log("stringChoice", stringChoice)
+  console.log("stringinfo fromredux", stringInfo)
 
-  //const racquetPlayer = useSelector(state => state.user.userInfo.racquet_player);
-
-  console.log("racquetplayer", racquetPlayer)
-
-  const dispatch = useDispatch();
-  dispatch(updateStringingPrice(10));
 
   //recupération de la saisie de la marque/type de la raquette
   const handleRacquetPlayerChange = (event) => {
     const value = event.target.value;
     setRacquetPlayer(value)
   };
-
   //recupération de la saisie de la marque/type du cordage fournit par le joueur
   const handleOwnStringPlayerChange = (event) => {
     const value = event.target.value;
     setOwnStringPlayer(value)
   };
 
-
-
-
   // gestion de l'état de validation du bouton pour ajouter le produit  
-  const isValid =
-    hubChoice !== "" &&
-    hubBackChoice !== "" &&
-    stringRopeChoice !== "" &&
-    stringChoice.id !== "" &&
-    racquetPlayer !== "" && 
-    racquetPlayer !== null;
-    ;
+  const isValid =    hubChoice !== "" && hubBackChoice !== "" &&  stringRopeChoice !== "" &&  stringChoice.id !== "" &&     racquetPlayer !== "" &&     racquetPlayer !== null;     ;
+
+  const dispatch = useDispatch
 
   // fonction qui ajoute, enrgistre la pose du cordage et ses options dans le panier du  store redux 
   const onSubmit= () => {
@@ -75,8 +62,6 @@ export default function Stringing() {
       }
         console.log(article)
         dispatch(addInstallationString(article))
-        dispatch(updateRacquetPlayer(racquetPlayer))
-        dispatch(updateOwnStringPlayer(ownStringPlayer))
         setSubmenuValidation(true)
     } else{ 
       const article = {
@@ -91,7 +76,6 @@ export default function Stringing() {
       dispatch(addInstallationString(article))
       setSubmenuValidation(true)
       dispatch(calculNumberArticle());
-      dispatch(updateRacquetPlayer(racquetPlayer))
     }
   };
        
@@ -120,7 +104,7 @@ export default function Stringing() {
 
             <label className="stringing-form__label">Cordage</label>
 
-            <SelectString  />
+            <SelectString setStringChoice={setStringChoice}  />
 
             { stringChoice.id !== "cordage fourni par le joueur" && stringChoice.id !== "" ? (
               
@@ -194,7 +178,7 @@ export default function Stringing() {
 
           <div className=' rope stringing-form__section-wrapper'>
             <label className="stringing-form__label" > Choix de la tension  </label>
-            <SelectRopeString />
+            <SelectRopeString setStringRopeChoice= {setStringRopeChoice} />
 
             { stringRopeChoice && stringRopeChoice !== ""? (
               
@@ -227,7 +211,8 @@ export default function Stringing() {
 
             <label className="stringing-form__label" >Lieu de dépot </label>
 
-            <SelectHub  />
+            <SelectHub  setHubChoice={setHubChoice} />
+
 
             { hubChoice && hubChoice !== ""? (
               
@@ -263,7 +248,7 @@ export default function Stringing() {
 
             <label className="stringing-form__label" > Retour de service </label>
 
-            <SelectHubBack />
+            <SelectHubBack setHubBackChoice={setHubBackChoice}/>
 
             { hubBackChoice && hubBackChoice !== "" ? (
               

@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from 'react-redux'
-import { resetStringChoice } from "../../store/cartSlice";
 
 export default function SelectString(props) {
 
   const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
+  const setStringChoice = props.setStringChoice
 
   
   return (
@@ -40,7 +38,7 @@ export default function SelectString(props) {
             <li
               className="clubSelect__submenu-li"
               onClick={() => {
-                dispatch(resetStringChoice( [{id: "cordage fourni par le joueur" }]));  
+                setStringChoice( {id: "cordage fourni par le joueur" });  
               }}
             >
 
