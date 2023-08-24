@@ -1,0 +1,53 @@
+
+
+.prefPlayer{
+    &__wrapper{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-bottom: 1rem;
+        margin-left: 2.5rem;
+        font-weight: 700;
+        color: #232346;
+        font-family: "Roboto", "Arial", sans-serif;
+
+    }
+    &__title{
+
+        text-transform: uppercase;
+        display: inline-block;
+        font-size: 1.6rem;
+        font-weight: 550;
+        color: #232346;
+        font-family: "Roboto", "Arial", sans-serif;
+    }
+    &__value{
+        color: #1c166c;
+        font-size: 1.5rem;
+    }
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+
+
+
+}
+
+
+    
+
+
+
+
+
+
+
+
+

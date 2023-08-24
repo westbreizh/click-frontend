@@ -2452,6 +2452,30 @@ input {
     margin-left: 2.5rem;
   }
 }
+.prefPlayer__wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 1rem;
+  margin-left: 2.5rem;
+  font-weight: 700;
+  color: #232346;
+  font-family: "Roboto", "Arial", sans-serif;
+}
+.prefPlayer__title {
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 550;
+  color: #232346;
+  font-family: "Roboto", "Arial", sans-serif;
+}
+.prefPlayer__value {
+  color: #1c166c;
+  font-size: 1.5rem;
+}
+
 .stringing__main {
   max-width: 122rem;
   width: 90%;
