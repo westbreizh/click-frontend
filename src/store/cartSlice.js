@@ -9,7 +9,7 @@ const cartSlice = createSlice({
     numberArticle: 0, // comprend tous les éléments articleList et installationWithStringList
     totalPriceProducts: 0, // prix total produit sans le prix de la pose cordage
     totalPrice: 0, //prix total
-    stringChoice:[{id: "" }],
+    stringFromShopChoice:[],
     stringingPrice: 10, //prix de la pose 
   },
 
@@ -98,8 +98,8 @@ const cartSlice = createSlice({
     },
     
     // Action pour réinitialiser la valeur de stringChoice
-    resetStringChoice: (state, action) => {
-      state.stringChoice = action.payload;
+    resetStringFromShopChoice: (state, action) => {
+      state.stringFromShopChoice = action.payload;
     },
 
 
@@ -125,7 +125,7 @@ export const {
   deleteArticle,
   deleteInstallationWithString,
   deleteInstallationAlone ,
-  resetStringChoice,
+  resetStringFromShopChoice,
   updateStringingPrice,
   resetCart,
 } = cartSlice.actions;

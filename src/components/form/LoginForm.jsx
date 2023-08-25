@@ -9,7 +9,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import ModalResetPassword from '../modal/modalReset/ModalResetPassword'
 import { shemaInputLogin } from '../../Utils/shemaInput'
 import {connectedToggle, setUserInfo, setToken} from '../../store/userSlice'
-import {resetStringChoice} from '../../store/cartSlice'
+import {resetStringFromShopChoice} from '../../store/cartSlice'
 
 export default function LoginForm( props ) {
 
@@ -105,7 +105,6 @@ export default function LoginForm( props ) {
           const result = await response.json();
           changeMessageFromBackEnd(result.message);
           showPErrorFromBackend();
-
           throw new Error(` ${result.message}`);
         }else {
         const result = await response.json();
@@ -113,10 +112,7 @@ export default function LoginForm( props ) {
         console.log("userInfo", result.userInfo)
         store.dispatch(connectedToggle());
         store.dispatch(setToken(result.token))
-        store.dispatch(resetStringChoice(result.userInfo.stringInfo))
-
-
-
+        store.dispatch( resetStringFromShopChoice(result.userInfo.stringInfo))
         closeModalConnexion(); 
       }
     }

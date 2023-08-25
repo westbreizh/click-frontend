@@ -14,22 +14,23 @@ import ModalValidationAddToCartInstallation from '../../components/modal/modalVa
 export default function Stringing() {
 
   const userInfo =  useSelector((state) => state.user.userInfo);
-  const stringInfo =  useSelector((state) => state.cart.stringChoice);
+  const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);
 
-  const stringingPrice = useSelector(state => state.cart.stringingPrice);
+  const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
+  const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
 
-  const [stringChoice, setStringChoice] = useState(userInfo.stringInfo);
+
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
   const [hubBackChoice, setHubBackChoice] = useState(userInfo.hubBackInfo);
-  const [ownStringPlayer, setOwnStringPlayer] = useState(userInfo.ownString_player);
   const [racquetPlayer, setRacquetPlayer] = useState(userInfo.racquet_player);
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
 
-  
+  const stringingPrice = useSelector(state => state.cart.stringingPrice);
+
   console.log("userInfo", userInfo)
-  console.log("stringChoice", stringChoice)
-  console.log("stringinfo fromredux", stringInfo)
+  console.log("stringFromShop", stringFromShop)
+  console.log("stringFromplayer", stringFromPlayer)
 
 
   //recupération de la saisie de la marque/type de la raquette
@@ -40,25 +41,30 @@ export default function Stringing() {
   //recupération de la saisie de la marque/type du cordage fournit par le joueur
   const handleOwnStringPlayerChange = (event) => {
     const value = event.target.value;
-    setOwnStringPlayer(value)
+    setStringFromPlayer(value)
   };
 
   // gestion de l'état de validation du bouton pour ajouter le produit  
-  const isValid =    hubChoice !== "" && hubBackChoice !== "" &&  stringRopeChoice !== "" &&  stringChoice.id !== "" &&     racquetPlayer !== "" &&     racquetPlayer !== null;     ;
+  const isValid =    hubChoice !== "" && hubBackChoice !== "" &&  stringRopeChoice !== "" &&   
+                     racquetPlayer !== "" &&  racquetPlayer !== null && 
+                      (               
+                     (stringFromPlayerSelected === true && stringFromPlayer !== "") ||
+                     (stringFromPlayerSelected === false && stringFromShop !== null)
+                      )
+                     ;      
 
-  const dispatch = useDispatch
+  const dispatch = useDispatch()
 
   // fonction qui ajoute, enrgistre la pose du cordage et ses options dans le panier du  store redux 
   const onSubmit= () => {
-    if (stringChoice.id === "cordage fourni par le joueur") { 
+    if (stringFromPlayer !==null) { 
       const article = {
         categorie:"pose cordage seule",
         quantity: 1,
         price: stringingPrice, 
         stringRopeChoice, 
-        stringChoice,
+        stringFromPlayer,
         racquetPlayer,
-        ownStringPlayer,
       }
         console.log(article)
         dispatch(addInstallationString(article))
@@ -66,10 +72,10 @@ export default function Stringing() {
     } else{ 
       const article = {
         categorie:"fourniture et pose cordage", 
-        price: (stringingPrice+ parseFloat(stringChoice.price)).toFixed(2),
+        price: (stringingPrice+ parseFloat(stringFromShop.price)).toFixed(2),
         quantity: 1,
         stringRopeChoice, 
-        stringChoice,
+        stringFromShop,
         racquetPlayer,
       }
       console.log(article)
@@ -104,9 +110,9 @@ export default function Stringing() {
 
             <label className="stringing-form__label">Cordage</label>
 
-            <SelectString setStringChoice={setStringChoice}  />
+            <SelectString setStringFromPlayerSelected={setStringFromPlayerSelected}  />
 
-            { stringChoice.id !== "cordage fourni par le joueur" && stringChoice.id !== "" ? (
+            { stringFromShop !== null && stringFromPlayerSelected === false ? (
               
               <>
                 <div className='stringing-form__own-string-wrapper'> 
@@ -122,16 +128,16 @@ export default function Stringing() {
                 </div>
 
                 <div className='stringing-form__string-wrapper  modal-atc__product-wrapper'>
-                  <NavLink to={`/fiche_produit/cordage/${stringChoice.id}`} 
+                  <NavLink to={`/fiche_produit/cordage/${stringFromShop.id}`} 
                   className=" stringing-form__string-link cart-content__link-to-card-product">
 
-                    <img crossOrigin="anonymous" src={stringChoice.image_url} 
-                    alt={stringChoice.model} className="stringing-form__string-img" />
+                    <img crossOrigin="anonymous" src={stringFromShop.image_url} 
+                    alt={stringFromShop.model} className="stringing-form__string-img" />
 
                     <div className='stringing-form__string-product-info-wrapper '>
-                      <div>{stringChoice.mark}</div>
-                      <div>{stringChoice.model}</div>
-                      <div>{stringChoice.price} €</div>
+                      <div>{stringFromShop.mark}</div>
+                      <div>{stringFromShop.model}</div>
+                      <div>{stringFromShop.price} €</div>
                     </div>
 
                   </NavLink>
@@ -141,7 +147,7 @@ export default function Stringing() {
             ) : null}
 
 
-            {stringChoice.id === "cordage fourni par le joueur"  ?  (
+            {stringFromPlayerSelected === true || stringFromPlayer !==null ?  (
 
               <div>
                 <div className='stringing-form__own-string-wrapper'> 
@@ -163,10 +169,10 @@ export default function Stringing() {
                 </label>
                 <div> Veuillez saisir la marque et le modèle de votre cordage dans la zone de texte ci-dessous merci !</div>
                 <input
-                  value={ownStringPlayer} 
+                  value={stringFromPlayer} 
                   type="text"
                   className="stringing-form__input-text"
-                  onClick={() => setOwnStringPlayer("")} 
+                  onClick={() => setStringFromPlayer("")} 
                   onChange={handleOwnStringPlayerChange}
                 />
 

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function SelectString(props) {
 
   const [isOpen, setIsOpen] = useState(false);
-  const setStringChoice = props.setStringChoice
+  const setStringFromPlayerSelected = props.setStringFromPlayerSelected
 
   
   return (
@@ -29,7 +29,12 @@ export default function SelectString(props) {
 
           <ul className='clubSelect__submenu-ul'>
 
-            <li className="clubSelect__submenu-li">
+            <li
+              className="clubSelect__submenu-li"
+              onClick={() => {
+                setStringFromPlayerSelected( true);  
+              }}
+            >
               <Link className="li-choose-string" to="/cordages">
                 je choisis mon cordage
               </Link>
@@ -38,7 +43,7 @@ export default function SelectString(props) {
             <li
               className="clubSelect__submenu-li"
               onClick={() => {
-                setStringChoice( {id: "cordage fourni par le joueur" });  
+                setStringFromPlayerSelected( true);  
               }}
             >
 

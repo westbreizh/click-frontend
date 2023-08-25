@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux'
 import { useState } from 'react';
 import ModalValidationAddToCart from '../modal/modalValidation/ModalValidationAddToCart';
 import { useNavigate } from 'react-router-dom';
-import {resetStringChoice} from '../../store/cartSlice'
+import { resetStringFromShopChoice} from '../../store/cartSlice'
 
 
 export default function ChoiceButton(props) {
@@ -14,7 +14,8 @@ export default function ChoiceButton(props) {
   const navigate = useNavigate()
  
   const handleAddToStringing = () => {
-    dispatch(resetStringChoice(stringChoice))
+    console.log("stringchoice page string",stringChoice[0])
+    dispatch( resetStringFromShopChoice(stringChoice[0]))
     navigate("/cordez")
   }
 
