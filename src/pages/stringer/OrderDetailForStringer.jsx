@@ -26,7 +26,7 @@ export default function OrderDetailForStringer() {
   //l'historique de la  commandes effectué par le joueur 
   const loadOneOrder  = async function (data) {
     try{
-      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/oneOrder`, {
+      const response = await fetch(`https://click-backend.herokuapp.com/api/stringer/oneOrder`, {
         mode: "cors",
         method: "POST",
         body: JSON.stringify({ orderId}),
@@ -277,15 +277,15 @@ export default function OrderDetailForStringer() {
 
                                     <NavLink 
                                       key={index} 
-                                      to={`/fiche_produit/cordage/${product.stringChoice.id}`}
+                                      to={`/fiche_produit/cordage/${product.stringFromShop.id}`}
                                       className="oneOrderCart__link-to-card-product"
                                     >
-                                    { product.stringChoice.mark  + " " + product.stringChoice.model}
+                                    { product.stringFromShop.mark  + " " + product.stringFromShop.model}
                                     </NavLink> </div>
                                   
                                 </div>
 
-                                <div>{product.stringChoice.price} € </div>
+                                <div>{product.stringFromShop.price} € </div>
 
                               </div>
 
@@ -307,7 +307,7 @@ export default function OrderDetailForStringer() {
                               <div className='oneOrderCart__text-weight-uppercase'>  Pose cordage </div>
 
                               <div> Cordage : votre propre cordage </div>
-                              <div> {product.ownStringPlayer} </div>
+                              <div> {product.stringFromPlayer} </div>
                              
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
  

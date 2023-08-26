@@ -12,13 +12,18 @@ import { calculNumberArticle, calculTotalPriceProducts } from '../../store/cartS
 export default function Order() {
 
   const isConnected = useSelector(state => state.user.isConnected);
-  const hubChoice = useSelector(state => state.cart.hubChoice);
   const articleList = useSelector(state => state.cart.articleList);
   const totalPriceProducts = useSelector(state => state.cart.totalPriceProducts);
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
-  const racquetPlayer = useSelector(state => state.cart.racquetPlayer);
-  const hubBackChoice = useSelector(state => state.cart.hubBackChoice);
   const userInfo = useSelector(state => state.user.userInfo);
+
+  //problème si on a un article accessoire en premier dans la liste
+  // amettre en parallèle avec une commande ne comprenant que des accessoires 
+  const racquetPlayer =  articleList[0].racquetPlayer;
+  const hubBackChoice =  articleList[0].hubBackChoice;
+  const hubChoice = articleList[0].hubChoice;
+
+
 
 
   useEffect(() => {
@@ -146,11 +151,11 @@ console.log("raquet player",racquetPlayer)
               {articleList.map((product, index) => {
 
                 switch (product.categorie) {
-
                   case "fourniture et pose cordage":
                     return (
 
                       <div className='order-cart__product-wrapper-instal-with-string' key={index}>
+                        {console.log("product",product)}
 
                         <div className='order-cart__instal-with-string-top'>
 
@@ -174,16 +179,16 @@ console.log("raquet player",racquetPlayer)
                               
                             </div>
 
-                            <div> {product.stringChoice.price} € </div>
+                            <div> {product.stringFromShop.price} € </div>
 
                           </div>
 
                           <NavLink 
                             key={index} 
-                            to={`/fiche_produit/cordage/${product.stringChoice.id}`}
+                            to={`/fiche_produit/cordage/${product.stringFromShop.id}`}
                             className="order-cart__link-to-card-product"
                           >
-                            { product.stringChoice.mark  + " " + product.stringChoice.model}
+                            { product.stringFromShop.mark  + " " + product.stringFromShop.model}
                           </NavLink>
 
                       </div>
@@ -273,29 +278,13 @@ console.log("raquet player",racquetPlayer)
 
               <h2 className="order__sub-title"> Lieu de dépot et retour </h2>
 
-              {articleList.map((product, index) => (
-                product.categorie === "pose cordage seule" || product.categorie === "fourniture et pose cordage" ? (
-                  <div key={index}>
-                    <div className='order-hub__title'> Dépot :</div>
-                    <div>{hubChoice.enterprise_name}</div>
-                    <div>{hubChoice.road} - {hubChoice.city}</div>
-                  </div>
-                ) : (
-                  null
-                ))
-              )}
-
-
+              <div className='order-hub__title'> Dépot :</div>
+              <div> {hubChoice.enterprise_name} </div>
+              <div> {hubChoice.road} - {hubChoice.city} </div>
 
               <div className='order-hub__title'> Retour de service :</div>
-              <div>
-                {hubBackChoice.enterprise_name}
-                </div>
-
-                <div>
-                {hubBackChoice.road} - {hubBackChoice.city}
-                </div>
-
+              <div> {hubBackChoice.enterprise_name} </div>
+              <div> {hubBackChoice.road} - {hubBackChoice.city} </div>
 
             </div>
 

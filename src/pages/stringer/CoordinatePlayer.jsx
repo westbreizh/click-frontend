@@ -1,10 +1,9 @@
 
 import { useState, useEffect } from 'react'
 import { useSelector } from "react-redux"
-import NavbarAccount from "../../components/navbar/NavbarAccount"
 import { useParams } from 'react-router-dom';
 import BackNavArrow from '../../components/button/BackNavArrow';
-
+import BackNavArrowStringer from "../../components/button/BackNavArrowStringer";
 
 export default function CoordinatePlayer() {
 
@@ -43,8 +42,6 @@ export default function CoordinatePlayer() {
         const result = await response.json();
         setUserInfo(result.userInfo);
         console.log("userInfo", result.userInfo)
-        setUserAddress(result.userAddress);
-        console.log(result.message);
       }
     }
 
@@ -71,9 +68,12 @@ export default function CoordinatePlayer() {
 
         <section className="order-stringer__contenair">
 
+
+
           <div className="account__contenair">
             <div className="account__header">
-            
+              <BackNavArrowStringer/>
+              <BackNavArrow/>
               <h1 className="account__header__h1">
                 edition de compte 
               </h1>
@@ -117,31 +117,30 @@ export default function CoordinatePlayer() {
                 Coordonnées
               </h3>
 
-
               <div className="info-perso__wrapper">
-                <div className="info-perso__title"> adresse : </div>
-                {address && address.road ? (
-                  <div className="info-login__data">{address.road}</div>
+                <div className="info-perso__title"> adresse :</div>
+                {userInfo.road? (
+                  <div className="info-perso__value">{userInfo.road}</div>
                 ) : (
-                  <div className="info-login__data"> </div>
+                  <div className="info-perso__value"> </div>
                 )}
               </div>
 
-
               <div className="info-perso__wrapper">
-                <div className="info-perso__title"> code postal : </div>
-                {address && address.postalCode ? (
-                  <div className="info-perso__value">{address.postalCode}</div>
+                <div className="info-perso__title"> code postal</div>
+                {userInfo.postal_code? (
+                  <div className="info-perso__value">{userInfo.postal_code}</div>
                 ) : (
                   <div className="info-perso__value"> </div>
                 )}
               </div>
 
 
+
               <div className="info-perso__wrapper">
                 <div className="info-perso__title"> ville :</div>
-                {address && address.city ? (
-                  <div className="info-perso__value">{address.city}</div>
+                {userInfo.city ? (
+                  <div className="info-perso__value">{userInfo.city}</div>
                 ) : (
                   <div className="info-perso__value"> </div>
                 )}

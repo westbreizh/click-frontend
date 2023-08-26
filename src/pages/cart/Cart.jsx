@@ -29,9 +29,7 @@ export default function Cart() {
   dispatch(calculTotalPriceProducts());
 }, [articleList]);
 
-useEffect(() => {
-  dispatch(updateStringingPrice(10));
-}, []);
+
 
   console.log("article dans panier",articleList )
   console.log("numberArticle", numberArticle )
@@ -89,14 +87,14 @@ useEffect(() => {
                                 <div> Cordage :</div>
                                 <NavLink 
                                       key={index} 
-                                      to={`/fiche_produit/cordage/${product.stringChoice.id}`}
+                                      to={`/fiche_produit/cordage/${product.stringFromShop.id}`}
                                       className="cart-content__link-to-card-product"
                                     >
-                                      {"  " + product.stringChoice.mark + " " + product.stringChoice.model}
+                                      {"  " + product.stringFromShop.mark + " " + product.stringFromShop.model}
                                 </NavLink>
                               </div>
 
-                              <div>{product.stringChoice.price} € </div>
+                              <div>{product.stringFromShop.price} € </div>
 
 
                             </div>
@@ -138,7 +136,7 @@ useEffect(() => {
                             <div className='cart-content__text-weight-uppercase'>  Pose cordage </div>
 
                             <div> Cordage : votre propre cordage </div>
-                            <div> en attente </div>
+                            <div> {product.stringFromPlayer} </div>
 
                             <div> Tension cordage : {product.stringRopeChoice} kg </div>
 
@@ -242,10 +240,6 @@ useEffect(() => {
                     <div>  {totalPriceProducts} € </div>
                   </div>
 
-                 {/* <div className='cart-summary__delivery'>
-                    <div> Livraison </div>
-                    <div> gratuit </div>
-                  </div>*/}
 
                 </div>
 

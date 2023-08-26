@@ -1,6 +1,5 @@
-
-import { useState, useEffect } from 'react';
-import {  useSelector, useDispatch } from 'react-redux'
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { addInstallationString, calculNumberArticle, updateStringingPrice } from "../../store/cartSlice"
 import { NavLink } from 'react-router-dom';
 import SelectHub from '../../components/select/SelectHub';
@@ -15,23 +14,26 @@ export default function Stringing() {
 
   const userInfo =  useSelector((state) => state.user.userInfo);
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);
+  const stringingPrice = useSelector(state => state.cart.stringingPrice);
+  const isConnected = useSelector(state => state.user.isConnected);
+  const token = useSelector(state => state.user.token);
 
   const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
-  const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
-
-
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
+  const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
   const [hubBackChoice, setHubBackChoice] = useState(userInfo.hubBackInfo);
   const [racquetPlayer, setRacquetPlayer] = useState(userInfo.racquet_player);
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
+  const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
 
-  const stringingPrice = useSelector(state => state.cart.stringingPrice);
+  const dispatch = useDispatch()
 
   console.log("userInfo", userInfo)
   console.log("stringFromShop", stringFromShop)
   console.log("stringFromplayer", stringFromPlayer)
-
+  console.log("ischecked?", isCheckBoxChecked)
+  console.log("isConnected?", isConnected)
 
   //recupération de la saisie de la marque/type de la raquette
   const handleRacquetPlayerChange = (event) => {
@@ -43,20 +45,51 @@ export default function Stringing() {
     const value = event.target.value;
     setStringFromPlayer(value)
   };
+ 
+// gestion de l'état de validation du bouton pour ajouter le produit
+const isValid =
+  (hubChoice ?? null) !== null &&   (hubBackChoice ?? null) !== null &&   (stringRopeChoice ?? null) !== null &&  racquetPlayer !== "" &&   racquetPlayer !== null && racquetPlayer !== undefined &&   (stringFromPlayerSelected ? stringFromPlayer !== "" && stringFromPlayer !== undefined  && stringFromPlayer !== null: (stringFromShop ?? null) !== null);
+ 
+  
+  //fonction asynchrone vers le backend pour modifier
+  //les préférences de cordages 
+  const savePreferencePlayer  = async function (data) {
+    try{
+      const response = await fetch(`https://click-backend.herokuapp.com/api/user/savePreferencePlayer`, {
+        mode: "cors",
+        method: "POST",
+        body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayer, stringFromShop: stringFromShop, stringRopeChoice: stringRopeChoice, racquetPlayer: racquetPlayer, hubChoice: hubChoice, hubBackChoice: hubBackChoice, }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+        }
+    })
 
-  // gestion de l'état de validation du bouton pour ajouter le produit  
-  const isValid =    hubChoice !== "" && hubBackChoice !== "" &&  stringRopeChoice !== "" &&   
-                     racquetPlayer !== "" &&  racquetPlayer !== null && 
-                      (               
-                     (stringFromPlayerSelected === true && stringFromPlayer !== "") ||
-                     (stringFromPlayerSelected === false && stringFromShop !== null)
-                      )
-                     ;      
+      if (!response.ok) {
+        const result = await response.json();
+        throw new Error(` ${result.message}`);
+      }else {
+        const result = await response.json();
+        console.log(result.message);
+      }
+    }
 
-  const dispatch = useDispatch()
+    catch(err){
+      const errorMessage = err.toString();
+      console.log(errorMessage);
+    }
+  }
 
-  // fonction qui ajoute, enrgistre la pose du cordage et ses options dans le panier du  store redux 
+
+
+
+
+  // fonction qui ajoute, enrgistre la pose du cordage dans le panier du  store redux 
+  // si la case "sauvegarder mes choix " est cliqué on envoit au backend les infos pour sauvegardes préférences cordages 
   const onSubmit= () => {
+    if (isCheckBoxChecked){
+      savePreferencePlayer()
+    }
     if (stringFromPlayer !==null) { 
       const article = {
         categorie:"pose cordage seule",
@@ -65,6 +98,8 @@ export default function Stringing() {
         stringRopeChoice, 
         stringFromPlayer,
         racquetPlayer,
+        hubChoice,
+        hubBackChoice,
       }
         console.log(article)
         dispatch(addInstallationString(article))
@@ -77,6 +112,8 @@ export default function Stringing() {
         stringRopeChoice, 
         stringFromShop,
         racquetPlayer,
+        hubChoice,
+        hubBackChoice,
       }
       console.log(article)
       dispatch(addInstallationString(article))
@@ -105,16 +142,16 @@ export default function Stringing() {
 
         <div className="stringing-form__contenair">
 
-
           <div className='string stringing-form__section-wrapper'>
 
             <label className="stringing-form__label">Cordage</label>
 
             <SelectString setStringFromPlayerSelected={setStringFromPlayerSelected}  />
 
-            { stringFromShop !== null && stringFromPlayerSelected === false ? (
+            { stringFromShop !== null && stringFromShop !== undefined && (
               
               <>
+              {  console.log("stringFromShop2", stringFromShop)}
                 <div className='stringing-form__own-string-wrapper'> 
 
                   <div className="stringing-form__validation-bubble-checked     ">
@@ -144,10 +181,10 @@ export default function Stringing() {
                 </div>
               </>
 
-            ) : null}
+            ) }
 
 
-            {stringFromPlayerSelected === true || stringFromPlayer !==null ?  (
+            {stringFromPlayerSelected === true  ?  (
 
               <div>
                 <div className='stringing-form__own-string-wrapper'> 
@@ -212,7 +249,6 @@ export default function Stringing() {
 
           </div>
 
-
           <div className='club stringing-form__section-wrapper '>
 
             <label className="stringing-form__label" >Lieu de dépot </label>
@@ -249,7 +285,6 @@ export default function Stringing() {
 
           </div>
 
-
           <div className=' club stringing-form__section-wrapper'>
 
             <label className="stringing-form__label" > Retour de service </label>
@@ -271,22 +306,16 @@ export default function Stringing() {
                   
                 </div>
 
-                <div>
-                {hubBackChoice.enterprise_name}
-                </div>
+                <div>{hubBackChoice.enterprise_name}</div>
+                <div>{hubBackChoice.road} - {hubBackChoice.city} </div>
 
-                <div>
-                {hubBackChoice.road} - {hubBackChoice.city}
-                </div>
+
                   
               </>
 
             ) : null}
 
           </div>
-
-
-
 
           <div className='string stringing-form__section-wrapper'>
 
@@ -304,12 +333,20 @@ export default function Stringing() {
 
           </div>  
 
-
-
-
-
           <div className=" stringing-form__section-wrapper stringing-form__section-wrapper-button">
-
+            
+            {isConnected === true  ?  (  
+              <div className='stringing-form__wrapper-input-checkbox'>
+                <input
+                    type="checkbox"
+                    className="order-stringer-detail__checkbox"
+                    onClick={() => setCheckBoxChecked(!isCheckBoxChecked)}                />                  
+                  <div className="order-stringer-detail__checkbox-text"> 
+                    Sauvegarder mes choix
+                  </div>
+              </div> 
+            ) : null}
+ 
             <button 
               onClick={() => onSubmit()}
               disabled={ !isValid} 

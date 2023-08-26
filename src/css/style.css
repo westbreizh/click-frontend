@@ -2556,7 +2556,7 @@ input {
   margin-bottom: 2rem;
 }
 .stringing-form__section-wrapper-button {
-  margin-top: 3rem !important;
+  margin-top: 1.5rem !important;
   font-size: 1.5rem;
 }
 .stringing-form__label {
@@ -2616,6 +2616,12 @@ input {
   font-size: 1.5rem;
   font-weight: bold;
   padding-left: 1rem;
+}
+.stringing-form__wrapper-input-checkbox {
+  display: flex;
+  align-items: baseline;
+  margin: auto;
+  margin-bottom: 1rem;
 }
 
 .stringing-form__input-text.focused::placeholder {
@@ -3943,14 +3949,14 @@ input {
   align-items: baseline;
 }
 .order-stringer-detail__checkbox-text {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 .order-stringer-detail__checkbox {
   appearance: none;
   width: 1.7rem;
   height: 1.7rem;
-  border: 0.1rem solid #ccc;
+  border: 0.2rem solid #919090;
   border-radius: 0.3rem;
   outline: none;
   cursor: pointer;
