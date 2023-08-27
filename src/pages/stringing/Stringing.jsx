@@ -33,10 +33,17 @@ export default function Stringing() {
   const store = useStore()
 
   console.log("userInfo", userInfo)
+
   console.log("stringFromShop", stringFromShop)
   console.log("stringFromplayer", stringFromPlayer)
+  console.log("stringRopeChoice", stringRopeChoice)
+  console.log("hubchoice", hubChoice)
+  console.log("hubBckchoice", hubBackChoice)
+  console.log("racquetPlayer", racquetPlayer)
+
   console.log("ischecked?", isCheckBoxChecked)
   console.log("isConnected?", isConnected)
+
 
   //recupération de la saisie de la marque/type de la raquette
   const handleRacquetPlayerChange = (event) => {
@@ -49,11 +56,16 @@ export default function Stringing() {
     setStringFromPlayer(value)
   };
  
+
+
   // gestion de l'état de validation du bouton pour ajouter le produit
   const isValid =
-  (hubChoice ?? null) !== null &&   (hubBackChoice ?? null) !== null &&   (stringRopeChoice ?? null) !== null &&  racquetPlayer !== "" &&   racquetPlayer !== null && racquetPlayer !== undefined &&   (stringFromPlayerSelected ? stringFromPlayer !== "" && stringFromPlayer !== undefined  && stringFromPlayer !== null: (stringFromShop ?? null) !== null);
+  (hubChoice ?? null) !== null &&   (hubBackChoice ?? null) !== null &&   (stringRopeChoice ?? null) !== null &&  racquetPlayer !== "" &&   racquetPlayer !== null && racquetPlayer !== undefined &&  
+  ( ( stringFromPlayer !== "" && stringFromPlayer !== undefined  && stringFromPlayer !== null)  || (stringFromShop ?? null) !== null );
  
   
+
+
   //fonction asynchrone vers le backend pour modifier
   //les préférences de cordages 
   const savePreferencePlayer  = async function (data) {
@@ -256,9 +268,8 @@ export default function Stringing() {
                 <div className='string stringing-form__section-wrapper'>
 
                 <label className="stringing-form__label stringing-form__sub-label">
-                  Descriptif cordage fournie
+                  Descriptif de votre cordage 
                 </label>
-                <div> Veuillez saisir la marque et le modèle de votre cordage dans la zone de texte ci-dessous merci !</div>
                 <input
                  value={stringFromPlayer !== null ? stringFromPlayer : ""} 
                  type="text"
@@ -375,9 +386,8 @@ export default function Stringing() {
           <div className='string stringing-form__section-wrapper'>
 
             <label className="stringing-form__label stringing-form__sub-label">
-              Descriptif raquette
+              Descriptif de votre raquette
             </label>
-            <div> Veuillez saisir la marque et le modèle de votre raquette dans la zone de texte ci-dessous merci !</div>
             <input
               value={racquetPlayer}
               type="text"
