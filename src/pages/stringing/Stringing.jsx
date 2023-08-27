@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, useStore } from 'react-redux'
 import { addInstallationString, calculNumberArticle, updateStringingPrice } from "../../store/cartSlice"
 import { NavLink } from 'react-router-dom';
 import SelectHub from '../../components/select/SelectHub';
@@ -7,8 +7,8 @@ import SelectHubBack from '../../components/select/SelectHubBack';
 import SelectString from '../../components/select/SelectString';
 import SelectRopeString from '../../components/select/SelectRopeString';
 import ModalValidationAddToCartInstallation from '../../components/modal/modalValidation/ModalValidationAddToCartInstallation';
-
-
+import { setUserInfo} from '../../store/userSlice'
+import {resetStringFromShopChoice} from '../../store/cartSlice'
 
 export default function Stringing() {
 
@@ -30,6 +30,7 @@ export default function Stringing() {
   const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
 
   const dispatch = useDispatch()
+  const store = useStore()
 
   console.log("userInfo", userInfo)
   console.log("stringFromShop", stringFromShop)
@@ -92,44 +93,87 @@ export default function Stringing() {
       console.log(errorMessage);
     }
   }
+    //fonction asynchrone vers le backend pour recuperer
+  //les infos utilisateurs avec les modifications veant d'être apporté  
+  const loadDataPlayerAfterModif = async function (data) {
+    try{
+      const response = await fetch(`https://click-backend.herokuapp.com/api/user/loadDataPlayerAfterModif`, {
+        mode: "cors",
+        method: "POST",
+        body: JSON.stringify({ email: userInfo.email }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+        }
+    })
+
+      if (!response.ok) {
+        const result = await response.json();
+        throw new Error(` ${result.message}`);
+      }else {
+        const result = await response.json();
+        console.log(result.message);
+        const updatedPlayerData = result.updatedPlayerData
+        console.log("updatedPlayerData", updatedPlayerData);
+        store.dispatch(setUserInfo(updatedPlayerData));
+        store.dispatch( resetStringFromShopChoice(updatedPlayerData.stringInfo))
+      }
+    }
+
+    catch(err){
+      const errorMessage = err.toString();
+      console.log(errorMessage);
+    }
+  }
 
   // fonction qui ajoute, enrgistre la pose du cordage dans le panier du  store redux 
   // si la case "sauvegarder mes choix " est cliqué on envoit au backend les infos pour sauvegardes préférences cordages 
-  const onSubmit= () => {
-    if (isCheckBoxChecked){
-      savePreferencePlayer()
-    }
-    if (stringFromPlayer !==null) { 
-      const article = {
-        categorie:"pose cordage seule",
-        quantity: 1,
-        price: stringingPrice, 
-        stringRopeChoice, 
-        stringFromPlayer,
-        racquetPlayer,
-        hubChoice,
-        hubBackChoice,
+  const onSubmit = async () => {
+    try {
+      if (isCheckBoxChecked) {
+        await savePreferencePlayer();
+        await loadDataPlayerAfterModif();
       }
-        console.log(article)
-        dispatch(addInstallationString(article))
-        setSubmenuValidation(true)
-    } else{ 
-      const article = {
-        categorie:"fourniture et pose cordage", 
-        price: (stringingPrice+ parseFloat(stringFromShop.price)).toFixed(2),
-        quantity: 1,
-        stringRopeChoice, 
-        stringFromShop,
-        racquetPlayer,
-        hubChoice,
-        hubBackChoice,
+  
+      if (stringFromPlayer !== null) {
+        const article = {
+          categorie: "pose cordage seule",
+          quantity: 1,
+          price: stringingPrice,
+          stringRopeChoice,
+          stringFromPlayer,
+          racquetPlayer,
+          hubChoice,
+          hubBackChoice,
+        };
+  
+        console.log(article);
+        await dispatch(addInstallationString(article));
+        setSubmenuValidation(true);
+      } else {
+        const article = {
+          categorie: "fourniture et pose cordage",
+          price: (stringingPrice + parseFloat(stringFromShop.price)).toFixed(2),
+          quantity: 1,
+          stringRopeChoice,
+          stringFromShop,
+          racquetPlayer,
+          hubChoice,
+          hubBackChoice,
+        };
+  
+        console.log(article);
+        dispatch(addInstallationString(article));
+        setSubmenuValidation(true);
+        dispatch(calculNumberArticle());
       }
-      console.log(article)
-      dispatch(addInstallationString(article))
-      setSubmenuValidation(true)
-      dispatch(calculNumberArticle());
+    } catch (err) {
+      const errorMessage = err.toString();
+      console.log(errorMessage);
+      // Gérer les erreurs ici si nécessaire
     }
   };
+  
    
   
 

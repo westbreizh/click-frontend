@@ -19,11 +19,21 @@ export default function Order() {
 
   //problème si on a un article accessoire en premier dans la liste
   // amettre en parallèle avec une commande ne comprenant que des accessoires 
-  const racquetPlayer =  articleList[0].racquetPlayer;
-  const hubBackChoice =  articleList[0].hubBackChoice;
-  const hubChoice = articleList[0].hubChoice;
+  // très louche avec react redux qui fait bueger order quand le le panier est cliner en fait rerender global et du coup les abonnement font que les variables de prder du store redux sont mide a jour et order aussi ....
 
-
+  let racquetPlayer = null;
+  let hubBackChoice = null;
+  let hubChoice = null;
+  
+  if (articleList && articleList.length > 0) {
+    racquetPlayer = articleList[0].racquetPlayer;
+    hubBackChoice = articleList[0].hubBackChoice;
+    hubChoice = articleList[0].hubChoice;
+  
+    // Le reste de votre composant
+  } else {
+    // Traitez le cas où articleList est vide ou null
+  }
 
 
   useEffect(() => {
@@ -90,7 +100,7 @@ console.log("raquet player",racquetPlayer)
   form.submit();
  }
 
-  const handleClickShopPaiement = async (event) => {
+ const handleClickShopPaiement = async (event) => {
     try{
       
       const response = await fetch(`https://click-backend.herokuapp.com/api/shop/paiement-in-shop`, {
@@ -120,7 +130,7 @@ console.log("raquet player",racquetPlayer)
     }
   }
   
-  const  handleClickNoOptionPaiement =  (event) => {
+ const  handleClickNoOptionPaiement =  (event) => {
     setShowError(true);
   }
 
@@ -133,14 +143,14 @@ console.log("raquet player",racquetPlayer)
 
       <section className="order__contenair">
 
-        {isConnected ? (
+        {isConnected  ? (
 
           <>
-
+            {(articleList && articleList.length > 0) ? (
+           <>   
           <h1 className="order__title"> Finaliser ma commande </h1>
 
           <div className="order__sub-contenair">
-
 
             <div className='order__contenair-cart'>
 
@@ -379,7 +389,8 @@ console.log("raquet player",racquetPlayer)
 
 
           </div>
-
+          </>
+            ) : ""}
           </>
 
           ) : (
