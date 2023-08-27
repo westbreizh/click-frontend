@@ -19,6 +19,8 @@ export default function Stringing() {
   const token = useSelector(state => state.user.token);
 
   const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
+
+
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
   const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
@@ -46,19 +48,30 @@ export default function Stringing() {
     setStringFromPlayer(value)
   };
  
-// gestion de l'état de validation du bouton pour ajouter le produit
-const isValid =
+  // gestion de l'état de validation du bouton pour ajouter le produit
+  const isValid =
   (hubChoice ?? null) !== null &&   (hubBackChoice ?? null) !== null &&   (stringRopeChoice ?? null) !== null &&  racquetPlayer !== "" &&   racquetPlayer !== null && racquetPlayer !== undefined &&   (stringFromPlayerSelected ? stringFromPlayer !== "" && stringFromPlayer !== undefined  && stringFromPlayer !== null: (stringFromShop ?? null) !== null);
  
   
   //fonction asynchrone vers le backend pour modifier
   //les préférences de cordages 
   const savePreferencePlayer  = async function (data) {
+
+    let stringFromShopId = ""
+    let stringFromPlayer2 = ""
+    if(stringFromPlayerSelected === true) {
+      stringFromShopId  = null;
+      stringFromPlayer2 = stringFromPlayer
+    }else{ 
+      stringFromShopId  = stringFromShop.id
+      stringFromPlayer2 = null
+    }
+
     try{
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/savePreferencePlayer`, {
         mode: "cors",
         method: "POST",
-        body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayer, stringFromShop: stringFromShop, stringRopeChoice: stringRopeChoice, racquetPlayer: racquetPlayer, hubChoice: hubChoice, hubBackChoice: hubBackChoice, }),
+        body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayer2, stringFromShopId: stringFromShopId, stringRopeChoice: stringRopeChoice, racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, }),
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}` 
@@ -79,10 +92,6 @@ const isValid =
       console.log(errorMessage);
     }
   }
-
-
-
-
 
   // fonction qui ajoute, enrgistre la pose du cordage dans le panier du  store redux 
   // si la case "sauvegarder mes choix " est cliqué on envoit au backend les infos pour sauvegardes préférences cordages 
@@ -121,7 +130,9 @@ const isValid =
       dispatch(calculNumberArticle());
     }
   };
-       
+   
+  
+
 
   return (
 
@@ -146,12 +157,11 @@ const isValid =
 
             <label className="stringing-form__label">Cordage</label>
 
-            <SelectString setStringFromPlayerSelected={setStringFromPlayerSelected}  />
+            <SelectString setStringFromPlayerSelected={setStringFromPlayerSelected}   />
 
-            { stringFromShop !== null && stringFromShop !== undefined && (
+            { stringFromShop !== null && stringFromShop !== undefined && stringFromPlayerSelected === false &&  (
               
               <>
-              {  console.log("stringFromShop2", stringFromShop)}
                 <div className='stringing-form__own-string-wrapper'> 
 
                   <div className="stringing-form__validation-bubble-checked     ">
@@ -184,7 +194,7 @@ const isValid =
             ) }
 
 
-            {stringFromPlayerSelected === true  ?  (
+            {stringFromPlayerSelected === true  || (stringFromPlayer !== null && stringFromShop === null) ? (
 
               <div>
                 <div className='stringing-form__own-string-wrapper'> 
@@ -206,12 +216,13 @@ const isValid =
                 </label>
                 <div> Veuillez saisir la marque et le modèle de votre cordage dans la zone de texte ci-dessous merci !</div>
                 <input
-                  value={stringFromPlayer} 
-                  type="text"
+                 value={stringFromPlayer !== null ? stringFromPlayer : ""} 
+                 type="text"
                   className="stringing-form__input-text"
                   onClick={() => setStringFromPlayer("")} 
                   onChange={handleOwnStringPlayerChange}
                 />
+
 
                 </div>  
               </div>

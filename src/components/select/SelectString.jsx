@@ -32,7 +32,7 @@ export default function SelectString(props) {
             <li
               className="clubSelect__submenu-li"
               onClick={() => {
-                setStringFromPlayerSelected( true);  
+                setStringFromPlayerSelected( false);  
               }}
             >
               <Link className="li-choose-string" to="/cordages">
