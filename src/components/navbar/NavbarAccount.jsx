@@ -23,7 +23,7 @@ export default function NavbarAccount() {
           
           <li className='navBarAccount__li' id="tooLongText" >
             <NavLink  to="/préférences_joueur" className={(nav) => (nav.isActive ? "navBarAccount__active" : "navBarAccount__inactive")} end>
-              Préférences cordage
+              Préférences 
             </NavLink>
           </li>
           

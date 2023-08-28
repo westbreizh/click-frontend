@@ -1,31 +1,20 @@
 
 
 .prefPlayer{
-    &__wrapper{
+    &__contenair{
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
+        position: relative;
+        margin-top: 8rem;
+        margin-bottom: 5rem;
         width: 100%;
-        margin-bottom: 1rem;
-        margin-left: 2.5rem;
-        font-weight: 700;
-        color: #232346;
-        font-family: "Roboto", "Arial", sans-serif;
-
-    }
-    &__title{
-
-        text-transform: uppercase;
-        display: inline-block;
-        font-size: 1.6rem;
-        font-weight: 550;
-        color: #232346;
-        font-family: "Roboto", "Arial", sans-serif;
-    }
-    &__value{
-        color: #1c166c;
         font-size: 1.5rem;
+        padding: 3rem 1rem 3rem 1rem;
+        border-radius: 1rem;
+        background-color: white;
+        color: #1c166c;
     }
+
 }
 
 
@@ -35,6 +24,17 @@
 
 
 @media screen and (max-width: 768px) {
+
+    .prefPlayer{
+        &__contenair{
+
+            margin-top: 0rem;
+            border-radius: 0rem;
+            margin-bottom: 0rem;
+        }
+    
+    }
+    
 
 
 

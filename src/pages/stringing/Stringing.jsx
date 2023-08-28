@@ -36,13 +36,10 @@ export default function Stringing() {
 
   console.log("stringFromShop", stringFromShop)
   console.log("stringFromplayer", stringFromPlayer)
-  console.log("stringRopeChoice", stringRopeChoice)
-  console.log("hubchoice", hubChoice)
-  console.log("hubBckchoice", hubBackChoice)
-  console.log("racquetPlayer", racquetPlayer)
+  
 
-  console.log("ischecked?", isCheckBoxChecked)
-  console.log("isConnected?", isConnected)
+
+
 
 
   //recupération de la saisie de la marque/type de la raquette
@@ -70,21 +67,21 @@ export default function Stringing() {
   //les préférences de cordages 
   const savePreferencePlayer  = async function (data) {
 
+    // met à null l'une des deux valeurs selon codage du joueur ou du magazin
     let stringFromShopId = ""
-    let stringFromPlayer2 = ""
-    if(stringFromPlayerSelected === true) {
-      stringFromShopId  = null;
-      stringFromPlayer2 = stringFromPlayer
-    }else{ 
-      stringFromShopId  = stringFromShop.id
-      stringFromPlayer2 = null
-    }
+    let stringFromPlayerToSend = ""
+    if( stringFromShop !== null && stringFromShop !== undefined && stringFromPlayerSelected === false  ) {
+      stringFromShopId = stringFromShop.id;
+      stringFromPlayerToSend = null;
+    }else{       
+      stringFromShopId = null;
+      stringFromPlayerToSend = stringFromPlayer ;}
 
     try{
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/savePreferencePlayer`, {
         mode: "cors",
         method: "POST",
-        body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayer2, stringFromShopId: stringFromShopId, stringRopeChoice: stringRopeChoice, racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, }),
+        body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayerToSend, stringFromShopId: stringFromShopId, stringRopeChoice: stringRopeChoice, racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, }),
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}` 
@@ -213,7 +210,7 @@ export default function Stringing() {
 
             <label className="stringing-form__label">Cordage</label>
 
-            <SelectString setStringFromPlayerSelected={setStringFromPlayerSelected}   />
+            <SelectString setStringFromPlayerSelected={setStringFromPlayerSelected} setStringFromPlayer ={setStringFromPlayer}  />
 
             { stringFromShop !== null && stringFromShop !== undefined && stringFromPlayerSelected === false &&  (
               

@@ -41,7 +41,7 @@ export default function AccountSubmenuMobile(props) {
           
           <li className='submenuMobile__li' onClick={()=> toggleMenuHamburgerAndSubmenu()}  >
             <Link  to="/préférences_joueur" className="submenuMobile__link">
-            Préférences cordage
+            Préférences 
             </Link>
             <ArrowForwardIosIcon className="submenuMobile__icon-forward"/>
           </li> 

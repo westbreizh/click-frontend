@@ -25,7 +25,7 @@ const toogleSubmenuOff = props.toogleSubmenuOff
 
             <li className='submenu__li'  onClick={()=> toogleSubmenuOff()}  >
                 <NavLink  to="/préférences_joueur" className={(nav) => (nav.isActive ? "submenu__navLink__active" : "submenu__navLink__inactive")} end>
-                Préférences cordages
+                Préférences 
                 </NavLink>
             </li> 
 
