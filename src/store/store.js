@@ -38,8 +38,9 @@ export const persistor = persistStore(store);
 // Cette logique sera exécutée au démarrage de l'application seulement
 
 const checkTokenOnStartup = async () => {
+  console.log("je suis dans checkTokenOnstartUp")
   const token = store.getState().user.token;
-
+console.log("token",token)
   if (token) {
     await checkTokenValidity(token);
   }
