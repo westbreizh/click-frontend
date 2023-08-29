@@ -33,7 +33,6 @@ export default function Stringing() {
   const store = useStore()
 
   console.log("userInfo", userInfo)
-
   console.log("stringFromShop", stringFromShop)
   console.log("stringFromplayer", stringFromPlayer)
   
@@ -67,7 +66,7 @@ export default function Stringing() {
   //les préférences de cordages 
   const savePreferencePlayer  = async function (data) {
 
-    // met à null l'une des deux valeurs selon codage du joueur ou du magazin
+    // met à null l'une des deux valeurs selon cordage du joueur ou du magazin choisi
     let stringFromShopId = ""
     let stringFromPlayerToSend = ""
     if( stringFromShop !== null && stringFromShop !== undefined && stringFromPlayerSelected === false  ) {
@@ -170,7 +169,6 @@ export default function Stringing() {
           hubChoice,
           hubBackChoice,
         };
-  
         console.log(article);
         dispatch(addInstallationString(article));
         setSubmenuValidation(true);
