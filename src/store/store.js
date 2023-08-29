@@ -47,6 +47,8 @@ store.subscribe(() => {
 const checkTokenValidity = async (token) => {
   try {
     const response = await fetch(`https://click-backend.herokuapp.com/api/user/isTokenYeatOk`, {
+      mode: "cors",
+      method: "POST",
       headers: {
         Authorization: `Bearer ${token}`
       }
