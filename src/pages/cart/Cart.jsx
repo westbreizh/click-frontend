@@ -1,11 +1,11 @@
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import {  useSelector, useDispatch } from 'react-redux'
 import { calculNumberArticle, deleteArticle, calculTotalPriceProducts, updateStringingPrice  } from '../../store/cartSlice';
 import DropDownSelectQuantity from '../../components/select/dropDownSelectQuantity';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { NavLink } from "react-router-dom"
-
+import ModalAskToAddString from '../../components/modal/modalValidation/ModalToAskToAddString';
 
 export default function Cart() {
 
@@ -15,12 +15,14 @@ export default function Cart() {
   const totalPrice = useSelector(state => state.cart.totalPrice);
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
 
-
+  const [isArticleListWithoutString, setIsArticleListWithoutString] =useState(false)
 
   const dispatch = useDispatch();
   function handleClickDelete (index) { 
   dispatch (deleteArticle(index))
   }
+
+  const navigate = useNavigate();
 
  //localStorage.clear();
 
@@ -28,6 +30,36 @@ export default function Cart() {
   dispatch(calculNumberArticle());
   dispatch(calculTotalPriceProducts());
 }, [articleList]);
+
+const isOnlyAccesories = (articleList, navigate) => {
+  let containsCordages = false;
+
+  for (const article of articleList) {
+    if (
+      article.categorie !== "balle" &&
+      article.categorie !== "accessoire"
+    ) {
+      containsCordages = true;
+      break; // Utilisation du break pour sortir de la boucle
+    }
+  }
+  if (containsCordages) {
+    console.log("Le panier contient des cordages.");
+    setIsArticleListWithoutString(false);
+    console.log("isArticleListWithoutString",isArticleListWithoutString)
+    navigate("/commande")
+  } else {
+    console.log("Le panier ne contient que des accessoires ou des balles.");
+    setIsArticleListWithoutString(true)
+    console.log("isArticleListWithoutString",isArticleListWithoutString)
+  }
+};
+
+const handleClickGoToOrder = () => {
+  console.log("je vais construire ma fonction qui teste si je n'ai que des accessoires")
+  isOnlyAccesories(articleList, navigate); // Passez navigate en tant qu'argument
+};
+
 
 
 
@@ -249,11 +281,14 @@ export default function Cart() {
                 </div>
 
 
-                <Link to="/commande" className='btn btn-green btn-commander btn-cart'>
-                commander
-                </Link>  
+                <button 
+                  onClick={handleClickGoToOrder}
+                  className='btn btn-green btn-commander btn-cart'
+                  type="submit">
+                    Commander
+                </button>
 
-
+                {isArticleListWithoutString ? <ModalAskToAddString /> : ""}
 
               </div>
     

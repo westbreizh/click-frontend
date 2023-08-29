@@ -16,7 +16,7 @@ export default function Order() {
   const totalPriceProducts = useSelector(state => state.cart.totalPriceProducts);
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
   const userInfo = useSelector(state => state.user.userInfo);
-
+  console.log("articleList", articleList)
   //problème si on a un article accessoire en premier dans la liste
   // amettre en parallèle avec une commande ne comprenant que des accessoires 
   // très louche avec react redux qui fait bueger order quand le le panier est cliner en fait rerender global et du coup les abonnement font que les variables de prder du store redux sont mide a jour et order aussi ....

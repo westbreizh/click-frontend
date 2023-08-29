@@ -62,13 +62,11 @@ export default function ModalValidationAddToCart( props) {
 
           <div className='modal-atc__buttons-link-wrapper'>
 
-            <Link to="/panier" className='btn btn-white-green'>
+            <Link to="/panier" className='btn btn-green'>
               voire le panier
             </Link>  
 
-            <Link to="/commande" className='btn btn-green '>
-              commander
-            </Link>  
+
             
           </div>
 

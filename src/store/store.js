@@ -34,6 +34,15 @@ const store = configureStore({
 // Création d'un persistor qui permet de sauvegarder automatiquement le store dans le local storage
 export const persistor = persistStore(store);
 
+
+
+
+// Exportez à la fois le store et le persistor
+export { store };
+
+
+
+/*
 // Vérification du token et mise à jour de l'état isConnected
 // Cette logique sera exécutée au démarrage de l'application seulement
 
@@ -74,10 +83,4 @@ const checkTokenValidity = async (token) => {
     console.error("Erreur lors de la vérification du token :", error);
     // Gérez l'erreur ici si nécessaire
   }
-};
-
-
-// Exportez à la fois le store et le persistor
-export { store };
-
-
+};*/

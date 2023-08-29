@@ -37,7 +37,7 @@ export default function ModalValidationChangesPreferences( props) {
           <div className='modal-installation-atc__buttons-link-wrapper'>
 
 
-            <Link to="/préférences_joueur" className='btn btn-green btn-installation-atc btn-last'>
+            <Link to="/cordez" className='btn btn-green btn-installation-atc btn-last'>
               ok
             </Link>  
             
