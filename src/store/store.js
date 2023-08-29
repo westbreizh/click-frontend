@@ -35,14 +35,18 @@ const store = configureStore({
 export const persistor = persistStore(store);
 
 // Vérification du token et mise à jour de l'état isConnected
-// Cette logique sera exécutée au démarrage de l'application
-store.subscribe(() => {
-  const token = store.getState().user.token; // Obtenez le token du store
+// Cette logique sera exécutée au démarrage de l'application seulement
+
+const checkTokenOnStartup = async () => {
+  const token = store.getState().user.token;
 
   if (token) {
-    checkTokenValidity(token); // Appelez la fonction de vérification avec le token
+    await checkTokenValidity(token);
   }
-});
+};
+
+checkTokenOnStartup();
+
 
 const checkTokenValidity = async (token) => {
   try {
@@ -63,7 +67,7 @@ const checkTokenValidity = async (token) => {
       // Si le token n'est pas valide, déconnectez l'utilisateur
       store.dispatch(setToken(""));
       store.dispatch(connectedToggle(false));
-      console.log("je mesuis déconnecté via redux car le token n'était plus valide")
+      console.log("je me suis déconnecté via redux car le token n'était plus valide")
     }
   } catch (error) {
     console.error("Erreur lors de la vérification du token :", error);
