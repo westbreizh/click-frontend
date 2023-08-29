@@ -57,14 +57,13 @@ const checkTokenValidity = async (token) => {
     const isValidToken = data.message === 'token valide';
 
     if (isValidToken) {
-      // Mettez à jour le token dans le store
       store.dispatch(setToken(token));
-      // Mettez à jour isConnected en conséquence
       store.dispatch(connectedToggle(true));
     } else {
       // Si le token n'est pas valide, déconnectez l'utilisateur
       store.dispatch(setToken(""));
       store.dispatch(connectedToggle(false));
+      console.log("je mesuis déconnecté via redux car le token n'était plus valide")
     }
   } catch (error) {
     console.error("Erreur lors de la vérification du token :", error);
