@@ -156,9 +156,9 @@ export default function Stringing() {
         };
   
         console.log(article);
-        await dispatch(addInstallationString(article));
+        dispatch(addInstallationString(article));
         setSubmenuValidation(true);
-      } else {
+      } else       if (stringFromShop !== null && stringFromPlayerSelected === false) {
         const article = {
           categorie: "fourniture et pose cordage",
           price: (stringingPrice + parseFloat(stringFromShop.price)).toFixed(2),
