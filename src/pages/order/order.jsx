@@ -24,12 +24,21 @@ export default function Order() {
   let racquetPlayer = null;
   let hubBackChoice = null;
   let hubChoice = null;
-  
+
   if (articleList && articleList.length > 0) {
-    racquetPlayer = articleList[0].racquetPlayer;
-    hubBackChoice = articleList[0].hubBackChoice;
-    hubChoice = articleList[0].hubChoice;
-  
+    for (const article of articleList) {
+      if (
+        article.categorie !== "balle" &&
+        article.categorie !== "accessoire"
+      ) {
+        racquetPlayer = article.racquetPlayer;
+        hubBackChoice = article.hubBackChoice;
+        hubChoice = article.hubChoice;
+        break; // Utilisation du break pour sortir de la boucle
+      }else{
+        console.log("on boucle")
+      }
+    }
     // Le reste de votre composant
   } else {
     // Traitez le cas où articleList est vide ou null
