@@ -61,10 +61,8 @@ const handleClickGoToOrder = () => {
 };
 
 
-
-
   console.log("article dans panier",articleList )
-  console.log("numberArticle", numberArticle )
+
 
 
 
@@ -110,7 +108,7 @@ const handleClickGoToOrder = () => {
 
                             <div className='cart-content__content-on-one-line'>
                               <div>Pose cordage </div> 
-                              <div>{stringingPrice} </div>
+                              <div>{stringingPrice.toFixed(2).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €</div>
                             </div>
 
                             <div className='cart-content__content-on-one-line'>
@@ -190,7 +188,7 @@ const handleClickGoToOrder = () => {
 
                   
                           <div className='cart-content__product-price'>
-                              <div>{parseFloat((product.price * product.quantity).toFixed(2))} €</div>
+                          <div>{(product.price * product.quantity).toFixed(2).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €</div>
                           </div>
 
                         </div>
@@ -241,7 +239,7 @@ const handleClickGoToOrder = () => {
                             </div>
 
                             <div className='cart-content__product-price'>
-                              <div>{parseFloat((product.price * product.quantity).toFixed(2))} €</div>
+                            <div>{(product.price * product.quantity).toFixed(2).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €</div>
                             </div>
 
                           </div>

@@ -188,7 +188,7 @@ console.log("raquet player",racquetPlayer)
 
                           <div className='order-cart__content-on-one-line'>
                             <div>Pose cordage </div> 
-                            <div> {stringingPrice}€ </div>
+                            <div>{stringingPrice.toFixed(2).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €</div>
                           </div>
 
                           <div className='order-cart__content-on-one-line'>
@@ -197,7 +197,6 @@ console.log("raquet player",racquetPlayer)
                               <div> Cordage : </div>
                               
                             </div>
-
                             <div> {product.stringFromShop.price} € </div>
 
                           </div>
@@ -224,12 +223,14 @@ console.log("raquet player",racquetPlayer)
                           <div className='order-cart__text-weight-uppercase'>  Pose cordage </div>
 
                           <div> Cordage : votre propre cordage </div>
+                          <div> {product.stringFromPlayer} </div>
+
 
                         </div>
 
 
                         <div className='order-cart__product-price'>
-                            <div>{parseFloat((product.price * product.quantity).toFixed(2))} €</div>
+                        <div>{(product.price * product.quantity).toFixed(2).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €</div>
                         </div>
 
                       </div>
@@ -268,7 +269,7 @@ console.log("raquet player",racquetPlayer)
                           </div>
 
                           <div className='order-cart__product-price'>
-                            <div>{parseFloat((product.price * product.quantity).toFixed(2))} €</div>
+                          <div>{(product.price * product.quantity).toFixed(2).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €</div>
                           </div>
 
                         </div>

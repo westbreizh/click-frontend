@@ -2359,6 +2359,7 @@ input {
   width: 100%;
   margin: 0 auto;
   margin-top: 1.5rem;
+  padding-left: 2.5rem;
 }
 .submenu__title {
   display: flex;
@@ -2366,7 +2367,6 @@ input {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 1.7rem;
-  margin-left: 2.5rem;
 }
 .submenu__title::after {
   content: "";
@@ -2389,7 +2389,6 @@ input {
 .info-perso__title {
   flex-basis: 35%;
   text-transform: uppercase;
-  margin-left: 2.5rem;
 }
 .info-perso__value {
   text-transform: uppercase;
@@ -2408,11 +2407,9 @@ input {
 .info-login__title {
   flex-basis: 35%;
   text-transform: uppercase;
-  margin-left: 2.5rem;
 }
 .info-login__data {
   display: inline;
-  margin-right: 2.5rem;
   overflow-wrap: anywhere;
 }
 .info-login__button {
@@ -2449,7 +2446,7 @@ input {
     margin: 2rem 1rem;
   }
   .info-login__data {
-    margin-left: 2.5rem;
+    margin-right: 2.5rem;
   }
 }
 .prefPlayer__contenair {
@@ -3172,7 +3169,6 @@ input {
 .cart-content__product-info-wrapper-left {
   display: flex;
   flex-direction: column;
-  height: 11rem;
   justify-content: space-between;
 }
 .cart-content__text-weight-uppercase {

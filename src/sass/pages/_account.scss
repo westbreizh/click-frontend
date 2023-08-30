@@ -129,6 +129,7 @@
         width: 100%;
         margin: 0 auto;
         margin-top: 1.5rem;
+        padding-left: 2.5rem;
     }
 
     &__title{
@@ -137,7 +138,7 @@
         text-transform: uppercase;
         font-weight: 700;
         font-size: 1.7rem;
-        margin-left: 2.5rem;
+
 
     
         &::after{
@@ -164,7 +165,6 @@
     &__title{
         flex-basis: 35%;
         text-transform: uppercase;
-        margin-left: 2.5rem;
 
     }
     &__value{
@@ -187,11 +187,10 @@
     &__title{
         flex-basis: 35%;
         text-transform: uppercase;
-        margin-left: 2.5rem;
+
     }
     &__data{
         display: inline;
-        margin-right: 2.5rem;
         overflow-wrap: anywhere;
     }
     &__button{
@@ -240,7 +239,7 @@
     .info-login{
 
         &__data{
-            margin-left: 2.5rem;
+margin-right: 2.5rem;
         }
     }
 

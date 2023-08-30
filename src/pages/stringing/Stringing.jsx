@@ -143,7 +143,7 @@ export default function Stringing() {
         await loadDataPlayerAfterModif();
       }
   
-      if (stringFromPlayer !== null) {
+      if (stringFromPlayer !== null && stringFromPlayerSelected === true) {
         const article = {
           categorie: "pose cordage seule",
           quantity: 1,
