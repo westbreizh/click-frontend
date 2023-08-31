@@ -2186,6 +2186,9 @@ input {
     width: 85%;
     margin-bottom: 2.5rem;
   }
+  .servicesLinks img {
+    image-rendering: pixelated; /* pixelated ou crisp-edges*/
+  }
   .functionning__button, .functionning__button-animate {
     margin-left: 2rem;
     margin-right: 0.5rem;

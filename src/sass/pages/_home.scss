@@ -193,6 +193,9 @@
             margin-bottom: 2.5rem;
             }      
     }
+    .servicesLinks img {
+        image-rendering: pixelated; /* pixelated ou crisp-edges*/ 
+      }
 
     .functionning__button, .functionning__button-animate {
  
