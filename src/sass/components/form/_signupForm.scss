@@ -98,6 +98,11 @@
     margin-bottom: 1rem;
 }
 
+.select__bar option:disabled {
+    display: none;
+    pointer-events: none;
+  }
+
 
 /* -------------------  responsive ----------------------*/
 

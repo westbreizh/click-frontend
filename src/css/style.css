@@ -403,6 +403,11 @@ body {
   margin-bottom: 1rem;
 }
 
+.select__bar option:disabled {
+  display: none;
+  pointer-events: none;
+}
+
 /* -------------------  responsive ----------------------*/
 @media screen and (max-width: 768px) {
   .signup-contenair {
