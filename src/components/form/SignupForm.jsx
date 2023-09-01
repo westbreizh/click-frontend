@@ -133,6 +133,7 @@ export default function SignupForm(props) {
           <select 
           className="select__bar" 
           {...register("civilite")}>
+              <option value="">Sélectionnez une civilité</option>
               <option value="Madame">Madame</option>
               <option value="Monsieur">Monsieur</option>
               <option value="Padawan">Padawan</option>
