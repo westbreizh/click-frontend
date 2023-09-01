@@ -11,7 +11,7 @@ export default function OrderHistory() {
   const email = useSelector((state) => state.user.userInfo.email);
 
   const [orderLogList, setOrderLogList] = useState([]) ;
-
+console.log("ecr")
 
   //fonction asynchrone vers le backend pour recupérer 
   //l'historique des commandes effectué par le joueur 
