@@ -103,12 +103,26 @@ export default function ProductStringPage() {
                     </div>
 
                     <div className='product-card__values-characteristics'>
-                      <div className='product-card__value-characteristic'> Contôle : {product.control_rating} / 10</div>
-                      <div className='product-card__value-characteristic'> Puissance : {product.power_rating} / 10</div>
-                      <div className='product-card__value-characteristic'> Prise d'effet : {product.spin} / 10</div>
-                      <div className='product-card__value-characteristic'> Confort : {product.comfort} / 10</div>
-                      <div className='product-card__value-characteristic'> Durabilité : {product.durability_rating} / 10</div>
+                      <div class="bubble-plus">
+                        <span class="plus">+</span>
+                      </div>
+
+                      <div className='product-card__value-characteristic'>  {product.first_characteristic} </div>
+                      <div className='product-card__value-characteristic'>  {product.second_characteristic} </div>
+                      <div className='product-card__value-characteristic'>  {product.third_characteristic} </div>
                     </div>
+
+                    <div className='product-card__values-characteristics'>
+                      <div class="bubble-less">
+                        <span class="less">-</span>
+                      </div>
+
+                      <div className='product-card__value-characteristic'>  {product.first_default} </div>
+                      <div className='product-card__value-characteristic'>  {product.second_default} </div>
+                    </div>
+
+
+
 
 
                     <div className='product-card__info-description-text'>

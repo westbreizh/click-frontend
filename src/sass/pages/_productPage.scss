@@ -188,6 +188,31 @@
   
 }
 
+.bubble-plus,.bubble-less {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #3498db; /* Couleur de la bulle */
+  border-radius: 50%; /* Pour obtenir une forme de bulle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px; /* Taille de la police du symbole plus */
+  color: #ffffff; /* Couleur du symbole plus */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ombre pour donner de la profondeur */
+  margin-right: 1.5rem;
+}
+
+
+.bubble-less {
+  background-color: #ff9900; /* Orange */
+
+}
+
+.plus, .less {
+  font-weight: bold; /* Pour rendre le symbole plus en gras */
+}
+
+
 
  
   /* -------------------  Responsive ----------------------*/
