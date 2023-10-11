@@ -70,7 +70,7 @@ export default function ProductStringPage() {
             <>
               <BackNavArrow />
 
-              <h1 className="title-product">  {product.mark} - {product.model} - <span className='gauge-h1'> {product.gauge} </span> - {product.packaging}  </h1>
+              <h1 className="title-product">  {product.mark} - {product.model}   </h1>
 
               <div className='product-card__contenair'>
 
@@ -98,7 +98,7 @@ export default function ProductStringPage() {
                         className="product-card__image-logo"
                         />
 
-                      <div> {product.model} {product.gauge} </div>
+                      <div> {product.model}  </div>
 
                     </div>
 

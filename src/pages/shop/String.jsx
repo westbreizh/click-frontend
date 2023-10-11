@@ -114,10 +114,10 @@ export default function String() {
 
           <div className="shop__text-info">  
             <span className="shop__text-info-part-a">
-            Le choix du cordage peut se révéler aussi important et complexe que celui de la raquette.<br/>
+            Le prix indiqué comprend la fourniture et la pose du cordage<br/>
+            L'achat de bobine peut se faire sur commande à la boutique.
             </span>
-            Pour avoir plus d'informations et un choix plus large de cordages, nous vous conseillons 
-            le site <a href="https://www.templeducordage.com/" target="_blank">templeducordage</a>.
+
           </div>
 
 
@@ -177,7 +177,6 @@ export default function String() {
                   />
                   <div className="cardProduct__nameMark">{product.mark}</div>
                   <div className="cardProduct__model">{product.model}</div>
-                  <div className="cardProduct__packaging">{product.packaging}</div>
                   <div className="cardProduct__price">{product.price} €</div>
                 </NavLink>
                 ))}

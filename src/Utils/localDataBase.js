@@ -1,25 +1,16 @@
 const datasForSelectstring = [ 
   {   
-   options: ["Babolat","Technifibre", "Yonex"],
+   options: ["Babolat","Dunlop", "Head", "Tecnifibre", "Yonex", "Luxillon"],
    title : "Marque",
    fieldNameBdd: "Mark"
   },
 
   {
-    options: ["Multifilament", "Monofilament"],
-    title : "Composition",
-    fieldNameBdd: "Composition",
-  },
-  {
     options: ["Contrôle", "Puissance", "Prise d'effet", "Confort"],
     title : "Gamme",
     fieldNameBdd: "first_characteristic"
-  },
-  {
-    options: ["Garniture 12m", "Bobine 200m"],
-    title : "Conditionnement",
-    fieldNameBdd: "Packaging"
   }
+
 ];
 
 export { datasForSelectstring };
