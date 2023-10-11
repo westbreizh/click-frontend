@@ -3096,7 +3096,8 @@ input {
     font-weight: 500;
   }
   .product-card__values-characteristics {
-    justify-content: center;
+    justify-content: flex-start;
+    width: 100%;
     font-weight: 500;
   }
   .product-card__value-characteristic {
