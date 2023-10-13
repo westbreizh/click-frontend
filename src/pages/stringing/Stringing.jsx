@@ -14,7 +14,11 @@ export default function Stringing() {
 
   const userInfo =  useSelector((state) => state.user.userInfo);
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);
+
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
+  const stringingPriceWithStringFromShop = useSelector(state => state.cart.stringingPriceWithStringFromShop);
+  const stringingPriceWithStringFromAnotherWhere= useSelector(state => state.cart.stringingPriceWithStringFromAnotherWhere);
+
   const isConnected = useSelector(state => state.user.isConnected);
   const token = useSelector(state => state.user.token);
 
@@ -24,10 +28,12 @@ export default function Stringing() {
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
   const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
+  const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(null);
   const [hubBackChoice, setHubBackChoice] = useState(userInfo.hubBackInfo);
   const [racquetPlayer, setRacquetPlayer] = useState(userInfo.racquet_player);
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
   const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
+
 
   const dispatch = useDispatch()
   const store = useStore()
@@ -161,7 +167,7 @@ export default function Stringing() {
       } else       if (stringFromShop !== null && stringFromPlayerSelected === false) {
         const article = {
           categorie: "fourniture et pose cordage",
-          price: (stringingPrice + parseFloat(stringFromShop.price)).toFixed(2),
+          price: ( parseFloat(stringFromShop.price)).toFixed(2),
           quantity: 1,
           stringRopeChoice,
           stringFromShop,
@@ -259,6 +265,32 @@ export default function Stringing() {
                   </div>
                   
                 </div>
+
+                <div className='stringing-form__wrapper-input-checkbox'>
+                    <input
+                        type="checkbox"
+                        className="order-stringer-detail__checkbox"
+                        onClick={() => setStringFromPlayerOrigin("shop")}
+                        checked={stringFromPlayerOrigin === "shop"}
+                        />                  
+                      <div className="order-stringer-detail__checkbox-text"> 
+                        Cordage acheté en boutique
+                      </div>
+                </div> 
+
+                  <div className='stringing-form__wrapper-input-checkbox'>
+                    <input
+                        type="checkbox"
+                        className="order-stringer-detail__checkbox"
+                        onClick={() => setStringFromPlayerOrigin("anotherwhere")}
+                        checked={stringFromPlayerOrigin === "anotherwhere"}
+                        />                  
+                      <div className="order-stringer-detail__checkbox-text"> 
+                        Cordage acheté hors boutique
+                      </div>
+                  </div> 
+
+
 
                 <div className='string stringing-form__section-wrapper'>
 

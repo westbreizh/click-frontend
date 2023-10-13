@@ -106,10 +106,6 @@ const handleClickGoToOrder = () => {
 
                           </div>
 
-                            <div className='cart-content__content-on-one-line'>
-                              <div>Pose cordage </div> 
-                              <div>{stringingPrice.toFixed(2).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €</div>
-                            </div>
 
                             <div className='cart-content__content-on-one-line'>
 
@@ -124,7 +120,6 @@ const handleClickGoToOrder = () => {
                                 </NavLink>
                               </div>
 
-                              <div>{product.stringFromShop.price} € </div>
 
 
                             </div>

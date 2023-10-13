@@ -186,28 +186,25 @@ console.log("raquet player",racquetPlayer)
 
                         </div>
 
-                          <div className='order-cart__content-on-one-line'>
-                            <div>Pose cordage </div> 
-                            <div>{stringingPrice.toFixed(2).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €</div>
-                          </div>
 
                           <div className='order-cart__content-on-one-line'>
 
                             <div className='order-cart__cordage'>
+
                               <div> Cordage : </div>
-                              
+
+                              <NavLink 
+                                key={index} 
+                                to={`/fiche_produit/cordage/${product.stringFromShop.id}`}
+                                className="order-cart__link-to-card-product"
+                              >
+                                { product.stringFromShop.mark  + " " + product.stringFromShop.model}
+                              </NavLink>
+
                             </div>
-                            <div> {product.stringFromShop.price} € </div>
 
                           </div>
 
-                          <NavLink 
-                            key={index} 
-                            to={`/fiche_produit/cordage/${product.stringFromShop.id}`}
-                            className="order-cart__link-to-card-product"
-                          >
-                            { product.stringFromShop.mark  + " " + product.stringFromShop.model}
-                          </NavLink>
 
                       </div>
 

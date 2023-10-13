@@ -11,6 +11,9 @@ const cartSlice = createSlice({
     totalPrice: 0, //prix total
     stringFromShopChoice:[],
     stringingPrice: 10, //prix de la pose 
+    stringingPriceWithStringFromShop: 12, //prix de la pose avec cordage acheté en boutique 
+    stringingPriceWithStringFromAnotherWhere: 15, //prix de la pose  avec cordage acheté ailleurs
+
   },
 
   reducers: {

@@ -123,8 +123,6 @@ export default function ProductStringPage() {
 
 
 
-
-
                     <div className='product-card__info-description-text'>
                     {product.description_text} 
                     </div>

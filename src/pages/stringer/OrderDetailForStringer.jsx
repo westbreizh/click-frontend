@@ -264,11 +264,7 @@ export default function OrderDetailForStringer() {
 
                             </div>
 
-                              <div className='oneOrderCart__content-on-one-line'>
-                                <div>Pose cordage </div> 
 
-                                <div> {stringingPrice}€ </div>
-                              </div>
 
                               <div className='oneOrderCart__content-on-one-line'>
 
