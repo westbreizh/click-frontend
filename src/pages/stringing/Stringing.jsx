@@ -12,18 +12,15 @@ import {resetStringFromShopChoice} from '../../store/cartSlice'
 
 export default function Stringing() {
 
+  const stringingPriceWithStringFromShop = 12 //prix de la pose avec cordage acheté en boutique 
+  const stringingPriceWithStringFromAnotherWhere = 15 //prix de la pose  avec cordage acheté ailleurs
+
   const userInfo =  useSelector((state) => state.user.userInfo);
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);
-  const stringingPriceWithStringFromShop = useSelector(state => state.cart.stringingPriceWithStringFromShop);
-  const stringingPriceWithStringFromAnotherWhere= useSelector(state => state.cart.stringingPriceWithStringFromAnotherWhere);
-  const stringingPrice= useSelector(state => state.cart.stringingPrice);
-
   const isConnected = useSelector(state => state.user.isConnected);
   const token = useSelector(state => state.user.token);
 
   const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
-
-
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
   const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
@@ -39,10 +36,6 @@ export default function Stringing() {
   console.log("userInfo", userInfo)
   //console.log("stringFromShop", stringFromShop)
   //console.log("stringFromplayer", stringFromPlayer)
-  console.log("prix de la pose cordage ", stringingPrice)
-
- console.log("prix de la pose cordage fourni ", stringingPriceWithStringFromAnotherWhere)
-  
   //recupération de la saisie de la marque/type de la raquette
   const handleRacquetPlayerChange = (event) => {
     const value = event.target.value;
@@ -55,15 +48,12 @@ export default function Stringing() {
   };
  
 
-
   // gestion de l'état de validation du bouton pour ajouter le produit
   const isValid =
   (hubChoice ?? null) !== null &&   (hubBackChoice ?? null) !== null &&   (stringRopeChoice ?? null) !== null &&  racquetPlayer !== "" &&   racquetPlayer !== null && racquetPlayer !== undefined &&  
   ( ( stringFromPlayer !== "" && stringFromPlayer !== undefined  && stringFromPlayer !== null && stringFromPlayerOrigin !== null)  || (stringFromShop ?? null) !== null );
  
   
-
-
   //fonction asynchrone vers le backend pour modifier
   //les préférences de cordages 
   const savePreferencePlayer  = async function (data) {
@@ -194,7 +184,6 @@ export default function Stringing() {
   };
   
   
-   
   
 
 
@@ -220,6 +209,7 @@ export default function Stringing() {
           <div className='string stringing-form__section-wrapper'>
 
             <label className="stringing-form__label">Cordage</label>
+
 
             <SelectString setStringFromPlayerSelected={setStringFromPlayerSelected} setStringFromPlayer ={setStringFromPlayer}  />
 
@@ -281,7 +271,7 @@ export default function Stringing() {
                         checked={stringFromPlayerOrigin === "shop"}
                         />                  
                       <div className="order-stringer-detail__checkbox-text"> 
-                        Cordage acheté en boutique
+                         acheté en boutique
                       </div>
                 </div> 
 
@@ -293,7 +283,7 @@ export default function Stringing() {
                         checked={stringFromPlayerOrigin === "anotherwhere"}
                         />                  
                       <div className="order-stringer-detail__checkbox-text"> 
-                        Cordage acheté hors boutique
+                         acheté hors boutique
                       </div>
                   </div> 
 

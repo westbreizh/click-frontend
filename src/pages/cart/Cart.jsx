@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {  useSelector, useDispatch } from 'react-redux'
-import { calculNumberArticle, deleteArticle, calculTotalPriceProducts, updateStringingPrice  } from '../../store/cartSlice';
+import { calculNumberArticle, deleteArticle, calculTotalPrice  } from '../../store/cartSlice';
 import DropDownSelectQuantity from '../../components/select/dropDownSelectQuantity';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { NavLink } from "react-router-dom"
@@ -11,7 +11,6 @@ export default function Cart() {
 
   const articleList = useSelector(state => state.cart.articleList);
   const numberArticle = useSelector(state => state.cart.numberArticle);
-  const totalPriceProducts = useSelector(state => state.cart.totalPriceProducts);
   const totalPrice = useSelector(state => state.cart.totalPrice);
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
 
@@ -28,7 +27,7 @@ export default function Cart() {
 
  useEffect(() => {
   dispatch(calculNumberArticle());
-  dispatch(calculTotalPriceProducts());
+  dispatch(calculTotalPrice());
 }, [articleList]);
 
 const isOnlyAccesories = (articleList, navigate) => {
@@ -262,7 +261,7 @@ const handleClickGoToOrder = () => {
                     <div>
                       {numberArticle > 1 ? ` ${numberArticle} articles ` : ` ${numberArticle} article `}
                     </div>
-                    <div>  {totalPriceProducts} € </div>
+                    <div>  {totalPrice} € </div>
                   </div>
 
 

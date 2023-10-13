@@ -7,13 +7,13 @@ import logoPaiment from "../../assets/logo-Paiement-carte-bleu.webp"
 import logoPaypal from "../../assets/logo-paypal.jpeg"
 import { useNavigate } from 'react-router-dom';
 import { resetCart } from '../../store/cartSlice'
-import { calculNumberArticle, calculTotalPriceProducts } from '../../store/cartSlice';
+import { calculNumberArticle, calculTotalPrice } from '../../store/cartSlice';
 
 export default function Order() {
 
   const isConnected = useSelector(state => state.user.isConnected);
   const articleList = useSelector(state => state.cart.articleList);
-  const totalPriceProducts = useSelector(state => state.cart.totalPriceProducts);
+  const totalPrice = useSelector(state => state.cart.totalPrice);
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
   const userInfo = useSelector(state => state.user.userInfo);
   console.log("articleList", articleList)
@@ -47,7 +47,7 @@ export default function Order() {
 
   useEffect(() => {
     dispatch(calculNumberArticle());
-    dispatch(calculTotalPriceProducts());
+    dispatch(calculTotalPrice());
   }, []);
 
 console.log("raquet player",racquetPlayer)
@@ -99,7 +99,7 @@ console.log("raquet player",racquetPlayer)
   const datasInput = document.createElement('input');
   datasInput.type = 'hidden';
   datasInput.name = 'datas';
-  datasInput.value = JSON.stringify({ userInfo, articleList, totalPriceProducts, hubChoice, hubBackChoice, token, racquetPlayer });
+  datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token, racquetPlayer });
 
   // Ajoutez le champ de formulaire au formulaire virtuel
   form.appendChild(datasInput);
@@ -115,7 +115,7 @@ console.log("raquet player",racquetPlayer)
       const response = await fetch(`https://click-backend.herokuapp.com/api/shop/paiement-in-shop`, {
         mode: "cors",
         method: "POST",
-        body: JSON.stringify({ userInfo, articleList, totalPriceProducts, hubChoice, hubBackChoice, token, racquetPlayer }),
+        body: JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token, racquetPlayer }),
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}` 
@@ -286,7 +286,7 @@ console.log("raquet player",racquetPlayer)
 
               <div className='cart-summary__total-line'>
                 <div> Total </div>
-                <div> {totalPriceProducts} € </div>
+                <div> {totalPrice} € </div>
               </div>
 
             </div>

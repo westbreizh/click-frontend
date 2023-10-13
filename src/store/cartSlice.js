@@ -7,12 +7,9 @@ const cartSlice = createSlice({
   initialState: {
     articleList: [], // comprend les balles et accessoires
     numberArticle: 0, // comprend tous les éléments articleList et installationWithStringList
-    totalPriceProducts: 0, // prix total produit sans le prix de la pose cordage
     totalPrice: 0, //prix total
     stringFromShopChoice:[],
-    stringingPrice: 10, //prix de la pose 
-    stringingPriceWithStringFromShop: 12, //prix de la pose avec cordage acheté en boutique 
-    stringingPriceWithStringFromAnotherWhere: 15, //prix de la pose  avec cordage acheté ailleurs
+    stringingPrice: 15, //prix de la pose 
   },
 
   reducers: {
@@ -88,14 +85,13 @@ const cartSlice = createSlice({
 
 
     // Action pour calculer le prix du panier
-    calculTotalPriceProducts: (state) => {
+    calculTotalPrice: (state) => {
       const totalPrice = state.articleList.reduce(
         (total, article) => total + article.price * article.quantity,
         0
       );
       
       const formattedPrice = totalPrice.toFixed(2).replace('.', ',');
-      state.totalPriceProducts = formattedPrice;
       state.totalPrice = formattedPrice;
     },
     
@@ -110,7 +106,6 @@ const cartSlice = createSlice({
     resetCart: (state) => {
       state.articleList = [];
       state.numberArticle = 0;
-      state.totalPriceProducts = 0;
       state.totalPrice = 0;
     },
     
@@ -122,7 +117,7 @@ export const {
   addArticle,
   addInstallationString,
   changeQuantityArticle,
-  calculTotalPriceProducts,
+  calculTotalPrice,
   calculNumberArticle,
   deleteArticle,
   deleteInstallationWithString,

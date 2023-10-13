@@ -145,7 +145,7 @@ export default function OrderDetailHistory() {
 
                   { oneOrder.statusOrder ==="initié"?
                     <div className='oneOrderCart__line-status'>
-                      Prêt à être retiré à  {' '}
+                      Prêt à être retiré par notre équipe à  {' '}
                         {
                           (() => {
                             const hub = JSON.parse(oneOrder.hub);
@@ -265,11 +265,6 @@ export default function OrderDetailHistory() {
 
                             </div>
 
-                              <div className='oneOrderCart__content-on-one-line'>
-                                <div>Pose cordage </div> 
-
-                                <div> {product.price}€ </div>
-                              </div>
 
                               <div className='oneOrderCart__content-on-one-line'>
 
@@ -286,13 +281,11 @@ export default function OrderDetailHistory() {
                                   
                                 </div>
 
-                                <div>{product.stringFromShop.price} € </div>
 
                               </div>
 
 
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
-                              <div > Raquette : <span className="order-stringer__important-info"> {product.racquetPlayer} </span> </div> 
 
                           </div>
 
