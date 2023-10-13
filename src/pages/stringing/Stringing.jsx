@@ -14,10 +14,9 @@ export default function Stringing() {
 
   const userInfo =  useSelector((state) => state.user.userInfo);
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);
-
-  const stringingPrice = useSelector(state => state.cart.stringingPrice);
   const stringingPriceWithStringFromShop = useSelector(state => state.cart.stringingPriceWithStringFromShop);
   const stringingPriceWithStringFromAnotherWhere= useSelector(state => state.cart.stringingPriceWithStringFromAnotherWhere);
+  const stringingPrice= useSelector(state => state.cart.stringingPrice);
 
   const isConnected = useSelector(state => state.user.isConnected);
   const token = useSelector(state => state.user.token);
@@ -34,19 +33,16 @@ export default function Stringing() {
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
   const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
 
-
   const dispatch = useDispatch()
   const store = useStore()
 
   console.log("userInfo", userInfo)
-  console.log("stringFromShop", stringFromShop)
-  console.log("stringFromplayer", stringFromPlayer)
+  //console.log("stringFromShop", stringFromShop)
+  //console.log("stringFromplayer", stringFromPlayer)
+  console.log("prix de la pose cordage ", stringingPrice)
+
+ console.log("prix de la pose cordage fourni ", stringingPriceWithStringFromAnotherWhere)
   
-
-
-
-
-
   //recupération de la saisie de la marque/type de la raquette
   const handleRacquetPlayerChange = (event) => {
     const value = event.target.value;
@@ -63,7 +59,7 @@ export default function Stringing() {
   // gestion de l'état de validation du bouton pour ajouter le produit
   const isValid =
   (hubChoice ?? null) !== null &&   (hubBackChoice ?? null) !== null &&   (stringRopeChoice ?? null) !== null &&  racquetPlayer !== "" &&   racquetPlayer !== null && racquetPlayer !== undefined &&  
-  ( ( stringFromPlayer !== "" && stringFromPlayer !== undefined  && stringFromPlayer !== null)  || (stringFromShop ?? null) !== null );
+  ( ( stringFromPlayer !== "" && stringFromPlayer !== undefined  && stringFromPlayer !== null && stringFromPlayerOrigin !== null)  || (stringFromShop ?? null) !== null );
  
   
 
@@ -149,25 +145,34 @@ export default function Stringing() {
         await loadDataPlayerAfterModif();
       }
   
-      if (stringFromPlayer !== null && stringFromShop === null  ) {
-        const article = {
-          categorie: "pose cordage seule",
-          quantity: 1,
-          price: stringingPrice,
+      let article = {};
+  
+      if (stringFromPlayer !== null && stringFromShop === null) {
+        if (stringFromPlayerOrigin === "shop") {
+          article = {
+            categorie: "pose cordage seule",
+            quantity: 1,
+            price: stringingPriceWithStringFromShop,
+          };
+        } else if (stringFromPlayerOrigin === "anotherwhere") {
+          article = {
+            categorie: "pose cordage seule",
+            quantity: 1,
+            price: stringingPriceWithStringFromAnotherWhere,
+          };
+        }
+        article = {
+          ...article,
           stringRopeChoice,
           stringFromPlayer,
           racquetPlayer,
           hubChoice,
           hubBackChoice,
         };
-  
-        console.log(article);
-        dispatch(addInstallationString(article));
-        setSubmenuValidation(true);
-      } else       if (stringFromShop !== null && stringFromPlayerSelected === false) {
-        const article = {
+      } else if (stringFromShop !== null && stringFromPlayerSelected === false) {
+        article = {
           categorie: "fourniture et pose cordage",
-          price: ( parseFloat(stringFromShop.price)).toFixed(2),
+          price: parseFloat(stringFromShop.price).toFixed(2),
           quantity: 1,
           stringRopeChoice,
           stringFromShop,
@@ -175,17 +180,19 @@ export default function Stringing() {
           hubChoice,
           hubBackChoice,
         };
-        console.log(article);
-        dispatch(addInstallationString(article));
-        setSubmenuValidation(true);
         dispatch(calculNumberArticle());
       }
+  
+      console.log(article);
+      dispatch(addInstallationString(article));
+      setSubmenuValidation(true);
     } catch (err) {
       const errorMessage = err.toString();
       console.log(errorMessage);
       // Gérer les erreurs ici si nécessaire
     }
   };
+  
   
    
   
