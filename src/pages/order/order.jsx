@@ -337,7 +337,7 @@ console.log("articleList",articleList)
                       name="paiementInShop"
                       className="order_checkbox_input"
                       checked={paiementInShopChecked}
-                                       />
+                     />
                   Paiement en boutique
                   </label>
                   <div className='order_checkbox-text-under'> 

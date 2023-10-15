@@ -228,7 +228,7 @@ if (numberKnotChoice==null){
 
             <SelectString setStringFromPlayerSelected={setStringFromPlayerSelected} setStringFromPlayer ={setStringFromPlayer}  />
 
-            { stringFromShop !== null && stringFromShop !== undefined && stringFromPlayerSelected === false &&  (
+            { stringFromShop !== null && stringFromShop !== undefined &&    (
               
               <>
                 <div className='stringing-form__own-string-wrapper'> 
