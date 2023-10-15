@@ -51,6 +51,7 @@ export default function Order() {
   }, []);
 
 console.log("raquet player",racquetPlayer)
+console.log("articleList",articleList)
 
   const token = useSelector((state) => state.user.token);
   const PUBLIC_KEY = "pk_live_51NGdYqI8HrVwrRfPvO0VCSPgquB0SZOcQeifdVeXzlryvLj2gpTf6EufvCPRJ7SD1M9iCjTY7ZTwySpWtjYibzb100TJ7uXJag"
