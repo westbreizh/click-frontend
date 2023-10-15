@@ -46,6 +46,9 @@ if (numberKnotChoice==null){
   console.log("nomberArticle", numberAticle)
   //console.log("stringFromShop", stringFromShop)
   //console.log("stringFromplayer", stringFromPlayer)
+
+
+
   //recupération de la saisie de la marque/type de la raquette
   const handleRacquetPlayerChange = (event) => {
     const value = event.target.value;
@@ -105,7 +108,7 @@ if (numberKnotChoice==null){
     }
   }
     //fonction asynchrone vers le backend pour recuperer
-  //les infos utilisateurs avec les modifications veant d'être apporté  
+  //les infos utilisateurs avec les modifications venant d'être apporté  
   const loadDataPlayerAfterModif = async function (data) {
     try{
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/loadDataPlayerAfterModif`, {
@@ -165,6 +168,7 @@ if (numberKnotChoice==null){
         article = {
           ...article,
           stringRopeChoice,
+          numberKnotChoice,
           stringFromPlayer,
           racquetPlayer,
           hubChoice,

@@ -287,6 +287,7 @@ export default function OrderDetailForStringer() {
 
 
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
+                              <div> Nombre de noeuds : <span className="order-stringer__important-info"> {product.numberKnot} </span>  </div>
                               <div > Raquette : <span className="order-stringer__important-info"> {product.racquetPlayer} </span> </div> 
 
                           </div>
@@ -307,6 +308,8 @@ export default function OrderDetailForStringer() {
                              
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
  
+                              <div> Nombre de noeuds : <span className="order-stringer__important-info"> {product.numberKnot} </span>  </div>
+
                               <div > Raquette : <span className="order-stringer__important-info"> {product.racquetPlayer} </span> </div> 
 
                             </div>
