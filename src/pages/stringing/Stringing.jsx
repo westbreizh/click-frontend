@@ -20,6 +20,8 @@ export default function Stringing() {
   const isConnected = useSelector(state => state.user.isConnected);
   const token = useSelector(state => state.user.token);
 
+  const numberAticle=  useSelector((state) => state.cart.numberAticle);
+
   const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
@@ -28,15 +30,20 @@ export default function Stringing() {
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
   const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
   const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
-  const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(null);
-  const [numberKnotChoice, setnumberKnotChoice] = useState("4");
+  const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(userInfo.stringFromPlayerOrigin);
+  const [numberKnotChoice, setnumberKnotChoice] = useState(userInfo.numberKnot);
 
-
+  console.log("numberKnotChoice", numberKnotChoice)
+// par défault on corde avec 4 noeuds
+if (numberKnotChoice==null){
+  setnumberKnotChoice("4")
+};
 
   const dispatch = useDispatch()
   const store = useStore()
 
   console.log("userInfo", userInfo)
+  console.log("nomberArticle", numberAticle)
   //console.log("stringFromShop", stringFromShop)
   //console.log("stringFromplayer", stringFromPlayer)
   //recupération de la saisie de la marque/type de la raquette
@@ -75,7 +82,8 @@ export default function Stringing() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/savePreferencePlayer`, {
         mode: "cors",
         method: "POST",
-        body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayerToSend, stringFromShopId: stringFromShopId, stringRopeChoice: stringRopeChoice, racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, }),
+        body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayerToSend, stringFromShopId: stringFromShopId, 
+          stringRopeChoice: stringRopeChoice,  racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, stringFromPlayerOrigin: stringFromPlayerOrigin, numberKnotChoice: numberKnotChoice, }),
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}` 
@@ -278,17 +286,17 @@ export default function Stringing() {
                       </div>
                 </div> 
 
-                  <div className='stringing-form__wrapper-input-checkbox'>
-                    <input
-                        type="checkbox"
-                        className="order-stringer-detail__checkbox"
-                        onClick={() => setStringFromPlayerOrigin("anotherwhere")}
-                        checked={stringFromPlayerOrigin === "anotherwhere"}
-                        />                  
-                      <div className="order-stringer-detail__checkbox-text"> 
-                         acheté hors boutique (15 € la pose)
-                      </div>
-                  </div> 
+                <div className='stringing-form__wrapper-input-checkbox'>
+                  <input
+                      type="checkbox"
+                      className="order-stringer-detail__checkbox"
+                      onClick={() => setStringFromPlayerOrigin("anotherwhere")}
+                      checked={stringFromPlayerOrigin === "anotherwhere"}
+                      />                  
+                    <div className="order-stringer-detail__checkbox-text"> 
+                        acheté hors boutique (15 € la pose)
+                    </div>
+                </div> 
 
 
 

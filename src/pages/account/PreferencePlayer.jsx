@@ -26,8 +26,16 @@ export default function PreferencePlayer() {
   const [hubBackChoice, setHubBackChoice] = useState(userInfo.hubBackInfo);
   const [racquetPlayer, setRacquetPlayer] = useState(userInfo.racquet_player);
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
+  const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(userInfo.stringFromPlayerOrigin);
+  const [numberKnotChoice, setnumberKnotChoice] = useState(userInfo.numberKnot);
 
+  console.log("numberKnotChoice", numberKnotChoice)
+  console.log("stringFromPlayerOrigin", stringFromPlayerOrigin)
 
+  // par défault on corde avec 4 noeuds
+  if (numberKnotChoice==null){
+    setnumberKnotChoice("4")
+  };
 
   const dispatch = useDispatch()
   const store = useStore()
@@ -69,7 +77,8 @@ export default function PreferencePlayer() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/savePreferencePlayer`, {
         mode: "cors",
         method: "POST",
-        body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayerToSend, stringFromShopId: stringFromShopId, stringRopeChoice: stringRopeChoice, racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, }),
+        body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayerToSend, stringFromShopId: stringFromShopId, 
+          stringRopeChoice: stringRopeChoice,  racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, stringFromPlayerOrigin: stringFromPlayerOrigin, numberKnotChoice: numberKnotChoice, }),
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}` 
@@ -123,8 +132,8 @@ export default function PreferencePlayer() {
     }
   }
 
-  // fonction qui ajoute, enrgistre la pose du cordage dans le panier du  store redux 
-  // si la case "sauvegarder mes choix " est cliqué on envoit au backend les infos pour sauvegardes préférences cordages 
+  // fonction qui appele la fonction pour sauvegarder les preference joueur et ensuite reacharge les modifs  
+  //  
   const onSubmit = async () => {
     try {
       await savePreferencePlayer();
@@ -215,8 +224,34 @@ export default function PreferencePlayer() {
                   <div className='modal-atc__message-text'>
                   Je fournis mon propre cordage
                   </div>
-                  
+
+
                 </div>
+
+                <div className='stringing-form__wrapper-input-checkbox'>
+                    <input
+                        type="checkbox"
+                        className="order-stringer-detail__checkbox"
+                        onClick={() => setStringFromPlayerOrigin("shop")}
+                        checked={stringFromPlayerOrigin === "shop"}
+                        />                  
+                      <div className="order-stringer-detail__checkbox-text"> 
+                         acheté en boutique (12 € la pose)
+                      </div>
+                  </div> 
+
+                  <div className='stringing-form__wrapper-input-checkbox'>
+                    <input
+                        type="checkbox"
+                        className="order-stringer-detail__checkbox"
+                        onClick={() => setStringFromPlayerOrigin("anotherwhere")}
+                        checked={stringFromPlayerOrigin === "anotherwhere"}
+                        />                  
+                      <div className="order-stringer-detail__checkbox-text"> 
+                          acheté hors boutique (15 € la pose)
+                      </div>
+                  </div> 
+
 
                 <div className='string stringing-form__section-wrapper'>
 
@@ -260,6 +295,37 @@ export default function PreferencePlayer() {
                 <div>
                 {stringRopeChoice} kg
                 </div>
+
+                <div className='title_number-knot'> Posé avec : </div>
+
+                <div className='wrapper_number-knot' >
+
+                  <div className='stringing-form__wrapper-input-checkbox-knot'>
+                      <input
+                          type="checkbox"
+                          className="order-stringer-detail__checkbox"
+                          onClick={() => setnumberKnotChoice("4")}
+                          checked={numberKnotChoice === "4"}
+                          />                  
+                        <div className="order-stringer-detail__checkbox-text"> 
+                          4 noeuds
+                        </div>
+                  </div> 
+
+                  <div className='stringing-form__wrapper-input-checkbox-knot'>
+                    <input
+                        type="checkbox"
+                        className="order-stringer-detail__checkbox"
+                        onClick={() => setnumberKnotChoice("2")}
+                        checked={numberKnotChoice === "2"}
+                      />                  
+                      <div className="order-stringer-detail__checkbox-text"> 
+                          2 noeuds
+                      </div>
+                  </div> 
+
+                </div>
+
 
                   
               </>
