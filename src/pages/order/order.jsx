@@ -65,7 +65,7 @@ console.log("articleList",articleList)
   };
 
   const [paiementInlineChecked, setPaiementInlineChecked] = useState(false);
-  const [paiementInShopChecked, setPaiementInShopChecked] = useState("paiementInShopChecked");
+  const [paiementInShopChecked, setPaiementInShopChecked] = useState(true);
 
   const handlePaiementInlineChange = () => {
     setPaiementInlineChecked(!paiementInlineChecked);
@@ -337,7 +337,8 @@ console.log("articleList",articleList)
                       name="paiementInShop"
                       className="order_checkbox_input"
                       checked={paiementInShopChecked}
-                      onChange={handlePaiementInShopChange}                  />
+                      disabled={true} // Désactive la case à cocher
+                                       />
                   Paiement en boutique
                   </label>
                   <div className='order_checkbox-text-under'> 
