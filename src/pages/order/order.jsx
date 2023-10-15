@@ -14,7 +14,7 @@ export default function Order() {
   const isConnected = useSelector(state => state.user.isConnected);
   const articleList = useSelector(state => state.cart.articleList);
   const totalPrice = useSelector(state => state.cart.totalPrice);
-  const stringingPrice = useSelector(state => state.cart.stringingPrice);
+
   const userInfo = useSelector(state => state.user.userInfo);
   console.log("articleList", articleList)
   //problème si on a un article accessoire en premier dans la liste
@@ -65,7 +65,7 @@ console.log("articleList",articleList)
   };
 
   const [paiementInlineChecked, setPaiementInlineChecked] = useState(false);
-  const [paiementInShopChecked, setPaiementInShopChecked] = useState(false);
+  const [paiementInShopChecked, setPaiementInShopChecked] = useState("paiementInShopChecked");
 
   const handlePaiementInlineChange = () => {
     setPaiementInlineChecked(!paiementInlineChecked);
