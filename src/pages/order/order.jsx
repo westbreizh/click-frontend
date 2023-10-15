@@ -337,7 +337,6 @@ console.log("articleList",articleList)
                       name="paiementInShop"
                       className="order_checkbox_input"
                       checked={paiementInShopChecked}
-                      disabled={true} // Désactive la case à cocher
                                        />
                   Paiement en boutique
                   </label>
