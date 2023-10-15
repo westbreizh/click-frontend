@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch, useStore } from 'react-redux'
-import { addInstallationString, calculNumberArticle, updateStringingPrice } from "../../store/cartSlice"
+import { addInstallationString, calculNumberArticle } from "../../store/cartSlice"
 import { NavLink } from 'react-router-dom';
 import SelectHub from '../../components/select/SelectHub';
 import SelectHubBack from '../../components/select/SelectHubBack';
@@ -23,12 +23,15 @@ export default function Stringing() {
   const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
-  const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
-  const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(null);
   const [hubBackChoice, setHubBackChoice] = useState(userInfo.hubBackInfo);
   const [racquetPlayer, setRacquetPlayer] = useState(userInfo.racquet_player);
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
   const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
+  const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
+  const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(null);
+  const [numberKnotChoice, setnumberKnotChoice] = useState("4");
+
+
 
   const dispatch = useDispatch()
   const store = useStore()
@@ -271,7 +274,7 @@ export default function Stringing() {
                         checked={stringFromPlayerOrigin === "shop"}
                         />                  
                       <div className="order-stringer-detail__checkbox-text"> 
-                         acheté en boutique
+                         acheté en boutique (12 € la pose)
                       </div>
                 </div> 
 
@@ -283,7 +286,7 @@ export default function Stringing() {
                         checked={stringFromPlayerOrigin === "anotherwhere"}
                         />                  
                       <div className="order-stringer-detail__checkbox-text"> 
-                         acheté hors boutique
+                         acheté hors boutique (15 € la pose)
                       </div>
                   </div> 
 
@@ -332,6 +335,36 @@ export default function Stringing() {
                 {stringRopeChoice} kg
                 </div>
 
+
+                <div className='title_number-knot'> Posé avec : </div>
+
+                <div className='wrapper_number-knot' >
+
+                  <div className='stringing-form__wrapper-input-checkbox-knot'>
+                      <input
+                          type="checkbox"
+                          className="order-stringer-detail__checkbox"
+                          onClick={() => setnumberKnotChoice("4")}
+                          checked={numberKnotChoice === "4"}
+                          />                  
+                        <div className="order-stringer-detail__checkbox-text"> 
+                          4 noeuds
+                        </div>
+                  </div> 
+
+                  <div className='stringing-form__wrapper-input-checkbox-knot'>
+                    <input
+                        type="checkbox"
+                        className="order-stringer-detail__checkbox"
+                        onClick={() => setnumberKnotChoice("2")}
+                        checked={numberKnotChoice === "2"}
+                      />                  
+                      <div className="order-stringer-detail__checkbox-text"> 
+                          2 noeuds
+                      </div>
+                  </div> 
+
+                </div>
                   
               </>
 

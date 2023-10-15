@@ -2630,6 +2630,23 @@ input {
   color: transparent;
 }
 
+.title_number-knot {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.wrapper_number-knot {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.stringing-form__wrapper-input-checkbox-knot {
+  display: flex;
+  align-items: baseline;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
 /* -------------------  Responsive ----------------------*/
 @media screen and (max-width: 768px) {
   .stringing__main {
