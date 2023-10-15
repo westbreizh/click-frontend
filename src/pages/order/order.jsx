@@ -44,7 +44,6 @@ export default function Order() {
     // Traitez le cas où articleList est vide ou null
   }
 
-
   useEffect(() => {
     dispatch(calculNumberArticle());
     dispatch(calculTotalPrice());
@@ -313,6 +312,7 @@ console.log("articleList",articleList)
 
               <div className="order_paiement-mode-wrapper">
 
+                {/*paiement en ligne en attente
                 <div className="order_paiement-mode-subWrapper">
 
                   <label className="order_checkbox_label">
@@ -327,6 +327,7 @@ console.log("articleList",articleList)
                   <img src={logoPaiment} alt="logo moyen de paiement" className="logo-paiement" />
                   <img src={logoPaypal} alt="logo moyen de paiement" className="logo-paiement" />
                 </div>
+                */}
 
                 <div className="order_paiement-mode-subWrapper">
 

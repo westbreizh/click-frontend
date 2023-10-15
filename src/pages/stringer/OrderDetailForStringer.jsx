@@ -248,7 +248,6 @@ export default function OrderDetailForStringer() {
                   {JSON.parse(oneOrder.articleList).map((product, index) => {
 
                     switch (product.categorie) {
-
                       case "fourniture et pose cordage":
                         return (
 
@@ -287,7 +286,7 @@ export default function OrderDetailForStringer() {
 
 
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
-                              <div> Nombre de noeuds : <span className="order-stringer__important-info"> {product.numberKnot} </span>  </div>
+                              <div> Nombre de noeuds : <span className="order-stringer__important-info"> {product.numberKnotChoice} </span>  </div>
                               <div > Raquette : <span className="order-stringer__important-info"> {product.racquetPlayer} </span> </div> 
 
                           </div>
@@ -298,6 +297,7 @@ export default function OrderDetailForStringer() {
                         return (
 
                           <div className='oneOrderCart__product-wrapper-installation' key={index}>
+                        {console.log("produit",product)}
 
                             <div className='oneOrderCart__product-info-wrapper-left'>
 
@@ -308,7 +308,7 @@ export default function OrderDetailForStringer() {
                              
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
  
-                              <div> Nombre de noeuds : <span className="order-stringer__important-info"> {product.numberKnot} </span>  </div>
+                              <div> Nombre de noeuds : <span className="order-stringer__important-info"> {product.numberKnotChoice} </span>  </div>
 
                               <div > Raquette : <span className="order-stringer__important-info"> {product.racquetPlayer} </span> </div> 
 
