@@ -13,7 +13,9 @@ export default function OrderDetailHistory() {
   const token = useSelector((state) => state.user.token);
 
   const [oneOrder, setOneOrder] = useState("") ;
+  const [hub, setHub] = useState("") ;
   const [selectedOrder, setSelectedOrder] = useState([]);
+
 
 
   // gestion de l'état de validation du bouton pour ajouter le produit  
@@ -43,6 +45,7 @@ export default function OrderDetailHistory() {
         const result = await response.json();
         const orderInfoFromBackend = result.data.orderInfo
         setOneOrder(orderInfoFromBackend[0])
+        setHub(JSON.parse(orderInfoFromBackend[0].hub))
         console.log(result.message);
       }
     }
@@ -52,10 +55,6 @@ export default function OrderDetailHistory() {
       console.log(errorMessage);
     }
   }
-
-  console.log("oneorder", oneOrder)
-  const hubObject = JSON.parse(oneOrder.hub);
-  console.log("hubObject", hubObject)
 
   //fonction asynchrone vers le backend pour valider 
   //le changement de status
@@ -106,6 +105,8 @@ export default function OrderDetailHistory() {
     loadOneOrder ()
   },[])
 
+  console.log("oneorder", oneOrder)
+  console.log("hub", hub)
 
   return (
 
@@ -158,8 +159,7 @@ export default function OrderDetailHistory() {
                   }
 
 
-                  { oneOrder.statusOrder ==="prêt à corder" && hubObject.enterprise_name !== "KST Boutique"?
-                    <div className='oneOrderCart__line-status'>
+                  { oneOrder.statusOrder ==="prêt à corder" && hub.enterprise_name !== "KST Boutique"?                    <div className='oneOrderCart__line-status'>
                       Raquette collectée le  {' '}
                       {
                         (() => {
@@ -256,7 +256,6 @@ export default function OrderDetailHistory() {
                         return (
 
                           <div className='oneOrderCart__product-wrapper-instal-with-string' key={index}>
-                                {console.log(product)}
                             <div className='oneOrderCart__instal-with-string-top'>
 
                               <div className='oneOrderCart__text-weight-uppercase'>  Fourniture et pose cordage </div>

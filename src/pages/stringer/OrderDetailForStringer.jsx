@@ -14,7 +14,7 @@ export default function OrderDetailForStringer() {
   const stringingPrice = useSelector(state => state.cart.stringingPrice);
   const [oneOrder, setOneOrder] = useState("") ;
   const [selectedOrder, setSelectedOrder] = useState([]);
-
+  const [hub, setHub] = useState("") ;
 
   // gestion de l'état de validation du bouton pour ajouter le produit  
   const isValid =
@@ -42,8 +42,8 @@ export default function OrderDetailForStringer() {
       }else {
         const result = await response.json();
         const orderInfo = result.data.orderInfo
-
         setOneOrder(orderInfo[0])
+        setHub(JSON.parse(orderInfo[0].hub))
         console.log(result.message);
         
       }
@@ -54,9 +54,7 @@ export default function OrderDetailForStringer() {
       console.log(errorMessage);
     }
   }
-  console.log("oneorder", oneOrder)
-  const hubObject = JSON.parse(oneOrder.hub);
-  console.log("hubObject", hubObject)
+
   //fonction asynchrone vers le backend pour valider 
   //le changement de status
   const changeStatusOrder  = async function (data) {
@@ -106,6 +104,8 @@ export default function OrderDetailForStringer() {
     loadOneOrder ()
   },[])
 
+  console.log("oneorder", oneOrder)
+  console.log("hubObject", hub)
 
   return (
 
@@ -158,7 +158,7 @@ export default function OrderDetailForStringer() {
                   }
 
 
-                  { oneOrder.statusOrder ==="prêt à corder" && hubObject.enterprise_name !== "KST Boutique"?
+                  { oneOrder.statusOrder ==="prêt à corder" && hub.enterprise_name !== "KST Boutique"?
                     <div className='oneOrderCart__line-status'>
                       Raquette collectée le  {' '}
                       {
