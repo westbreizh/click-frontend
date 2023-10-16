@@ -8,7 +8,7 @@ const cartSlice = createSlice({
     articleList: [], // comprend les balles et accessoires
     numberArticle: 0, // comprend tous les éléments articleList et installationWithStringList
     totalPrice: 0, //prix total
-    stringFromShopChoice:[],
+    stringFromShopChoice:null,
     stringingPrice: 15, //prix de la pose 
   },
 

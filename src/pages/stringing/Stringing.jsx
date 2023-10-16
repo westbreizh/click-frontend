@@ -15,25 +15,32 @@ export default function Stringing() {
   const stringingPriceWithStringFromShop = 12 //prix de la pose avec cordage acheté en boutique 
   const stringingPriceWithStringFromAnotherWhere = 15 //prix de la pose  avec cordage acheté ailleurs
 
-  const userInfo =  useSelector((state) => state.user.userInfo);
-  const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);
+
+
+  const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);// dans le slice redux on initialise la preference joueur si il y a 
+  const numberAticle=  useSelector((state) => state.cart.numberAticle);
+  const cart=  useSelector((state) => state.cart);
+
+
   const isConnected = useSelector(state => state.user.isConnected);
   const token = useSelector(state => state.user.token);
 
-  const numberAticle=  useSelector((state) => state.cart.numberAticle);
-
+  const userInfo =  useSelector((state) => state.user.userInfo);
   const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
   const [hubBackChoice, setHubBackChoice] = useState(userInfo.hubBackInfo);
   const [racquetPlayer, setRacquetPlayer] = useState(userInfo.racquet_player);
-  const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
-  const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
-  const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
   const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(userInfo.stringFromPlayerOrigin);
   const [numberKnotChoice, setnumberKnotChoice] = useState(userInfo.numberKnot);
 
-  console.log("numberKnotChoice", numberKnotChoice)
+  const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
+  const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
+  const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
+
+
+
+
 // par défault on corde avec 4 noeuds
 if (numberKnotChoice==null){
   setnumberKnotChoice("4")
@@ -44,7 +51,9 @@ if (numberKnotChoice==null){
 
   console.log("userInfo", userInfo)
   console.log("nomberArticle", numberAticle)
-  //console.log("stringFromShop", stringFromShop)
+  console.log("stringFromShop", stringFromShop)
+  console.log("numberKnotChoice", numberKnotChoice)
+  console.log("cart", cart)
   //console.log("stringFromplayer", stringFromPlayer)
 
 
@@ -180,6 +189,7 @@ if (numberKnotChoice==null){
           price: parseFloat(stringFromShop.price).toFixed(2),
           quantity: 1,
           stringRopeChoice,
+          numberKnotChoice,
           stringFromShop,
           racquetPlayer,
           hubChoice,
@@ -188,7 +198,7 @@ if (numberKnotChoice==null){
         dispatch(calculNumberArticle());
       }
   
-      console.log(article);
+      console.log("article", article);
       dispatch(addInstallationString(article));
       setSubmenuValidation(true);
     } catch (err) {
@@ -228,7 +238,7 @@ if (numberKnotChoice==null){
 
             <SelectString setStringFromPlayerSelected={setStringFromPlayerSelected} setStringFromPlayer ={setStringFromPlayer}  />
 
-            { stringFromShop !== null && stringFromShop !== undefined &&  (
+            { stringFromShop !== null && stringFromShop !== undefined && stringFromPlayerSelected === false &&  (
               
               <>
                 <div className='stringing-form__own-string-wrapper'> 
@@ -263,7 +273,7 @@ if (numberKnotChoice==null){
             ) }
 
 
-            {stringFromPlayerSelected === true   ? (
+            {stringFromPlayerSelected === true  || (stringFromPlayer !== null && stringFromShop === null) ? (
 
               <div>
                 <div className='stringing-form__own-string-wrapper'> 
