@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStore } from "react-redux";
@@ -98,6 +100,11 @@ export default function LoginForm(props) {
 
   const closeModalConnexion = props.closeModalConnexion;
 
+
+
+  const navigate = useNavigate()
+
+
   const onSubmit = async function (data) {
     try {
       const response = await fetch(
@@ -119,10 +126,14 @@ export default function LoginForm(props) {
         const result = await response.json();
         store.dispatch(setUserInfo(result.userInfo));
         console.log("userInfo", result.userInfo);
+        const userRole =  result.userInfo.userRole
         store.dispatch(connectedToggle());
         store.dispatch(setToken(result.token));
         store.dispatch(resetStringFromShopChoice(result.userInfo.stringInfo));
         closeModalConnexion();
+        if (userRole === 'stringer'){
+          navigate("/cordeur_raquettes-à-corder")
+        }
       }
     } catch (err) {
       const errorMessage = err.toString();

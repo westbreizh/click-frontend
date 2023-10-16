@@ -50,7 +50,7 @@ if (numberKnotChoice==null){
   const store = useStore()
 
   console.log("userInfo", userInfo)
-  console.log("nomberArticle", numberAticle)
+  console.log("numberArticle", numberAticle)
   console.log("stringFromShop", stringFromShop)
   console.log("numberKnotChoice", numberKnotChoice)
   console.log("cart", cart)
