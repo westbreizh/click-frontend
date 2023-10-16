@@ -42,9 +42,10 @@ export default function OrderDetailForStringer() {
       }else {
         const result = await response.json();
         const orderInfo = result.data.orderInfo
-        console.log("oderInfo", orderInfo)
+
         setOneOrder(orderInfo[0])
         console.log(result.message);
+        
       }
     }
 
@@ -53,7 +54,9 @@ export default function OrderDetailForStringer() {
       console.log(errorMessage);
     }
   }
-
+  console.log("oneorder", oneOrder)
+  const hubObject = JSON.parse(oneOrder.hub);
+  console.log("hubObject", hubObject)
   //fonction asynchrone vers le backend pour valider 
   //le changement de status
   const changeStatusOrder  = async function (data) {
@@ -155,7 +158,7 @@ export default function OrderDetailForStringer() {
                   }
 
 
-                  { oneOrder.statusOrder ==="prêt à corder"?
+                  { oneOrder.statusOrder ==="prêt à corder" && hubObject.enterprise_name !== "KST Boutique"?
                     <div className='oneOrderCart__line-status'>
                       Raquette collectée le  {' '}
                       {
