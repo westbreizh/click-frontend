@@ -18,7 +18,7 @@ export default function Stringing() {
 
 
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);// dans le slice redux on initialise la preference joueur si il y a 
-  const numberAticle=  useSelector((state) => state.cart.numberAticle);
+  const numberAticle=  useSelector((state) => state.cart.numberArticle);
   const cart=  useSelector((state) => state.cart);
 
 
