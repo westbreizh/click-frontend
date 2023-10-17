@@ -32,16 +32,16 @@ export default function Stringing() {
   const [hubBackChoice, setHubBackChoice] = useState(userInfo.hubBackInfo);
   const [racquetPlayer, setRacquetPlayer] = useState(userInfo.racquet_player);
   const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(userInfo.stringFromPlayerOrigin);
-  const [numberKnotChoice, setnumberKnotChoice] = useState(userInfo.numberKnot);
+  const [numberKnotChoice, setnumberKnotChoice] = useState(userInfo.numberKnotChoice);
 
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
   const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
   const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
 
   // par défault on corde avec 4 noeuds
-  if (numberKnotChoice==null){
-    setnumberKnotChoice("4")
-  };
+ //if (numberKnotChoice==null){
+ //   setnumberKnotChoice("4")
+ //};
 
   const dispatch = useDispatch()
   const store = useStore()
@@ -49,7 +49,7 @@ export default function Stringing() {
   console.log("userInfo", userInfo)
   //console.log("numberArticle", numberAticle)
   //console.log("stringFromShop", stringFromShop)
-  //console.log("numberKnotChoice", numberKnotChoice)
+  console.log("numberKnotChoice", numberKnotChoice)
   //console.log("cart", cart)
   //console.log("stringFromplayer", stringFromPlayer)
 
@@ -205,9 +205,9 @@ export default function Stringing() {
     }
   };
   
-  
+  // Initialisation des valeurs locales à partir de userInfo lorsque userInfo change (connexion)
   useEffect(() => {
-    // Initialisation des valeurs locales à partir de userInfo lorsque userInfo change
+
     setStringFromPlayer(userInfo.stringFromPlayer);
     setStringRopeChoice(userInfo.string_rope);
     setHubChoice(userInfo.hubInfo);
@@ -299,7 +299,7 @@ export default function Stringing() {
                     <input
                         type="checkbox"
                         className="order-stringer-detail__checkbox"
-                        onClick={() => setStringFromPlayerOrigin("shop")}
+                        onChange={() => setStringFromPlayerOrigin("shop")}
                         checked={stringFromPlayerOrigin === "shop"}
                         />                  
                       <div className="order-stringer-detail__checkbox-text"> 
@@ -311,7 +311,7 @@ export default function Stringing() {
                   <input
                       type="checkbox"
                       className="order-stringer-detail__checkbox"
-                      onClick={() => setStringFromPlayerOrigin("anotherwhere")}
+                      onChange={() => setStringFromPlayerOrigin("anotherwhere")}
                       checked={stringFromPlayerOrigin === "anotherwhere"}
                       />                  
                     <div className="order-stringer-detail__checkbox-text"> 
@@ -367,33 +367,34 @@ export default function Stringing() {
 
                 <div className='title_number-knot'> Posé avec : </div>
 
-                <div className='wrapper_number-knot' >
-
-                  <div className='stringing-form__wrapper-input-checkbox-knot'>
-                      <input
-                          type="checkbox"
-                          className="order-stringer-detail__checkbox"
-                          onClick={() => setnumberKnotChoice("4")}
-                          checked={numberKnotChoice === "4"}
-                          />                  
-                        <div className="order-stringer-detail__checkbox-text"> 
-                          4 noeuds
-                        </div>
-                  </div> 
+                <div className='wrapper_number-knot'>
 
                   <div className='stringing-form__wrapper-input-checkbox-knot'>
                     <input
-                        type="checkbox"
-                        className="order-stringer-detail__checkbox"
-                        onClick={() => setnumberKnotChoice("2")}
-                        checked={numberKnotChoice === "2"}
-                      />                  
-                      <div className="order-stringer-detail__checkbox-text"> 
-                          2 noeuds
-                      </div>
-                  </div> 
+                      type="checkbox"
+                      className="order-stringer-detail__checkbox"
+                      onChange={() => setnumberKnotChoice("4")}
+                      checked={numberKnotChoice === "4"}
+                    />
+                    <div className="order-stringer-detail__checkbox-text">
+                      4 noeuds
+                    </div>
+                  </div>
+
+                  <div className='stringing-form__wrapper-input-checkbox-knot'>
+                    <input
+                      type="checkbox"
+                      className="order-stringer-detail__checkbox"
+                      onChange={() => setnumberKnotChoice("2")}
+                      checked={numberKnotChoice === "2"}
+                    />
+                    <div className="order-stringer-detail__checkbox-text">
+                      2 noeuds
+                    </div>
+                  </div>
 
                 </div>
+
                   
               </>
 
