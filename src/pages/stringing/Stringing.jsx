@@ -39,9 +39,9 @@ export default function Stringing() {
   const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
 
   // par défault on corde avec 4 noeuds
- //if (numberKnotChoice==null){
- //   setnumberKnotChoice("4")
- //};
+ if (numberKnotChoice==null){
+    setnumberKnotChoice("4")
+ };
 
   const dispatch = useDispatch()
   const store = useStore()
@@ -214,7 +214,7 @@ export default function Stringing() {
     setHubBackChoice(userInfo.hubBackInfo);
     setRacquetPlayer(userInfo.racquet_player);
     setStringFromPlayerOrigin(userInfo.stringFromPlayerOrigin);
-    setnumberKnotChoice(userInfo.numberKnot);
+    setnumberKnotChoice(userInfo.numberKnotChoice);
   }, [userInfo]);
     
 
