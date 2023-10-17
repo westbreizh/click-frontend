@@ -1,6 +1,6 @@
 const datasForSelectstring = [ 
   {   
-   options: ["Babolat","Dunlop", "Head", "Tecnifibre", "Yonex", "Luxillon"],
+   options: ["Babolat","Dunlop", "Head", "Tecnifibre", "Yonex", "Luxilon"],
    title : "Marque",
    fieldNameBdd: "Mark"
   },
