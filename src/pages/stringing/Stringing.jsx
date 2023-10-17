@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch, useStore } from 'react-redux'
 import { addInstallationString, calculNumberArticle } from "../../store/cartSlice"
 import { NavLink } from 'react-router-dom';
@@ -16,7 +16,6 @@ export default function Stringing() {
   const stringingPriceWithStringFromAnotherWhere = 15 //prix de la pose  avec cordage acheté ailleurs
 
 
-
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);// dans le slice redux on initialise la preference joueur si il y a 
   const numberAticle=  useSelector((state) => state.cart.numberArticle);
   const cart=  useSelector((state) => state.cart);
@@ -26,6 +25,7 @@ export default function Stringing() {
   const token = useSelector(state => state.user.token);
 
   const userInfo =  useSelector((state) => state.user.userInfo);
+
   const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
@@ -38,22 +38,19 @@ export default function Stringing() {
   const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
   const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
 
-
-
-
-// par défault on corde avec 4 noeuds
-if (numberKnotChoice==null){
-  setnumberKnotChoice("4")
-};
+  // par défault on corde avec 4 noeuds
+  if (numberKnotChoice==null){
+    setnumberKnotChoice("4")
+  };
 
   const dispatch = useDispatch()
   const store = useStore()
 
   console.log("userInfo", userInfo)
-  console.log("numberArticle", numberAticle)
-  console.log("stringFromShop", stringFromShop)
-  console.log("numberKnotChoice", numberKnotChoice)
-  console.log("cart", cart)
+  //console.log("numberArticle", numberAticle)
+  //console.log("stringFromShop", stringFromShop)
+  //console.log("numberKnotChoice", numberKnotChoice)
+  //console.log("cart", cart)
   //console.log("stringFromplayer", stringFromPlayer)
 
 
@@ -209,7 +206,17 @@ if (numberKnotChoice==null){
   };
   
   
-  
+  useEffect(() => {
+    // Initialisation des valeurs locales à partir de userInfo lorsque userInfo change
+    setStringFromPlayer(userInfo.stringFromPlayer);
+    setStringRopeChoice(userInfo.string_rope);
+    setHubChoice(userInfo.hubInfo);
+    setHubBackChoice(userInfo.hubBackInfo);
+    setRacquetPlayer(userInfo.racquet_player);
+    setStringFromPlayerOrigin(userInfo.stringFromPlayerOrigin);
+    setnumberKnotChoice(userInfo.numberKnot);
+  }, [userInfo]);
+    
 
 
   return (
