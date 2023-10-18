@@ -115,6 +115,18 @@ export default function SelectDateReady(props) {
             >
               {format( dateLonger, 'EEEE d MMMM', { locale: fr })}
             </li>
+
+            <li
+              key="shop faster"
+              className="clubSelect__submenu-li"
+
+            >
+              Urgent ? rendez-vous directement en boutique
+            </li>
+
+
+
+
           </ul>
         </div>
       )}

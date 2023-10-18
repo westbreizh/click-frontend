@@ -478,20 +478,26 @@ export default function Stringing() {
           <div className=' club stringing-form__section-wrapper'>
 
             <label className="stringing-form__label" > Délai proposé </label>
-            <div className='stringing-form__own-string-wrapper'> 
+
+            <div className='stringing-form__own-string-wrapper stringing-form__date-wrapper  '> 
 
               <div className="stringing-form__validation-bubble-checked     ">
                 <span>&#10003;</span>
               </div>
 
+              <div className='modal-atc__message-text'>                
+              A partir du {dateRacquetReady}
               </div>
 
-              <div>{dateRacquetReady}</div>
+            </div>
+
+          
+
 
             <SelectDateReady  setDateRacquetReady={setDateRacquetReady}  />
 
 
-              
+            
              
 
 
