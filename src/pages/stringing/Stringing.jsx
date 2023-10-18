@@ -6,9 +6,13 @@ import SelectHub from '../../components/select/SelectHub';
 import SelectHubBack from '../../components/select/SelectHubBack';
 import SelectString from '../../components/select/SelectString';
 import SelectRopeString from '../../components/select/SelectRopeString';
+import SelectDateReady from '../../components/select/SelectDateReady';
 import ModalValidationAddToCartInstallation from '../../components/modal/modalValidation/ModalValidationAddToCartInstallation';
 import { setUserInfo} from '../../store/userSlice'
 import {resetStringFromShopChoice} from '../../store/cartSlice'
+
+
+
 
 export default function Stringing() {
 
@@ -19,13 +23,10 @@ export default function Stringing() {
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);// dans le slice redux on initialise la preference joueur si il y a 
   const numberAticle=  useSelector((state) => state.cart.numberArticle);
   const cart=  useSelector((state) => state.cart);
-
-
   const isConnected = useSelector(state => state.user.isConnected);
   const token = useSelector(state => state.user.token);
 
   const userInfo =  useSelector((state) => state.user.userInfo);
-
   const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
@@ -37,6 +38,8 @@ export default function Stringing() {
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
   const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
   const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
+  const [dateRacquetReady, setDateRacquetReady] = useState("");
+
 
   // par défault on corde avec 4 noeuds
  if (numberKnotChoice==null){
@@ -469,6 +472,39 @@ export default function Stringing() {
             ) : null}
 
           </div>
+
+
+
+          <div className=' club stringing-form__section-wrapper'>
+
+            <label className="stringing-form__label" > Délai proposé </label>
+            <div className='stringing-form__own-string-wrapper'> 
+
+              <div className="stringing-form__validation-bubble-checked     ">
+                <span>&#10003;</span>
+              </div>
+
+              </div>
+
+              <div>{dateRacquetReady}</div>
+
+            <SelectDateReady  setDateRacquetReady={setDateRacquetReady}  />
+
+
+              
+             
+
+
+
+
+                  
+
+
+
+
+          </div>
+
+
 
           <div className='string stringing-form__section-wrapper'>
 
