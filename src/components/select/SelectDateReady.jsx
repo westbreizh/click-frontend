@@ -82,11 +82,11 @@ export default function SelectDateReady(props) {
 
   return (
     <div
-      className="clubSelect__wrapper"
+      className="clubSelect__wrapper dateBack-wrapper"
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className="clubSelect__bar-wrapper">
-        <div className="clubSelect__bar-title">Modifier le délai</div>
+        <div className="clubSelect__bar-title">Choisir une autre date</div>
         <span className={`clubSelect__arrow ${isOpen ? "clubSelect__arrow-up" : "clubSelect__arrow-down"}`} />
       </div>
 

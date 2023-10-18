@@ -264,7 +264,6 @@
 
 }
 
-
 .stringing-form{
 
   &__section-wrapper {
@@ -284,14 +283,22 @@
   &__sub-label{
     margin-bottom: 0.5rem;
   }
-
-
-  
 }
 
+.stringing-form{
+ &__section-wrapper-date{
+  margin-bottom: 0rem;
+ }
+ &__date-wrapper{
+  margin-top: 0rem;
+ }
 
+}
 
-
+.dateBack-wrapper{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+ }
 
 
     

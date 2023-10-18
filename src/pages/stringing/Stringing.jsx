@@ -49,12 +49,14 @@ export default function Stringing() {
   const dispatch = useDispatch()
   const store = useStore()
 
-  console.log("userInfo", userInfo)
+  //console.log("userInfo", userInfo)
   //console.log("numberArticle", numberAticle)
   //console.log("stringFromShop", stringFromShop)
-  console.log("numberKnotChoice", numberKnotChoice)
+  //console.log("numberKnotChoice", numberKnotChoice)
   //console.log("cart", cart)
   //console.log("stringFromplayer", stringFromPlayer)
+  
+  console.log("dateRacquetReady", dateRacquetReady)
 
 
 
@@ -182,6 +184,8 @@ export default function Stringing() {
           racquetPlayer,
           hubChoice,
           hubBackChoice,
+          dateRacquetReady,
+
         };
       } else if (stringFromShop !== null && stringFromPlayerSelected === false) {
         article = {
@@ -194,6 +198,8 @@ export default function Stringing() {
           racquetPlayer,
           hubChoice,
           hubBackChoice,
+          dateRacquetReady,
+
         };
         dispatch(calculNumberArticle());
       }
@@ -405,6 +411,23 @@ export default function Stringing() {
 
           </div>
 
+          <div className='string stringing-form__section-wrapper'>
+
+            <label className="stringing-form__label stringing-form__sub-label">
+              Descriptif de votre raquette
+            </label>
+            <input
+              value={racquetPlayer}
+              type="text"
+              className="stringing-form__input-text"
+              onClick={() => setRacquetPlayer("")} 
+              onChange={handleRacquetPlayerChange}
+            />
+
+          </div>  
+
+
+
           <div className='club stringing-form__section-wrapper '>
 
             <label className="stringing-form__label" >Lieu de dépot </label>
@@ -464,9 +487,7 @@ export default function Stringing() {
 
                 <div>{hubBackChoice.enterprise_name}</div>
                 <div>{hubBackChoice.road} - {hubBackChoice.city} </div>
-
-
-                  
+    
               </>
 
             ) : null}
@@ -475,9 +496,9 @@ export default function Stringing() {
 
 
 
-          <div className=' club stringing-form__section-wrapper'>
+          <div className=' club stringing-form__section-wrapper stringing-form__section-wrapper-date'>
 
-            <label className="stringing-form__label" > Délai proposé </label>
+            <label className="stringing-form__label" > Date du retour </label>
 
             <div className='stringing-form__own-string-wrapper stringing-form__date-wrapper  '> 
 
@@ -492,40 +513,9 @@ export default function Stringing() {
             </div>
 
           
-
-
             <SelectDateReady  setDateRacquetReady={setDateRacquetReady}  />
 
-
-            
-             
-
-
-
-
-                  
-
-
-
-
           </div>
-
-
-
-          <div className='string stringing-form__section-wrapper'>
-
-            <label className="stringing-form__label stringing-form__sub-label">
-              Descriptif de votre raquette
-            </label>
-            <input
-              value={racquetPlayer}
-              type="text"
-              className="stringing-form__input-text"
-              onClick={() => setRacquetPlayer("")} 
-              onChange={handleRacquetPlayerChange}
-            />
-
-          </div>  
 
           <div className=" stringing-form__section-wrapper stringing-form__section-wrapper-button">
             

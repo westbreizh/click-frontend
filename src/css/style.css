@@ -2697,6 +2697,18 @@ input {
   margin-bottom: 0.5rem;
 }
 
+.stringing-form__section-wrapper-date {
+  margin-bottom: 0rem;
+}
+.stringing-form__date-wrapper {
+  margin-top: 0rem;
+}
+
+.dateBack-wrapper {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .shop__main {
   max-width: 122rem;
   margin: auto;
