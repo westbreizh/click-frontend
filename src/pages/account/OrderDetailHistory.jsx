@@ -287,6 +287,8 @@ export default function OrderDetailHistory() {
 
 
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
+                              <div > Retour prévu le : <span className="order-stringer__important-info"> {product.dateRacquetReady} </span> </div> 
+
 
                           </div>
 

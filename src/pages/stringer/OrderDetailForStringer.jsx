@@ -145,6 +145,8 @@ export default function OrderDetailForStringer() {
                       } 
                   </div>
 
+
+
                   { oneOrder.statusOrder ==="initié"?
                     <div className='oneOrderCart__line-status'>
                       Prêt à être retiré à  {' '}
@@ -291,6 +293,7 @@ export default function OrderDetailForStringer() {
                               <div> Tension de cordage : <span className="order-stringer__important-info"> {product.stringRopeChoice} kg</span>  </div>
                               <div> Nombre de noeuds : <span className="order-stringer__important-info"> {product.numberKnotChoice} </span>  </div>
                               <div > Raquette : <span className="order-stringer__important-info"> {product.racquetPlayer} </span> </div> 
+                              <div > Retour prévu le : <span className="order-stringer__important-info"> {product.dateRacquetReady} </span> </div> 
 
                           </div>
 
