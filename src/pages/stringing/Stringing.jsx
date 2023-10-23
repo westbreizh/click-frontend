@@ -40,13 +40,13 @@ export default function Stringing() {
   // par défault on corde avec 4 noeuds
  if (numberKnotChoice==null){ setnumberKnotChoice("4")};
 
- //gestion de la date de retour 
- const [dateRacquetReady, setDateRacquetReady] = useState("");
- const [dateOrigin, setDateOrigin] = useState(new Date());
- useEffect(() => {
+  //gestion de la date de retour 
+  const [dateRacquetReady, setDateRacquetReady] = useState("");
+  const [dateOrigin, setDateOrigin] = useState(new Date());
+  useEffect(() => {
   // Obtenez la date actuelle
   const today = new Date();
-  
+
   // Vérifiez si today est un dimanche (0), et si oui, ajoutez un jour à dateOrigin
   if (getDay(today) === 0) {
     setDateOrigin(addDays(today, 1));
@@ -66,12 +66,8 @@ export default function Stringing() {
 
   // Mettez à jour setDateRacquetReady avec la nouvelle date
   setDateRacquetReady(formattedDateRacquetOk);
-  
-}, []);
 
-
-
-
+  }, []);
 
 
 

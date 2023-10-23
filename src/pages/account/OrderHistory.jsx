@@ -11,7 +11,8 @@ export default function OrderHistory() {
   const email = useSelector((state) => state.user.userInfo.email);
 
   const [orderLogList, setOrderLogList] = useState([]) ;
-console.log("ecr")
+  const [orderLogListEmpty, setOrderLogListEmpty] = useState(false) ;
+
 
   //fonction asynchrone vers le backend pour recupérer 
   //l'historique des commandes effectué par le joueur 
@@ -33,30 +34,29 @@ console.log("ecr")
       }else {
         const result = await response.json();
         const ordersInfo = result.data.ordersInfo
-        console.log(ordersInfo);
+        const messageFromBackend = result.message
+        if (messageFromBackend==="Vous n'avez pas encore effectué de commande."){
+          setOrderLogListEmpty(true)
+        };
+        console.log("message du backend",result.message);
+        console.log("liste des commandes",ordersInfo);
         setOrderLogList(ordersInfo)
-        console.log(result.message);
       }
     }
-
     catch(err){
       const errorMessage = err.toString();
       console.log(errorMessage);
     }
   }
 
-
-  console.log("orderLogList : ", orderLogList);
-  console.log("orderLogList premier élément : ", JSON.stringify(orderLogList[0]));
-  
-
   // charger la listes des commandes  au chargement de la page
   useEffect(() => {
     loadLogOrder ()
   },[])
 
-  return (
 
+
+  return (
 
   <>
       <NavbarAccount />
@@ -132,6 +132,11 @@ console.log("ecr")
                 <TennisSpinner />
                 </div>
             )}
+
+          {orderLogListEmpty?
+            <div> Vous n'avez pas encore passée de commmande </div> : ""
+          }
+            
 
         </div>
 
