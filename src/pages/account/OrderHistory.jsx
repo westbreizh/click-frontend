@@ -11,7 +11,7 @@ export default function OrderHistory() {
   const email = useSelector((state) => state.user.userInfo.email);
 
   const [orderLogList, setOrderLogList] = useState([]) ;
-  const [orderLogListEmpty, setOrderLogListEmpty] = useState(false) ;
+  const [orderLogListEmpty, setOrderLogListEmpty] = useState(true) ;
 
 
   //fonction asynchrone vers le backend pour recupérer 
@@ -36,11 +36,12 @@ export default function OrderHistory() {
         const ordersInfo = result.data.ordersInfo
         const messageFromBackend = result.message
         if (messageFromBackend==="Vous n'avez pas encore effectué de commande."){
-          setOrderLogListEmpty(true)
+
         };
         console.log("message du backend",result.message);
         console.log("liste des commandes",ordersInfo);
         setOrderLogList(ordersInfo)
+        setOrderLogListEmpty(false)
       }
     }
     catch(err){
