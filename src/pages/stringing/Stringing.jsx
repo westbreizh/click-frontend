@@ -6,25 +6,24 @@ import SelectHub from '../../components/select/SelectHub';
 import SelectHubBack from '../../components/select/SelectHubBack';
 import SelectString from '../../components/select/SelectString';
 import SelectRopeString from '../../components/select/SelectRopeString';
-import SelectDateReady from '../../components/select/SelectDateReady';
 import ModalValidationAddToCartInstallation from '../../components/modal/modalValidation/ModalValidationAddToCartInstallation';
 import { setUserInfo} from '../../store/userSlice'
 import {resetStringFromShopChoice} from '../../store/cartSlice'
-
+import { format, addDays, getDay } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
 
 
 export default function Stringing() {
 
-  const stringingPriceWithStringFromShop = 12 //prix de la pose avec cordage acheté en boutique 
-  const stringingPriceWithStringFromAnotherWhere = 15 //prix de la pose  avec cordage acheté ailleurs
-
+  const stringingPriceWithStringFromAnotherWhere = 10 //prix de la pose  avec cordage acheté ailleurs
 
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);// dans le slice redux on initialise la preference joueur si il y a 
   const isConnected = useSelector(state => state.user.isConnected);
   const token = useSelector(state => state.user.token);
-
   const userInfo =  useSelector((state) => state.user.userInfo);
+
+  //on récupère les préférences joueurs si connecté et si il y en a
   const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
@@ -36,13 +35,46 @@ export default function Stringing() {
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
   const [isCheckBoxChecked, setCheckBoxChecked] = useState(false);
   const [stringFromPlayerSelected, setStringFromPlayerSelected] = useState(false);
-  const [dateRacquetReady, setDateRacquetReady] = useState("");
 
 
   // par défault on corde avec 4 noeuds
- if (numberKnotChoice==null){
-    setnumberKnotChoice("4")
- };
+ if (numberKnotChoice==null){ setnumberKnotChoice("4")};
+
+ //gestion de la date de retour 
+ const [dateRacquetReady, setDateRacquetReady] = useState("");
+ const [dateOrigin, setDateOrigin] = useState(new Date());
+ useEffect(() => {
+  // Obtenez la date actuelle
+  const today = new Date();
+  
+  // Vérifiez si today est un dimanche (0), et si oui, ajoutez un jour à dateOrigin
+  if (getDay(today) === 0) {
+    setDateOrigin(addDays(today, 1));
+  } else {
+    setDateOrigin(today);
+  }
+  // Ajoutez 1 jours à la date de depart
+  const dateRacquetOK = addDays(dateOrigin, 1);
+
+  // Vérifiez si dateRacquetOK est un dimanche (0) , et si oui, repoussez au lundi
+  const dayOfWeek = getDay(dateRacquetOK);
+  if (dayOfWeek === 0) {
+    dateRacquetOK.setDate(dateRacquetOK.getDate() + 1); 
+  } 
+  // Formatez la nouvelle date
+  const formattedDateRacquetOk = format(dateRacquetOK, 'EEEE d MMMM', { locale: fr });
+
+  // Mettez à jour setDateRacquetReady avec la nouvelle date
+  setDateRacquetReady(formattedDateRacquetOk);
+  
+}, []);
+
+
+
+
+
+
+
 
   const dispatch = useDispatch()
   const store = useStore()
@@ -116,7 +148,7 @@ export default function Stringing() {
       console.log(errorMessage);
     }
   }
-    //fonction asynchrone vers le backend pour recuperer
+  //fonction asynchrone vers le backend pour recuperer
   //les infos utilisateurs avec les modifications venant d'être apporté  
   const loadDataPlayerAfterModif = async function (data) {
     try{
@@ -148,7 +180,6 @@ export default function Stringing() {
       console.log(errorMessage);
     }
   }
-
   // fonction qui ajoute, enrgistre la pose du cordage dans le panier du  store redux 
   // si la case "sauvegarder mes choix " est cliqué on envoit au backend les infos pour sauvegardes préférences cordages 
   const onSubmit = async () => {
@@ -161,19 +192,13 @@ export default function Stringing() {
       let article = {};
   
       if (stringFromPlayer !== null && stringFromShop === null) {
-        if (stringFromPlayerOrigin === "shop") {
-          article = {
-            categorie: "pose cordage seule",
-            quantity: 1,
-            price: stringingPriceWithStringFromShop,
-          };
-        } else if (stringFromPlayerOrigin === "anotherwhere") {
+
           article = {
             categorie: "pose cordage seule",
             quantity: 1,
             price: stringingPriceWithStringFromAnotherWhere,
           };
-        }
+        
         article = {
           ...article,
           stringRopeChoice,
@@ -491,8 +516,6 @@ export default function Stringing() {
 
             </div>
 
-          
-            <SelectDateReady  setDateRacquetReady={setDateRacquetReady}  />
 
           </div>
 
