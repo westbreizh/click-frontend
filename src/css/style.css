@@ -2516,6 +2516,9 @@ input {
   background-color: white;
   color: #1c166c;
 }
+.stringing__important-info {
+  color: #007bff;
+}
 
 .stringing-header__wrapper {
   display: flex;
@@ -2526,11 +2529,11 @@ input {
 .stringing-header__wrapper::after {
   cursor: default;
   content: "";
-  width: 5.3rem;
+  width: 8rem;
   height: 0.4rem;
   display: block;
   margin: auto;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   background-color: #2030ab;
 }
 .stringing-header__title {
@@ -2555,29 +2558,34 @@ input {
   margin-right: auto;
 }
 .stringing-form__section-wrapper {
-  margin-bottom: 2rem;
-}
-.stringing-form__section-wrapper-button {
-  margin-top: 1.5rem !important;
-  font-size: 1.5rem;
+  margin-bottom: 3rem;
 }
 .stringing-form__label {
   text-transform: uppercase;
   display: inline-block;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 550;
-  color: #232346;
+  color: #0f3e81;
   font-family: "Roboto", "Arial", sans-serif;
   margin-bottom: 1rem;
 }
+.stringing-form__sub-label {
+  margin-bottom: 0.5rem !important;
+  margin-top: 0rem;
+}
+.stringing-form__text-h2 {
+  font-size: 1.7rem;
+}
 .stringing-form__string-wrapper {
-  margin-top: 2rem;
+  margin-top: 0rem;
+  margin-bottom: 0.5rem;
 }
 .stringing-form__string-link {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   text-decoration: none;
+  margin-left: 0.2rem;
 }
 .stringing-form__string-link:hover {
   color: #2c23ac;
@@ -2592,22 +2600,7 @@ input {
   display: flex;
   align-items: center;
   margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-.stringing-form__validation-bubble-checked {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  border: 1px solid rgb(215, 213, 213);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.7rem;
-  font-weight: bold;
-  background-color: #4caf50;
-  color: white;
-  margin-left: 0rem;
-  margin-right: 1.5rem;
+  margin-bottom: 2rem;
 }
 .stringing-form__input-text, .stringing-form__input-text::placeholder {
   border-radius: 1rem;
@@ -2626,18 +2619,46 @@ input {
   margin-bottom: 1rem;
 }
 
+.section-wrapper-button {
+  margin-top: 1.5rem !important;
+  font-size: 1.5rem;
+}
+
+.string-description {
+  margin-bottom: 0rem;
+}
+
+.validation-bubble-checked {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid rgb(215, 213, 213);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  font-weight: bold;
+  background-color: #4caf50;
+  color: white;
+  margin-left: 0rem;
+  margin-right: 1.5rem;
+}
+
 .stringing-form__input-text.focused::placeholder {
   color: transparent;
 }
 
 .title_number-knot {
+  font-size: 1.6rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  margin-right: 1.5rem;
 }
 
 .wrapper_number-knot {
   display: flex;
   justify-content: flex-start;
+  align-items: baseline;
 }
 
 .stringing-form__wrapper-input-checkbox-knot {
@@ -2692,9 +2713,6 @@ input {
 }
 .stringing-form__label {
   margin-bottom: 1.5rem;
-}
-.stringing-form__sub-label {
-  margin-bottom: 0.5rem;
 }
 
 .stringing-form__section-wrapper-date {

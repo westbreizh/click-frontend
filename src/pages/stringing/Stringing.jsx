@@ -21,8 +21,6 @@ export default function Stringing() {
 
 
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);// dans le slice redux on initialise la preference joueur si il y a 
-  const numberAticle=  useSelector((state) => state.cart.numberArticle);
-  const cart=  useSelector((state) => state.cart);
   const isConnected = useSelector(state => state.user.isConnected);
   const token = useSelector(state => state.user.token);
 
@@ -247,10 +245,9 @@ export default function Stringing() {
 
         <div className="stringing-form__contenair">
 
-          <div className='string stringing-form__section-wrapper'>
+          <div className=' stringing-form__section-wrapper'>
 
-            <label className="stringing-form__label">Cordage</label>
-
+            <label className="stringing-form__label">Cordage </label>
 
             <SelectString setStringFromPlayerSelected={setStringFromPlayerSelected} setStringFromPlayer ={setStringFromPlayer}  />
 
@@ -259,19 +256,20 @@ export default function Stringing() {
               <>
                 <div className='stringing-form__own-string-wrapper'> 
 
-                  <div className="stringing-form__validation-bubble-checked     ">
+                  <div className="validation-bubble-checked">
                     <span>&#10003;</span>
                   </div>
 
-                  <div className='modal-atc__message-text'>
+                  <div className="stringing-form__text-h2">
                   Cordage choisi :
                   </div>
                   
                 </div>
 
-                <div className='stringing-form__string-wrapper  modal-atc__product-wrapper'>
+                <div className='stringing-form__string-wrapper '>
+                  
                   <NavLink to={`/fiche_produit/cordage/${stringFromShop.id}`} 
-                  className=" stringing-form__string-link cart-content__link-to-card-product">
+                  className=" stringing-form__string-link ">
 
                     <img crossOrigin="anonymous" src={stringFromShop.image_url} 
                     alt={stringFromShop.model} className="stringing-form__string-img" />
@@ -294,43 +292,18 @@ export default function Stringing() {
               <div>
                 <div className='stringing-form__own-string-wrapper'> 
 
-                  <div className="stringing-form__validation-bubble-checked     ">
+                  <div className="validation-bubble-checked ">
                     <span>&#10003;</span>
                   </div>
 
-                  <div className='modal-atc__message-text'>
-                  Je fournis mon propre cordage
+                  <div className="stringing-form__text-h2">
+                  Je fournis mon propre cordage (pose à 10 €)
                   </div>
                   
                 </div>
 
-                <div className='stringing-form__wrapper-input-checkbox'>
-                    <input
-                        type="checkbox"
-                        className="order-stringer-detail__checkbox"
-                        onChange={() => setStringFromPlayerOrigin("shop")}
-                        checked={stringFromPlayerOrigin === "shop"}
-                        />                  
-                      <div className="order-stringer-detail__checkbox-text"> 
-                         acheté en boutique (12 € la pose)
-                      </div>
-                </div> 
 
-                <div className='stringing-form__wrapper-input-checkbox'>
-                  <input
-                      type="checkbox"
-                      className="order-stringer-detail__checkbox"
-                      onChange={() => setStringFromPlayerOrigin("anotherwhere")}
-                      checked={stringFromPlayerOrigin === "anotherwhere"}
-                      />                  
-                    <div className="order-stringer-detail__checkbox-text"> 
-                        acheté hors boutique (15 € la pose)
-                    </div>
-                </div> 
-
-
-
-                <div className='string stringing-form__section-wrapper'>
+                <div className='stringing-form__section-wrapper string-description'>
 
                 <label className="stringing-form__label stringing-form__sub-label">
                   Descriptif de votre cordage 
@@ -350,7 +323,7 @@ export default function Stringing() {
 
           </div>
 
-          <div className=' rope stringing-form__section-wrapper'>
+          <div className='stringing-form__section-wrapper'>
             <label className="stringing-form__label" > Choix de la tension  </label>
             <SelectRopeString setStringRopeChoice= {setStringRopeChoice} />
 
@@ -359,51 +332,54 @@ export default function Stringing() {
               <>
                 <div className='stringing-form__own-string-wrapper'> 
 
-                  <div className="stringing-form__validation-bubble-checked     ">
+                  <div className="validation-bubble-checked     ">
                     <span>&#10003;</span>
                   </div>
 
-                  <div className='modal-atc__message-text'>
+                  <div className="stringing-form__text-h2">
                   Tension de cordage choisi :
+                  <span className='stringing__important-info'> 
+                    {stringRopeChoice} kg 
+                  </span>
                   </div>
                   
                 </div>
 
-                <div>
-                {stringRopeChoice} kg
-                </div>
 
 
-                <div className='title_number-knot'> Posé avec : </div>
+                <div className='wrapper_number-knot'> 
 
-                <div className='wrapper_number-knot'>
+                  <div className='title_number-knot'> Posé avec : </div>
 
-                  <div className='stringing-form__wrapper-input-checkbox-knot'>
-                    <input
-                      type="checkbox"
-                      className="order-stringer-detail__checkbox"
-                      onChange={() => setnumberKnotChoice("4")}
-                      checked={numberKnotChoice === "4"}
-                    />
-                    <div className="order-stringer-detail__checkbox-text">
-                      4 noeuds
+                  <div className='wrapper_number-knot'>
+
+                    <div className='stringing-form__wrapper-input-checkbox-knot'>
+                      <input
+                        type="checkbox"
+                        className="order-stringer-detail__checkbox"
+                        onChange={() => setnumberKnotChoice("4")}
+                        checked={numberKnotChoice === "4"}
+                      />
+                      <div className="order-stringer-detail__checkbox-text">
+                        4 noeuds
+                      </div>
                     </div>
+
+                    <div className='stringing-form__wrapper-input-checkbox-knot'>
+                      <input
+                        type="checkbox"
+                        className="order-stringer-detail__checkbox"
+                        onChange={() => setnumberKnotChoice("2")}
+                        checked={numberKnotChoice === "2"}
+                      />
+                      <div className="order-stringer-detail__checkbox-text">
+                        2 noeuds
+                      </div>
+                    </div>
+
                   </div>
 
-                  <div className='stringing-form__wrapper-input-checkbox-knot'>
-                    <input
-                      type="checkbox"
-                      className="order-stringer-detail__checkbox"
-                      onChange={() => setnumberKnotChoice("2")}
-                      checked={numberKnotChoice === "2"}
-                    />
-                    <div className="order-stringer-detail__checkbox-text">
-                      2 noeuds
-                    </div>
-                  </div>
-
                 </div>
-
                   
               </>
 
@@ -411,7 +387,7 @@ export default function Stringing() {
 
           </div>
 
-          <div className='string stringing-form__section-wrapper'>
+          <div className='stringing-form__section-wrapper'>
 
             <label className="stringing-form__label stringing-form__sub-label">
               Descriptif de votre raquette
@@ -426,9 +402,7 @@ export default function Stringing() {
 
           </div>  
 
-
-
-          <div className='club stringing-form__section-wrapper '>
+          <div className=' stringing-form__section-wrapper '>
 
             <label className="stringing-form__label" >Lieu de dépot </label>
 
@@ -440,19 +414,21 @@ export default function Stringing() {
               <>
                 <div className='stringing-form__own-string-wrapper'> 
 
-                  <div className="stringing-form__validation-bubble-checked     ">
+                  <div className="validation-bubble-checked     ">
                     <span>&#10003;</span>
                   </div>
 
-                  <div className='modal-atc__message-text'>
+                  <div className="stringing-form__text-h2">
                   Lieu de dépot choisi :
                   </div>
+
+                  <span className='stringing__important-info'> 
+                  {hubChoice.enterprise_name}
+                  </span>
+
                   
                 </div>
 
-                <div>
-                {hubChoice.enterprise_name}
-                </div>
 
                 <div>
                 {hubChoice.road} - {hubChoice.city}
@@ -464,7 +440,7 @@ export default function Stringing() {
 
           </div>
 
-          <div className=' club stringing-form__section-wrapper'>
+          <div className=' stringing-form__section-wrapper'>
 
             <label className="stringing-form__label" > Retour de service </label>
 
@@ -475,11 +451,11 @@ export default function Stringing() {
               <>
                 <div className='stringing-form__own-string-wrapper'> 
 
-                  <div className="stringing-form__validation-bubble-checked     ">
+                  <div className="validation-bubble-checked     ">
                     <span>&#10003;</span>
                   </div>
 
-                  <div className='modal-atc__message-text'>
+                  <div className="stringing-form__text-h2">
                   Lieu de retour de service choisi :
                   </div>
                   
@@ -494,19 +470,17 @@ export default function Stringing() {
 
           </div>
 
-
-
-          <div className=' club stringing-form__section-wrapper stringing-form__section-wrapper-date'>
+          <div className='  stringing-form__section-wrapper section-wrapper-date'>
 
             <label className="stringing-form__label" > Date du retour </label>
 
             <div className='stringing-form__own-string-wrapper stringing-form__date-wrapper  '> 
 
-              <div className="stringing-form__validation-bubble-checked     ">
+              <div className="validation-bubble-checked     ">
                 <span>&#10003;</span>
               </div>
 
-              <div className='modal-atc__message-text'>                
+              <div className="stringing-form__text-h2">                
               A partir du {dateRacquetReady}
               </div>
 
@@ -517,7 +491,7 @@ export default function Stringing() {
 
           </div>
 
-          <div className=" stringing-form__section-wrapper stringing-form__section-wrapper-button">
+          <div className=" stringing-form__section-wrapper section-wrapper-button">
             
             {isConnected === true  ?  (  
               <div className='stringing-form__wrapper-input-checkbox'>
