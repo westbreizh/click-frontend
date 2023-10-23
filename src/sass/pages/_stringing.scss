@@ -44,6 +44,7 @@
 
   &__important-info{
     color: #007bff;
+    font-size: 1.6rem;
   }
 
 }
@@ -121,6 +122,9 @@
   &__text-h2{
     font-size: 1.7rem;
   }
+  &__text-address{
+    font-size: 1.7rem;
+  }
 
   &__string-wrapper{
     margin-top: 0rem;
@@ -152,6 +156,13 @@
     margin-top: 1.5rem;
     margin-bottom: 2rem;
   }
+  &__address-wrapper{
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
 
     &__input-text, &__input-text::placeholder{
       border-radius: 1rem;
@@ -173,20 +184,32 @@
 
 }
 
-// cas particulier des sections inputs
-.section-wrapper-button{
-  margin-top: 1.5rem !important;
-  font-size: 1.5rem;
+.number-knot{
+
+  &__title{
+    font-size: 1.6rem;
+    margin-top: 1rem;
+    margin-right: 1.5rem;
+  }
+
+  &__wrapper{
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+  }
+
+  &__input-checkbox{
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+  }
+  &__input-checkbox{
+    display: flex;
+    align-items: baseline;
+    margin-right: 1rem;
+  }
+
 }
-.string-description{
-  margin-bottom: 0rem;
-}
-
-
-
-
-
-
 
 .validation-bubble-checked{
   width: 2rem;
@@ -205,36 +228,37 @@
 }
 
 
-
-
-
-
 .stringing-form__input-text.focused::placeholder {
   color: transparent;
 }
   
 
-.title_number-knot{
-  font-size: 1.6rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  margin-right: 1.5rem;
 
+
+
+// cas particulier des sections inputs
+.section-wrapper-button{
+  margin-top: 1.5rem !important;
+  font-size: 1.5rem;
+}
+.string-description{
+  margin-bottom: 0rem;
 }
 
-.wrapper_number-knot{
-  display: flex;
-  justify-content: flex-start;
-  align-items: baseline;
-}
 
 
-.stringing-form__wrapper-input-checkbox-knot{
-  display: flex;
-  align-items: baseline;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

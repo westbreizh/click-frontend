@@ -245,6 +245,7 @@ export default function Stringing() {
 
         <div className="stringing-form__contenair">
 
+          {/* choix du cordage*/ }
           <div className=' stringing-form__section-wrapper'>
 
             <label className="stringing-form__label">Cordage </label>
@@ -261,7 +262,7 @@ export default function Stringing() {
                   </div>
 
                   <div className="stringing-form__text-h2">
-                  Cordage choisi :
+                  Cordage choisi : &nbsp;
                   </div>
                   
                 </div>
@@ -297,7 +298,7 @@ export default function Stringing() {
                   </div>
 
                   <div className="stringing-form__text-h2">
-                  Je fournis mon propre cordage (pose à 10 €)
+                  Je fournis mon propre cordage (pose 10 €)
                   </div>
                   
                 </div>
@@ -305,17 +306,16 @@ export default function Stringing() {
 
                 <div className='stringing-form__section-wrapper string-description'>
 
-                <label className="stringing-form__label stringing-form__sub-label">
-                  Descriptif de votre cordage 
-                </label>
-                <input
-                 value={stringFromPlayer !== null ? stringFromPlayer : ""} 
-                 type="text"
-                  className="stringing-form__input-text"
-                  onClick={() => setStringFromPlayer("")} 
-                  onChange={handleOwnStringPlayerChange}
-                />
-
+                  <label className="stringing-form__label stringing-form__sub-label">
+                    Descriptif de votre cordage 
+                  </label>
+                  <input
+                  value={stringFromPlayer !== null ? stringFromPlayer : ""} 
+                  type="text"
+                    className="stringing-form__input-text"
+                    onClick={() => setStringFromPlayer("")} 
+                    onChange={handleOwnStringPlayerChange}
+                  />
 
                 </div>  
               </div>
@@ -323,6 +323,7 @@ export default function Stringing() {
 
           </div>
 
+          {/* choix de la tension*/ }
           <div className='stringing-form__section-wrapper'>
             <label className="stringing-form__label" > Choix de la tension  </label>
             <SelectRopeString setStringRopeChoice= {setStringRopeChoice} />
@@ -337,7 +338,7 @@ export default function Stringing() {
                   </div>
 
                   <div className="stringing-form__text-h2">
-                  Tension de cordage choisi :
+                  Tension de cordage choisi :&nbsp;
                   <span className='stringing__important-info'> 
                     {stringRopeChoice} kg 
                   </span>
@@ -345,15 +346,13 @@ export default function Stringing() {
                   
                 </div>
 
+                <div className='number-knot__wrapper'> 
 
+                  <div className='number-knot__title'> Posé avec : </div>
 
-                <div className='wrapper_number-knot'> 
+                  <div className='number-knot__wrapper'>
 
-                  <div className='title_number-knot'> Posé avec : </div>
-
-                  <div className='wrapper_number-knot'>
-
-                    <div className='stringing-form__wrapper-input-checkbox-knot'>
+                    <div className='number-knot__input-checkbox'>
                       <input
                         type="checkbox"
                         className="order-stringer-detail__checkbox"
@@ -365,7 +364,7 @@ export default function Stringing() {
                       </div>
                     </div>
 
-                    <div className='stringing-form__wrapper-input-checkbox-knot'>
+                    <div className='number-knot__input-checkbox'>
                       <input
                         type="checkbox"
                         className="order-stringer-detail__checkbox"
@@ -387,6 +386,7 @@ export default function Stringing() {
 
           </div>
 
+          {/* saisie de la raquette*/ }
           <div className='stringing-form__section-wrapper'>
 
             <label className="stringing-form__label stringing-form__sub-label">
@@ -402,35 +402,33 @@ export default function Stringing() {
 
           </div>  
 
+          {/* choix du lieu de dépot*/ }
           <div className=' stringing-form__section-wrapper '>
 
             <label className="stringing-form__label" >Lieu de dépot </label>
 
             <SelectHub  setHubChoice={setHubChoice} />
 
-
             { hubChoice && hubChoice !== ""? (
               
               <>
-                <div className='stringing-form__own-string-wrapper'> 
+                <div className='stringing-form__address-wrapper'> 
 
                   <div className="validation-bubble-checked     ">
                     <span>&#10003;</span>
                   </div>
 
                   <div className="stringing-form__text-h2">
-                  Lieu de dépot choisi :
+                  Lieu de dépot choisi : &nbsp;
                   </div>
 
                   <span className='stringing__important-info'> 
                   {hubChoice.enterprise_name}
                   </span>
 
-                  
                 </div>
 
-
-                <div>
+                <div className="stringing-form__text-address">
                 {hubChoice.road} - {hubChoice.city}
                 </div>
                   
@@ -440,6 +438,7 @@ export default function Stringing() {
 
           </div>
 
+          {/* choix du lieu du retour*/ }
           <div className=' stringing-form__section-wrapper'>
 
             <label className="stringing-form__label" > Retour de service </label>
@@ -449,27 +448,33 @@ export default function Stringing() {
             { hubBackChoice && hubBackChoice !== "" ? (
               
               <>
-                <div className='stringing-form__own-string-wrapper'> 
+                <div className='stringing-form__address-wrapper'> 
 
                   <div className="validation-bubble-checked     ">
                     <span>&#10003;</span>
                   </div>
 
                   <div className="stringing-form__text-h2">
-                  Lieu de retour de service choisi :
+                  Lieu de retour  :{""}
                   </div>
-                  
+
+                  <span className='stringing__important-info'> 
+                  {hubBackChoice.enterprise_name}
+                  </span>
+
                 </div>
 
-                <div>{hubBackChoice.enterprise_name}</div>
-                <div>{hubBackChoice.road} - {hubBackChoice.city} </div>
-    
+                <div className="stringing-form__text-address">
+                  {hubBackChoice.road} - {hubBackChoice.city}
+                </div>
+
               </>
 
             ) : null}
 
           </div>
 
+          {/* date de retour*/ }
           <div className='  stringing-form__section-wrapper section-wrapper-date'>
 
             <label className="stringing-form__label" > Date du retour </label>
@@ -491,6 +496,7 @@ export default function Stringing() {
 
           </div>
 
+          {/* bouton de commande*/ }
           <div className=" stringing-form__section-wrapper section-wrapper-button">
             
             {isConnected === true  ?  (  

@@ -2518,6 +2518,7 @@ input {
 }
 .stringing__important-info {
   color: #007bff;
+  font-size: 1.6rem;
 }
 
 .stringing-header__wrapper {
@@ -2576,6 +2577,9 @@ input {
 .stringing-form__text-h2 {
   font-size: 1.7rem;
 }
+.stringing-form__text-address {
+  font-size: 1.7rem;
+}
 .stringing-form__string-wrapper {
   margin-top: 0rem;
   margin-bottom: 0.5rem;
@@ -2602,6 +2606,12 @@ input {
   margin-top: 1.5rem;
   margin-bottom: 2rem;
 }
+.stringing-form__address-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
 .stringing-form__input-text, .stringing-form__input-text::placeholder {
   border-radius: 1rem;
   height: 3rem;
@@ -2619,13 +2629,25 @@ input {
   margin-bottom: 1rem;
 }
 
-.section-wrapper-button {
-  margin-top: 1.5rem !important;
-  font-size: 1.5rem;
+.number-knot__title {
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  margin-right: 1.5rem;
 }
-
-.string-description {
-  margin-bottom: 0rem;
+.number-knot__wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+.number-knot__input-checkbox {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+.number-knot__input-checkbox {
+  display: flex;
+  align-items: baseline;
+  margin-right: 1rem;
 }
 
 .validation-bubble-checked {
@@ -2648,24 +2670,13 @@ input {
   color: transparent;
 }
 
-.title_number-knot {
-  font-size: 1.6rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  margin-right: 1.5rem;
+.section-wrapper-button {
+  margin-top: 1.5rem !important;
+  font-size: 1.5rem;
 }
 
-.wrapper_number-knot {
-  display: flex;
-  justify-content: flex-start;
-  align-items: baseline;
-}
-
-.stringing-form__wrapper-input-checkbox-knot {
-  display: flex;
-  align-items: baseline;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
+.string-description {
+  margin-bottom: 0rem;
 }
 
 /* -------------------  Responsive ----------------------*/
