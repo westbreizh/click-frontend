@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { useSelector } from "react-redux"
 import { useParams } from 'react-router-dom';
@@ -17,7 +16,7 @@ export default function CoordinatePlayer() {
   const token = useSelector((state) => state.user.token);
 
   //fonction asynchrone vers le backend pour recupérer 
-  //l'historique de la  commandes effectué par le joueur 
+  //les infos  joueur 
   const loadOnePlayer  = async function (data) {
     try{
       const response = await fetch(`https://click-backend.herokuapp.com/api/stringer/onePlayer`, {
@@ -53,6 +52,7 @@ export default function CoordinatePlayer() {
 
   //console.log(address)
 
+
   return (
 
   <>
@@ -63,9 +63,8 @@ export default function CoordinatePlayer() {
 
         <section className="order-stringer__contenair">
 
-
-
           <div className="account__contenair">
+
             <div className="account__header">
               <BackNavArrowStringer/>
               <BackNavArrow/>
@@ -102,9 +101,7 @@ export default function CoordinatePlayer() {
                 <div className="info-login__data">{userInfo.email}</div>
               </div>
 
-
             </div>
-
 
             <div className="submenu__wrapper">
 
@@ -130,8 +127,6 @@ export default function CoordinatePlayer() {
                 )}
               </div>
 
-
-
               <div className="info-perso__wrapper">
                 <div className="info-perso__title"> ville :</div>
                 {userInfo.city ? (
@@ -150,7 +145,6 @@ export default function CoordinatePlayer() {
                 )}
               </div>
 
-              
             </div>
 
           </div>

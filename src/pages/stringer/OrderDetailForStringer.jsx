@@ -11,7 +11,6 @@ export default function OrderDetailForStringer() {
   const orderIdParam = useParams()
   const orderId = orderIdParam.orderId
   const token = useSelector((state) => state.user.token);
-  const stringingPrice = useSelector(state => state.cart.stringingPrice);
   const [oneOrder, setOneOrder] = useState("") ;
   const [selectedOrder, setSelectedOrder] = useState([]);
   const [hub, setHub] = useState("") ;
@@ -19,7 +18,7 @@ export default function OrderDetailForStringer() {
   // gestion de l'état de validation du bouton pour ajouter le produit  
   const isValid =
   selectedOrder.length  !== 0;
-  ;
+  
   const navigate = useNavigate();
 
   //fonction asynchrone vers le backend pour recupérer 
@@ -98,19 +97,17 @@ export default function OrderDetailForStringer() {
     }
 };
 
-
   // charger la listes des commandes  au chargement de la page
   useEffect(() => {
     loadOneOrder ()
   },[])
 
-  console.log("oneorder", oneOrder)
-  console.log("hubObject", hub)
+  // console.log("oneorder", oneOrder)
+  // console.log("hubObject", hub)
 
   return (
 
   <>
-
 
     <main className="order-stringer__main">
 
@@ -144,7 +141,6 @@ export default function OrderDetailForStringer() {
                         })()
                       } 
                   </div>
-
 
 
                   { oneOrder.statusOrder ==="initié"?
@@ -376,8 +372,6 @@ export default function OrderDetailForStringer() {
                       default:
                         return null;
                     }
-
-                    
 
                   })}
 

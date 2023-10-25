@@ -31,7 +31,6 @@ import HistoryOrderStringer from '../pages/stringer/historyOrderStringer'
 import CoordinatePlayer from '../pages/stringer/CoordinatePlayer'
 
 
-
 export default function Router() {
 
   return (
@@ -39,6 +38,7 @@ export default function Router() {
     <BrowserRouter scrollBehavior="smooth">
       
       <ScrollToTop />
+
       <Header />
 
       <Routes >

@@ -14,8 +14,6 @@ export default function RacquetToTake() {
   const [pageLoading, setPageLoading] = useState(true);
 
 
-
-
   // Fonction pour regrouper les commandes par hub
   const groupOrdersByHub = (orderList) => {
     const ordersByHub = {};
@@ -66,8 +64,6 @@ export default function RacquetToTake() {
     }
   }
 
-
-
   // charger la listes des commandes  au chargement de la page
   useEffect(() => {
     loadLogOrder();
@@ -80,19 +76,15 @@ export default function RacquetToTake() {
     setOrderLogListByHub(groupedOrdersByHub);
   }, [orderLogList]);
 
-
-
   return (
 
   <>
 
+    <main className="order-stringer__main">
 
-      <main className="order-stringer__main">
+      <div className="order-stringer__bg"> </div>
 
-        <div className="order-stringer__bg"> </div>
-
-        <section className="order-stringer__contenair">
-
+      <section className="order-stringer__contenair">
 
         <div className='order-stringer__sub-contenair'>
 
@@ -145,9 +137,10 @@ export default function RacquetToTake() {
 
         </div>
 
-        </section>
+      </section>
 
-      </main>
+    </main>
+
   </>
     
   )

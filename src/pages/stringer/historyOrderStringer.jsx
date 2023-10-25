@@ -13,7 +13,7 @@ export default function HistoryOrderStringer() {
   const [pageLoading, setPageLoading] = useState(true);
 
   //fonction asynchrone vers le backend pour recupérer 
-  //la liste des raquettes en fonction du status de la commande
+  //la liste des raquettes en fonction du status de la commande ici validée
   const loadListOrderFiltered  = async function (data) {
     try{
       const response = await fetch(`https://click-backend.herokuapp.com/api/stringer/ordertSelectedByStatus`, {
@@ -107,7 +107,6 @@ export default function HistoryOrderStringer() {
               }
             </>
           )}
-
 
         </div>
 
