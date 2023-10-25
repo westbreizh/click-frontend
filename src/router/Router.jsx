@@ -20,8 +20,6 @@ import Cart from '../pages/cart/Cart'
 import ErrorPage from '../pages/errorPage/ErrorPages'
 import Order from '../pages/order/order'
 import ResetPassword from '../pages/resetPassword/ResetPassword'
-import SingnupHub from '../pages/singup/SingupHub'
-import SingnupStringer from '../pages/singup/SingupStringer'
 import SuccesPaiement from '../pages/afterPaiement/SuccesPaiement'
 import EchecPaiement from '../pages/afterPaiement/EchecPaiement'
 import OrderPassed from '../pages/orderPassed/OrderPassed'
@@ -33,8 +31,8 @@ import HistoryOrderStringer from '../pages/stringer/historyOrderStringer'
 import CoordinatePlayer from '../pages/stringer/CoordinatePlayer'
 
 
-export default function Router() {
 
+export default function Router() {
 
   return (
 
@@ -45,35 +43,33 @@ export default function Router() {
 
       <Routes >
 
-          <Route path='/' element={<Home />} />     
-          <Route path='/inscription'  element = {< Signup/>} />
-          <Route path='/inscription-hub'  element = {< SingnupHub/>} />
-          <Route path='/inscription-cordeur'  element = {< SingnupStringer/>} />
-          <Route path='/cordez'  element = {<Stringing />} />
-          <Route path='/cordages'  element = {<String />} />
-          <Route path="/fiche_produit/cordage/:productId"  element = {<ProductStringPage />} />
-          <Route path='/balles'  element = {<Ball />} />
-          <Route path="/fiche_produit/balle/:productId"  element = {<ProductBallPage />} />
-          <Route path='/accessoires'  element = {<Accessories />} />
-          <Route path="/fiche_produit/accessoire/:productId"  element = {<ProductAccessoriesPage />} />
-          <Route path='/panier'  element = {< Cart/>} />
-          <Route path='/coordonnées'  element = {< Coordinate/>} />
-          <Route path='/commande'  element = {< Order/>} />
-          <Route path='/préférences_joueur'  element = {< PreferencePlayer/>} />
-          <Route path='/historique_commandes' element={<OrderHistory />} />
-          <Route path='/historique_commandes/:orderId' element={<OrderDetailHistory />} />
-          <Route path="/passwordReset/:token/:id" element={<ResetPassword />} />
-          <Route path='/paiement-accepte'  element = {< SuccesPaiement/>} />
-          <Route path='/paiement-refuse'  element = {< EchecPaiement/>} />
-          <Route path='/commande-passé'  element = {< OrderPassed/>} />
-          <Route path='/*' element={<ErrorPage />} />
+        <Route path='/' element={<Home />} />     
+        <Route path='/inscription'  element = {< Signup/>} />
+        <Route path='/cordez'  element = {<Stringing />} />
+        <Route path='/cordages'  element = {<String />} />
+        <Route path="/fiche_produit/cordage/:productId"  element = {<ProductStringPage />} />
+        <Route path='/balles'  element = {<Ball />} />
+        <Route path="/fiche_produit/balle/:productId"  element = {<ProductBallPage />} />
+        <Route path='/accessoires'  element = {<Accessories />} />
+        <Route path="/fiche_produit/accessoire/:productId"  element = {<ProductAccessoriesPage />} />
+        <Route path='/panier'  element = {< Cart/>} />
+        <Route path='/coordonnées'  element = {< Coordinate/>} />
+        <Route path='/commande'  element = {< Order/>} />
+        <Route path='/préférences_joueur'  element = {< PreferencePlayer/>} />
+        <Route path='/historique_commandes' element={<OrderHistory />} />
+        <Route path='/historique_commandes/:orderId' element={<OrderDetailHistory />} />
+        <Route path="/passwordReset/:token/:id" element={<ResetPassword />} />
+        <Route path='/paiement-accepte'  element = {< SuccesPaiement/>} />
+        <Route path='/paiement-refuse'  element = {< EchecPaiement/>} />
+        <Route path='/commande-passé'  element = {< OrderPassed/>} />
+        <Route path='/*' element={<ErrorPage />} />
 
-          <Route path='/cordeur_raquettes-à-retirer'  element = {< RacquetToTake/>} />
-          <Route path='/cordeur_raquettes-à-corder'  element = {< RacquetToString/>} />
-          <Route path='/cordeur_raquettes-prête'  element = {< RacquetReady/>} />
-          <Route path='/cordeur_commandes-historique'  element = {< HistoryOrderStringer/>} />
-          <Route path='/détails_commande/:orderId' element={<OrderDetailForStringer />} />
-          <Route path='/fiche_joueur/:userId' element={<CoordinatePlayer />} />
+        <Route path='/cordeur_raquettes-à-retirer'  element = {< RacquetToTake/>} />
+        <Route path='/cordeur_raquettes-à-corder'  element = {< RacquetToString/>} />
+        <Route path='/cordeur_raquettes-prête'  element = {< RacquetReady/>} />
+        <Route path='/cordeur_commandes-historique'  element = {< HistoryOrderStringer/>} />
+        <Route path='/détails_commande/:orderId' element={<OrderDetailForStringer />} />
+        <Route path='/fiche_joueur/:userId' element={<CoordinatePlayer />} />
 
 
       </Routes>

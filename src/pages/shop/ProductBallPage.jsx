@@ -48,7 +48,7 @@ export default function ProductBallPage() {
   loadProductSelected();
   }, []);
 
-  //  on l'affecte le resultat du backend à la variable initialisé product
+  //  on recupère le produit selectionné sous la forme voulue
   let product = null;
   if (productSelected.length > 0) {
   product = productSelected[0];

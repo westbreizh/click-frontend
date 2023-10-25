@@ -1,6 +1,3 @@
-// problème de mise en forme avec l'input mot de passe un trait apparait
-// les inputs n'ont pas la même couleur non plus une fois rempli
-
 import { useState } from 'react'
 import ModalValidationSignup from "../../components/modal/modalValidation/ModalValidationSignup"
 import SignupForm from "../../components/form/SignupForm"
@@ -24,21 +21,21 @@ export default function Signup() {
 
         <section className="signup-contenair">
 
-            <div className="form-signup__header">
+          <div className="form-signup__header">
 
-              <h1 className="form-signup__header__h1">
-                Création de compte Click & Raquette !
-              </h1>
+            <h1 className="form-signup__header__h1">
+              Création de compte Click & Raquette !
+            </h1>
 
-              <div className="form-signup__littleBitText">
-                Nous sommes heureux de vous voir ici, bienvenue parmis nous.
-              </div>
-
+            <div className="form-signup__littleBitText">
+              Nous sommes heureux de vous voir ici, bienvenue parmis nous.
             </div>
 
-            <div className="form-signup__field-wrapper">
-                <SignupForm  showModal={showModal}/>
-            </div>
+          </div>
+
+          <div className="form-signup__field-wrapper">
+              <SignupForm  showModal={showModal}/>
+          </div>
 
         </section>
 

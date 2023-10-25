@@ -14,10 +14,12 @@ import { setCategorieWithOptionSelectedForAccessories } from "../../store/produc
 
 export default function Accessories() {
 
+
   const [productFind, setProductFind] = useState(true)
   const productsListFromBackend = useSelector((state) => state.product.productsListFromBackend);
   const categorieWithOptionSelectedForAccessories = useSelector((state) => state.product.categorieWithOptionSelectedForAccessories);
   const store = useStore()
+
 
   //fonction asynchrone vers le backend pour recupérer 
   //une liste des marques de cordages de manière aléatoire
@@ -85,6 +87,7 @@ export default function Accessories() {
       loadProductListRandom ()
     },[])
 
+    
   // rénitialise à zéro les options choisies précédemment quand on revient sur la page
     useEffect(() => {
       store.dispatch( setCategorieWithOptionSelectedForAccessories([]));

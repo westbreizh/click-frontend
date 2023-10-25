@@ -1,7 +1,3 @@
-// loadproductListFiltered est appelé car le denier select de la liste se met charge tout seul ???
-// problème quand on décoche toutes les options choisi il ne revient pas à sa configuration initiale ...
-
-
 import { NavLink } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { useSelector, useStore } from "react-redux"
@@ -85,11 +81,13 @@ export default function Ball() {
     loadproductListFiltered();
   }, [categorieWithOptionSelectedForBall ]);
 
+
   // charger une liste de balles aléatoires et on réinitialise les options au chargement de la page
   useEffect(() => {
     loadProductListRandom ()
   },[])
 
+  
   // rénitialise à zéro les options choisies précédemment quand on revient sur la page
   useEffect(() => {
     store.dispatch( setCategorieWithOptionSelectedForBall([]));

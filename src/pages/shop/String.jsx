@@ -112,10 +112,10 @@ export default function String() {
 
           <h1 className="title-products-string"> Cordages</h1>
 
-          <div className="shop__text-info">  
+          <div className="shop__text-info"> 
+
             <span className="shop__text-info-part-a">
             Le prix indiqué comprend la fourniture et la pose du cordage<br/>
-            L'achat de bobine peut se faire sur commande à la boutique.
             </span>
 
           </div>
@@ -142,14 +142,15 @@ export default function String() {
             {categorieWithOptionSelectedForString.map((object, index) => (
 
               <div 
-              className="options-selected-wrapper__one-categorie"
-              key={index}>
+                className="options-selected-wrapper__one-categorie"
+                key={index}>
 
                   {object.optionSelectedForOneCategorie.map((option, index) => (
                     <div key={index}
                     className="options-selected"
                     >
-                      {option}</div>
+                      {option}
+                    </div>
                   ))}
 
               </div>
