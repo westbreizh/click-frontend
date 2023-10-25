@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {  useSelector, useDispatch } from 'react-redux'
 import { calculNumberArticle, deleteArticle, calculTotalPrice  } from '../../store/cartSlice';
 import DropDownSelectQuantity from '../../components/select/dropDownSelectQuantity';
@@ -12,7 +12,6 @@ export default function Cart() {
   const articleList = useSelector(state => state.cart.articleList);
   const numberArticle = useSelector(state => state.cart.numberArticle);
   const totalPrice = useSelector(state => state.cart.totalPrice);
-  const stringingPrice = useSelector(state => state.cart.stringingPrice);
 
   const [isArticleListWithoutString, setIsArticleListWithoutString] =useState(false)
 
@@ -23,14 +22,12 @@ export default function Cart() {
 
   const navigate = useNavigate();
 
- //localStorage.clear();
+  useEffect(() => {
+    dispatch(calculNumberArticle());
+    dispatch(calculTotalPrice());
+  }, [articleList]);
 
- useEffect(() => {
-  dispatch(calculNumberArticle());
-  dispatch(calculTotalPrice());
-}, [articleList]);
-
-const isOnlyAccesories = (articleList, navigate) => {
+  const isOnlyAccesories = (articleList, navigate) => {
   let containsCordages = false;
 
   for (const article of articleList) {
@@ -52,18 +49,15 @@ const isOnlyAccesories = (articleList, navigate) => {
     setIsArticleListWithoutString(true)
     console.log("isArticleListWithoutString",isArticleListWithoutString)
   }
-};
+  };
 
-const handleClickGoToOrder = () => {
-  console.log("je vais construire ma fonction qui teste si je n'ai que des accessoires")
-  isOnlyAccesories(articleList, navigate); // Passez navigate en tant qu'argument
-};
-
-
-  console.log("article dans panier",articleList )
+  const handleClickGoToOrder = () => {
+    console.log("je vais construire ma fonction qui teste si je n'ai que des accessoires")
+    isOnlyAccesories(articleList, navigate); // Passez navigate en tant qu'argument
+  };
 
 
-
+  // console.log("article dans panier",articleList )
 
     return (
 
@@ -85,8 +79,7 @@ const handleClickGoToOrder = () => {
                   </div>
                 </div>
     
-                {articleList.map((product, index) => {                    console.log("product", product)
-
+                {articleList.map((product, index) => {                   
 
                   switch (product.categorie) {
 
@@ -105,48 +98,37 @@ const handleClickGoToOrder = () => {
 
                           </div>
 
+                          <div className='cart-content__content-on-one-line'>
 
-                            <div className='cart-content__content-on-one-line'>
-
-                              <div className='cart-content__cordage'>
-                                <div> Cordage :</div>
-                                <NavLink 
-                                      key={index} 
-                                      to={`/fiche_produit/cordage/${product.stringFromShop.id}`}
-                                      className="cart-content__link-to-card-product"
-                                    >
-                                      {"  " + product.stringFromShop.mark + " " + product.stringFromShop.model}
-                                </NavLink>
-                              </div>
-
-
-
+                            <div className='cart-content__cordage'>
+                              <div> Cordage :</div>
+                              <NavLink 
+                                    key={index} 
+                                    to={`/fiche_produit/cordage/${product.stringFromShop.id}`}
+                                    className="cart-content__link-to-card-product"
+                                  >
+                                    {"  " + product.stringFromShop.mark + " " + product.stringFromShop.model}
+                              </NavLink>
                             </div>
+
+                          </div>
                               
-                             
+                          <div> Tension cordage : {product.stringRopeChoice} kg </div>
 
-                            <div> Tension cordage : {product.stringRopeChoice} kg </div>
+                          <div className='cart-content__wrapper-icons'>
 
-                            <div className='cart-content__wrapper-icons'>
+                              <DropDownSelectQuantity
+                                quantityForOneProduct={product.quantity}
+                                indexProductInArrayCart={index}
+                              />
+                              <DeleteIcon 
+                                onClick={() => handleClickDelete(index) }
+                                className="cart-content__deleteIcon" 
+                              />
 
-                                <DropDownSelectQuantity
-                                  quantityForOneProduct={product.quantity}
-                                  indexProductInArrayCart={index}
-                                />
-                                <DeleteIcon 
-                                  onClick={() => handleClickDelete(index) }
-                                  className="cart-content__deleteIcon" 
-                                />
-
-                            </div>
-
+                          </div>
 
                         </div>
-
-                  
-
-
-                 
 
                       );
 
@@ -189,8 +171,8 @@ const handleClickGoToOrder = () => {
 
                       );
 
-                    case "balle":
-                    case "accessoire":
+                    case "balle":  case "accessoire":
+
                       return (
 
                         <div className='cart-content__product-wrapper' key={index}>
@@ -271,7 +253,6 @@ const handleClickGoToOrder = () => {
                   <div> Total </div>
                   <div> {totalPrice} € </div>
                 </div>
-
 
                 <button 
                   onClick={handleClickGoToOrder}

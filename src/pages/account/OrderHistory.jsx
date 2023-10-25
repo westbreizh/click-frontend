@@ -36,7 +36,6 @@ export default function OrderHistory() {
         const ordersInfo = result.data.ordersInfo
         const messageFromBackend = result.message
         if (messageFromBackend==="Vous n'avez pas encore effectué de commande."){
-
         };
         console.log("message du backend",result.message);
         console.log("liste des commandes",ordersInfo);
@@ -59,7 +58,7 @@ export default function OrderHistory() {
 
   return (
 
-  <>
+    <>
       <NavbarAccount />
 
       <main className="order-log__main">
@@ -68,15 +67,14 @@ export default function OrderHistory() {
 
         <section className="order-log__contenair">
 
-
-        <div className='oneOrder__contenair-cart'>
+          <div className='oneOrder__contenair-cart'>
 
             <h1 className="order-log__h1">
               Historique des commandes 
             </h1>
 
-
             {orderLogList.length > 0 ? (
+
               <div className="order-log__list-contenair">
 
                 {orderLogList.slice().reverse().map((order, index) => (
@@ -91,15 +89,15 @@ export default function OrderHistory() {
                       </div>
 
                       <div className="order-log__list-row-element">
-                      date :  {" "}
-                        {
-                          (() => {
-                            const orderDate = new Date(order.orderDate);
-                            const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
-                            const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
-                            return dateFrancaise;
-                          })()
-                        }
+                        date :  {" "}
+                          {
+                            (() => {
+                              const orderDate = new Date(order.orderDate);
+                              const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+                              const dateFrancaise = orderDate.toLocaleDateString('fr-FR', options);
+                              return dateFrancaise;
+                            })()
+                          }
 
                       </div>
 
@@ -120,12 +118,6 @@ export default function OrderHistory() {
 
                 ))}
                 
-
-
-
-
-
-
               </div>
 
               ) : (
@@ -134,17 +126,16 @@ export default function OrderHistory() {
                 </div>
             )}
 
-          {orderLogListEmpty?
-            <div> Vous n'avez pas encore passée de commmande </div> : ""
-          }
-            
-
-        </div>
+            {orderLogListEmpty?
+              <div> Vous n'avez pas encore passée de commmande </div> : ""
+            }
+              
+          </div>
 
         </section>
 
       </main>
-  </>
+    </>
     
   )
 }
