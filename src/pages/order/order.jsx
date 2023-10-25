@@ -20,10 +20,6 @@ export default function Order() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //problème si on a un article accessoire en premier dans la liste
-  // mettre en parallèle avec une commande ne comprenant que des accessoires 
-  // très louche avec react redux qui fait bueger order quand le le panier est cliner en fait rerender global et du coup les abonnement font que les variables de prder du store redux sont mide a jour et order aussi ....
-
 
   //on récupère les infos du lieu et de la raquette depuis articleList 
   let racquetPlayer = null;
