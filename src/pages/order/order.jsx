@@ -1,30 +1,34 @@
 import { useState, useEffect } from 'react'
 import {  useSelector, useDispatch } from 'react-redux'
 import { NavLink } from "react-router-dom"
-import { loadStripe } from '@stripe/stripe-js'
 import ModalConnexionOrSingupFromOrder from '../../components/modal/modalLoginOrSignup/ModalLoginOrSignupFromOrder';
-import logoPaiment from "../../assets/logo-Paiement-carte-bleu.webp"
-import logoPaypal from "../../assets/logo-paypal.jpeg"
 import { useNavigate } from 'react-router-dom';
 import { resetCart } from '../../store/cartSlice'
 import { calculNumberArticle, calculTotalPrice } from '../../store/cartSlice';
+//import logoPaiment from "../../assets/logo-Paiement-carte-bleu.webp"
+//import logoPaypal from "../../assets/logo-paypal.jpeg"
+//import { loadStripe } from '@stripe/stripe-js'
 
 export default function Order() {
 
   const isConnected = useSelector(state => state.user.isConnected);
   const articleList = useSelector(state => state.cart.articleList);
   const totalPrice = useSelector(state => state.cart.totalPrice);
-
   const userInfo = useSelector(state => state.user.userInfo);
-  console.log("articleList", articleList)
+  const token = useSelector((state) => state.user.token);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   //problème si on a un article accessoire en premier dans la liste
-  // amettre en parallèle avec une commande ne comprenant que des accessoires 
+  // mettre en parallèle avec une commande ne comprenant que des accessoires 
   // très louche avec react redux qui fait bueger order quand le le panier est cliner en fait rerender global et du coup les abonnement font que les variables de prder du store redux sont mide a jour et order aussi ....
 
+
+  //on récupère les infos du lieu et de la raquette depuis articleList 
   let racquetPlayer = null;
   let hubBackChoice = null;
   let hubChoice = null;
-
   if (articleList && articleList.length > 0) {
     for (const article of articleList) {
       if (
@@ -40,75 +44,56 @@ export default function Order() {
       }
     }
     // Le reste de votre composant
-  } else {
-    // Traitez le cas où articleList est vide ou null
   }
 
-  useEffect(() => {
-    dispatch(calculNumberArticle());
-    dispatch(calculTotalPrice());
-  }, []);
 
-console.log("raquet player",racquetPlayer)
-console.log("articleList",articleList)
-
-  const token = useSelector((state) => state.user.token);
-  const PUBLIC_KEY = "pk_live_51NGdYqI8HrVwrRfPvO0VCSPgquB0SZOcQeifdVeXzlryvLj2gpTf6EufvCPRJ7SD1M9iCjTY7ZTwySpWtjYibzb100TJ7uXJag"
-  const stripePromise =loadStripe (PUBLIC_KEY)
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  //ne sert qu'à envoyer une prop qui avait été défini dans les composant enfant
-  const [isModalConnexionOpen, setModalConnexionOpen] = useState(false);
-  const closeModalConnexion = function(){
-    setModalConnexionOpen(false);
-  };
-
+  //gestion du choix de paiement
   const [paiementInlineChecked, setPaiementInlineChecked] = useState(false);
   const [paiementInShopChecked, setPaiementInShopChecked] = useState(true);
-
   const handlePaiementInlineChange = () => {
     setPaiementInlineChecked(!paiementInlineChecked);
     setPaiementInShopChecked(false); // Décoche l'autre case si elle est cochée
     setShowError(false);
   };
-
   const handlePaiementInShopChange = () => {
     setPaiementInShopChecked(!paiementInShopChecked);
     setPaiementInlineChecked(false); // Décoche l'autre case si elle est cochée
     setShowError(false);
   };
+  // gestion du cas ou pas de moyen de paiement a été selectionné
+  const [showError, setShowError] = useState(false) ; 
+  const  handleClickNoOptionPaiement =  (event) => {
+    setShowError(true);
+  }
 
+  //logique pour paiement en ligne
+  //const PUBLIC_KEY = "pk_live_51NGdYqI8HrVwrRfPvO0VCSPgquB0SZOcQeifdVeXzlryvLj2gpTf6EufvCPRJ7SD1M9iCjTY7ZTwySpWtjYibzb100TJ7uXJag"
+  //const stripePromise =loadStripe (PUBLIC_KEY)
+  const handleSubmitInlignePaiement =  (event) => {
+    event.preventDefault();
 
+    // Créez un formulaire virtuel pour envoyer les données
+    const form = document.createElement('form');
+    form.method = 'POST';
 
- // gestion de l'affichage de l'erreur dans la balise p
- const [showError, setShowError] = useState(false) ;
+    // Traitement pour paiement en ligne
+    form.action = 'https://click-backend.herokuapp.com/api/stripe/create-checkout-session';
 
+    // Ajoutez un champ de formulaire caché avec la valeur de la liste d'articles
+    const datasInput = document.createElement('input');
+    datasInput.type = 'hidden';
+    datasInput.name = 'datas';
+    datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token, racquetPlayer });
 
- const handleSubmitInlignePaiement =  (event) => {
-  event.preventDefault();
+    // Ajoutez le champ de formulaire au formulaire virtuel
+    form.appendChild(datasInput);
+    
+    // Ajoutez le formulaire virtuel à la page et soumettez-le
+    document.body.appendChild(form);
+    form.submit();
+  }
 
-  // Créez un formulaire virtuel pour envoyer les données
-  const form = document.createElement('form');
-  form.method = 'POST';
-
-  // Traitement pour paiement en ligne
-  form.action = 'https://click-backend.herokuapp.com/api/stripe/create-checkout-session';
-
-  // Ajoutez un champ de formulaire caché avec la valeur de la liste d'articles
-  const datasInput = document.createElement('input');
-  datasInput.type = 'hidden';
-  datasInput.name = 'datas';
-  datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token, racquetPlayer });
-
-  // Ajoutez le champ de formulaire au formulaire virtuel
-  form.appendChild(datasInput);
-  
-  // Ajoutez le formulaire virtuel à la page et soumettez-le
-  document.body.appendChild(form);
-  form.submit();
- }
-
+ //logique pour paiement en direct
  const handleClickShopPaiement = async (event) => {
     try{
       
@@ -139,9 +124,16 @@ console.log("articleList",articleList)
     }
   }
   
- const  handleClickNoOptionPaiement =  (event) => {
-    setShowError(true);
-  }
+
+  useEffect(() => {
+    dispatch(calculNumberArticle());
+    dispatch(calculTotalPrice());
+  }, []);
+
+  //console.log("articleList", articleList)
+  //console.log("raquet player",racquetPlayer)
+  //console.log("articleList",articleList)
+  
 
   return (
 
@@ -161,6 +153,7 @@ console.log("articleList",articleList)
 
           <div className="order__sub-contenair">
 
+            {/*liste des articles */}
             <div className='order__contenair-cart'>
 
               <h2 className="order__sub-title"> récapitulatif </h2>
@@ -234,8 +227,8 @@ console.log("articleList",articleList)
 
                     );
 
-                  case "balle":
-                  case "accessoire":
+                  case "balle": case "accessoire":
+
                     return (
 
                       <div className='order-cart__product-wrapper' key={index}>
@@ -291,6 +284,7 @@ console.log("articleList",articleList)
 
             </div>
 
+            {/*lieu de dépot et retour */}
             <div className="order__contenair-info" > 
 
               <h2 className="order__sub-title"> Lieu de dépot et retour </h2>
@@ -305,7 +299,7 @@ console.log("articleList",articleList)
 
             </div>
 
-
+            {/*paiement en ligne */}
             <div className="order__contenair-info" > 
 
               <h2 className="order__sub-title"> Moyen de paiement </h2>
@@ -350,10 +344,8 @@ console.log("articleList",articleList)
 
             </div>
 
-
+            {/*moyen de paiement*/}
             <div className="order__contenair-info order__contenair-info-button" > 
-
-
 
               {showError && <p className="input__error message__errorOrderPaiement">Veuillez saisir un mode de paiement, merci !</p>}
 
@@ -365,39 +357,37 @@ console.log("articleList",articleList)
                       Commander
                     </button>
                 </form> : ""                
-
               }
 
 
               { paiementInShopChecked===true ?
         
-                  <button 
-                    onClick={handleClickShopPaiement}
-                    className="btn btn-green btn-commander btn-cart" 
-                    type="submit">
-                      Commander
-                    </button>
+                <button 
+                  onClick={handleClickShopPaiement}
+                  className="btn btn-green btn-commander btn-cart" 
+                  type="submit">
+                    Commander
+                </button>
                 :   ""              
 
               }
 
               { paiementInShopChecked===false && paiementInlineChecked===false ?
         
-                  <button 
-                    onClick={handleClickNoOptionPaiement}
-                    className="btn btn-green btn-commander btn-cart" 
-                    type="submit">
-                      Commander
-                  </button>
+                <button 
+                  onClick={handleClickNoOptionPaiement}
+                  className="btn btn-green btn-commander btn-cart" 
+                  type="submit">
+                    Commander
+                </button>
                 :   ""              
 
               }
 
             </div>
 
-
-
           </div>
+
           </>
             ) : ""}
           </>
@@ -405,7 +395,7 @@ console.log("articleList",articleList)
           ) : (
 
           <ModalConnexionOrSingupFromOrder 
-          closeModalConnexion={closeModalConnexion}/>
+          />
 
           )
         }

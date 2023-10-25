@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import {  useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { resetCart } from "../../store/cartSlice";
 
 
@@ -24,7 +24,7 @@ export default function SuccesPaiement() {
         <div className="order-back__section">
 
           <h2 className="order-back__h2">Confirmation de commande </h2>
-          
+
           <p>
             Notre équipe a bien reçu votre commande.<br/>
             Un e-mail de confirmation vous a été envoyé par email.<br/>
