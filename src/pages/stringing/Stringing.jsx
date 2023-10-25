@@ -13,7 +13,6 @@ import { format, addDays, getDay } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
 
-
 export default function Stringing() {
 
   const stringingPriceWithStringFromAnotherWhere = 10 //prix de la pose  avec cordage acheté ailleurs
@@ -21,9 +20,9 @@ export default function Stringing() {
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);// dans le slice redux on initialise la preference joueur si il y a 
   const isConnected = useSelector(state => state.user.isConnected);
   const token = useSelector(state => state.user.token);
-  const userInfo =  useSelector((state) => state.user.userInfo);
 
   //on récupère les préférences joueurs si connecté et si il y en a
+  const userInfo =  useSelector((state) => state.user.userInfo);
   const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
@@ -70,8 +69,6 @@ export default function Stringing() {
   }, []);
 
 
-
-
   const dispatch = useDispatch()
   const store = useStore()
 
@@ -81,10 +78,7 @@ export default function Stringing() {
   //console.log("numberKnotChoice", numberKnotChoice)
   //console.log("cart", cart)
   //console.log("stringFromplayer", stringFromPlayer)
-  
-  console.log("dateRacquetReady", dateRacquetReady)
-
-
+  //console.log("dateRacquetReady", dateRacquetReady)
 
   //recupération de la saisie de la marque/type de la raquette
   const handleRacquetPlayerChange = (event) => {
