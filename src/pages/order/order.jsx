@@ -46,6 +46,12 @@ export default function Order() {
     // Le reste de votre composant
   }
 
+  //on arrive sur la page non connecté, le modal de connexion ou inscription s'affiche
+  // transmet comme props au modal la fonction interrupteur on //off pour le X de fermeture 
+  const [isModalConnexionOpen, setModalConnexionOpen] = useState(false);
+  const closeModalConnexion = function(){
+    setModalConnexionOpen(false);
+  };
 
   //gestion du choix de paiement
   const [paiementInlineChecked, setPaiementInlineChecked] = useState(false);
@@ -387,7 +393,7 @@ export default function Order() {
             </div>
 
           </div>
-
+          
           </>
             ) : ""}
           </>
@@ -395,7 +401,7 @@ export default function Order() {
           ) : (
 
           <ModalConnexionOrSingupFromOrder 
-          />
+          closeModalConnexion={closeModalConnexion}/>
 
           )
         }
