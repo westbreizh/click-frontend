@@ -7,13 +7,8 @@ import BackNavArrowStringer from "../../components/button/BackNavArrowStringer";
 
 export default function CoordinatePlayer() {
 
-
-
-
   const [userInfo, setUserInfo] = useState("") ;
   const [address, setUserAddress] = useState("") ;
-
-  console.log(address)
 
 
   // on récupère l'id dans l'url de la page
@@ -51,12 +46,12 @@ export default function CoordinatePlayer() {
     }
   }
 
-
   // charger la listes des commandes  au chargement de la page
   useEffect(() => {
     loadOnePlayer ()
   },[])
 
+  //console.log(address)
 
   return (
 
