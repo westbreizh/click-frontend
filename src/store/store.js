@@ -34,9 +34,6 @@ const store = configureStore({
 // Création d'un persistor qui permet de sauvegarder automatiquement le store dans le local storage
 export const persistor = persistStore(store);
 
-
-
-
 // Exportez à la fois le store et le persistor
 export { store };
 

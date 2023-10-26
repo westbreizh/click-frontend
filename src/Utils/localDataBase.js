@@ -1,6 +1,6 @@
 const datasForSelectstring = [ 
   {   
-   options: ["Babolat","Dunlop", "Head", "Tecnifibre", "Yonex", "Luxilon"],
+   options: ["Babolat", "Tecnifibre", "Yonex", "Luxilon"],
    title : "Marque",
    fieldNameBdd: "Mark"
   },
@@ -12,7 +12,6 @@ const datasForSelectstring = [
   }
 
 ];
-
 export { datasForSelectstring };
 
 
@@ -24,7 +23,6 @@ const datasForSelectsBall = [
   },
 
 ];
-
 export { datasForSelectsBall };
 
 
@@ -41,24 +39,11 @@ const datasForSelectsAccessories = [
     },
 
 ];
-
 export { datasForSelectsAccessories };
 
 
-const datasForSelectHub = [ 
-  { value: 'Rollang Garros', adress: "porte d'auteuil" },
-  { value: 'TC Penmach', adress: "rue de la rue Penmach"},
-  { value: 'Leclerc Pendref', adress: "rue pratique Pendref Plomeur"},
-];
-
-export { datasForSelectHub };
-
-
 const datasForSelectRopeString = [];
-
 for (let i = 17; i <= 30; i++) {
   datasForSelectRopeString.push({ value: i });
 }
-
-
 export { datasForSelectRopeString };
