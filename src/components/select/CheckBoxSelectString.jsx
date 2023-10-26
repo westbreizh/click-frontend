@@ -10,12 +10,15 @@ import { setCategorieWithOptionSelectedForString } from "../../store/productSlic
 
 export default function CheckboxSelect(props) {
 
+  const store = useStore()
+
   const options= props.options
   const title  = props.title
   const fieldNameBdd = props.fieldNameBdd
+
   const [isOpen, setIsOpen] = useState(false);
   const [optionSelectedForOneCategorie, setOptionSelectedForOneCategorie] = useState([]); 
-  const store = useStore()
+
   const categorieWithOptionSelectedForString = useSelector((state) => state.product.categorieWithOptionSelectedForString);
 
 
@@ -81,50 +84,50 @@ export default function CheckboxSelect(props) {
 
   return (
 
+    <div 
+      className="checkBoxSelect__wrapper"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
+
       <div 
-        className="checkBoxSelect__wrapper"
-        onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
-      >
-
-        <div 
-        onClick={() => setIsOpen(!isOpen)} 
-        className="checkBoxSelect__title" >
-          {title}
-          <span
-          className={`checkBoxSelect__arrow ${
-            isOpen ? "checkBoxSelect__arrow-up" : "checkBoxSelect__arrow-down"
-          }`}
-          />
-        </div>
-
-        {isOpen && (
-        <div className="checkBoxSelect__submenu-contenair" >
-
-          <ul 
-          className='checkBoxSelect__submenu-ul'>
-            {options.map((option) => (
-
-              <li key={option} className="checkBoxSelect__submenu-li">
-                <input
-                  type="checkbox"
-                  id={option}
-                  name={option}
-                  checked={optionSelectedForOneCategorie.includes(option)}
-                  onChange={() => handleOptionClick(option)}
-                />
-                <label 
-                className='checkBoxSelect__option-label'
-                htmlFor={option}>
-                  {option}</label>
-              </li>
-
-            ))}
-          </ul>
-
-        </div>
-        )}
+      onClick={() => setIsOpen(!isOpen)} 
+      className="checkBoxSelect__title" >
+        {title}
+        <span
+        className={`checkBoxSelect__arrow ${
+          isOpen ? "checkBoxSelect__arrow-up" : "checkBoxSelect__arrow-down"
+        }`}
+        />
       </div>
+
+      {isOpen && (
+      <div className="checkBoxSelect__submenu-contenair" >
+
+        <ul 
+        className='checkBoxSelect__submenu-ul'>
+          {options.map((option) => (
+
+            <li key={option} className="checkBoxSelect__submenu-li">
+              <input
+                type="checkbox"
+                id={option}
+                name={option}
+                checked={optionSelectedForOneCategorie.includes(option)}
+                onChange={() => handleOptionClick(option)}
+              />
+              <label 
+              className='checkBoxSelect__option-label'
+              htmlFor={option}>
+                {option}</label>
+            </li>
+
+          ))}
+        </ul>
+
+      </div>
+      )}
+    </div>
 
   );
 }

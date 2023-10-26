@@ -5,14 +5,15 @@ import { resetHubChoice } from "../../store/cartSlice";
 
 export default function SelectHub(props) {
 
+  const setHubChoice = props.setHubChoice
+
   const [datasForSelectHub , setDatasForSelectHub ] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const setHubChoice = props.setHubChoice
-
+  
   const handleChange = (value) => {
     const hubSelected = value; 
-    console.log("hubselected", hubSelected)
+    //console.log("hubselected", hubSelected)
     setHubChoice(hubSelected)
   };
   
@@ -74,11 +75,11 @@ export default function SelectHub(props) {
 
         {datasForSelectHub.map((option) => (
           <li
-            key={option.id} // Assurez-vous que la propriété "id" est unique pour chaque élément
+            key={option.id} 
             className="clubSelect__submenu-li"
             onClick={() => handleChange(option)}
           >
-            {option.enterprise_name} {/* Utilisez la propriété correcte ici */}
+            {option.enterprise_name} 
           </li>
         ))}
         

@@ -1,19 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 // Créez une slice pour le panier
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    articleList: [], // comprend les balles et accessoires
-    numberArticle: 0, // comprend tous les éléments articleList et installationWithStringList
-    totalPrice: 0, //prix total
+    articleList: [], 
+    numberArticle: 0, 
+    totalPrice: 0, 
     stringFromShopChoice:null,
-    stringingPrice: 15, //prix de la pose 
+    stringingPrice: 10, 
   },
 
   reducers: {
-
     // Action pour ajouter des articles aux panier
     addArticle: (state, action) => {
       console.log("statejson",JSON.stringify(state));
@@ -22,7 +20,6 @@ const cartSlice = createSlice({
         // Si action.payload est indéfini ou falsy, ne rien faire
         return;
       }
-
       const newProduct = action.payload;
       if (!newProduct.id) {
         // Vérifier si newProduct.id est défini
@@ -49,19 +46,17 @@ const cartSlice = createSlice({
       }
     },
   
-    // Action pour ajouter une pose cordage (avec ou sans fourniture du cordage)
+    // Action pour ajouter une pose cordage 
     addInstallationString: (state, action) => {
     const newProduct = action.payload;
     state.articleList.push(newProduct);
     },
-
 
     // Action pour supprimer un article du panier
     deleteArticle: (state, action) => {
       const index = action.payload;
       state.articleList.splice(index, 1);
     },
-
 
     // Action pour changer la quantité d'un produit dans le panier
     changeQuantityArticle: (state, action) => {
@@ -74,7 +69,6 @@ const cartSlice = createSlice({
       }
     },
 
-
     // Action pour calculer le nombre de produits dans.articleList et l'enregistrer dans numberProduct
     calculNumberArticle: (state) => {
       state.numberArticle = state.articleList.reduce(
@@ -83,14 +77,12 @@ const cartSlice = createSlice({
       ) ;
     },
 
-
     // Action pour calculer le prix du panier
     calculTotalPrice: (state) => {
       const totalPrice = state.articleList.reduce(
         (total, article) => total + article.price * article.quantity,
         0
       );
-      
       const formattedPrice = totalPrice.toFixed(2).replace('.', ',');
       state.totalPrice = formattedPrice;
     },
@@ -99,8 +91,6 @@ const cartSlice = createSlice({
     resetStringFromShopChoice: (state, action) => {
       state.stringFromShopChoice = action.payload;
     },
-
-
 
     // Action pour réinitialiser complètement le panier
     resetCart: (state) => {
@@ -116,14 +106,11 @@ const cartSlice = createSlice({
 export const {
   addArticle,
   addInstallationString,
-  changeQuantityArticle,
-  calculTotalPrice,
-  calculNumberArticle,
   deleteArticle,
-  deleteInstallationWithString,
-  deleteInstallationAlone ,
+  changeQuantityArticle,
+  calculNumberArticle,
+  calculTotalPrice,
   resetStringFromShopChoice,
-  updateStringingPrice,
   resetCart,
 } = cartSlice.actions;
 

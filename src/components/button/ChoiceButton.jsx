@@ -8,11 +8,13 @@ import { resetStringFromShopChoice} from '../../store/cartSlice'
 export default function ChoiceButton(props) {
 
   const stringChoice = props.stringChoice
-  const [isSubmenuValidationOpen, setSubmenuValidation]= useState(false)
-  const dispatch = useDispatch();
   const productWithQuantity  =props.productWithQuantity 
+
+  const [isSubmenuValidationOpen, setSubmenuValidation]= useState(false)
+
   const navigate = useNavigate()
- 
+  const dispatch = useDispatch();
+
   const handleAddToStringing = () => {
     console.log("stringchoice page string",stringChoice[0])
     dispatch( resetStringFromShopChoice(stringChoice[0]))

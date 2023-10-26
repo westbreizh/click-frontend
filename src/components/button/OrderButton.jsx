@@ -6,10 +6,9 @@ import ModalValidationAddToCart from '../modal/modalValidation/ModalValidationAd
 
 export default function OrderButton(props) {
 
-
+  const productWithQuantity  =props.productWithQuantity 
   const [isSubmenuValidationOpen, setSubmenuValidation]= useState(false)
   const dispatch = useDispatch();
-  const productWithQuantity  =props.productWithQuantity 
 
   const handleAddToCart = () => {
     dispatch(addArticle(productWithQuantity));
@@ -17,7 +16,6 @@ export default function OrderButton(props) {
     dispatch(calculNumberArticle());
   }
   
-
   return (
 
     <>

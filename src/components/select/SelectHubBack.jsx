@@ -5,13 +5,14 @@ import { resetHubBackChoice } from "../../store/cartSlice";
 export default function SelectHubBack(props) {
 
   const setHubBackChoice = props.setHubBackChoice
+
   const [datasForSelectHubBack , setDatasForSelectHubBack ] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
 
   const handleChange = (value) => {
     const hubBackSelected = value; 
-    console.log("hubBackSelected", hubBackSelected)
+    //console.log("hubBackSelected", hubBackSelected)
     setHubBackChoice(hubBackSelected);
   };
   
@@ -78,7 +79,6 @@ useEffect(() => {
             >
             {option.enterprise_name} 
             </li>
-
 
           )}
 

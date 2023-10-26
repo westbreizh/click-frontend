@@ -8,10 +8,8 @@ export default function ModalValidationAddToCart( props) {
   const setSubmenuValidation = props.setSubmenuValidation
   const cart = useSelector(state => state.cart.articleList);
 
-  console.log("produit ajouté")
-  console.log(product )
-  console.log("panier"  )
-  console.log(cart )
+  //console.log("produit ajouté", product)
+  //console.log("panier", cart  )
 
 
   return createPortal(
@@ -66,10 +64,7 @@ export default function ModalValidationAddToCart( props) {
               voire le panier
             </Link>  
 
-
-            
           </div>
-
 
         </div>
 

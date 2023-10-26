@@ -5,7 +5,6 @@ export default function ModalValidationChangesPreferences( props) {
 
   const setSubmenuValidation = props.setSubmenuValidation
 
-
   return createPortal(
     <>
       <div className="modal-overlay">
@@ -42,8 +41,6 @@ export default function ModalValidationChangesPreferences( props) {
             </Link>  
             
           </div>
-
-
 
         </div>
 

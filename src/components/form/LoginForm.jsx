@@ -4,29 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStore } from "react-redux";
-import {
-  Input,
-  InputAdornment,
-  IconButton,
-  styled,
-  TextField,
-} from "@mui/material";
-
+import {Input,InputAdornment, IconButton, styled,TextField,} from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ModalResetPassword from "../modal/modalReset/ModalResetPassword";
 import { shemaInputLogin } from "../../Utils/shemaInput";
-import {
-  connectedToggle,
-  setUserInfo,
-  setToken,
-} from "../../store/userSlice";
+import {connectedToggle, setUserInfo, setToken,} from "../../store/userSlice";
 import { resetStringFromShopChoice } from "../../store/cartSlice";
 
+// Votre style personnalisé pour le champ de texte
 const CustomTextField = styled(TextField)(({ theme }) => ({
-  // Votre style personnalisé pour le champ de texte
 }));
-
 const CustomInput = styled(Input)(({ theme }) => ({
   appearance: "none !important",
   display: "flex",
@@ -57,10 +45,8 @@ const CustomInput = styled(Input)(({ theme }) => ({
 }));
 
 export default function LoginForm(props) {
-  const [isPErrorFromBackEndOpen, setShowErrorFromBackEnd] = useState(false);
-  const showPErrorFromBackend = () => {
-    setShowErrorFromBackEnd(true);
-  };
+
+  const closeModalConnexion = props.closeModalConnexion;
 
   const [showPassword, setShowPassWord] = useState(false);
   const handleClickShowPassword = () => {
@@ -70,6 +56,8 @@ export default function LoginForm(props) {
     event.preventDefault();
   };
 
+
+//gestion de la validité des saisie par yup
   const {
     register,
     formState,
@@ -80,16 +68,19 @@ export default function LoginForm(props) {
     mode: "onTouched",
     shouldFocusError: true,
   });
-
   const { isValid } = formState;
 
+//gestion de l'affichage des erreus venant du backend
+  const [isPErrorFromBackEndOpen, setShowErrorFromBackEnd] = useState(false);
+  const showPErrorFromBackend = () => {
+    setShowErrorFromBackEnd(true);
+  };
   const [messageFromBackEnd, setMessageFromBackend] = useState("");
   function changeMessageFromBackEnd(messageFromBack) {
     setMessageFromBackend(messageFromBack);
   }
 
-  const store = useStore();
-
+//gestion de l'ouverture des modales
   const [isModalResetPasswordOpen, setModalResetPasswordOpen] = useState(false);
   const showModalResetPassword = () => {
     setModalResetPasswordOpen(true);
@@ -98,12 +89,8 @@ export default function LoginForm(props) {
     setModalResetPasswordOpen(false);
   };
 
-  const closeModalConnexion = props.closeModalConnexion;
-
-
-
+  const store = useStore();
   const navigate = useNavigate()
-
 
   const onSubmit = async function (data) {
     try {
@@ -141,7 +128,9 @@ export default function LoginForm(props) {
     }
   }
 
+  
   return (
+
     <form onSubmit={handleSubmit(onSubmit)} className="form-modal">
       <label className="input__label"> Email </label>
       <input

@@ -5,8 +5,9 @@ import { useDispatch } from 'react-redux'
 
 export default function SelectString(props) {
 
-  const [isOpen, setIsOpen] = useState(false);
   const setStringFromPlayerSelected = props.setStringFromPlayerSelected
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const dispatch = useDispatch();
 

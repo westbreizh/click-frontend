@@ -9,17 +9,19 @@ import { setCategorieWithOptionSelectedForAccessories } from "../../store/produc
 
 export default function CheckboxSelect(props) {
 
+  const store = useStore()
+
   const options= props.options
   const title  = props.title
   const fieldNameBdd = props.fieldNameBdd
+
   const [isOpen, setIsOpen] = useState(false);
   const [optionSelectedForOneCategorie, setOptionSelectedForOneCategorie] = useState([]); 
-  const store = useStore()
   const categorieWithOptionSelectedForAccessories = useSelector((state) => state.product.categorieWithOptionSelectedForAccessories);
 
 
   // fonction appelé lorsque que l'on coche une case
-  //fonction dresetSelectComposante mise à jour des option selectionné pour la categorie du select
+  //fonction  mise à jour des option selectionné pour la categorie du select
   function uploadOptionsSelectLocal(newOption) {
     setOptionSelectedForOneCategorie((prevOptions) => {
       // on enlève l'option lorsqu'on décoche
@@ -67,64 +69,61 @@ export default function CheckboxSelect(props) {
   function handleOptionClick(option) {
     setIsOpen(false) ;
     uploadOptionsSelectLocal(option);
-
   }
 
 
   // une fois sateState effectué on met à jour les données pour le backend
 
-
   useEffect(() => {
     uploadOptionsSelectForBackend();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [optionSelectedForOneCategorie]);
 
   return (
 
+    <div 
+      className="checkBoxSelect__wrapper"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
+
       <div 
-        className="checkBoxSelect__wrapper"
-        onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
-      >
-
-        <div 
-        onClick={() => setIsOpen(!isOpen)} 
-        className="checkBoxSelect__title" >
-          {title}
-          <span
-          className={`checkBoxSelect__arrow ${
-            isOpen ? "checkBoxSelect__arrow-up" : "checkBoxSelect__arrow-down"
-          }`}
-          />
-        </div>
-
-        {isOpen && (
-        <div className="checkBoxSelect__submenu-contenair" >
-
-          <ul 
-
-          className='checkBoxSelect__submenu-ul'>
-            {options.map((option) => (
-
-              <li key={option} className="checkBoxSelect__submenu-li">
-                <input
-                  type="checkbox"
-                  id={option}
-                  name={option}
-                  checked={optionSelectedForOneCategorie.includes(option)}
-                  onChange={() => handleOptionClick(option)}
-                />
-                <label 
-                className='checkBoxSelect__option-label'
-                htmlFor={option}>
-                  {option}</label>
-              </li>
-            ))}
-          </ul>
-
-        </div>
-        )}
+      onClick={() => setIsOpen(!isOpen)} 
+      className="checkBoxSelect__title" >
+        {title}
+        <span
+        className={`checkBoxSelect__arrow ${
+          isOpen ? "checkBoxSelect__arrow-up" : "checkBoxSelect__arrow-down"
+        }`}
+        />
       </div>
+
+      {isOpen && (
+      <div className="checkBoxSelect__submenu-contenair" >
+
+        <ul 
+
+        className='checkBoxSelect__submenu-ul'>
+          {options.map((option) => (
+
+            <li key={option} className="checkBoxSelect__submenu-li">
+              <input
+                type="checkbox"
+                id={option}
+                name={option}
+                checked={optionSelectedForOneCategorie.includes(option)}
+                onChange={() => handleOptionClick(option)}
+              />
+              <label 
+              className='checkBoxSelect__option-label'
+              htmlFor={option}>
+                {option}</label>
+            </li>
+          ))}
+        </ul>
+
+      </div>
+      )}
+    </div>
 
   );
 }

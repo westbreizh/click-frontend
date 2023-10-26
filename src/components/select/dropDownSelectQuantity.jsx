@@ -4,22 +4,23 @@ import { changeQuantityArticle } from "../../store/cartSlice";
 
 export default function DropDownSelectQuantity(props) {
 
-  const quantityForOneProduct = props.quantityForOneProduct;
-  const indexProductInArrayCart = props.indexProductInArrayCart;
-  const [newQuantity, setNewQuantity] = useState(quantityForOneProduct);
-  
   const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    const newQuantity = parseInt(event.target.value, 10); // Convertir en entier
-    setNewQuantity(newQuantity);
-    dispatch(changeQuantityArticle(
-      { quantity: newQuantity, 
-        index: indexProductInArrayCart }
-    ));
-    console.log(event.target.value);
-    console.log(indexProductInArrayCart);
-  };
+  const quantityForOneProduct = props.quantityForOneProduct;
+  const indexProductInArrayCart = props.indexProductInArrayCart;
+
+  const [newQuantity, setNewQuantity] = useState(quantityForOneProduct);
+  
+  //enregistrement de la nouvelle quantité dans le store redux
+    const handleChange = (event) => {
+      const newQuantity = parseInt(event.target.value, 10); 
+      setNewQuantity(newQuantity);
+      dispatch(changeQuantityArticle(
+        { quantity: newQuantity, 
+          index: indexProductInArrayCart }
+      ));
+    };
+
 
   return (
 

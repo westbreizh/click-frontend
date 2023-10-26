@@ -11,12 +11,16 @@ import ModalValidationMessageModif from "../modal/modalValidation/ModalValidatio
 export default function CoordinateForm( props ) {
 
   const onClose = props.onClose
-  const store = useStore()
+
   const playerId = useSelector((state) => state.user.userInfo.id);
   const telephone = useSelector((state) => state.user.userInfo.telephone);
   const address = useSelector((state) => state.user.userAddress);
   const token = useSelector((state) => state.user.token);
 
+  const [isPErrorFromBackEndOpen, setShowErrorFromBackEnd] = useState(false) ;
+  const [messageFromBackEnd, setMessageFromBackend] = useState("") ;
+
+  const store = useStore()
 
  
   //gestion de l'ouverture du modal de validation et fermeture des 2 modales (modalValidation et modalChangeEmail...)
@@ -31,13 +35,13 @@ export default function CoordinateForm( props ) {
   onClose();
   };
 
-
-  // gestion de l'affichage de l'erreur backend dans la balise p
-  const [isPErrorFromBackEndOpen, setShowErrorFromBackEnd] = useState(false) ;
+  // gestion de la valeure de la réponse backend 
   const showPErrorFromBackend = () => {
    setShowErrorFromBackEnd( true );
- };
-
+  };
+ function changeMessageFromBackEnd(messageFromBack) {
+  setMessageFromBackend(messageFromBack);
+  }
 
   // gestion du contôle de la validité des inputs 
   const { register , formState, handleSubmit,   formState: { errors }  } =
@@ -46,19 +50,9 @@ export default function CoordinateForm( props ) {
     mode: 'onTouched',
     shouldFocusError: true,
   });
-
   const { isValid } = formState;
 
-   // gestion de la valeure de la réponse backend 
-   const [messageFromBackEnd, setMessageFromBackend] = useState("") ;
-
-   function changeMessageFromBackEnd(messageFromBack) {
-     setMessageFromBackend(messageFromBack);
-   }
- 
-
   //fonction asynchrone vers le backend verifiant l'email et le mot de passe associé
-
   const onSubmit = async function (data) {
 
     try{
@@ -141,7 +135,7 @@ export default function CoordinateForm( props ) {
           type="submit" 
           className={isValid ? "btn btn-blue" : "btn btn-blue-invalid"}>
             valider
-          </button>
+        </button>
 
         <button
           onClick={() => onClose() } 

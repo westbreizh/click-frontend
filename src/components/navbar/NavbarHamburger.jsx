@@ -56,7 +56,6 @@ export default function NavbarHamburger() {
                 
           }
        
-
         <li className='menuHamburger__li ' onClick={() => toggleMenuHamburger()} >
           <NavLink  to="/panier" className={(nav) => (nav.isActive ? "navLink__active" : "navLink__inactive")} end>
             <ShoppingBasketIcon className="menuHamburger__icon"/>

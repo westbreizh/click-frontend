@@ -1,5 +1,3 @@
-//sécurité pour le changement d'email et password ?
-
 import {createPortal} from 'react-dom'
 import { useState } from "react"
 import {useForm} from "react-hook-form"
@@ -16,13 +14,13 @@ import { shemaInputChangePassword } from '../../../Utils/shemaInput'
 
 export default function ModalChangePassword(props) {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const onClose = props.onClose
   const userEmail = useSelector((state) => state.user.userInfo.email);
   const token = useSelector((state) => state.user.token);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [isModalValidationMessageOpen, setModalValidationMessageOpen] = useState(false);
-
   const showModalValidation = function(){
   setModalValidationMessageOpen(true);
   };
@@ -31,7 +29,6 @@ export default function ModalChangePassword(props) {
   dispatch(connectedToggle()); 
   navigate("/click-raquette");
   };
-
 
 
   // gestion de l'affichage du mot de passe
@@ -51,6 +48,7 @@ export default function ModalChangePassword(props) {
     event.preventDefault();
   };
 
+
   // gestion du contôle de la validité des inputs 
   const { register , formState, handleSubmit,   formState: { errors }  } =
     useForm({
@@ -62,19 +60,17 @@ export default function ModalChangePassword(props) {
 
 
   // gestion de la valeure de la réponse backend 
+  // gestion de l'affichage de l'erreur backend dans la balise p
   const [messageFromBackEnd, setMessageFromBackend] = useState("hello") ;
   function changeMessageFromBackEnd(x) {
    setMessageFromBackend(x);
   }
-
-  // gestion de l'affichage de l'erreur backend dans la balise p
   const [isPErrorFromBackEndOpen, setShowErrorFromBackEnd] = useState(false) ;
   const showPErrorFromBackend = () => {
    setShowErrorFromBackEnd( true );
   };
 
-
-  //fonction asynchrone vers le backend modifiant l'e-mail
+  //fonction asynchrone vers le backend modifiant le mot de passe
   const onSubmit = async function (data) {
     try{
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/changePassword`, {

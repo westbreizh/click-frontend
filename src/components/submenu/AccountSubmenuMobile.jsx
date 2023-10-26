@@ -6,7 +6,6 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export default function AccountSubmenuMobile(props) {
 
-
   const toggleMobileSubmenu = props.toggleMobileSubmenu
   const toggleMenuHamburger = props.toggleMenuHamburger
 
@@ -15,16 +14,14 @@ export default function AccountSubmenuMobile(props) {
     toggleMobileSubmenu();
   }
 
-
   return(
 
     <div className='submenuMobile__contenair'>
         
       <BackNavSubmenu   toggleMobileSubmenu ={toggleMobileSubmenu} />
 
-  
       <div className='submenuMobile__wrapper-title'>
-           Mon compte
+        Mon compte
       </div>
 
       <div className='submenuMobile__wrapper-links'>

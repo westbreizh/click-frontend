@@ -14,10 +14,8 @@ export default function Header() {
   const userInfo =  useSelector((state) => state.user.userInfo);
   const userRole =  userInfo.userRole
 
-
+  // Cette fonction s'exécutera à chaque changement de `userRole`.
   useEffect(() => {
-    // Cette fonction s'exécutera à chaque changement de `userRole`.
-    // Des effets secondaires ou des actions supplémentaires en fonction du changement de `userRole` peuvent être effectués ici.
   }, [userRole]);
 
   return (
@@ -26,7 +24,7 @@ export default function Header() {
 
       <div className="header__wrapper-width">
         
-          <img src={logo} alt="logo de click & raquette" className="header__logo"/>
+        <img src={logo} alt="logo de click & raquette" className="header__logo"/>
         
         {/* Conditional rendering based on userRole */}
         {(userRole === '' || userRole === undefined || userRole === 'player') && <NavbarDesktop />}
@@ -37,7 +35,6 @@ export default function Header() {
         {userRole === 'stringer' && <NavbarHamburgerStringer/>}
         {userRole === 'hub' && <NavbarHamburgerHub  />}
           
-
       </div>
       
     </header>

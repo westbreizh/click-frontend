@@ -1,4 +1,3 @@
-//la balle ne s'affiche pas à revoir
 import { CircularProgress } from "@mui/material";
 import { SportsTennis } from "@mui/icons-material";
 

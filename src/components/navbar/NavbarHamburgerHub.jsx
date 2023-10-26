@@ -2,9 +2,7 @@ import { NavLink } from "react-router-dom"
 import { useState } from "react"
 import { Squash as Hamburger } from 'hamburger-react'
 import { useSelector } from "react-redux"
-import HomeIcon from '@mui/icons-material/Home'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import StorefrontIcon from '@mui/icons-material/Storefront';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import LogoutIconAdmin from "../icons/desktop/LogoutIconAdmin";
 

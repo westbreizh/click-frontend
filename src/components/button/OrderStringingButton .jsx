@@ -6,10 +6,9 @@ import ModalValidationAddToCart from '../modal/modalValidation/ModalValidationAd
 
 export default function OrderStringingButton(props) {
 
-
+  const stringingWithString  =props.stringingWithString 
   const [isSubmenuValidationOpen, setSubmenuValidation]= useState(false)
   const dispatch = useDispatch();
-  const stringingWithString  =props.stringingWithString 
 
   const handleAddToCart = () => {
     dispatch(addArticle(stringingWithString))

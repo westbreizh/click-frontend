@@ -5,21 +5,18 @@ import { Link, useParams} from "react-router-dom"
 import { useState } from 'react'
 import { useStore } from "react-redux"
 import { Input, InputAdornment, IconButton, styled } from '@mui/material';
-
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 
 export default function NewPasswordForm(props) {
 
+  const showModal = props.showModal
 
   // on récupère l'id dans l'url de la page
   const paramsUrl = useParams();
   const userId = paramsUrl.id.split('=')[1];
   const token = paramsUrl.token.split('=')[1];
-  console.log("userId", userId);
-  console.log("token", token);
 
  // gestion du style de l'input mui material
   const CustomInput = styled(Input)(({ theme }) => ({
@@ -52,8 +49,7 @@ export default function NewPasswordForm(props) {
   }));
 
 
-  const showModal = props.showModal
-
+//gestion de la validité des saisie par yup
   const { register , formState, handleSubmit,  formState: { errors }  } =
    useForm({
     resolver: yupResolver(shemaInputResetPassword),
@@ -77,12 +73,11 @@ export default function NewPasswordForm(props) {
   };
 
   // gestion de la valeure de la réponse backend 
+  // gestion de l'affichage de l'erreur backend dans la balise p
   const [messageFromBackEnd, setMessageFromBackend] = useState("hello") ;
   function changeMessageFromBackEnd(x) {
     setMessageFromBackend(x);
   }
-
-  // gestion de l'affichage de l'erreur backend dans la balise p
   const [isPErrorFromBackEndOpen, setShowErrorFromBackEnd] = useState(false) ;
   const showPErrorFromBackend = () => {
     setShowErrorFromBackEnd( true );
@@ -117,6 +112,9 @@ export default function NewPasswordForm(props) {
     }
   }
 
+
+ // console.log("userId", userId);
+ // console.log("token", token);
 
   
   return (

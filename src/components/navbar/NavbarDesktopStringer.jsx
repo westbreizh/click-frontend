@@ -12,7 +12,6 @@ export default function NavbarDesktopStringer() {
   const isConnected = useSelector((state) => state.user.isConnected)
 
 
-
   return (
   
     <nav  className="navBar__contenair">

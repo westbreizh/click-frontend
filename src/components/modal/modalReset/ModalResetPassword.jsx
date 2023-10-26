@@ -11,8 +11,8 @@ export default function ModalResetPassword(props) {
 
   const closeModalResetPassword = props.closeModalResetPassword
   const closeModalConnexion = props.closeModalConnexion
-  const [isModalValidationMessageOpen, setModalValidationMessageOpen] = useState(false);
 
+  const [isModalValidationMessageOpen, setModalValidationMessageOpen] = useState(false);
   const showModalValidation = function(){
   setModalValidationMessageOpen(true);
   };
@@ -27,18 +27,16 @@ export default function ModalResetPassword(props) {
   const {isValid} = formState;
 
   // gestion de la valeure de la réponse backend 
+  // gestion de l'affichage de l'erreur backend dans la balise p
   const [messageFromBackEnd, setMessageFromBackend] = useState("hello") ;
   function changeMessageFromBackEnd(x) {
    setMessageFromBackend(x);
   }
-
-  // gestion de l'affichage de l'erreur backend dans la balise p
   const [isPErrorFromBackEndOpen, setShowErrorFromBackEnd] = useState(false) ;
   const showPErrorFromBackend = () => {
    setShowErrorFromBackEnd( true );
   };
 
- 
   //fonction asynchrone vers le backend modifiant l'e-mail
   const onSubmit = async function (data) {
 

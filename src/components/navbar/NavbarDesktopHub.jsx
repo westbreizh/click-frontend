@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import LogoutIconAdmin from "../icons/desktop/LogoutIconAdmin";
+import LogoutIcon from "../icons/desktop/LogoutIcon";
 
 
 
@@ -50,7 +50,7 @@ export default function NavbarDesktopHub() {
 
 
         <li className='navBar__li li__logoutIcon'>
-          <LogoutIconAdmin />
+          <LogoutIcon />
         </li>
         
       </ul>

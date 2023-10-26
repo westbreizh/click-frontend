@@ -4,10 +4,8 @@ import { useNavigate } from 'react-router-dom'
 
 export default function ModalAskToAddString( props) {
 
-
   const navigate = useNavigate();
   const goToHomeAndcloseModals = function(){
-
     navigate("/cordez");
   }
 

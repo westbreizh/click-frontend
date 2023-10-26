@@ -7,7 +7,7 @@ export default function BackNavArrowStringer() {
   const navigate = useNavigate();
   
   function handleBackClick() {
-    navigate(-1); // Navigue vers la page précédente
+    navigate(-1); 
   }
 
   return(

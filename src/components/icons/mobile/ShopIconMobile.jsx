@@ -8,7 +8,7 @@ export default function ShopIconMobile(props) {
   const toggleMenuHamburger = props.toggleMenuHamburger
   const [isShopSubmenuOpen, setShopSubmenuOpen] = useState(false)
   function toggleMobileSubmenu() { 
-      setShopSubmenuOpen(!isShopSubmenuOpen);  }
+  setShopSubmenuOpen(!isShopSubmenuOpen);  }
   
  
   return (

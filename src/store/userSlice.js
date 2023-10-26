@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Création de la tranche "userSlice"
 const userSlice = createSlice({
-  name: "user", // Nom de la tranche
+  name: "user",
   initialState: {
     isConnected: false, 
     userInfo: "",
@@ -35,5 +35,4 @@ export const {
   setToken,
 } = userSlice.actions;
 
-// Export du réducteur de la tranche
 export default userSlice.reducer;

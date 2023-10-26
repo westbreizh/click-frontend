@@ -6,7 +6,6 @@ import { useState } from 'react'
 import { useStore } from "react-redux"
 import {connectedToggle, setUserInfo, setToken} from '../../store/userSlice'
 import { Input, InputAdornment, IconButton, styled } from '@mui/material';
-
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -14,6 +13,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 export default function SignupForm(props) {
 
+  const showModal = props.showModal
 
  // gestion du style de l'input mui material
   const CustomInput = styled(Input)(({ theme }) => ({
@@ -45,11 +45,7 @@ export default function SignupForm(props) {
     }, 
   }));
 
-
-
-
-  const showModal = props.showModal
-
+  // gestion 
   const { register , formState, handleSubmit,   formState: { errors }  } =
    useForm({
     resolver: yupResolver(shemaInputSignup),
@@ -72,20 +68,18 @@ export default function SignupForm(props) {
     event.preventDefault();
   };
 
-  // gestion de la valeure de la réponse backend 
+  // gestion de la valeure de la réponse backend
+  // gestion de l'affichage de l'erreur backend dans la balise p 
   const [messageFromBackEnd, setMessageFromBackend] = useState("hello") ;
   function changeMessageFromBackEnd(x) {
     setMessageFromBackend(x);
   }
-
-  // gestion de l'affichage de l'erreur backend dans la balise p
   const [isPErrorFromBackEndOpen, setShowErrorFromBackEnd] = useState(false) ;
   const showPErrorFromBackend = () => {
     setShowErrorFromBackEnd( true );
   };
  
-   // gestion du store redux en asynchrone
-   const store = useStore()
+
 
   //fonction asynchrone vers le backend enregistrant l'utilisateur
   const onSubmit = async function (data) {
@@ -120,10 +114,11 @@ export default function SignupForm(props) {
     }
   }
 
-
+  // gestion du store redux en asynchrone
+   const store = useStore()
   
-  return (
 
+  return (
 
     <form onSubmit={handleSubmit(onSubmit)} className="form__wrapper">
     
