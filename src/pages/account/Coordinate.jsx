@@ -43,7 +43,7 @@ export default function Coordinate() {
           <div className="submenu__wrapper">
 
             <h3 className="submenu__title">
-              Informations personnelles
+              Informations personnelles test
             </h3>
 
             <div className="info-perso__wrapper">
