@@ -80,20 +80,16 @@ export default function String() {
     }
   }
 
-  // quand des options sont selectionnés, on lance la fonction de filtrage du backend
+  // quand des options sont selectionnés changent, on lance la fonction de filtrage du backend
   useEffect(() => {
   loadproductListFiltered();
   }, [categorieWithOptionSelectedForString ]);
 
-  // charger une liste de cordages aléatoires au chargement de la page
   useEffect(() => {
-    loadProductListRandom ()
+    loadproductListFiltered();
   },[])
 
-  // rénitialise à zéro les options choisies précédemment quand on revient sur la page
-  useEffect(() => {
-    store.dispatch( setCategorieWithOptionSelectedForString([]));
-  },[])
+
   
 
   return (

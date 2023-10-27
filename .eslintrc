@@ -1,9 +1,10 @@
+// fichier pour detecter des erreurs potentiels suivants les règles prédéfinies et configurables
 {
-    "extends": ["react-app"],
-    "rules": {
-      "react-hooks/exhaustive-deps": "off",
-      "no-unused-vars": "off",
-      "react/jsx-no-target-blank": "off"
-    }
+  "extends": ["react-app"], // Étend la configuration de base "react-app" pour les projets React.
+
+  "rules": {
+    "react-hooks/exhaustive-deps": "off", // Désactive la règle "react-hooks/exhaustive-deps" qui vérifie la dépendance exhaustive des hooks React. Les avertissements à ce sujet seront ignorés.
+    "no-unused-vars": "off", // Désactive la règle "no-unused-vars" qui détecte les variables déclarées mais non utilisées. Les avertissements à ce sujet seront ignorés.
+    "react/jsx-no-target-blank": "error" // Désactive la règle "react/jsx-no-target-blank" qui vérifie l'utilisation de l'attribut "target="_blank"" dans les éléments JSX. Les avertissements à ce sujet seront ignorés.
   }
-  
+}

@@ -1,26 +1,36 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Voir https://help.github.com/articles/ignoring-files/ pour plus d'informations sur l'ignorance des fichiers.
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Dépendances
+/node_modules            # Exclut le dossier "node_modules" où les dépendances du projet sont installées.
 
-# testing
-/coverage
+/.pnp                    # Exclut le dossier ".pnp", lié à Plug'n'Play (Yarn).
+.pnp.js                  # Exclut le fichier ".pnp.js", également lié à Plug'n'Play.
 
-# production
-/build
+# Tests
+/coverage                # Exclut le dossier "coverage" où les rapports de couverture de code des tests peuvent être stockés.
 
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Production
+/build                   # Exclut le dossier "build" qui contient généralement les fichiers de production de l'application.
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Divers
+.DS_Store                # Exclut les fichiers .DS_Store générés par macOS pour stocker des métadonnées de dossiers.
 
-# Local Netlify folder
-.netlify
+.env.local               # Exclut le fichier .env.local, utilisé pour les variables d'environnement locales.
+
+.env.development.local    # Exclut le fichier .env.development.local, utilisé pour les variables d'environnement locales en mode développement.
+
+.env.test.local           # Exclut le fichier .env.test.local, utilisé pour les variables d'environnement locales en mode test.
+
+.env.production.local     # Exclut le fichier .env.production.local, utilisé pour les variables d'environnement locales en mode production.
+
+# Fichiers de journal (logs) des outils de gestion de packages
+npm-debug.log*           # Exclut les fichiers de journal liés à npm.
+
+yarn-debug.log*          # Exclut les fichiers de journal liés à Yarn.
+
+yarn-error.log*          # Exclut les fichiers de journal d'erreurs liés à Yarn.
+
+# Dossier local de Netlify
+.netlify                 # Exclut le dossier ".netlify" qui peut contenir des fichiers de configuration spécifiques à Netlify.
+
+node_modules
