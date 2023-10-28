@@ -2,6 +2,12 @@
 
 installer node avec une version récente, si besoin utiliser nvm
 avoir yarn et ou npm
+pour sass :
+installer
+sudo apt update
+sudo apt install ruby-full
+gem install sass
+installer live sass compiler comme extension de vsc
 
 ## Scripts Disponibles
 
