@@ -1,6 +1,7 @@
-# Démarrer avec Create React App
+# ecosysteme
 
-Ce projet a été initialisé avec [Create React App](https://github.com/facebook/create-react-app).
+installer node avec une version récente, si besoin utiliser nvm
+avoir yarn et ou npm
 
 ## Scripts Disponibles
 
@@ -14,7 +15,10 @@ yarn upgrade
 yarn upgrade-interactive
 yarn audit
 yarn outdated
+yarn cache clean
 
+remplacer vielle version par nth-check "^2.0.1" dans yarn.lock
+idem pour resolve-url-loader "^5.0.0"
 ### `yarn start`
 
 Lance l'application en mode de développement.\
