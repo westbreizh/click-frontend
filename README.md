@@ -16,9 +16,12 @@ yarn upgrade-interactive
 yarn audit
 yarn outdated
 yarn cache clean
-
-remplacer vielle version par nth-check "^2.0.1" dans yarn.lock
+Dépendance utilisant et installant des dépendances non actualisé :
+dans yarn.lock
+remplacer vielle version par nth-check "^2.0.1" 
 idem pour resolve-url-loader "^5.0.0"
+ dernier probleme   punycode "^2.3.0" mais pas trop grâve apperement ...
+
 ### `yarn start`
 
 Lance l'application en mode de développement.\
