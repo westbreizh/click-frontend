@@ -10,7 +10,10 @@ Dans le répertoire du projet,vous pouvez exécuter :
 ### `yarn install`
 
 installe les différentes dépendances du projet
-
+yarn upgrade
+yarn upgrade-interactive
+yarn audit
+yarn outdated
 
 ### `yarn start`
 
