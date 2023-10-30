@@ -1,6 +1,6 @@
 const datasForSelectstring = [ 
   {   
-   options: ["Babolat", "Tecnifibre", "Yonex", "Luxilon"],
+   options: [ "Tecnifibre", "Yonex"],
    title : "Marque",
    fieldNameBdd: "Mark"
   },
@@ -17,7 +17,7 @@ export { datasForSelectstring };
 
 const datasForSelectsBall = [ 
   {   
-   options: ["Dunlop"],
+   options: ["Tecnifibre"],
    title : "Marque",
    fieldNameBdd: "mark"
   },
@@ -28,7 +28,7 @@ export { datasForSelectsBall };
 
 const datasForSelectsAccessories = [ 
   {   
-   options: ["Babolat", "Tourna"],
+   options: ["wilson"],
    title : "Marque",
    fieldNameBdd: "mark"
   },
