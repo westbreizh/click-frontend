@@ -10,7 +10,6 @@ import CheckboxSelect from "../../components/select/CheckBoxSelectString"
 import {datasForSelectstring} from "../../Utils/localDataBase"
 import { setProductsListFromBackend } from "../../store/productSlice"
 import BackNavArrow from '../../components/button/BackNavArrow'
-import { setCategorieWithOptionSelectedForString } from "../../store/productSlice";
 
 
 export default function String() {
@@ -21,7 +20,7 @@ export default function String() {
   const store = useStore()
   const productCategorie ="string"
 
-  console.log(categorieWithOptionSelectedForString)
+  //console.log(categorieWithOptionSelectedForString)
 
   //fonction asynchrone vers le backend pour recupérer 
   //une liste des marques de cordages de manière aléatoire
@@ -40,14 +39,12 @@ export default function String() {
         const result = await response.json();
         console.log(result.message);
         store.dispatch(setProductsListFromBackend(result.stringListRandom));
-
-
       }
     }
 
     catch(err){
       const errorMessage = err.toString();
-      console.log(errorMessage);
+      //console.log(errorMessage);
     }
   }
 
@@ -69,7 +66,7 @@ export default function String() {
         if(result.message === "il n' y a pas de produits correspondant aux options choisis")
          {setProductFind(false)
           }else {setProductFind(true)};
-        console.log(result.message);
+        //console.log(result.message);
         store.dispatch(setProductsListFromBackend(result.stringList));
       }
     }
@@ -86,7 +83,7 @@ export default function String() {
   }, [categorieWithOptionSelectedForString ]);
 
   useEffect(() => {
-    loadproductListFiltered();
+    loadProductListRandom();
   },[])
 
 
@@ -113,7 +110,12 @@ export default function String() {
             <span className="shop__text-info-part-a">
             Le prix indiqué comprend la fourniture et la pose du cordage<br/>
             </span>
-
+            <span className="shop__text-info-part-a">
+            Pour avoir plus d'informations et un choix plus large de cordages, nous vous conseillons le site
+            <a href="https://www.extreme-tennis.fr/fr/7-cordage-tennis" target="_blank" rel="noreferrer"> extreme tennis </a> 
+            ou <a href="https://www.templeducordage.com/" target="_blank" rel="noreferrer"> le temple du cordage. </a> 
+            </span>
+            
           </div>
 
 
@@ -166,6 +168,8 @@ export default function String() {
                   to={`/fiche_produit/cordage/${product.id}`}
                   className="cardProduct__wrapper"
                 >
+                                  {console.log("product", product)}
+
                   <img 
                     crossOrigin="anonymous" 
                     src={product.image_url} 
@@ -174,6 +178,11 @@ export default function String() {
                   />
                   <div className="cardProduct__nameMark">{product.mark}</div>
                   <div className="cardProduct__model">{product.model}</div>
+                  <div className="cardProduct__benefice-wrapper">
+                    <div className="cardProduct__benefice-text">{product.first_characteristic} </div>
+                    {product.second_characteristic !== "" ? <span>&nbsp;-&nbsp;</span> : null}
+                    <div className="cardProduct__benefice-text">{product.second_characteristic}</div>
+                  </div>
                   <div className="cardProduct__price">{product.price} €</div>
                 </NavLink>
                 ))}
