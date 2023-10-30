@@ -2533,6 +2533,7 @@ input {
   width: 43%;
   min-height: 38rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center; }
 .product-card__image {
@@ -2584,6 +2585,8 @@ input {
   min-width: max-content;
   margin-right: 1rem;
   font-size: 1.7rem; }
+.product-card__info-price-string {
+  margin: auto; }
 
 .product-quantity__wrapper {
   display: flex;

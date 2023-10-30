@@ -111,7 +111,7 @@ export default function String() {
             Le prix indiqué comprend la fourniture et la pose du cordage<br/>
             </span>
             <span className="shop__text-info-part-a">
-            Pour avoir plus d'informations et un choix plus large de cordages, nous vous conseillons le site
+            Pour avoir plus d'informations et un choix plus large de cordages,<br/> nous vous conseillons le site
             <a href="https://www.extreme-tennis.fr/fr/7-cordage-tennis" target="_blank" rel="noreferrer"> extreme tennis </a> 
             ou <a href="https://www.templeducordage.com/" target="_blank" rel="noreferrer"> le temple du cordage. </a> 
             </span>

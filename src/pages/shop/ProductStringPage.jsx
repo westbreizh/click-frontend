@@ -82,6 +82,7 @@ export default function ProductStringPage() {
                     alt={product.model} 
                     className="product-card__image"
                   />
+                    <div> jauge : {product.gauge} </div>
 
                 </div>
 
@@ -101,6 +102,8 @@ export default function ProductStringPage() {
                       <div> {product.model}  </div>
 
                     </div>
+
+
 
                     <div className='product-card__values-characteristics'>
                       <div class="bubble-plus">
@@ -123,6 +126,7 @@ export default function ProductStringPage() {
 
 
 
+
                     <div className='product-card__info-description-text'>
                     {product.description_text} 
                     </div>
@@ -133,6 +137,9 @@ export default function ProductStringPage() {
                       {product.price} €
                   </div>
 
+                  <div className='product-card__info-price-string'>
+                    ( cordage et pause cordge )
+                    </div>
 
                   <div className='product-card__order-wrapper'>
 

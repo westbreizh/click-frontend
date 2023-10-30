@@ -69,6 +69,7 @@
     width: 43%;
     min-height: 38rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
@@ -143,6 +144,9 @@
     min-width: max-content;
     margin-right: 1rem;
     font-size: 1.7rem;
+  }
+  &__info-price-string{
+    margin: auto;
   }
 
 }
