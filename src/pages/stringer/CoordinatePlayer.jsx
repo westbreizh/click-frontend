@@ -13,7 +13,7 @@ export default function CoordinatePlayer() {
   // on récupère l'id dans l'url de la page
   const userIdParam = useParams()
   const userId = userIdParam.userId
-  const token = useSelector((state) => state.user.token);
+ const token = useSelector((state) => state.token);
 
   //fonction asynchrone vers le backend pour recupérer 
   //les infos  joueur 

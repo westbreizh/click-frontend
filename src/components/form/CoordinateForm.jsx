@@ -15,12 +15,13 @@ export default function CoordinateForm( props ) {
   const playerId = useSelector((state) => state.user.userInfo.id);
   const telephone = useSelector((state) => state.user.userInfo.telephone);
   const address = useSelector((state) => state.user.userAddress);
-  const token = useSelector((state) => state.user.token);
+  const token = useSelector((state) => state.token);
 
   const [isPErrorFromBackEndOpen, setShowErrorFromBackEnd] = useState(false) ;
   const [messageFromBackEnd, setMessageFromBackend] = useState("") ;
 
   const store = useStore()
+
 
  
   //gestion de l'ouverture du modal de validation et fermeture des 2 modales (modalValidation et modalChangeEmail...)

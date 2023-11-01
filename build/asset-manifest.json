@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.45198183.css",
+    "main.js": "/static/js/main.1def589a.js",
+    "static/media/LOGO.jpg": "/static/media/LOGO.a4512731d971eade231b.jpg",
+    "static/media/balle.jpeg": "/static/media/balle.51019c160afb6aa0faa4.jpeg",
+    "static/media/balleeffet.jpeg": "/static/media/balleeffet.37f56eecae57f2899f29.jpeg",
+    "static/media/cordagecasse.webp": "/static/media/cordagecasse.8642f2b9aea910546d0d.webp",
+    "index.html": "/index.html",
+    "main.45198183.css.map": "/static/css/main.45198183.css.map",
+    "main.1def589a.js.map": "/static/js/main.1def589a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.45198183.css",
+    "static/js/main.1def589a.js"
+  ]
+}

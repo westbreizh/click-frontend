@@ -10,7 +10,7 @@ export default function OrderDetailForStringer() {
   // on récupère l'id dans l'url de la page
   const orderIdParam = useParams()
   const orderId = orderIdParam.orderId
-  const token = useSelector((state) => state.user.token);
+ const token = useSelector((state) => state.token);
   const [oneOrder, setOneOrder] = useState("") ;
   const [selectedOrder, setSelectedOrder] = useState([]);
   const [hub, setHub] = useState("") ;

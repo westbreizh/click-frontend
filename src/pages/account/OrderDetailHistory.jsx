@@ -11,7 +11,7 @@ export default function OrderDetailHistory() {
   const orderIdParam = useParams()
   const orderId = orderIdParam.orderId
 
-  const token = useSelector((state) => state.user.token);
+ const token = useSelector((state) => state.token);
   const [oneOrder, setOneOrder] = useState("") ;
   const [hub, setHub] = useState("") ;
   const [selectedOrder, setSelectedOrder] = useState([]);

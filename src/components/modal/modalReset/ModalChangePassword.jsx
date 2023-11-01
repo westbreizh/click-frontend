@@ -19,7 +19,7 @@ export default function ModalChangePassword(props) {
 
   const onClose = props.onClose
   const userEmail = useSelector((state) => state.user.userInfo.email);
-  const token = useSelector((state) => state.user.token);
+ const token = useSelector((state) => state.token);
   const [isModalValidationMessageOpen, setModalValidationMessageOpen] = useState(false);
   const showModalValidation = function(){
   setModalValidationMessageOpen(true);

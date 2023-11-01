@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,8 +9,9 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ModalResetPassword from "../modal/modalReset/ModalResetPassword";
 import { shemaInputLogin } from "../../Utils/shemaInput";
-import {connectedToggle, setUserInfo, setToken,} from "../../store/userSlice";
+import {connectedToggle, setUserInfo } from "../../store/userSlice";
 import { resetStringFromShopChoice } from "../../store/cartSlice";
+import { setToken } from "../../store/tokenSlice"
 
 // Votre style personnalisé pour le champ de texte
 const CustomTextField = styled(TextField)(({ theme }) => ({
@@ -111,9 +112,10 @@ export default function LoginForm(props) {
         throw new Error(` ${result.message}`);
       } else {
         const result = await response.json();
+        Cookies.set("mon_token", result.token, { secure: true, httpOnly: true, expires: 3 });    // Stockez le token dans un cookie sécurisé
         store.dispatch(setUserInfo(result.userInfo));
         console.log("userInfo", result.userInfo);
-        const userRole =  result.userInfo.userRole
+        const userRole =  result.userInfo.userRole;
         store.dispatch(connectedToggle());
         store.dispatch(setToken(result.token));
         store.dispatch(resetStringFromShopChoice(result.userInfo.stringInfo));
