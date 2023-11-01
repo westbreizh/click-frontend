@@ -1,5 +1,6 @@
 "use strict";
 
+require("./polyfills");
 var _react = _interopRequireDefault(require("react"));
 var _client = require("react-dom/client");
 var _App = _interopRequireDefault(require("./App"));
