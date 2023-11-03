@@ -88,6 +88,7 @@ export default function SignupForm(props) {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/signup`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({civilite: data.civilite, lastname: data.lastname, forename: data.forename, email: data.email, password: data.password}),
         headers: {"Content-Type": "application/json"}})
 

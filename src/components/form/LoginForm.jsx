@@ -100,6 +100,7 @@ export default function LoginForm(props) {
         {
           mode: "cors",
           method: "POST",
+          credentials: 'include',
           body: JSON.stringify({ email: data.email, password: data.password }),
           headers: { "Content-Type": "application/json" },
         }
