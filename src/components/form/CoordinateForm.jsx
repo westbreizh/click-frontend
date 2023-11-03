@@ -60,6 +60,7 @@ export default function CoordinateForm( props ) {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/createOrUploadCoordinate`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({playerId: playerId, telephone: data.telephone.replace(/(\d{2})(?=\d)/g, '$1 '), road: data.road, city: data.city, postalCode : data.postalCode.replace(/^(\d{2})(\d{3})$/, '$1 $2')}),
         headers: {
           "Content-Type": "application/json",

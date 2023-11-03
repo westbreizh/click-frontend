@@ -116,6 +116,7 @@ export default function Stringing() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/savePreferencePlayer`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayerToSend, stringFromShopId: stringFromShopId, 
           stringRopeChoice: stringRopeChoice,  racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, stringFromPlayerOrigin: stringFromPlayerOrigin, numberKnotChoice: numberKnotChoice, }),
         headers: {
@@ -145,6 +146,7 @@ export default function Stringing() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/loadDataPlayerAfterModif`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ email: userInfo.email }),
         headers: {
           "Content-Type": "application/json",

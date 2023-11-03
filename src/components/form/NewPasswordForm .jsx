@@ -92,6 +92,7 @@ export default function NewPasswordForm(props) {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/saveResetPassword`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ newPassword: data.password, userId: userId, resetToken: token}),
         headers: {"Content-Type": "application/json"}})
 

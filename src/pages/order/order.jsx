@@ -102,6 +102,7 @@ export default function Order() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/shop/paiement-in-shop`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token, racquetPlayer }),
         headers: {
           "Content-Type": "application/json",

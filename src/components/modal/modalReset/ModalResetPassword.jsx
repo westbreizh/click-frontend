@@ -44,6 +44,7 @@ export default function ModalResetPassword(props) {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/sendEmailToResetPassword`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({email: data.email}),
         headers: {"Content-Type": "application/json"}})
 

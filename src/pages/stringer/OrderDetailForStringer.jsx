@@ -28,6 +28,7 @@ export default function OrderDetailForStringer() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/stringer/oneOrder`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ orderId}),
         headers: {
           "Content-Type": "application/json",

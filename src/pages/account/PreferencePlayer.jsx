@@ -97,6 +97,7 @@ export default function PreferencePlayer() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/loadDataPlayerAfterModif`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ email: userInfo.email }),
         headers: {
           "Content-Type": "application/json",
