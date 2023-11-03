@@ -62,6 +62,7 @@ export default function OrderDetailForStringer() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/stringer/change-status-order`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ orderId: selectedOrder, statusOrder: oneOrder.statusOrder}),
         headers: {
           "Content-Type": "application/json",

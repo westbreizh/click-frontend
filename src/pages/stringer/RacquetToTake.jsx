@@ -38,6 +38,7 @@ export default function RacquetToTake() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/stringer/ordertSelectedByStatus`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ statusOrder: "initié"}),
         headers: {
           "Content-Type": "application/json",

@@ -19,6 +19,7 @@ export default function HistoryOrderStringer() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/stringer/ordertSelectedByStatus`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ statusOrder: "commande validée"}),
 
         headers: {

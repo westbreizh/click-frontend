@@ -22,6 +22,7 @@ export default function CoordinatePlayer() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/stringer/onePlayer`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ userId}),
         headers: {
           "Content-Type": "application/json",
