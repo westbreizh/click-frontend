@@ -25,6 +25,7 @@ export default function OrderDetailHistory() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/oneOrder`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ orderId}),
         headers: {
           "Content-Type": "application/json",
