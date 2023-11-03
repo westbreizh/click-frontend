@@ -21,6 +21,7 @@ export default function OrderHistory() {
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/orderLog`, {
         mode: "cors",
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify({ email:email}),
         headers: {
           "Content-Type": "application/json",
