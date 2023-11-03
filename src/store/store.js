@@ -10,6 +10,7 @@ import cartReducer from "./cartSlice";
 
 // Récupérer le token à partir du cookie
 const initialToken = Cookies.get("mon_token");
+console.log("initialeToken", initialToken)
 
 // Combiner les différents reducers en un seul rootReducer
 const rootReducer = combineReducers({
@@ -37,7 +38,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
   reducer: persistedReducer,
   preloadedState: {
-    token: initialToken || "", // Utilise le token du cookie s'il existe
+    token: initialToken || "token non trouvé ou enixistant", // Utilise le token du cookie s'il existe
   },
 });
 
