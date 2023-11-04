@@ -7,8 +7,7 @@ import TennisSpinner from "../../components/loadingSpinner/TennisSpinner"
 
 export default function OrderHistory() {
 
- const token = useSelector((state) => state.token);
- console.log("token", token)
+
   const email = useSelector((state) => state.user.userInfo.email);
 
   const [orderLogList, setOrderLogList] = useState([]) ;
@@ -26,7 +25,6 @@ export default function OrderHistory() {
         body: JSON.stringify({ email:email}),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
         }
     })
 
