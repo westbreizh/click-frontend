@@ -21,7 +21,7 @@ export default function OrderHistory() {
     try{
       const xsrfToken = Cookies.get('xsrfToken'); // Récupérez le xsrfToken du cookie
     
-      console.log("xsrfToken",xsrfToken);
+      console.log("xsrfToken test ",xsrfToken);
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/orderLog`, {
         mode: "cors",
         method: "POST",
