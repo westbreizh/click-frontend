@@ -4,6 +4,7 @@ import { useSelector} from 'react-redux'
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom"
 import TennisSpinner from "../../components/loadingSpinner/TennisSpinner"
+import Cookies from 'js-cookie'
 
 export default function OrderHistory() {
 
@@ -18,6 +19,7 @@ export default function OrderHistory() {
   //l'historique des commandes effectué par le joueur 
   const loadLogOrder  = async function (data) {
     try{
+
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/orderLog`, {
         mode: "cors",
         method: "POST",
@@ -25,6 +27,7 @@ export default function OrderHistory() {
         body: JSON.stringify({ email:email}),
         headers: {
           "Content-Type": "application/json",
+          "X-XSRF-TOKEN": xsrfToken // Envoyez le xsrfToken dans l'en-tête de la requête
         }
     })
 
