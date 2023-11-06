@@ -4,7 +4,7 @@ import { useSelector} from 'react-redux'
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom"
 import TennisSpinner from "../../components/loadingSpinner/TennisSpinner"
-import Cookies from 'js-cookie'
+
 
 export default function OrderHistory() {
 
@@ -14,10 +14,8 @@ export default function OrderHistory() {
   const [orderLogList, setOrderLogList] = useState([]) ;
   const [orderLogListEmpty, setOrderLogListEmpty] = useState(true) ;
 
-  const xsrfToken = Cookies.get('xsrfToken'); 
+  const xsrfToken = window.localStorage.getItem('xsrfToken'); 
   console.log("xsrfToken test1 ",xsrfToken);
-  const token = Cookies.get('token'); 
-console.log("token test1 ",token);
 
   //fonction asynchrone vers le backend pour recupérer 
   //l'historique des commandes effectué par le joueur 
