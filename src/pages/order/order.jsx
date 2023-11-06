@@ -15,12 +15,12 @@ export default function Order() {
   const articleList = useSelector(state => state.cart.articleList);
   const totalPrice = useSelector(state => state.cart.totalPrice);
   const userInfo = useSelector(state => state.user.userInfo);
-//  const token = useSelector((state) => state.token);
+  const xsrfToken = window.localStorage.getItem('xsrfToken'); 
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const xsrfToken = window.localStorage.getItem('xsrfToken'); 
+
 
   //on récupère les infos du lieu et de la raquette depuis articleList 
   let racquetPlayer = null;
@@ -107,7 +107,7 @@ export default function Order() {
         body: JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, xsrfToken, racquetPlayer }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${xsrfToken}` 
+          "x-xsrf-token": xsrfToken 
         }
       })
 

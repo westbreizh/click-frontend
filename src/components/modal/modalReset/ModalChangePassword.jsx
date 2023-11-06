@@ -19,7 +19,8 @@ export default function ModalChangePassword(props) {
 
   const onClose = props.onClose
   const userEmail = useSelector((state) => state.user.userInfo.email);
- const token = useSelector((state) => state.token);
+  const xsrfToken = useSelector((state) => state.xsrfToken);
+
   const [isModalValidationMessageOpen, setModalValidationMessageOpen] = useState(false);
   const showModalValidation = function(){
   setModalValidationMessageOpen(true);
@@ -79,7 +80,7 @@ export default function ModalChangePassword(props) {
         body: JSON.stringify({email: userEmail, password: data.password, new_password: data.new_password,}),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "x-xsrf-token": xsrfToken  
         }
       })
 

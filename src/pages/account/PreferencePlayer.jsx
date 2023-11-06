@@ -14,6 +14,7 @@ import ModalValidationChangesPreferences from '../../components/modal/modalValid
 export default function PreferencePlayer() {
 
   const userInfo =  useSelector((state) => state.user.userInfo);
+  const xsrfToken = useSelector((state) => state.xsrfToken);
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);
 
 
@@ -27,7 +28,7 @@ export default function PreferencePlayer() {
   const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(userInfo.stringFromPlayerOrigin);
   const [numberKnotChoice, setnumberKnotChoice] = useState(userInfo.numberKnot);
 
-  const xsrfToken = window.localStorage.getItem('xsrfToken'); 
+
   // par défault on corde avec 4 noeuds
   if (numberKnotChoice==null){
     setnumberKnotChoice("4")
@@ -71,7 +72,7 @@ export default function PreferencePlayer() {
           stringRopeChoice: stringRopeChoice,  racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, stringFromPlayerOrigin: stringFromPlayerOrigin, numberKnotChoice: numberKnotChoice, }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${xsrfToken}` 
+          "x-xsrf-token": xsrfToken   
         }
     })
 
@@ -101,7 +102,7 @@ export default function PreferencePlayer() {
         body: JSON.stringify({ email: userInfo.email }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${xsrfToken}` 
+          "x-xsrf-token": xsrfToken 
         }
     })
 

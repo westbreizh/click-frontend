@@ -13,7 +13,7 @@ export default function CoordinatePlayer() {
   // on récupère l'id dans l'url de la page
   const userIdParam = useParams()
   const userId = userIdParam.userId
- const token = useSelector((state) => state.token);
+  const xsrfToken = useSelector((state) => state.xsrfToken);
 
   //fonction asynchrone vers le backend pour recupérer 
   //les infos  joueur 
@@ -26,7 +26,7 @@ export default function CoordinatePlayer() {
         body: JSON.stringify({ userId}),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "x-xsrf-token": xsrfToken  
         }
     })
 

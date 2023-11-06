@@ -10,7 +10,7 @@ export default function OrderDetailForStringer() {
   // on récupère l'id dans l'url de la page
   const orderIdParam = useParams()
   const orderId = orderIdParam.orderId
- const token = useSelector((state) => state.token);
+  const xsrfToken = useSelector((state) => state.xsrfToken);
   const [oneOrder, setOneOrder] = useState("") ;
   const [selectedOrder, setSelectedOrder] = useState([]);
   const [hub, setHub] = useState("") ;
@@ -32,7 +32,7 @@ export default function OrderDetailForStringer() {
         body: JSON.stringify({ orderId}),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "x-xsrf-token": xsrfToken 
         }
     })
 
@@ -66,7 +66,7 @@ export default function OrderDetailForStringer() {
         body: JSON.stringify({ orderId: selectedOrder, statusOrder: oneOrder.statusOrder}),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "x-xsrf-token": xsrfToken 
         }
     })
 

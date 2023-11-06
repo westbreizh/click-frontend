@@ -7,7 +7,7 @@ import TennisSpinner from "../../components/loadingSpinner/TennisSpinner"
 
 export default function RacquetToTake() {
 
- const token = useSelector((state) => state.token);
+  const xsrfToken = useSelector((state) => state.xsrfToken);
 
   const [orderLogList, setOrderLogList] = useState([]) ;
   const [orderLogListByHub, setOrderLogListByHub] = useState([]) ;
@@ -42,7 +42,7 @@ export default function RacquetToTake() {
         body: JSON.stringify({ statusOrder: "initié"}),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "x-xsrf-token": xsrfToken 
         }
     })
 
