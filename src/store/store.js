@@ -4,7 +4,6 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import Cookies from "js-cookie";
 import userReducer from "./userSlice";
-import tokenReducer from "./tokenSlice";
 import productReducer from "./productSlice";
 import cartReducer from "./cartSlice";
 
@@ -17,7 +16,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   product: productReducer,
   cart: cartReducer,
-  token: tokenReducer,
+
 });
 
 // Configuration pour redux-persist
