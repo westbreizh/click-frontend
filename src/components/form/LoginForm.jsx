@@ -120,7 +120,6 @@ export default function LoginForm(props) {
         localStorage.setItem('xsrfToken', result.xsrfToken);
         store.dispatch(setXsrfToken(result.xsrfToken));
         closeModalConnexion();
-
         if (userRole === 'stringer'){
           navigate("/cordeur_raquettes-à-corder")
         }

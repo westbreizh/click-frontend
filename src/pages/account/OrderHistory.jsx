@@ -30,7 +30,7 @@ export default function OrderHistory() {
         body: JSON.stringify({ email:email}),
         headers: {
           "Content-Type": "application/json",
-          "X-XSRF-TOKEN": xsrfToken // Envoyez le xsrfToken dans l'en-tête de la requête
+          "x-xsrf-token": xsrfToken // Envoyez le xsrfToken dans l'en-tête de la requête
         }
     })
 

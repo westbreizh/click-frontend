@@ -2,15 +2,12 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import Cookies from "js-cookie";
 import userReducer from "./userSlice";
 import productReducer from "./productSlice";
 import cartReducer from "./cartSlice";
 import xsrfTokenReducer from "./xsrfTokenSlice";
 
-// Récupérer le token à partir du cookie
-const initialToken = Cookies.get("mon_token");
-console.log("initialeToken", initialToken)
+
 
 // Combiner les différents reducers en un seul rootReducer
 const rootReducer = combineReducers({
@@ -38,8 +35,10 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Création du store avec le reducer persistant et le préchargement pour le slice "token"
 const store = configureStore({
   reducer: persistedReducer,
-  preloadedState: {
-    token: initialToken || "token non trouvé ou enixistant", // Utilise le token du cookie s'il existe
+  preloadedState: { // Préchargement du state avec les données du local storage
+    xsrfToken: {
+      token: localStorage.getItem("xsrfToken"), // Préchargement du xsrfToken
+    },
   },
 });
 
