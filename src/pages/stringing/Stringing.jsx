@@ -19,7 +19,7 @@ export default function Stringing() {
 
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);// dans le slice redux on initialise la preference joueur si il y a 
   const isConnected = useSelector(state => state.user.isConnected);
-  const token = useSelector(state => state.user.token);
+
 
   //on récupère les préférences joueurs si connecté et si il y en a
   const userInfo =  useSelector((state) => state.user.userInfo);

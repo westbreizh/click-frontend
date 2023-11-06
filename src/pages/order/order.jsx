@@ -15,7 +15,7 @@ export default function Order() {
   const articleList = useSelector(state => state.cart.articleList);
   const totalPrice = useSelector(state => state.cart.totalPrice);
   const userInfo = useSelector(state => state.user.userInfo);
-  const token = useSelector((state) => state.token);
+//  const token = useSelector((state) => state.token);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

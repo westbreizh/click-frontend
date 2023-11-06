@@ -15,7 +15,7 @@ export default function PreferencePlayer() {
 
   const userInfo =  useSelector((state) => state.user.userInfo);
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);
-  const token = useSelector(state => state.user.token);
+
 
   const [stringFromPlayer, setStringFromPlayer] = useState(userInfo.stringFromPlayer);
   const [stringRopeChoice, setStringRopeChoice] = useState(userInfo.string_rope);
