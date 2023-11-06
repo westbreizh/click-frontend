@@ -4,7 +4,7 @@ import materiel from "../../assets/balle.jpeg"
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import DevicesIcon from '@mui/icons-material/Devices';
 
-localStorage.clear()
+//localStorage.clear()
 export default function Home() {
 
 	return (
