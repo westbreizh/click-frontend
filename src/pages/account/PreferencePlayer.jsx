@@ -27,7 +27,7 @@ export default function PreferencePlayer() {
   const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(userInfo.stringFromPlayerOrigin);
   const [numberKnotChoice, setnumberKnotChoice] = useState(userInfo.numberKnot);
 
-
+  const xsrfToken = window.localStorage.getItem('xsrfToken'); 
   // par défault on corde avec 4 noeuds
   if (numberKnotChoice==null){
     setnumberKnotChoice("4")
@@ -71,7 +71,7 @@ export default function PreferencePlayer() {
           stringRopeChoice: stringRopeChoice,  racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, stringFromPlayerOrigin: stringFromPlayerOrigin, numberKnotChoice: numberKnotChoice, }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "Authorization": `Bearer ${xsrfToken}` 
         }
     })
 
@@ -101,7 +101,7 @@ export default function PreferencePlayer() {
         body: JSON.stringify({ email: userInfo.email }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "Authorization": `Bearer ${xsrfToken}` 
         }
     })
 

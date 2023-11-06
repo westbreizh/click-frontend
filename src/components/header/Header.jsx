@@ -12,7 +12,7 @@ import { useEffect } from "react";
 export default function Header() {
 
   const userInfo =  useSelector((state) => state.user.userInfo);
-  const userRole =  userInfo.userRole
+  const userRole =  "player"
 
   // Cette fonction s'exécutera à chaque changement de `userRole`.
   useEffect(() => {

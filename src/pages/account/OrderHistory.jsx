@@ -10,17 +10,19 @@ export default function OrderHistory() {
 
 
   const email = useSelector((state) => state.user.userInfo.email);
+  const xsrfToken = useSelector((state) => state.xsrfToken);
 
   const [orderLogList, setOrderLogList] = useState([]) ;
   const [orderLogListEmpty, setOrderLogListEmpty] = useState(true) ;
 
-  const xsrfToken = window.localStorage.getItem('xsrfToken'); 
+
   console.log("xsrfToken test1 ",xsrfToken);
 
   //fonction asynchrone vers le backend pour recupérer 
   //l'historique des commandes effectué par le joueur 
   const loadLogOrder  = async function (data) {
     try{
+      console.log("xsrfToken test2 ",xsrfToken);
       const response = await fetch(`https://click-backend.herokuapp.com/api/user/orderLog`, {
         mode: "cors",
         method: "POST",

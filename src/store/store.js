@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import userReducer from "./userSlice";
 import productReducer from "./productSlice";
 import cartReducer from "./cartSlice";
+import xsrfTokenReducer from "./xsrfTokenSlice";
 
 // Récupérer le token à partir du cookie
 const initialToken = Cookies.get("mon_token");
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   product: productReducer,
   cart: cartReducer,
+  xsrfToken: xsrfTokenReducer,
 
 });
 
@@ -23,7 +25,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "data", // La clé pour stocker les données dans le local storage
   storage, // Le type de stockage (ici, on utilise le local storage)
-  whitelist: ["cart", "user"], // Permet de sélectionner les slices à sauvegarder
+  whitelist: ["cart", "user", "xsrfToken"], // Permet de sélectionner les slices à sauvegarder
   storageOptions: {
     expires: "3d", // Durée de conservation de 3 jours
     expireKey: "persistExpires", // Clé pour stocker la date d'expiration dans le localStorage

@@ -10,6 +10,7 @@ import ModalValidationMessageModif from "../modal/modalValidation/ModalValidatio
 
 export default function CoordinateForm( props ) {
 
+
   const onClose = props.onClose
 
   const playerId = useSelector((state) => state.user.userInfo.id);
@@ -21,6 +22,8 @@ export default function CoordinateForm( props ) {
   const [messageFromBackEnd, setMessageFromBackend] = useState("") ;
 
   const store = useStore()
+
+  const xsrfToken = window.localStorage.getItem('xsrfToken'); 
 
 
  
@@ -64,7 +67,7 @@ export default function CoordinateForm( props ) {
         body: JSON.stringify({playerId: playerId, telephone: data.telephone.replace(/(\d{2})(?=\d)/g, '$1 '), road: data.road, city: data.city, postalCode : data.postalCode.replace(/^(\d{2})(\d{3})$/, '$1 $2')}),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "Authorization": `Bearer ${xsrfToken}` 
         }
       })
 

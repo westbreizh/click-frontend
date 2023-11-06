@@ -15,6 +15,8 @@ import { fr } from 'date-fns/locale';
 
 export default function Stringing() {
 
+  const xsrfToken = window.localStorage.getItem('xsrfToken'); 
+
   const stringingPriceWithStringFromAnotherWhere = 10 //prix de la pose  avec cordage acheté ailleurs
 
   const stringFromShop =  useSelector((state) => state.cart.stringFromShopChoice);// dans le slice redux on initialise la preference joueur si il y a 
@@ -121,7 +123,7 @@ export default function Stringing() {
           stringRopeChoice: stringRopeChoice,  racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, stringFromPlayerOrigin: stringFromPlayerOrigin, numberKnotChoice: numberKnotChoice, }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "Authorization": `Bearer ${xsrfToken}` 
         }
     })
 
@@ -150,7 +152,7 @@ export default function Stringing() {
         body: JSON.stringify({ email: userInfo.email }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "Authorization": `Bearer ${xsrfToken}` 
         }
     })
 

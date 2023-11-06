@@ -20,6 +20,7 @@ export default function Order() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const xsrfToken = window.localStorage.getItem('xsrfToken'); 
 
   //on récupère les infos du lieu et de la raquette depuis articleList 
   let racquetPlayer = null;
@@ -85,7 +86,7 @@ export default function Order() {
     const datasInput = document.createElement('input');
     datasInput.type = 'hidden';
     datasInput.name = 'datas';
-    datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token, racquetPlayer });
+    datasInput.value = JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, xsrfToken, racquetPlayer });
 
     // Ajoutez le champ de formulaire au formulaire virtuel
     form.appendChild(datasInput);
@@ -103,10 +104,10 @@ export default function Order() {
         mode: "cors",
         method: "POST",
         credentials: 'include',
-        body: JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, token, racquetPlayer }),
+        body: JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, xsrfToken, racquetPlayer }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "Authorization": `Bearer ${xsrfToken}` 
         }
       })
 

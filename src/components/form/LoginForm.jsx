@@ -10,7 +10,7 @@ import ModalResetPassword from "../modal/modalReset/ModalResetPassword";
 import { shemaInputLogin } from "../../Utils/shemaInput";
 import {connectedToggle, setUserInfo } from "../../store/userSlice";
 import { resetStringFromShopChoice } from "../../store/cartSlice";
-
+import { setXsrfToken } from "../../store/xsrfTokenSlice"; 
 
 // Votre style personnalisé pour le champ de texte
 const CustomTextField = styled(TextField)(({ theme }) => ({
@@ -117,7 +117,10 @@ export default function LoginForm(props) {
         const userRole =  result.userInfo.userRole;
         store.dispatch(connectedToggle());
         store.dispatch(resetStringFromShopChoice(result.userInfo.stringInfo));
+        localStorage.setItem('xsrfToken', result.xsrfToken);
+        store.dispatch(setXsrfToken(result.xsrfToken));
         closeModalConnexion();
+
         if (userRole === 'stringer'){
           navigate("/cordeur_raquettes-à-corder")
         }
