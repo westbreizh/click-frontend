@@ -9,7 +9,7 @@ import { Input, InputAdornment, IconButton, styled } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
+import { setXsrfToken } from "../../store/xsrfTokenSlice"; 
 
 export default function SignupForm(props) {
 
@@ -97,16 +97,13 @@ export default function SignupForm(props) {
           showPErrorFromBackend();
           throw new Error(` ${result.message}`);
         }else {
-          store.dispatch(setXsrfToken(result.xsrfToken)); 
-          console.log("xsfrToken après inscription",result.xsrfToken); 
+        const result = await response.json(); 
+        store.dispatch(setXsrfToken(result.xsrfToken)); 
+        console.log("xsfrToken après inscription",result.xsrfToken); 
         localStorage.setItem('xsrfToken', result.xsrfToken);
-
         store.dispatch(connectedToggle());
-        const result = await response.json();
         store.dispatch(setUserInfo(result.userInfo));
         showModal();
-
-
         console.log(result.userInfo)
         console.log(result.message)
       }
