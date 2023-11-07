@@ -16,11 +16,8 @@ const shemaInputLogin = yup.object().shape({
 export {shemaInputLogin}
 
 
-const shemaInputSignup = yup.object().shape({
 
-  civilite: yup
-  .string()
-  .required("Veuillez renseigner votre civilité, merci!"),
+const shemaInputSignup = yup.object().shape({
 
   forename: yup
       .string()
@@ -38,45 +35,25 @@ const shemaInputSignup = yup.object().shape({
       .required("Veuillez saisir votre email, merci!"),
 
   password: yup
-    .string(),
-    /*
-    .required("Veuillez saisir votre mot de passe, merci!")
-    .matches(/^(?=.{4,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/, "Votre  mot de passe doit contenir au moins 8 caractères, 1 chiffre, une majuscule et un caractère spéciale")
-    .matches(/[a-z]/, "le mot de passe doit contenir au moins une minuscule")
-      .matches(/[A-Z]/, "le mot de passe doit contenir au moins une majuscule")
-      .matches(/[0-9]/, "le mot de passe doit contenir au moins un chiffre")
-      .min(8, "le mot de passe doit contenir au moins 8 caractères"),
-      */
-
+  .string()
+  .required("Veuillez saisir votre mot de passe, merci!")
+  .matches(/^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/, 
+  "Votre mot de passe doit contenir au moins 8 caractères, dont un chiffre, une majuscule et un caractère spéciale"),
+  
   passwordConfirm: yup
     .string()
     .required('veuillez resaisir le mot de passe')
     .oneOf([yup.ref('password')], 'Les mots de passes doivent être identiques'),
 
+  telephone: yup
+  .string()
+  .matches(/^\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}\s?\d{1}$/, "Le numéro de téléphone doit contenir 10 chiffres avec un espace éventuel entre les chiffres")
+  
   });
 export {shemaInputSignup}
 
  
-const shemaInputChangeEmail= yup.object().shape({
 
-  email: yup
-    .string()
-    .email("Veuillez fournir un format d'e-mail valide ")
-    .required("Veuillez saisir votre email, merci!"),
-
-  new_email: yup
-    .string()
-    .email("Veuillez fournir un format d'e-mail valide ")
-    .required("Veuillez saisir votre nouvel e-mail, merci!"),
-
-  confirm_new_email: yup
-    .string()
-    .email("Veuillez fournir un format d'e-mail valide ")
-    .required("Veuillez resaisir votre nouvel e-mail, merci!")
-    .oneOf([yup.ref('new_email')], 'Les e-mails doivent être identiques'),
-
-});  
-export {shemaInputChangeEmail}
 
 
 const shemaInputChangePassword= yup.object().shape({

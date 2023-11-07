@@ -10,6 +10,7 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { setXsrfToken } from "../../store/xsrfTokenSlice"; 
+//civilite: data.civilite,
 
 export default function SignupForm(props) {
 
@@ -80,7 +81,6 @@ export default function SignupForm(props) {
   };
  
 
-
   //fonction asynchrone vers le backend enregistrant l'utilisateur
   const onSubmit = async function (data) {
     try{
@@ -88,7 +88,8 @@ export default function SignupForm(props) {
         mode: "cors",
         method: "POST",
         credentials: 'include',
-        body: JSON.stringify({civilite: data.civilite, lastname: data.lastname, forename: data.forename, email: data.email, password: data.password}),
+        body: JSON.stringify({ lastname: data.lastname, forename: data.forename, email: data.email, 
+          password: data.password,telephone: data.telephone.replace(/(\d{2})(?=\d)/g, '$1 ')}),
         headers: {"Content-Type": "application/json"}})
 
         if (!response.ok) {
@@ -122,20 +123,7 @@ export default function SignupForm(props) {
 
     <form onSubmit={handleSubmit(onSubmit)} className="form__wrapper">
     
-      <label className="select__label" >Civilité<sup>*</sup> </label>
-      <div className='select__wrapper'>
-          <KeyboardArrowDownIcon className='select__arrow' />
-          <select 
-          className="select__bar" 
-          {...register("civilite")}>
-              <option value="">Sélectionnez une civilité</option>
-              <option value="Madame">Madame</option>
-              <option value="Monsieur">Monsieur</option>
-              <option value="Padawan">Padawan</option>
-              <option value="Padawanette">Padawanette</option>
-          </select>
-      </div>
-      <p className="input__error">{errors.civilite?.message}</p>
+
 
 
       <label className="input__label" > Nom <sup>*</sup> </label>
@@ -183,6 +171,13 @@ export default function SignupForm(props) {
       />
 
       <p className="input__error">{errors.passwordConfirm?.message}</p>
+
+
+      <label className="input__label"> Numéro de téléphone   </label>
+      <input type="tel"  {...register('telephone')} className="input__text"  />
+      <p className="input__error">{errors.telephone?.message}</p>  
+
+
 
 
       {isPErrorFromBackEndOpen ?  

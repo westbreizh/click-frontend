@@ -43,13 +43,9 @@ export default function Coordinate() {
           <div className="submenu__wrapper">
 
             <h3 className="submenu__title">
-              Informations personnelles test
+              Informations personnelles 
             </h3>
 
-            <div className="info-perso__wrapper">
-              <div className="info-perso__title">Civilité :  </div>
-              <div className="info-perso__value">{userInfo.civilite}</div>
-            </div>
 
             <div className="info-perso__wrapper">
               <div className="info-perso__title">prénom : </div>
