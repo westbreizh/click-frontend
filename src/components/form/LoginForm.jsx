@@ -107,6 +107,7 @@ export default function LoginForm(props) {
 
       if (!response.ok) {
         const result = await response.json();
+        console.log("result", result);
         changeMessageFromBackEnd(result.message);
         showPErrorFromBackend();
         throw new Error(` ${result.message}`);
