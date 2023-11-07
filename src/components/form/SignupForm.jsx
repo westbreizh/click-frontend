@@ -97,8 +97,10 @@ export default function SignupForm(props) {
           showPErrorFromBackend();
           throw new Error(` ${result.message}`);
         }else {
+          store.dispatch(setXsrfToken(result.xsrfToken)); 
+          console.log("xsfrToken après inscription",result.xsrfToken); 
         localStorage.setItem('xsrfToken', result.xsrfToken);
-        store.dispatch(setXsrfToken(result.xsrfToken));
+
         store.dispatch(connectedToggle());
         const result = await response.json();
         store.dispatch(setUserInfo(result.userInfo));

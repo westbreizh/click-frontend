@@ -14,9 +14,8 @@ export default function Order() {
   const isConnected = useSelector(state => state.user.isConnected);
   const articleList = useSelector(state => state.cart.articleList);
   const totalPrice = useSelector(state => state.cart.totalPrice);
-  const userInfo = useSelector(state => state.user.userInfo);
-  const xsrfToken = window.localStorage.getItem('xsrfToken'); 
-
+  const userInfo = useSelector(state => state.user.userInfo); 
+  const xsrfToken = useSelector((state) => state.xsrfToken);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
