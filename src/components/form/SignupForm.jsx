@@ -127,17 +127,17 @@ export default function SignupForm(props) {
 
 
       <label className="input__label" > Nom <sup>*</sup> </label>
-      <input  type ="text" {...register("lastname")} className="input__text"  />
+      <input  type ="text" {...register("lastname")} className="input__text" autoComplete="family-name"  />
       <p className="input__error">{errors.lastname?.message}</p>
 
 
       <label htmlFor="forename"  className="input__label" > Prénom <sup>*</sup> </label>
-      <input  type ="text" {...register("forename")} className="input__text" id="forename" name="forename" />
+      <input  type ="text" {...register("forename")} className="input__text" autoComplete="forename" id="forename" name="forename" />
       <p className="input__error">{errors.forename?.message}</p>
 
 
       <label className="input__label"> Email <sup>*</sup>  </label>
-      <input type="email" {...register("email")} className="input__text" />
+      <input type="email" {...register("email")} className="input__text" autoComplete="email" />
       <p className="input__error">{errors.email?.message}</p>
 
       <label className="input__label"> Mot de passe <sup>*</sup> </label>
@@ -145,6 +145,7 @@ export default function SignupForm(props) {
       <CustomInput
         type={showPassword ? 'text' : 'password'}
         {...register('password')}
+        autoComplete="new-password"
         endAdornment={
           <InputAdornment position="end">
             <IconButton onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword}>
@@ -161,6 +162,7 @@ export default function SignupForm(props) {
       <CustomInput
         type={showConfirmPassword ? 'text' : 'password'}
         {...register('passwordConfirm')}
+        autoComplete ="new-password"
         endAdornment={
           <InputAdornment position="end">
             <IconButton onClick={handleClickShowConfirmPassword} onMouseDown={handleMouseDownPassword}>
@@ -174,7 +176,7 @@ export default function SignupForm(props) {
 
 
       <label className="input__label"> Numéro de téléphone   </label>
-      <input type="tel"  {...register('telephone')} className="input__text"  />
+      <input type="tel"  {...register('telephone')} className="input__text" autoComplete="tel"  />
       <p className="input__error">{errors.telephone?.message}</p>  
 
 

@@ -140,6 +140,7 @@ export default function LoginForm(props) {
         type="email"
         {...register("email")}
         className="input__text"
+        autoComplete="email"
       />
       <p className="input__error">{errors.email?.message}</p>
 
@@ -148,6 +149,7 @@ export default function LoginForm(props) {
       <CustomInput
         type={showPassword ? "text" : "password"}
         {...register("password")}
+        autoComplete="current-password"
         endAdornment={
           <InputAdornment position="end">
             <IconButton
