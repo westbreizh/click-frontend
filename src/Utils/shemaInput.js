@@ -10,7 +10,6 @@ const shemaInputLogin = yup.object().shape({
 
   password: yup
     .string()
-    .required("Veuillez saisir votre mot de passe, merci!")
     .matches(/^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/, 
     "Votre mot de passe doit contenir au moins 8 caractères, dont un chiffre, une majuscule et un caractère spéciale")}); 
 export {shemaInputLogin}
@@ -36,7 +35,6 @@ const shemaInputSignup = yup.object().shape({
 
   password: yup
   .string()
-  .required("Veuillez saisir votre mot de passe, merci!")
   .matches(/^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/, 
   "Votre mot de passe doit contenir au moins 8 caractères, dont un chiffre, une majuscule et un caractère spéciale"),
   
