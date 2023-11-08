@@ -56,7 +56,7 @@ export default function CoordinateForm( props ) {
   });
   const { isValid } = formState;
 
-  //fonction asynchrone vers le backend verifiant l'email et le mot de passe associé
+  //fonction asynchrone vers le backend modifiant les coordonnées de l'utilisateur
   const onSubmit = async function (data) {
 
     try{

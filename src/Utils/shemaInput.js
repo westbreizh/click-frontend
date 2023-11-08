@@ -52,11 +52,17 @@ export {shemaInputSignup}
 
  
 
+const shemaInputResetPasswordEmail = yup.object().shape({
 
+  email: yup
+      .string()
+      .email("Veuillez fournir un format d'e-mail valide ")
+      .required("Veuillez saisir votre email, merci!"),
+  });
+export {shemaInputResetPasswordEmail}
 
 
   
-
 const shemaInputResetPassword= yup.object().shape({
 
   password: yup
@@ -74,17 +80,6 @@ export {shemaInputResetPassword}
 
 
 
-
-
-
-const shemaInputStringing = yup.object().shape({
-  club: yup
-    .string()
-    .required("Veuillez choisir un club, merci!"),
-});
-export {shemaInputStringing}
-
-
 const shemaInputCoordonate = yup.object().shape({
 
   road: yup
@@ -92,7 +87,6 @@ const shemaInputCoordonate = yup.object().shape({
   .max(30, "le champs ne peut contenir que 30 caratères"),
   city: yup
   .string()
-  .required("Veuillez saisir votre ville")
   .max(30, "le champs ne peut contenir que 30 caratères"),
 
   postalCode: yup
@@ -105,3 +99,12 @@ const shemaInputCoordonate = yup.object().shape({
 
   }); 
 export {shemaInputCoordonate}
+
+
+
+const shemaInputStringing = yup.object().shape({
+  club: yup
+    .string()
+    .required("Veuillez choisir un club, merci!"),
+});
+export {shemaInputStringing}
