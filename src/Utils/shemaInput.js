@@ -54,66 +54,27 @@ export {shemaInputSignup}
 
 
 
-const shemaInputChangePassword= yup.object().shape({
 
-  password: yup
-  .string(),
-  /*
-  .required("Veuillez saisir votre mot de passe, merci!")
-  .matches(/^(?=.{4,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/, "Votre  mot de passe doit contenir au moins 8 caractères, 1 chiffre, une majuscule et un caractère spéciale")
-  .matches(/[a-z]/, "le mot de passe doit contenir au moins une minuscule")
-    .matches(/[A-Z]/, "le mot de passe doit contenir au moins une majuscule")
-    .matches(/[0-9]/, "le mot de passe doit contenir au moins un chiffre")
-    .min(8, "le mot de passe doit contenir au moins 8 caractères"),
-  */
-  new_password: yup
-  .string(),
-  /*
-  .required("Veuillez saisir votre mot de passe, merci!")
-  .matches(/^(?=.{4,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/, "Votre  mot de passe doit contenir au moins 8 caractères, 1 chiffre, une majuscule et un caractère spéciale")
-  .matches(/[a-z]/, "le mot de passe doit contenir au moins une minuscule")
-  .matches(/[A-Z]/, "le mot de passe doit contenir au moins une majuscule")
-  .matches(/[0-9]/, "le mot de passe doit contenir au moins un chiffre")
-  .min(8, "le mot de passe doit contenir au moins 8 caractères"),
-*/
-
-  new_passwordConfirm: yup
-    .string()
-    .required('veuillez resaisir le mot de passe')
-    .oneOf([yup.ref('new_password')], 'Les mots de passes doivent être identiques'),
-
-}); 
-export {shemaInputChangePassword}
-
-
-const shemaInputResetPasswordEmail= yup.object().shape({
-  email: yup
-    .string()
-    .email("Veuillez fournir un format d'e-mail valide ")
-    .required("Veuillez saisir votre email, merci!"),
-}); 
-export {shemaInputResetPasswordEmail}
   
 
 const shemaInputResetPassword= yup.object().shape({
 
   password: yup
-    .string(),
-    /*
-    .required("Veuillez saisir votre mot de passe, merci!")
-    .matches(/^(?=.{4,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/, "Votre  mot de passe doit contenir au moins 8 caractères, 1 chiffre, une majuscule et un caractère spéciale")
-    .matches(/[a-z]/, "le mot de passe doit contenir au moins une minuscule")
-     .matches(/[A-Z]/, "le mot de passe doit contenir au moins une majuscule")
-     .matches(/[0-9]/, "le mot de passe doit contenir au moins un chiffre")
-     .min(8, "le mot de passe doit contenir au moins 8 caractères"),
-   */
-
+  .string()
+  .matches(/^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/, 
+  "Votre mot de passe doit contenir au moins 8 caractères, dont un chiffre, une majuscule et un caractère spéciale"),
+  
   passwordConfirm: yup
     .string()
     .required('veuillez resaisir le mot de passe')
     .oneOf([yup.ref('password')], 'Les mots de passes doivent être identiques'),
+
   });  
 export {shemaInputResetPassword}
+
+
+
+
 
 
 const shemaInputStringing = yup.object().shape({

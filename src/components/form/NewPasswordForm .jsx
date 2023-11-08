@@ -114,8 +114,8 @@ export default function NewPasswordForm(props) {
   }
 
 
- // console.log("userId", userId);
- // console.log("token", token);
+  console.log("userId", userId);
+   console.log("token", token);
 
   
   return (
