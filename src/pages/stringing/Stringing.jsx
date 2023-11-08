@@ -30,7 +30,6 @@ export default function Stringing() {
   const [hubChoice, setHubChoice] = useState(userInfo.hubInfo);
   const [hubBackChoice, setHubBackChoice] = useState(userInfo.hubBackInfo);
   const [racquetPlayer, setRacquetPlayer] = useState(userInfo.racquet_player);
-  const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(userInfo.stringFromPlayerOrigin);
   const [numberKnotChoice, setnumberKnotChoice] = useState(userInfo.numberKnotChoice);
 
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
@@ -97,7 +96,7 @@ export default function Stringing() {
   // gestion de l'état de validation du bouton pour ajouter le produit
   const isValid =
   (hubChoice ?? null) !== null &&   (hubBackChoice ?? null) !== null &&   (stringRopeChoice ?? null) !== null &&  racquetPlayer !== "" &&   racquetPlayer !== null && racquetPlayer !== undefined &&  
-  ( ( stringFromPlayer !== "" && stringFromPlayer !== undefined  && stringFromPlayer !== null && stringFromPlayerOrigin !== null)  || (stringFromShop ?? null) !== null );
+  ( ( stringFromPlayer !== "" && stringFromPlayer !== undefined  && stringFromPlayer !== null )  || (stringFromShop ?? null) !== null );
  
   
   //fonction asynchrone vers le backend pour modifier
@@ -120,7 +119,7 @@ export default function Stringing() {
         method: "POST",
         credentials: 'include',
         body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayerToSend, stringFromShopId: stringFromShopId, 
-          stringRopeChoice: stringRopeChoice,  racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, stringFromPlayerOrigin: stringFromPlayerOrigin, numberKnotChoice: numberKnotChoice, }),
+          stringRopeChoice: stringRopeChoice,  racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, numberKnotChoice: numberKnotChoice, }),
         headers: {
           "Content-Type": "application/json",
           "x-xsrf-token": xsrfToken  
@@ -239,7 +238,6 @@ export default function Stringing() {
     setHubChoice(userInfo.hubInfo);
     setHubBackChoice(userInfo.hubBackInfo);
     setRacquetPlayer(userInfo.racquet_player);
-    setStringFromPlayerOrigin(userInfo.stringFromPlayerOrigin);
     setnumberKnotChoice(userInfo.numberKnotChoice);
   }, [userInfo]);
     

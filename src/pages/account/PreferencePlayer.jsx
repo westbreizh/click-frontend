@@ -11,6 +11,7 @@ import {resetStringFromShopChoice} from '../../store/cartSlice'
 import ModalValidationChangesPreferences from '../../components/modal/modalValidation/ModalValidationChangePreferences';
 
 
+
 export default function PreferencePlayer() {
 
   const userInfo =  useSelector((state) => state.user.userInfo);
@@ -25,9 +26,9 @@ export default function PreferencePlayer() {
   const [hubBackChoice, setHubBackChoice] = useState(userInfo.hubBackInfo);
   const [racquetPlayer, setRacquetPlayer] = useState(userInfo.racquet_player);
   const [isSubmenuValidationOpen, setSubmenuValidation] = useState(false);
-  const [stringFromPlayerOrigin, setStringFromPlayerOrigin] = useState(userInfo.stringFromPlayerOrigin);
   const [numberKnotChoice, setnumberKnotChoice] = useState(userInfo.numberKnot);
 
+ 
 
   // par défault on corde avec 4 noeuds
   if (numberKnotChoice==null){
@@ -69,7 +70,7 @@ export default function PreferencePlayer() {
         method: "POST",
         credentials: 'include',
         body: JSON.stringify({ userId: userInfo.id, stringFromPlayer: stringFromPlayerToSend, stringFromShopId: stringFromShopId, 
-          stringRopeChoice: stringRopeChoice,  racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, stringFromPlayerOrigin: stringFromPlayerOrigin, numberKnotChoice: numberKnotChoice, }),
+          stringRopeChoice: stringRopeChoice,  racquetPlayer: racquetPlayer, hubChoiceId: hubChoice.id, hubBackChoiceId: hubBackChoice.id, numberKnotChoice: numberKnotChoice, }),
         headers: {
           "Content-Type": "application/json",
           "x-xsrf-token": xsrfToken   
@@ -139,7 +140,7 @@ export default function PreferencePlayer() {
   
 
   //console.log("numberKnotChoice", numberKnotChoice)
-  //console.log("stringFromPlayerOrigin", stringFromPlayerOrigin)
+
   //console.log("userInfo", userInfo)
   //console.log("stringFromShop", stringFromShop)
   //console.log("stringFromplayer", stringFromPlayer)
@@ -399,7 +400,7 @@ export default function PreferencePlayer() {
             
             <button 
               onClick={() => onSubmit()}
-              type="submit" 
+              type="submit"
               className="stringing-form__btn-order btn btn-blue" 
               >
               Sauvegarder mes choix

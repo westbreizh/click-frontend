@@ -102,6 +102,21 @@ export {shemaInputCoordonate}
 
 
 
+
+const shemaInputPreferencePlayer = yup.object().shape({
+  stringFromPlayerToSend: yup.string().max(30, 'Doit être de 30 caractères ou moins'),
+  stringFromShopId: yup.number().integer().min(10, 'Doit être un nombre à 2 chiffres').max(99, 'Doit être un nombre à 2 chiffres'),
+  stringRopeChoice: yup.number().integer().min(10, 'Doit être un nombre à 2 chiffres').max(99, 'Doit être un nombre à 2 chiffres'),
+  racquetPlayer: yup.string().max(30, 'Doit être de 30 caractères ou moins'),
+  hubChoiceId: yup.number().integer().min(10, 'Doit être un nombre à 2 chiffres').max(99, 'Doit être un nombre à 2 chiffres'),
+  hubBackChoiceId: yup.number().integer().min(10, 'Doit être un nombre à 2 chiffres').max(99, 'Doit être un nombre à 2 chiffres'),
+  numberKnotChoice: yup.number().integer().min(0, 'Doit être un chiffre').max(9, 'Doit être un chiffre'),
+});
+export {shemaInputPreferencePlayer}
+
+
+
+
 const shemaInputStringing = yup.object().shape({
   club: yup
     .string()
