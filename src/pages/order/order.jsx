@@ -103,7 +103,7 @@ export default function Order() {
         mode: "cors",
         method: "POST",
         credentials: 'include',
-        body: JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, xsrfToken, racquetPlayer }),
+        body: JSON.stringify({ userInfo, articleList, totalPrice, hubChoice, hubBackChoice, racquetPlayer }),
         headers: {
           "Content-Type": "application/json",
           "x-xsrf-token": xsrfToken 
