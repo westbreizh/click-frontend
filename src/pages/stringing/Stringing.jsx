@@ -241,8 +241,8 @@ export default function Stringing() {
     setnumberKnotChoice(userInfo.numberKnotChoice);
   }, [userInfo]);
     
-
-
+  console.log('hubChoice', hubChoice)
+  console.log('hubBackChoice', hubBackChoice)
   return (
 
     <main className="stringing__main">
