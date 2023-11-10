@@ -3,24 +3,15 @@
 
 import { NavLink } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { useSelector, useStore } from "react-redux"
 import NavbarShop from "../../components/navbar/NavbarShop"
 import TennisSpinner from "../../components/loadingSpinner/TennisSpinner"
-import CheckboxSelect from "../../components/select/CheckBoxSelectString"
-import {datasForSelectstring} from "../../Utils/localDataBase"
-import { setProductsListFromBackend } from "../../store/productSlice"
 import BackNavArrow from '../../components/button/BackNavArrow'
 
 
 export default function String() {
 
-  const [productFind, setProductFind] = useState(true)
-  const productsListFromBackend = useSelector((state) => state.product.productsListFromBackend);
-  const categorieWithOptionSelectedForString = useSelector((state) => state.product.categorieWithOptionSelectedForString);
-  const store = useStore()
-  const productCategorie ="string"
+  const [stringList, setStringList] = useState("");
 
-  //console.log(categorieWithOptionSelectedForString)
 
   //fonction asynchrone vers le backend pour recupérer 
   //une liste des marques de cordages de manière aléatoire
@@ -37,8 +28,8 @@ export default function String() {
           throw new Error(` ${result.message}`);
         }else {
         const result = await response.json();
-        console.log(result.message);
-        store.dispatch(setProductsListFromBackend(result.stringListRandom));
+        setStringList(result.stringListRandom);
+        console.log("stringList", stringList)
       }
     }
 
@@ -47,40 +38,6 @@ export default function String() {
       //console.log(errorMessage);
     }
   }
-
-  //fonction asynchrone vers le backend pour recupérer 
-  //la liste des marques de cordages en filtrant avec des options fournit
-  const loadproductListFiltered  = async function (data) {
-    try{
-      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/stringListFiltered`, {
-        mode: "cors",
-        method: "POST",
-        body: JSON.stringify({ productCategorie, categorieWithOptionSelectedForString }),
-        headers: {"Content-Type": "application/json"}})
-
-        if (!response.ok) {
-          const result = await response.json();
-          throw new Error(` ${result.message}`);
-        }else {
-        const result = await response.json();
-        if(result.message === "il n' y a pas de produits correspondant aux options choisis")
-         {setProductFind(false)
-          }else {setProductFind(true)};
-        //console.log(result.message);
-        store.dispatch(setProductsListFromBackend(result.stringList));
-      }
-    }
-
-    catch(err){
-      const errorMessage = err.toString();
-      console.log(errorMessage);
-    }
-  }
-
-  // quand des options sont selectionnés changent, on lance la fonction de filtrage du backend
-  useEffect(() => {
-  loadproductListFiltered();
-  }, [categorieWithOptionSelectedForString ]);
 
   useEffect(() => {
     loadProductListRandom();
@@ -119,50 +76,14 @@ export default function String() {
           </div>
 
 
-          <div className="checkboxSelects__wrapper">
 
-            {datasForSelectstring.map((object, index) => (
-
-            <CheckboxSelect 
-            key={`${object}-${index}`}
-            className="checkboxSelect"
-            options = {object.options}
-            title = {object.title}
-            fieldNameBdd= {object.fieldNameBdd}
-            />
-
-            ))}
-
-          </div>
-          
-          <div className="options-selected-wrapper">  
-
-            {categorieWithOptionSelectedForString.map((object, index) => (
-
-              <div 
-                className="options-selected-wrapper__one-categorie"
-                key={index}>
-
-                  {object.optionSelectedForOneCategorie.map((option, index) => (
-                    <div key={index}
-                    className="options-selected"
-                    >
-                      {option}
-                    </div>
-                  ))}
-
-              </div>
-
-            ))}
-
-          </div>
  
 
-          {productsListFromBackend.length > 0 ? (
+          {stringList.length > 0 ? (
 
             <div className="cardProducts__contenair">
 
-              {productsListFromBackend.map((product, index) => (
+              {stringList.map((product, index) => (
                 <NavLink 
                   key={index} 
                   to={`/fiche_produit/cordage/${product.id}`}
@@ -191,16 +112,10 @@ export default function String() {
 
           ) : (
 
-            <>
-            
-            {!productFind ? (
-              <div className="message-product-not-find">Il n'y a aucun cordage correspondant aux options choisies !</div>
-            ) : (
               <div className="loadingspinnerString">
               <TennisSpinner />
               </div>
-            )}
-            </>
+
           )}
 
         </section>

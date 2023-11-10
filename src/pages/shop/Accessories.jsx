@@ -3,22 +3,13 @@
 
 import { NavLink } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { useSelector, useStore } from "react-redux"
 import NavbarShop from "../../components/navbar/NavbarShop"
 import TennisSpinner from "../../components/loadingSpinner/TennisSpinner"
-import CheckboxSelect from "../../components/select/CheckBoxSelectAccessories"
-import { datasForSelectsAccessories} from "../../Utils/localDataBase"
-import { setProductsListFromBackend } from "../../store/productSlice"
 import BackNavArrow from '../../components/button/BackNavArrow'
-import { setCategorieWithOptionSelectedForAccessories } from "../../store/productSlice"
 
 export default function Accessories() {
 
-
-  const [productFind, setProductFind] = useState(true)
-  const productsListFromBackend = useSelector((state) => state.product.productsListFromBackend);
-  const categorieWithOptionSelectedForAccessories = useSelector((state) => state.product.categorieWithOptionSelectedForAccessories);
-  const store = useStore()
+  const [accessoriesList, setAccessoriesList] = useState("");
 
 
   //fonction asynchrone vers le backend pour recupérer 
@@ -36,8 +27,8 @@ export default function Accessories() {
           throw new Error(` ${result.message}`);
         }else {
         const result = await response.json();
-        console.log(result.message);
-        store.dispatch(setProductsListFromBackend(result.stringListRandom));
+        setAccessoriesList(result.stringListRandom);
+        console.log("accessorieList", accessoriesList)
       }
     }
 
@@ -48,39 +39,6 @@ export default function Accessories() {
   }
 
 
-  //fonction asynchrone vers le backend pour recupérer 
-  //la liste des marques de cordages en filtrant avec des options fournit
-  const loadproductListFiltered  = async function (data) {
-    try{
-      const response = await fetch(`https://click-backend.herokuapp.com/api/shop/accessoriesListFiltered`, {
-        mode: "cors",
-        method: "POST",
-        body: JSON.stringify({ productCategorie:"accessories", categorieWithOptionSelectedForAccessories }),
-        headers: {"Content-Type": "application/json"}})
-
-        if (!response.ok) {
-          const result = await response.json();
-          throw new Error(` ${result.message}`);
-        }else {
-        const result = await response.json();
-        if(result.message === "il n' y a pas de produits correspondant aux options choisis")
-         {setProductFind(false)
-          }else {setProductFind(true)};
-        console.log(result.message);
-        store.dispatch(setProductsListFromBackend(result.stringList));
-      }
-    }
-
-    catch(err){
-      const errorMessage = err.toString();
-      console.log(errorMessage);
-    }
-  }
-
-   // quand des options sont selectionnés, on lance la fonction de filtrage du backend
-   useEffect(() => {
-    loadproductListFiltered();
-  }, [categorieWithOptionSelectedForAccessories ]);
 
   // charger une liste de cordages aléatoires au chargement de la page
     useEffect(() => {
@@ -88,10 +46,7 @@ export default function Accessories() {
     },[])
 
     
-  // rénitialise à zéro les options choisies précédemment quand on revient sur la page
-    useEffect(() => {
-      store.dispatch( setCategorieWithOptionSelectedForAccessories([]));
-    },[])
+ 
   
 
   return (
@@ -110,49 +65,13 @@ export default function Accessories() {
 
           <h1 className="title-products"> Accessoires</h1>
 
-          <div className="checkboxSelects__wrapper">
-
-            {datasForSelectsAccessories.map((object, index) => (
-
-            <CheckboxSelect 
-            key={`${object}-${index}`}
-            className="checkboxSelect"
-            options = {object.options}
-            title = {object.title}
-            fieldNameBdd= {object.fieldNameBdd}
-            />
-
-            ))}
-
-          </div>
-          
-          <div className="options-selected-wrapper">  
-
-            {categorieWithOptionSelectedForAccessories.map((object, index) => (
-
-              <div 
-              className="options-selected-wrapper__one-categorie"
-              key={index}>
-
-                  {object.optionSelectedForOneCategorie.map((option, index) => (
-                    <div key={index}
-                    className="options-selected"
-                    >
-                      {option}</div>
-                  ))}
-
-              </div>
-
-            ))}
-
-          </div>
  
 
-          {productsListFromBackend.length > 0 ? (
+          {accessoriesList.length > 0 ? (
 
             <div className="cardProducts__contenair">
 
-              {productsListFromBackend.map((product, index) => (
+              {accessoriesList.map((product, index) => (
                 <NavLink 
                   key={index} 
                   to={`/fiche_produit/accessoire/${product.id}`}
@@ -175,15 +94,10 @@ export default function Accessories() {
 
           ) : (
 
-            <>
-            {!productFind ? (
-              <div className="message-product-not-find">Il n'y a aucun accessoire correspondant aux options choisies !</div>
-            ) : (
-              <div className="loadingspinnerString">
-              <TennisSpinner />
-              </div>
-            )}
-            </>
+            <div className="loadingspinnerString">
+            <TennisSpinner />
+            </div>
+            
           )}
 
         </section>

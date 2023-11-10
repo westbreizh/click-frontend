@@ -6,8 +6,6 @@ const productSlice = createSlice({
     productsListFromBackend: [],
     resetSelectComposant: false,
     categorieWithOptionSelectedForString: [],
-    categorieWithOptionSelectedForBall: [],
-    categorieWithOptionSelectedForAccessories: [],
   },
   reducers: {
     setResetSelectComposant: (state) => {
@@ -19,12 +17,6 @@ const productSlice = createSlice({
     setCategorieWithOptionSelectedForString: (state, action) => {
       state.categorieWithOptionSelectedForString = action.payload;
     },
-    setCategorieWithOptionSelectedForBall: (state, action) => {
-      state.categorieWithOptionSelectedForBall = action.payload;
-    },
-    setCategorieWithOptionSelectedForAccessories: (state, action) => {
-      state.categorieWithOptionSelectedForAccessories = action.payload;
-    },
   },
 });
 
@@ -32,8 +24,6 @@ export const {
   setResetSelectComposant,
   setProductsListFromBackend,
   setCategorieWithOptionSelectedForString,
-  setCategorieWithOptionSelectedForBall,
-  setCategorieWithOptionSelectedForAccessories,
 } = productSlice.actions;
 
 export default productSlice.reducer;
