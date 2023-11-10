@@ -27,8 +27,7 @@ export default function Accessories() {
           throw new Error(` ${result.message}`);
         }else {
         const result = await response.json();
-        setAccessoriesList(result.stringListRandom);
-        console.log("accessorieList", accessoriesList)
+        setAccessoriesList(result.productListRandom);
       }
     }
 

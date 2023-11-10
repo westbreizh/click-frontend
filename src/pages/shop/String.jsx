@@ -28,8 +28,7 @@ export default function String() {
           throw new Error(` ${result.message}`);
         }else {
         const result = await response.json();
-        setStringList(result.stringListRandom);
-        console.log("stringList", stringList)
+        setStringList(result.productListRandom);
       }
     }
 
@@ -89,7 +88,6 @@ export default function String() {
                   to={`/fiche_produit/cordage/${product.id}`}
                   className="cardProduct__wrapper"
                 >
-                                  {console.log("product", product)}
 
                   <img 
                     crossOrigin="anonymous" 

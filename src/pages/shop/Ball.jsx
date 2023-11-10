@@ -1,20 +1,13 @@
 import { NavLink } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { useSelector, useStore } from "react-redux"
 import NavbarShop from "../../components/navbar/NavbarShop"
 import TennisSpinner from "../../components/loadingSpinner/TennisSpinner"
 import BackNavArrow from '../../components/button/BackNavArrow'
 
-import { setProductsListFromBackend } from "../../store/productSlice"
-import { setCategorieWithOptionSelectedForBall } from "../../store/productSlice"
 
 export default function Ball() {
 
-  const [productFind, setProductFind] = useState(true)
   const [ballList, setBallList] = useState("");
-
-
-
 
   //fonction asynchrone vers le backend pour recupérer 
   //une liste des marques de cordages de manière aléatoire
@@ -31,8 +24,7 @@ export default function Ball() {
           throw new Error(` ${result.message}`);
         }else {
         const result = await response.json();
-        setBallList(result.stringListRandom);
-        console.log("ballList", ballList)
+        setBallList(result.productListRandom);
       }
     }
 

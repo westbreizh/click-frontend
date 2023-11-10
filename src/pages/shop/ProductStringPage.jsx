@@ -138,7 +138,7 @@ export default function ProductStringPage() {
                   </div>
 
                   <div className='product-card__info-price-string'>
-                    ( cordage et pause cordge )
+                    ( cordage et pose cordge )
                     </div>
 
                   <div className='product-card__order-wrapper'>
