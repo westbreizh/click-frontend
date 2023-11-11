@@ -1,5 +1,3 @@
-
-
 # [build] : Cette section définit la configuration de construction pour votre projet.
 [build]
   # command : La commande qui sera exécutée pour construire votre application.
@@ -13,7 +11,6 @@
 
   ## (optional) Settings for Netlify Dev
   ## https://github.com/netlify/cli/blob/main/docs/netlify-dev.md#project-detection
-  #[dev] : Cette section est optionnelle et est utilisée pour configurer Netlify Dev, un outil pour le développement local.
   [dev]
     # command : La commande pour démarrer votre serveur de développement local.
     command = "yarn start"
@@ -32,3 +29,13 @@
 #  from = "/*"
 #  to = "/index.html"
 #  status = 200
+
+# [[headers]] : Cette section permet de définir des en-têtes HTTP personnalisés.
+[[headers]]
+  # for : Le chemin pour lequel les en-têtes doivent être appliqués.
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate"
+    Pragma = "no-cache"
